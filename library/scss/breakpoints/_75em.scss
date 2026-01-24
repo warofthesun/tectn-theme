@@ -1,0 +1,188 @@
+
+.wrap {
+  width: 1040px;
+}
+
+
+/*************
+NAVIGATION STYLES
+**************/
+
+#inner-header {
+	flex-direction: row;
+	align-items: center;
+}
+
+.header_nav {
+	flex-direction: row;
+}
+
+.nav {
+	border: 0;
+
+
+	ul {
+		background:$black;
+		margin-top:0;
+	}
+	li {
+
+
+		a {
+			border-bottom: 0;
+
+			&:hover, &:focus {
+				color: $white;
+				text-decoration: underline;
+			}
+		}
+
+		&:first-child {}
+		&:last-child {}
+
+		/*
+		plan your menus and drop-downs wisely.
+		*/
+		ul.sub-menu,
+		ul.children {
+			margin-top: 0;
+			border: 1px solid #ccc;
+			border-top: 0;
+			position: absolute;
+			visibility: hidden;
+			z-index: 8999;
+
+			li {
+
+				a {
+					padding-left: 10px;
+					border-right: 0;
+					display: block;
+					width: 180px;
+					border-bottom: 1px solid #ccc;
+
+					&:hover,
+					&:focus {}
+
+					&:link {}
+				}
+
+				&:first-child {}
+
+				&:last-child {
+
+					a {
+						border-bottom: 0;
+					}
+				}
+
+				/*
+				if you need to go deeper, go nuts
+				just remember deeper menus suck
+				for usability. k, bai.
+				*/
+				ul {
+					top:0;
+					left:100%;
+				}
+			}
+
+			/* highlight sub-menu current page */
+			li.current-menu-item,
+			li.current_page_item,
+			li.current_page_ancestor {
+				a {}
+			}
+		}
+
+		/* showing sub-menus */
+		&:hover > ul {
+			top: auto;
+			visibility:visible;
+		}
+
+	} /* end .menu ul li */
+
+	/* highlight current page */
+	li.current-menu-item,
+	li.current_page_item,
+	li.current_page_ancestor {
+		a {}
+	}  /* end current highlighters */
+
+} /* end .nav */
+
+/********************
+HERO STYLES
+********************/
+
+.hero {
+
+	&__container {
+		
+
+		
+
+		&_large {
+			.hero__content {
+				height: 650px;
+
+				&_text {
+					justify-content: flex-end;
+					background: transparent;
+				}
+
+				&_text-angle {
+					display: inline;
+					svg {
+						width: 650px;
+						margin-left: 0;
+						height: 104%;
+					}
+				}
+			}
+		}
+	}
+
+	&__featured_post {
+		display: flex;
+		right: $spacing-xxl;
+		bottom: 80px;
+		width: 500px;
+		@include box-shadow($left-diffused);
+
+		article {
+			display: flex;
+			flex-direction: row;
+			border-radius: $radius-lg;
+			align-items: center;
+
+			
+			header {
+				border-bottom: 0;
+				padding: 0 1.5em;
+			}
+
+			.post-category {
+				color: $secondary-500;
+				font-family: $serif;
+				margin-bottom: $spacing-sm;
+			}
+
+			.entry-title {
+				font-size: 1.3em;
+				line-height: 1;
+				font-family: $sans-serif;
+				
+				a {
+					text-decoration: none;
+					color: $primary-600;
+				}
+			}
+
+			.hero--image {
+				line-height: 0;
+			}
+		}
+	}
+}

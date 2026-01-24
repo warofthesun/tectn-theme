@@ -1,0 +1,95 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Variables
+
+Here is where we declare all our variables like colors, fonts,
+base values, and defaults. We want to make sure this file ONLY
+contains variables that way our files don't get all messy.
+No one likes a mess.
+
+******************************************************************/
+
+/*********************
+COLORS
+Need help w/ choosing your colors? Try this site out:
+http://0to255.com/
+*********************/
+
+$alert-yellow:      #ebe16f;
+$alert-red:         #fbe3e4;
+$alert-green:       #e6efc2;
+$alert-blue:        #d5edf8;
+
+$black:             #000;
+$white:             #fff;
+
+$light-gray:        #f8f9fa;
+$gray:              #eaedf2;
+$text-color:        #5c6b80;
+$meta-gray:         #9fa6b4;
+
+$primary-10:        #F5FAFF;
+$primary-50:        #C7D2DE;
+$primary-100:       #A2B4C7;
+$primary-200:       #8FA5BC;
+$primary-300:       #7D96B1;
+$primary-400:       #6A87A6;
+$primary-500:       #456990;
+$primary-600:       #304A65;
+$primary-700:       #293F56;
+$primary-800:       #1C2A3A;
+$primary-900:       #0E151D;
+
+$secondary-50:      #F9F7EC;
+$secondary-100:     #F1EDD6;
+$secondary-200:     #E5DEB1;
+$secondary-300:     #D3CA83;
+$secondary-400:     #BFB55C;
+$secondary-500:     #A69E3F;
+$secondary-600:     #827D2E;
+$secondary-700:     #646127;
+$secondary-800:     #504E24;
+$secondary-900:     #454422;
+$secondary-950:     #25250e;
+
+$grey-10:           #F5F6F7;
+$grey-50:           #E2E5E7;
+$grey-100:          #CFD3D7;
+$grey-200:          #C6CACF;
+$grey-300:          #BDC1C7;
+$grey-400:          #B3B9BF;
+$grey-500:          #A0A7AF;
+$grey-600:          #70757B;
+$grey-700:          #606469;
+$grey-800:          #404346;
+$grey-900:          #202123;
+
+$link-color:        $secondary-500;
+$link-hover:        darken($link-color, 9%);
+
+$border-color:      #ccc;
+$disabled-gray:     #cfcfcf;
+
+$primary-surface: $grey-10;
+
+/*
+Here's a great tutorial on how to
+use color variables properly:
+http://sachagreif.com/sass-color-variables/
+*/
+
+
+$spacing-none: 0em;
+$spacing-xs: .25em;
+$spacing-sm: .5em;
+$spacing-md: .75em;
+$spacing-lg: 1em;
+$spacing-xl: 1.5em;
+$spacing-xxl: 2em;
+
+$radius-xs: .25em;
+$radius-sm: .5em;
+$radius-md: .75em;
+$radius-lg: 1em;

@@ -1,0 +1,29 @@
+{
+  "name": "trustmfa",
+  "version": "1.0.0",
+  "description": "Custom Wordpress theme for TrustMFA.com",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browser-sync": "^2.26.3",
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-sass": "^3.1.0",
+    "lodash": ">=4.17.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warofthesun/trustmfa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/warofthesun/trustmfa/issues"
+  },
+  "homepage": "https://github.com/warofthesun/trustmfa#readme"
+}

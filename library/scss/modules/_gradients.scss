@@ -1,0 +1,20 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Gradient Styles
+
+*********************/
+
+.dark_primary_gradient{
+  &__stop-1 {
+    stop-color: $primary-700;
+  }
+
+  &__stop-2 {
+    stop-color: $primary-500;
+  }
+
+}
+
+

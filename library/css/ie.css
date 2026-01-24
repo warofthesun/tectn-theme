@@ -1,0 +1,700 @@
+@charset "UTF-8";
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: IE Stylesheet
+
+So instead of using the respond.js file to add media query support
+to IE, we're going to use SASS to create an easily readable css file.
+Here, we import all the styles the standard stylesheet gets, only
+without the media queries. No need to worry about editing anything!
+
+******************************************************************/
+/******************************************************************
+IMPORTS & DEPENDENCIES
+Remember, all the BASE styles are called already since IE can
+read those. Below, we need to import only the stuff IE can't
+understand (what's inside the media queries). We also need to
+import the mixins file so SASS can understand the variables.
+******************************************************************/
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Variables
+
+Here is where we declare all our variables like colors, fonts,
+base values, and defaults. We want to make sure this file ONLY
+contains variables that way our files don't get all messy.
+No one likes a mess.
+
+******************************************************************/
+/*********************
+COLORS
+Need help w/ choosing your colors? Try this site out:
+http://0to255.com/
+*********************/
+/*
+Here's a great tutorial on how to
+use color variables properly:
+http://sachagreif.com/sass-color-variables/
+*/
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Typography
+
+Need to import a font or set of icons for your site? Drop them in
+here or just use this to establish your typographical grid. Or not.
+Do whatever you want to...GOSH!
+
+Helpful Articles:
+http://trentwalton.com/2012/06/19/fluid-type/
+http://ia.net/blog/responsive-typography-the-basics/
+http://alistapart.com/column/responsive-typography-is-a-physical-discipline
+
+******************************************************************/
+/*********************
+FONT FACE (IN YOUR FACE)
+*********************/
+/*  To embed your own fonts, use this syntax
+  and place your fonts inside the
+  library/fonts folder. For more information
+  on embedding fonts, go to:
+  http://www.fontsquirrel.com/
+  Be sure to remove the comment brackets.
+*/
+/*  @font-face {
+      font-family: 'Font Name';
+      src: url('library/fonts/font-name.eot');
+      src: url('library/fonts/font-name.eot?#iefix') format('embedded-opentype'),
+             url('library/fonts/font-name.woff') format('woff'),
+             url('library/fonts/font-name.ttf') format('truetype'),
+             url('library/fonts/font-name.svg#font-name') format('svg');
+      font-weight: normal;
+      font-style: normal;
+  }
+*/
+/*
+The following is based of Typebase:
+https://github.com/devinhunt/typebase.css
+I've edited it a bit, but it's a nice starting point.
+*/
+/*
+some nice typographical defaults
+more here: http://www.newnet-soft.com/blog/csstypography
+*/
+p {
+  -ms-word-wrap: normal;
+  word-break: normal;
+  word-wrap: normal;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  hyphens: none;
+  -webkit-hyphenate-before: 2;
+  -webkit-hyphenate-after: 3;
+  hyphenate-lines: 3; }
+
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Mixins Stylesheet
+
+This is where you can take advantage of Sass' great features: Mixins.
+I won't go in-depth on how they work exactly,
+there are a few articles below that will help do that. What I will
+tell you is that this will help speed up simple changes like
+changing a color or adding CSS3 techniques gradients.
+
+A WORD OF WARNING: It's very easy to overdo it here. Be careful and
+remember less is more.
+
+Helpful:
+http://sachagreif.com/useful-sass-mixins/
+http://thesassway.com/intermediate/leveraging-sass-mixins-for-cleaner-code
+http://web-design-weekly.com/blog/2013/05/12/handy-sass-mixins/
+
+******************************************************************/
+/*********************
+TRANSITION
+*********************/
+/*
+I totally rewrote this to be cleaner and easier to use.
+You'll need to be using Sass 3.2+ for these to work.
+Thanks to @anthonyshort for the inspiration on these.
+USAGE: @include transition(all 0.2s ease-in-out);
+*/
+/*********************
+CSS3 GRADIENTS
+Be careful with these since they can
+really slow down your CSS. Don't overdo it.
+*********************/
+/* @include css-gradient(#dfdfdf,#f8f8f8); */
+/*********************
+BOX SIZING
+*********************/
+/* @include box-sizing(border-box); */
+/* NOTE: value of "padding-box" is only supported in Gecko. So
+probably best not to use it. I mean, were you going to anyway? */
+/* Set 3 variables w/ different styles */
+/* Create our super simple mixin */
+/* Putting it all together in our classes 
+.bottom-box {
+    @include box-shadow($bottom-diffused);
+}
+
+.left-box {
+    @include box-shadow($left-diffused);
+}
+
+.right-box {
+    @include box-shadow($right-diffused);
+}
+*/
+/*********************
+NAVIGATION STYLES
+*********************/
+/*********************
+POSTS & CONTENT STYLES
+*********************/
+.testimonials {
+  margin-bottom: 2em; }
+  .testimonials__background_white {
+    background: linear-gradient(rgba(245, 246, 247, 0.8), rgba(245, 246, 247, 0.5)), url("../images/pattern_circle.png") repeat left top; }
+    .testimonials__background_white .attribution {
+      background: -webkit-linear-gradient(45deg, #BFB55C, #A69E3F);
+      background: -moz-linear-gradient(45deg, #BFB55C, #A69E3F);
+      background: -o-linear-gradient(45deg, #BFB55C, #A69E3F);
+      background: linear-gradient(45deg, #BFB55C, #A69E3F);
+      color: #F9F7EC; }
+  .testimonials__background_gold {
+    background: url("../images/pattern_circle.png") repeat left top, linear-gradient(#D3CA83, #BFB55C);
+    border-top: 2px solid #A69E3F;
+    border-bottom: 2px solid #827D2E;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 8px 10px -10px rgba(69, 68, 34, 0.7); }
+    .testimonials__background_gold .attribution {
+      background: -webkit-linear-gradient(45deg, #456990, #293F56);
+      background: -moz-linear-gradient(45deg, #456990, #293F56);
+      background: -o-linear-gradient(45deg, #456990, #293F56);
+      background: linear-gradient(45deg, #456990, #293F56);
+      color: #C7D2DE; }
+    .testimonials__background_gold h3, .testimonials__background_gold h4 {
+      color: #293F56; }
+    .testimonials__background_gold::before {
+      content: "What our clients say";
+      font-family: "DM Serif Text", "Georgia", Cambria, Times New Roman, Times, serif;
+      font-size: 2em;
+      line-height: 1;
+      border-radius: 0 0 20px 20px;
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: -5px;
+      padding: 0 1em .5em 1em;
+      box-shadow: 0px 3px 0px #A69E3F, 0 8px 10px -10px rgba(69, 68, 34, 0.7); }
+  .testimonials__content {
+    justify-content: space-between;
+    padding-bottom: 0em; }
+    .testimonials__content .testimonial {
+      display: flex;
+      flex-direction: column;
+      margin-left: auto;
+      margin-right: auto; }
+      .testimonials__content .testimonial .quote_mark {
+        display: none; }
+      .testimonials__content .testimonial h3 {
+        font-size: 2em; }
+        .testimonials__content .testimonial h3::before {
+          content: "";
+          background-image: url(../images/marker/quote.png);
+          display: block;
+          height: 58px;
+          width: 58px;
+          margin: auto; }
+      .testimonials__content .testimonial .attribution {
+        display: inline-block;
+        border-radius: 20px;
+        padding: 4px 16px;
+        font-family: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        font-size: 1.2em;
+        margin: auto;
+        margin-bottom: 2em; }
+    .testimonials__content > div:nth-last-of-type(2), .testimonials__content > div:nth-last-of-type(2) ~ div, .testimonials__content > div:nth-last-of-type(3), .testimonials__content > div:nth-last-of-type(3) ~ div {
+      background-color: #fff;
+      border-radius: 1em;
+      padding: 0;
+      justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #A69E3F;
+      margin-top: 2em;
+      margin-bottom: 2em; }
+      .testimonials__content > div:nth-last-of-type(2) .quote_mark, .testimonials__content > div:nth-last-of-type(2) ~ div .quote_mark, .testimonials__content > div:nth-last-of-type(3) .quote_mark, .testimonials__content > div:nth-last-of-type(3) ~ div .quote_mark {
+        display: inline;
+        width: 25px;
+        position: absolute;
+        margin-top: 1.5em;
+        margin-left: 1.5em; }
+      .testimonials__content > div:nth-last-of-type(2) h3, .testimonials__content > div:nth-last-of-type(2) ~ div h3, .testimonials__content > div:nth-last-of-type(3) h3, .testimonials__content > div:nth-last-of-type(3) ~ div h3 {
+        font-size: 1.1em;
+        margin: 0;
+        padding: 1.5em;
+        padding-left: 3.5em;
+        text-align: left; }
+        .testimonials__content > div:nth-last-of-type(2) h3::before, .testimonials__content > div:nth-last-of-type(2) ~ div h3::before, .testimonials__content > div:nth-last-of-type(3) h3::before, .testimonials__content > div:nth-last-of-type(3) ~ div h3::before {
+          display: none; }
+        .testimonials__content > div:nth-last-of-type(2) h3 p, .testimonials__content > div:nth-last-of-type(2) ~ div h3 p, .testimonials__content > div:nth-last-of-type(3) h3 p, .testimonials__content > div:nth-last-of-type(3) ~ div h3 p {
+          padding: 0;
+          margin: 0; }
+      .testimonials__content > div:nth-last-of-type(2) .attribution, .testimonials__content > div:nth-last-of-type(2) ~ div .attribution, .testimonials__content > div:nth-last-of-type(3) .attribution, .testimonials__content > div:nth-last-of-type(3) ~ div .attribution {
+        padding: 0.75em 1.5em;
+        border-radius: 0 0 0.75em 0.75em;
+        font-weight: 700;
+        font-size: 1em;
+        margin: 0; }
+    .testimonials__content > div:nth-last-of-type(2), .testimonials__content > div:nth-last-of-type(2) ~ div {
+      width: 48%; }
+    .testimonials__content > div:nth-last-of-type(3), .testimonials__content > div:nth-last-of-type(3) ~ div {
+      width: 32%; }
+  .testimonials__sidebar {
+    border-left: 2px solid #A69E3F;
+    border-top: 0;
+    padding-left: 2em; }
+    .testimonials__sidebar li {
+      display: flex;
+      max-width: 100%; }
+      .testimonials__sidebar li .quote_mark {
+        display: inline;
+        width: 50px;
+        height: 50px;
+        margin-right: 1em; }
+      .testimonials__sidebar li h3 {
+        margin-top: 0;
+        font-size: 1.2em;
+        line-height: 1.2; }
+        .testimonials__sidebar li h3 p {
+          margin-top: 0; }
+      .testimonials__sidebar li .attribution {
+        background: -webkit-linear-gradient(45deg, #456990, #293F56);
+        background: -moz-linear-gradient(45deg, #456990, #293F56);
+        background: -o-linear-gradient(45deg, #456990, #293F56);
+        background: linear-gradient(45deg, #456990, #293F56);
+        color: #C7D2DE;
+        display: inline-block;
+        border-radius: 20px;
+        padding: 4px 16px;
+        font-family: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        font-size: 1em;
+        margin: auto;
+        margin-bottom: 2em; }
+
+/* entry content */
+.entry-content {
+  /* at this larger size, we can start to align images */ }
+  .entry-content .alignleft, .entry-content img.alignleft {
+    margin-right: 1.5em;
+    display: inline;
+    float: left; }
+  .entry-content .alignright, .entry-content img.alignright {
+    margin-left: 1.5em;
+    display: inline;
+    float: right; }
+  .entry-content .aligncenter, .entry-content img.aligncenter {
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    clear: both; }
+
+/* end .entry-content */
+/*********************
+FOOTER STYLES
+*********************/
+.lower_content_curve {
+  width: 100%; }
+  .lower_content_curve .lower_content_curve__background {
+    fill: #F5F6F7; }
+
+/*
+check your menus here. do they look good?
+do they need tweaking?
+*/
+/* end .footer-links */
+/*********************
+GENERAL STYLES
+*********************/
+/*********************
+LAYOUT & GRID STYLES
+*********************/
+.wrap {
+  width: 96%; }
+
+/*********************
+HEADER STYLES
+*********************/
+/*********************
+NAVIGATION STYLES
+*********************/
+#mobile-nav {
+  display: none; }
+
+.nav {
+  flex-direction: row;
+  height: auto;
+  opacity: 1;
+  display: flex;
+  flex-wrap: wrap; }
+  .nav li {
+    border-bottom: 0; }
+
+.header_nav {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row; }
+  .header_nav a {
+    text-align: left;
+    margin-left: 1em; }
+
+.nav__wrapper {
+  flex-direction: row; }
+
+#inner-header {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto; }
+
+/* .menu is clearfixed inside mixins.scss */
+.menu {
+  /* end .menu ul */ }
+  .menu ul {
+    /* end .menu ul li */
+    /* highlight current page */
+    /* end current highlighters */ }
+    .menu ul li {
+      text-align: left;
+      /*
+      plan your menus and drop-downs wisely.
+      */ }
+      .menu ul li a {
+        /*
+        you can use hover styles here even though this size
+        has the possibility of being a mobile device.
+        */ }
+
+/* end .menu */
+/*********************
+HERO STYLES
+*********************/
+.hero__container {
+  background: -webkit-linear-gradient(0deg, #293F56, #456990);
+  background: -moz-linear-gradient(0deg, #293F56, #456990);
+  background: -o-linear-gradient(0deg, #293F56, #456990);
+  background: linear-gradient(0deg, #293F56, #456990);
+  margin-top: -10px; }
+  .hero__container h1 {
+    position: relative; }
+  .hero__container_landing .content_curve__up, .hero__container_large .content_curve__up {
+    display: inline; }
+    .hero__container_landing .content_curve__up svg, .hero__container_large .content_curve__up svg {
+      margin-top: -90px;
+      margin-bottom: -20px; }
+  .hero__container_medium .content_curve__outer svg {
+    margin-top: -80px;
+    margin-bottom: -30px; }
+  .hero__container_landing h1 {
+    font-size: 4.5em;
+    margin-top: 0;
+    margin-bottom: 0; }
+    .hero__container_landing h1 span {
+      display: block;
+      color: #C7D2DE;
+      font-family: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: .4em;
+      line-height: 1.1; }
+  .hero__container_landing h3 {
+    margin-top: 0; }
+    .hero__container_landing h3 ul {
+      font-family: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      margin: 0; }
+      .hero__container_landing h3 ul li {
+        display: inline-block;
+        color: #A69E3F;
+        font-weight: 800; }
+        .hero__container_landing h3 ul li:nth-child(1):after, .hero__container_landing h3 ul li:nth-child(2):after {
+          content: " • ";
+          color: #8FA5BC; }
+  .hero__container_landing p {
+    font-size: 1.3em; }
+  .hero__container_landing .hero__content {
+    height: 550px; }
+    .hero__container_landing .hero__content_text {
+      background: -webkit-linear-gradient(0deg, #293F56, #456990);
+      background: -moz-linear-gradient(0deg, #293F56, #456990);
+      background: -o-linear-gradient(0deg, #293F56, #456990);
+      background: linear-gradient(0deg, #293F56, #456990);
+      position: initial; }
+    .hero__container_landing .hero__content_text-angle {
+      display: inline;
+      margin-left: -50px; }
+      .hero__container_landing .hero__content_text-angle svg {
+        width: 250px; }
+  .hero__container_medium .hero__content {
+    height: 400px; }
+    .hero__container_medium .hero__content_text {
+      justify-content: flex-end;
+      background: transparent; }
+  .hero__container_small {
+    background: url("../images/pattern_circle.png") repeat left top, linear-gradient(#D3CA83, #A69E3F);
+    height: 250px; }
+    .hero__container_small .hero__content {
+      background-color: white; }
+    .hero__container_small .hero__content_text {
+      background: none;
+      padding: 0;
+      width: 100%;
+      left: 0; }
+      .hero__container_small .hero__content_text h1 {
+        color: #F9F7EC;
+        text-align: center;
+        text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.23); }
+    .hero__container_small .header_curve_lower {
+      display: inline;
+      height: 240px;
+      position: relative; }
+      .hero__container_small .header_curve_lower svg {
+        position: absolute;
+        bottom: 0; }
+    .hero__container_small .content_curve__outer svg {
+      display: inline;
+      position: relative;
+      margin-top: -5%; }
+  .hero__container_inner {
+    max-width: 1440px;
+    margin: auto; }
+  .hero__container p {
+    color: #F5FAFF; }
+.hero__content_image {
+  background-size: cover;
+  background-position: right top;
+  padding: 0; }
+.hero__content_text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 7%;
+  padding-right: 5%; }
+  .hero__content_text-angle {
+    padding-left: 0;
+    display: inline; }
+    .hero__content_text-angle svg {
+      margin-left: -10px;
+      width: 930px;
+      height: 109%; }
+.hero__post_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  .hero__post_text h1 {
+    font-size: 3.5em; }
+
+/*********************
+SIDEBARS & ASIDES
+*********************/
+.sidebar {
+  /* margin-top: 2.2em; */ }
+
+.widgettitle {
+  border-bottom: 2px solid #444;
+  margin-bottom: 0.75em; }
+
+.widget {
+  padding: 0 10px;
+  margin: 2.2em 0; }
+  .widget ul li {
+    margin-bottom: 0.75em;
+    /* deep nesting */ }
+    .widget ul li ul {
+      margin-top: 0.75em;
+      padding-left: 1em; }
+
+/* links widget */
+/* meta widget */
+/* pages widget */
+/* recent-posts widget */
+/* archives widget */
+/* tag-cloud widget */
+/* calendar widget */
+/* category widget */
+/* recent-comments widget */
+/* search widget */
+/* text widget */
+/*********************
+FOOTER STYLES
+*********************/
+/*
+you'll probably need to do quite a bit
+of overriding here if you styled them for
+mobile. Make sure to double check these!
+*/
+#inner-footer {
+  flex-direction: row; }
+  #inner-footer .contact_info {
+    text-align: right; }
+
+.footer__logo #trustmfa_logo {
+  margin-top: 0em;
+  margin-left: 1em; }
+.footer-nav {
+  justify-content: flex-start; }
+
+.footer-links ul li {
+  /*
+  be careful with the depth of your menus.
+  it's very rare to have multi-depth menus in
+  the footer.
+  */ }
+
+/* end .footer-links */
+.wrap {
+  width: 1040px; }
+
+/*************
+NAVIGATION STYLES
+**************/
+#inner-header {
+  flex-direction: row;
+  align-items: center; }
+
+.header_nav {
+  flex-direction: row; }
+
+.nav {
+  border: 0;
+  /* end .menu ul li */
+  /* highlight current page */
+  /* end current highlighters */ }
+  .nav ul {
+    background: #000;
+    margin-top: 0; }
+  .nav li {
+    /*
+    plan your menus and drop-downs wisely.
+    */
+    /* showing sub-menus */ }
+    .nav li a {
+      border-bottom: 0; }
+      .nav li a:hover, .nav li a:focus {
+        color: #fff;
+        text-decoration: underline; }
+    .nav li ul.sub-menu,
+    .nav li ul.children {
+      margin-top: 0;
+      border: 1px solid #ccc;
+      border-top: 0;
+      position: absolute;
+      visibility: hidden;
+      z-index: 8999;
+      /* highlight sub-menu current page */ }
+      .nav li ul.sub-menu li,
+      .nav li ul.children li {
+        /*
+        if you need to go deeper, go nuts
+        just remember deeper menus suck
+        for usability. k, bai.
+        */ }
+        .nav li ul.sub-menu li a,
+        .nav li ul.children li a {
+          padding-left: 10px;
+          border-right: 0;
+          display: block;
+          width: 180px;
+          border-bottom: 1px solid #ccc; }
+        .nav li ul.sub-menu li:last-child a,
+        .nav li ul.children li:last-child a {
+          border-bottom: 0; }
+        .nav li ul.sub-menu li ul,
+        .nav li ul.children li ul {
+          top: 0;
+          left: 100%; }
+    .nav li:hover > ul {
+      top: auto;
+      visibility: visible; }
+
+/* end .nav */
+/********************
+HERO STYLES
+********************/
+.hero__container_large .hero__content {
+  height: 650px; }
+  .hero__container_large .hero__content_text {
+    justify-content: flex-end;
+    background: transparent; }
+  .hero__container_large .hero__content_text-angle {
+    display: inline; }
+    .hero__container_large .hero__content_text-angle svg {
+      width: 650px;
+      margin-left: 0;
+      height: 104%; }
+.hero__featured_post {
+  display: flex;
+  right: 2em;
+  bottom: 80px;
+  width: 500px;
+  box-shadow: -13px 0px 21px -10px rgba(0, 0, 0, 0.3); }
+  .hero__featured_post article {
+    display: flex;
+    flex-direction: row;
+    border-radius: 1em;
+    align-items: center; }
+    .hero__featured_post article header {
+      border-bottom: 0;
+      padding: 0 1.5em; }
+    .hero__featured_post article .post-category {
+      color: #A69E3F;
+      font-family: "DM Serif Text", "Georgia", Cambria, Times New Roman, Times, serif;
+      margin-bottom: 0.5em; }
+    .hero__featured_post article .entry-title {
+      font-size: 1.3em;
+      line-height: 1;
+      font-family: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+      .hero__featured_post article .entry-title a {
+        text-decoration: none;
+        color: #304A65; }
+    .hero__featured_post article .hero--image {
+      line-height: 0; }
+
+/*
+you can call the larger styles if you want, but there's really no need
+*/
+/******************************************************************
+ADDITIONAL IE FIXES
+These fixes are now ONLY seen by IE, so you don't have to worry
+about using prefixes, although it's best practice. For more info
+on using Modernizr classes, check out this link:
+http://www.modernizr.com/docs/
+******************************************************************/
+/*
+For example, you can use something like:
+
+.no-textshadow .class { ... }
+
+You can also target specific versions by using the classes applied to
+the html element. These can sometimes change, so take a look inside the
+header.php file to see what they are:
+
+
+.lt-ie8 .class { ... }
+
+*/
+
+/*# sourceMappingURL=ie.css.map */
