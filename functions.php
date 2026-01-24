@@ -37,8 +37,6 @@ function trustmfa_setup() {
 
   // enqueue base scripts and styles
   add_action( 'wp_enqueue_scripts', 'starter_scripts_and_styles', 999 );
-  // ie conditional wrapper
-
   // launching this stuff after theme setup
   starter_theme_support();
 
