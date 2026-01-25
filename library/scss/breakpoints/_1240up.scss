@@ -1,14 +1,18 @@
-/******************************************************************
-Site Name: 
-Author: 
+@use "../globals" as *;
 
-Stylesheet: Super Large Monitor Stylesheet
+@media only screen and (min-width: 1240px) {
+  /******************************************************************
+  Site Name: 
+  Author: 
 
-You can add some advanced styles here if you like. This kicks in
-on larger screens.
+  Stylesheet: Super Large Monitor Stylesheet
 
-******************************************************************/
+  You can add some advanced styles here if you like. This kicks in
+  on larger screens.
 
-.wrap {
-  width: 1240px;
+  ******************************************************************/
+
+  .wrap {
+    width: 1240px;
+  }
 }

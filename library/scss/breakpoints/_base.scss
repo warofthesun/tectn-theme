@@ -1,9 +1,15 @@
+@use "../globals" as *;
+@use "../partials/normalize";
+
+@use "../modules/buttons" as *;
+
+
 /*********************
 GENERAL STYLES
 *********************/
 
 body {
-	font-family: $sans-serif;
+	font-family: $body-font;
 	font-size: 100%;
 	line-height: 1.5;
 	color: $text-color;
@@ -143,7 +149,7 @@ H1, H2, H3, H4, H5 STYLES
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 	text-rendering: optimizelegibility;
-	font-weight: 500;
+	font-weight: 400;
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http://css-tricks.com/watch-your-font-weight/
@@ -158,7 +164,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 h1, .h1 {
 	font-size: 3.5em;
 	line-height: .9em;
-	font-family: $serif;
+	font-family: $header-font;
 	color: $primary-100;
 }
 
@@ -167,7 +173,7 @@ h2, .h2 {
 	line-height: 1em;
 	margin-top: 0;
 	margin-bottom: 0.375em;
-	font-family: $serif;
+	font-family: $header-font;
 	color: $primary-600;
 
 	&.has-text-align-center {
@@ -190,21 +196,21 @@ h2, .h2 {
 h3, .h3 {
 	font-size: 2em;
 	line-height: 1.1;
-	font-family: $serif;
+	font-family: $header-font;
 }
 
 h4, .h4 {
 	font-size: 1.5em;
 	font-weight: 700;
-	font-family: $serif;
+	font-family: $header-font;
 }
 
 h5, .h5 {
 	font-size: 1.2em;
 	line-height: 1.6em;
 	text-transform: normal;
-	font-weight: 500;
-	font-family: $sans-serif;
+	font-weight: 400;
+	font-family: $header-font;
 	color: $primary-900;
 }
 
@@ -355,8 +361,9 @@ and more scalable.
 			color: $white;
 			text-decoration: none;
 			padding: 0.75em;
-			font-family: $serif;
-			font-size: 1.1em;;
+			font-family: $header-font;
+			font-size: 1.1em;
+			text-transform: uppercase;
 
 		}
 
@@ -454,7 +461,7 @@ POSTS & CONTENT STYLES
 			span {
 				display: block;
 				color: $primary-50;
-				font-family: $sans-serif;
+				font-family: $header-font;
 				text-transform: uppercase;
 				font-size: .4em;
 				line-height: 1.1;
@@ -465,7 +472,7 @@ POSTS & CONTENT STYLES
 				margin-top: 0;
 				font-size: 1.5em;
 				ul {
-				font-family: $sans-serif;
+				font-family: $header-font;
 				margin:0;
 
 				li {
@@ -646,7 +653,7 @@ POSTS & CONTENT STYLES
 				}
 
 				a {
-					font-family: $sans-serif;
+					font-family: $header-font;
 					font-weight: 700;
 					color: $primary-600;
 					font-size: .9em;
@@ -682,7 +689,7 @@ POSTS & CONTENT STYLES
 
 	a {
 		text-decoration: none;
-		font-family: $serif;
+		font-family: $header-font;
 	}
 }
 
@@ -722,7 +729,7 @@ POSTS & CONTENT STYLES
 			&::before {
 					content: "What our clients say";
 					@extend %content_background__primary;
-					font-family: $serif;
+					font-family: $header-font;
 					font-size: 2em;
 					line-height: 1;
 					border-radius: 0 0 20px 20px;
@@ -765,7 +772,7 @@ POSTS & CONTENT STYLES
 					display: inline-block;
 					border-radius: 20px;
 					padding: 4px 16px;
-					font-family: $sans-serif;
+					font-family: $header-font;
 					font-weight: 700;
 					font-size: 1.1em;
 					margin: auto;
@@ -851,7 +858,7 @@ POSTS & CONTENT STYLES
 				display: inline-block;
 				border-radius: 20px;
 				padding: 4px 16px;
-				font-family: $sans-serif;
+				font-family: $header-font;
 				font-weight: 700;
 				font-size: 1em;
 				margin: auto;
@@ -1181,7 +1188,7 @@ article {
   cursor: pointer;
   font-weight: bold;
   display: table;
-  font-family: $serif;
+  font-family: $header-font;
   font-size: 1.3em;
   font-weight: 500;
   line-height: 1.1;
@@ -1318,7 +1325,7 @@ article {
 				display: inline-block;
 				margin-bottom: $spacing-xs;
 				margin-left: $spacing-xs;
-				font-family: $sans-serif;
+				font-family: $header-font;
 				font-weight: 500;
 				border-bottom: 2px solid $primary-300;
 			}
@@ -1375,7 +1382,7 @@ article {
 				margin-top: 0;
 				margin-bottom: $spacing-xs;
 				margin-left: $spacing-xs;
-				font-family: $sans-serif;
+				font-family: $header-font;
 				font-weight: 500;
 				display: inline-block;
 				border-bottom: 2px solid $primary-300;
@@ -2031,14 +2038,14 @@ FOOTER STYLES
 
 		em {
 			font-style: normal;
-			font-family: $sans-serif;
+			font-family: $header-font;
 			font-weight: 700;
 			text-transform: uppercase;
 			font-size: 1.5em;
 		}
 
 		strong {
-			font-family: $serif;
+			font-family: $body-font;
 			color: $secondary-500;
 			font-size: 2.5em;
 			line-height: 1;

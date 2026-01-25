@@ -1,3 +1,6 @@
+@use "../globals" as *;
+@use "sass:color";
+
 /******************************************************************
 Site Name:
 Author:
@@ -20,24 +23,24 @@ you can just remove this stylesheet.
 
 .alert-help {
   @extend %alert;
-  border-color: darken($alert-yellow, 5%);
+  border-color: color.adjust($alert-yellow, $lightness: -5%);
   background: $alert-yellow;
 }
 
 .alert-info {
   @extend %alert;
-  border-color: darken($alert-blue, 5%);
+  border-color: color.adjust($alert-blue, $lightness: -5%);
   background: $alert-blue;
 }
 
 .alert-error {
   @extend %alert;
-  border-color: darken($alert-red, 5%);
+  border-color: color.adjust($alert-red, $lightness: -5%);
   background: $alert-red;
 }
 
 .alert-success {
   @extend %alert;
-  border-color: darken($alert-green, 5%);
+  border-color: color.adjust($alert-green, $lightness: -5%);
   background: $alert-green;
 }

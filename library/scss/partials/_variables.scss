@@ -11,6 +11,9 @@ No one likes a mess.
 
 ******************************************************************/
 
+@use "sass:color";
+
+
 /*********************
 COLORS
 Need help w/ choosing your colors? Try this site out:
@@ -67,7 +70,7 @@ $grey-800:          #404346;
 $grey-900:          #202123;
 
 $link-color:        $secondary-500;
-$link-hover:        darken($link-color, 9%);
+$link-hover:        color.adjust($link-color, $lightness: -9%);
 
 $border-color:      #ccc;
 $disabled-gray:     #cfcfcf;

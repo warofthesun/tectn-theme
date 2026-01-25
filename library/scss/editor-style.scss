@@ -12,27 +12,27 @@ http://codex.wordpress.org/Editor_Style
 
 ******************************************************************/
 
+@use "partials/normalize";
+@use "globals" as *;
+
+
+
 /* Wrap the entire post style inside the TinyMCE selector, as suggested
 here http://codex.wordpress.org/Function_Reference/add_editor_style */
 body#tinymce.wp-editor {
 
 	// normalize: http://necolas.github.io/normalize.css/
-	@import "partials/normalize";
 
 	// Sass variables
-	@import "partials/variables";
 
 	// typography
-	@import "partials/typography";
 
 	// Sass functions
-	@import "partials/functions";
 
 	// import mixins
-	@import "partials/mixins";
 
 	width: 731px;
-	font-family: $sans-serif;
+	font-family: $body-font;
 	font-size: 100%;
 	line-height: 1.5;
 	color: $text-color;

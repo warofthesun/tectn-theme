@@ -1,188 +1,191 @@
+@use "../globals" as *;
 
-.wrap {
-  width: 1040px;
-}
-
-
-/*************
-NAVIGATION STYLES
-**************/
-
-#inner-header {
-	flex-direction: row;
-	align-items: center;
-}
-
-.header_nav {
-	flex-direction: row;
-}
-
-.nav {
-	border: 0;
+@media only screen and (min-width: 75em) {
+  .wrap {
+    width: 1040px;
+  }
 
 
-	ul {
-		background:$black;
-		margin-top:0;
-	}
-	li {
+  /*************
+  NAVIGATION STYLES
+  **************/
+
+  #inner-header {
+  	flex-direction: row;
+  	align-items: center;
+  }
+
+  .header_nav {
+  	flex-direction: row;
+  }
+
+  .nav {
+  	border: 0;
 
 
-		a {
-			border-bottom: 0;
+  	ul {
+  		background:$black;
+  		margin-top:0;
+  	}
+  	li {
 
-			&:hover, &:focus {
-				color: $white;
-				text-decoration: underline;
-			}
-		}
 
-		&:first-child {}
-		&:last-child {}
+  		a {
+  			border-bottom: 0;
 
-		/*
-		plan your menus and drop-downs wisely.
-		*/
-		ul.sub-menu,
-		ul.children {
-			margin-top: 0;
-			border: 1px solid #ccc;
-			border-top: 0;
-			position: absolute;
-			visibility: hidden;
-			z-index: 8999;
+  			&:hover, &:focus {
+  				color: $white;
+  				text-decoration: underline;
+  			}
+  		}
 
-			li {
+  		&:first-child {}
+  		&:last-child {}
 
-				a {
-					padding-left: 10px;
-					border-right: 0;
-					display: block;
-					width: 180px;
-					border-bottom: 1px solid #ccc;
+  		/*
+  		plan your menus and drop-downs wisely.
+  		*/
+  		ul.sub-menu,
+  		ul.children {
+  			margin-top: 0;
+  			border: 1px solid #ccc;
+  			border-top: 0;
+  			position: absolute;
+  			visibility: hidden;
+  			z-index: 8999;
 
-					&:hover,
-					&:focus {}
+  			li {
 
-					&:link {}
-				}
+  				a {
+  					padding-left: 10px;
+  					border-right: 0;
+  					display: block;
+  					width: 180px;
+  					border-bottom: 1px solid #ccc;
 
-				&:first-child {}
+  					&:hover,
+  					&:focus {}
 
-				&:last-child {
+  					&:link {}
+  				}
 
-					a {
-						border-bottom: 0;
-					}
-				}
+  				&:first-child {}
 
-				/*
-				if you need to go deeper, go nuts
-				just remember deeper menus suck
-				for usability. k, bai.
-				*/
-				ul {
-					top:0;
-					left:100%;
-				}
-			}
+  				&:last-child {
 
-			/* highlight sub-menu current page */
-			li.current-menu-item,
-			li.current_page_item,
-			li.current_page_ancestor {
-				a {}
-			}
-		}
+  					a {
+  						border-bottom: 0;
+  					}
+  				}
 
-		/* showing sub-menus */
-		&:hover > ul {
-			top: auto;
-			visibility:visible;
-		}
+  				/*
+  				if you need to go deeper, go nuts
+  				just remember deeper menus suck
+  				for usability. k, bai.
+  				*/
+  				ul {
+  					top:0;
+  					left:100%;
+  				}
+  			}
 
-	} /* end .menu ul li */
+  			/* highlight sub-menu current page */
+  			li.current-menu-item,
+  			li.current_page_item,
+  			li.current_page_ancestor {
+  				a {}
+  			}
+  		}
 
-	/* highlight current page */
-	li.current-menu-item,
-	li.current_page_item,
-	li.current_page_ancestor {
-		a {}
-	}  /* end current highlighters */
+  		/* showing sub-menus */
+  		&:hover > ul {
+  			top: auto;
+  			visibility:visible;
+  		}
 
-} /* end .nav */
+  	} /* end .menu ul li */
 
-/********************
-HERO STYLES
-********************/
+  	/* highlight current page */
+  	li.current-menu-item,
+  	li.current_page_item,
+  	li.current_page_ancestor {
+  		a {}
+  	}  /* end current highlighters */
 
-.hero {
+  } /* end .nav */
 
-	&__container {
-		
+  /********************
+  HERO STYLES
+  ********************/
 
-		
+  .hero {
 
-		&_large {
-			.hero__content {
-				height: 650px;
+  	&__container {
 
-				&_text {
-					justify-content: flex-end;
-					background: transparent;
-				}
 
-				&_text-angle {
-					display: inline;
-					svg {
-						width: 650px;
-						margin-left: 0;
-						height: 104%;
-					}
-				}
-			}
-		}
-	}
 
-	&__featured_post {
-		display: flex;
-		right: $spacing-xxl;
-		bottom: 80px;
-		width: 500px;
-		@include box-shadow($left-diffused);
 
-		article {
-			display: flex;
-			flex-direction: row;
-			border-radius: $radius-lg;
-			align-items: center;
+  		&_large {
+  			.hero__content {
+  				height: 650px;
 
-			
-			header {
-				border-bottom: 0;
-				padding: 0 1.5em;
-			}
+  				&_text {
+  					justify-content: flex-end;
+  					background: transparent;
+  				}
 
-			.post-category {
-				color: $secondary-500;
-				font-family: $serif;
-				margin-bottom: $spacing-sm;
-			}
+  				&_text-angle {
+  					display: inline;
+  					svg {
+  						width: 650px;
+  						margin-left: 0;
+  						height: 104%;
+  					}
+  				}
+  			}
+  		}
+  	}
 
-			.entry-title {
-				font-size: 1.3em;
-				line-height: 1;
-				font-family: $sans-serif;
-				
-				a {
-					text-decoration: none;
-					color: $primary-600;
-				}
-			}
+  	&__featured_post {
+  		display: flex;
+  		right: $spacing-xxl;
+  		bottom: 80px;
+  		width: 500px;
+  		@include box-shadow($left-diffused);
 
-			.hero--image {
-				line-height: 0;
-			}
-		}
-	}
+  		article {
+  			display: flex;
+  			flex-direction: row;
+  			border-radius: $radius-lg;
+  			align-items: center;
+
+
+  			header {
+  				border-bottom: 0;
+  				padding: 0 1.5em;
+  			}
+
+  			.post-category {
+  				color: $secondary-500;
+  				font-family: $header-font;
+  				margin-bottom: $spacing-sm;
+  			}
+
+  			.entry-title {
+  				font-size: 1.3em;
+  				line-height: 1;
+  				font-family: $header-font;
+
+  				a {
+  					text-decoration: none;
+  					color: $primary-600;
+  				}
+  			}
+
+  			.hero--image {
+  				line-height: 0;
+  			}
+  		}
+  	}
+  }
 }

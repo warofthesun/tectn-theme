@@ -1,236 +1,240 @@
-/*********************
-NAVIGATION STYLES
-*********************/
+@use "../globals" as *;
+
+@media only screen and (min-width: 48em) {
+  /*********************
+  NAVIGATION STYLES
+  *********************/
 
 
 
 
-/*********************
-POSTS & CONTENT STYLES
-*********************/
+  /*********************
+  POSTS & CONTENT STYLES
+  *********************/
 
-.testimonials {
-	margin-bottom: 2em;
-	&__background {
-		&_white {
-			@include pattern_overlay;
+  .testimonials {
+  	margin-bottom: 2em;
+  	&__background {
+  		&_white {
+  			@include pattern_overlay;
 
-			.attribution {
-				@include gradient(45deg, $secondary-two_stops);
-				color: $secondary-50;
-			}
-		}
+  			.attribution {
+  				@include gradient(45deg, $secondary-two_stops);
+  				color: $secondary-50;
+  			}
+  		}
 
-		&_gold {
-			@include gold_overlay_gradient_light;
-			border-top: 2px solid $secondary-500;
-			border-bottom: 2px solid $secondary-600;
-			display: flex;
-			flex-direction: column;
-			box-shadow: inset 0 8px 10px -10px rgba($secondary-900, 0.7);
+  		&_gold {
+  			@include gold_overlay_gradient_light;
+  			border-top: 2px solid $secondary-500;
+  			border-bottom: 2px solid $secondary-600;
+  			display: flex;
+  			flex-direction: column;
+  			box-shadow: inset 0 8px 10px -10px rgba($secondary-900, 0.7);
 
-			.attribution {
-				@include gradient(45deg, $primary-two_stops__dark);
-				color: $primary-50;
-			}
+  			.attribution {
+  				@include gradient(45deg, $primary-two_stops__dark);
+  				color: $primary-50;
+  			}
 
-			h3, h4 {
-				color: $primary-700;
-			}
+  			h3, h4 {
+  				color: $primary-700;
+  			}
 
-			&::before {
-					content: "What our clients say";
-					font-family: $serif;
-					font-size: 2em;
-					line-height: 1;
-					border-radius: 0 0 20px 20px;
-					display: inline-block;
-					margin-left: auto;
-					margin-right: auto;
-					margin-top: -5px;
-					padding: 0 1em .5em 1em;
-					box-shadow: 0px 3px 0px $secondary-500, 0 8px 10px -10px rgba($secondary-900, 0.7);
+  			&::before {
+  					content: "What our clients say";
+  					font-family: $header-font;
+  					font-size: 2em;
+  					line-height: 1;
+  					border-radius: 0 0 20px 20px;
+  					display: inline-block;
+  					margin-left: auto;
+  					margin-right: auto;
+  					margin-top: -5px;
+  					padding: 0 1em .5em 1em;
+  					box-shadow: 0px 3px 0px $secondary-500, 0 8px 10px -10px rgba($secondary-900, 0.7);
 
-				}
+  				}
 
-		}
-	}
+  		}
+  	}
 
-	&__content {
-		justify-content: space-between;
-		padding-bottom: $spacing-none;
+  	&__content {
+  		justify-content: space-between;
+  		padding-bottom: $spacing-none;
 
-		.testimonial {
-			.quote_mark {
-				display: none;
-			}
-			display: flex;
-			flex-direction: column;
-			margin-left: auto;
-			margin-right: auto;
+  		.testimonial {
+  			.quote_mark {
+  				display: none;
+  			}
+  			display: flex;
+  			flex-direction: column;
+  			margin-left: auto;
+  			margin-right: auto;
 
-				h3 {
-					font-size: 2em;
+  				h3 {
+  					font-size: 2em;
 
-					&::before {
-						content: "";
-						background-image: url(../images/marker/quote.png);
-						display: block;
-						height: 58px;
-						width: 58px;
-						margin: auto;
-					}
-				}
+  					&::before {
+  						content: "";
+  						background-image: url(../images/marker/quote.png);
+  						display: block;
+  						height: 58px;
+  						width: 58px;
+  						margin: auto;
+  					}
+  				}
 
-				.attribution {
-					display: inline-block;
-					border-radius: 20px;
-					padding: 4px 16px;
-					font-family: $sans-serif;
-					font-weight: 700;
-					font-size: 1.2em;
-					margin: auto;
-					margin-bottom: $spacing-xxl;
-				}
-			}
+  				.attribution {
+  					display: inline-block;
+  					border-radius: 20px;
+  					padding: 4px 16px;
+  					font-family: $header-font;
+  					font-weight: 700;
+  					font-size: 1.2em;
+  					margin: auto;
+  					margin-bottom: $spacing-xxl;
+  				}
+  			}
 
-			& > div:nth-last-of-type(2), & > div:nth-last-of-type(2) ~ div, & > div:nth-last-of-type(3), & > div:nth-last-of-type(3) ~ div {
-				.quote_mark {
-					display: inline;
-					width: 25px;
-					position: absolute;
-					margin-top: 1.5em;
-					margin-left: 1.5em;
-				}
-				background-color: $white;
-				border-radius: $radius-lg;
-				padding: 0;
-				justify-content: space-between;
-				display: flex;
-				flex-direction: column;
-				border: 1px solid $secondary-500;
-				margin-top: $spacing-xxl;
-				margin-bottom: $spacing-xxl;
+  			& > div:nth-last-of-type(2), & > div:nth-last-of-type(2) ~ div, & > div:nth-last-of-type(3), & > div:nth-last-of-type(3) ~ div {
+  				.quote_mark {
+  					display: inline;
+  					width: 25px;
+  					position: absolute;
+  					margin-top: 1.5em;
+  					margin-left: 1.5em;
+  				}
+  				background-color: $white;
+  				border-radius: $radius-lg;
+  				padding: 0;
+  				justify-content: space-between;
+  				display: flex;
+  				flex-direction: column;
+  				border: 1px solid $secondary-500;
+  				margin-top: $spacing-xxl;
+  				margin-bottom: $spacing-xxl;
 
-				h3 {
-					font-size: 1.1em;
-					margin: 0;
-					padding: $spacing-xl;
-					padding-left: 3.5em;
-					text-align: left;
+  				h3 {
+  					font-size: 1.1em;
+  					margin: 0;
+  					padding: $spacing-xl;
+  					padding-left: 3.5em;
+  					text-align: left;
 
-					&::before {
-						display: none;
-					}
+  					&::before {
+  						display: none;
+  					}
 
 
-					p {
-						padding: 0;
-						margin: 0;
-					}
-				}
+  					p {
+  						padding: 0;
+  						margin: 0;
+  					}
+  				}
 
-				.attribution {
-					padding: $spacing-md $spacing-xl;
-					border-radius: 0 0 $radius-md $radius-md;
-					font-weight: 700;
-					font-size: 1em;
-					margin: 0;
+  				.attribution {
+  					padding: $spacing-md $spacing-xl;
+  					border-radius: 0 0 $radius-md $radius-md;
+  					font-weight: 700;
+  					font-size: 1em;
+  					margin: 0;
 
-				}
-			}
+  				}
+  			}
 
-			& > div:nth-last-of-type(2), & > div:nth-last-of-type(2) ~ div {
-				width: 48%;
-			}
+  			& > div:nth-last-of-type(2), & > div:nth-last-of-type(2) ~ div {
+  				width: 48%;
+  			}
 
-			& > div:nth-last-of-type(3), & > div:nth-last-of-type(3) ~ div {
-				width: 32%;
-			}
-		}
+  			& > div:nth-last-of-type(3), & > div:nth-last-of-type(3) ~ div {
+  				width: 32%;
+  			}
+  		}
 
-	&__sidebar {
-		border-left: 2px solid $secondary-500;
-		border-top: 0;
-		padding-left: 2em;
+  	&__sidebar {
+  		border-left: 2px solid $secondary-500;
+  		border-top: 0;
+  		padding-left: 2em;
 
-		li {
-			display: flex;
-			max-width: 100%;
+  		li {
+  			display: flex;
+  			max-width: 100%;
 
-			.quote_mark {
-				display: inline;
-				width: 50px;
-				height: 50px;
-				margin-right: $spacing-lg;
-			}
+  			.quote_mark {
+  				display: inline;
+  				width: 50px;
+  				height: 50px;
+  				margin-right: $spacing-lg;
+  			}
 
-			h3 {
-				margin-top: 0;
-				font-size: 1.2em;
-				line-height: 1.2;
+  			h3 {
+  				margin-top: 0;
+  				font-size: 1.2em;
+  				line-height: 1.2;
 
-				p {
-					margin-top: 0;
-				}
-		}
-		.attribution {
-			@include gradient(45deg, $primary-two_stops__dark);
-				color: $primary-50;
-				display: inline-block;
-				border-radius: 20px;
-				padding: 4px 16px;
-				font-family: $sans-serif;
-				font-weight: 700;
-				font-size: 1em;
-				margin: auto;
-				margin-bottom: $spacing-xxl;
-			}
-		}
-	}
+  				p {
+  					margin-top: 0;
+  				}
+  		}
+  		.attribution {
+  			@include gradient(45deg, $primary-two_stops__dark);
+  				color: $primary-50;
+  				display: inline-block;
+  				border-radius: 20px;
+  				padding: 4px 16px;
+  				font-family: $header-font;
+  				font-weight: 700;
+  				font-size: 1em;
+  				margin: auto;
+  				margin-bottom: $spacing-xxl;
+  			}
+  		}
+  	}
+  }
+
+  /* entry content */
+  .entry-content {
+
+
+  	/* at this larger size, we can start to align images */
+  	.alignleft, img.alignleft {
+  		margin-right: 1.5em;
+  		display: inline;
+  		float: left;
+  	}
+  	.alignright, img.alignright {
+  		margin-left: 1.5em;
+  		display: inline;
+  		float: right;
+  	}
+  	.aligncenter, img.aligncenter {
+  		margin-right: auto;
+  		margin-left: auto;
+  		display: block;
+  		clear: both;
+  	}
+
+  } /* end .entry-content */
+
+  /*********************
+  FOOTER STYLES
+  *********************/
+
+  .lower_content_curve {
+  	width: 100%;
+
+  	.lower_content_curve__background {
+  		fill: $primary-surface;
+  	}
+  }
+  /*
+  check your menus here. do they look good?
+  do they need tweaking?
+  */
+  .footer-links {
+  	ul {
+  		li {}
+  	}
+  } /* end .footer-links */
 }
-
-/* entry content */
-.entry-content {
-
-
-	/* at this larger size, we can start to align images */
-	.alignleft, img.alignleft {
-		margin-right: 1.5em;
-		display: inline;
-		float: left;
-	}
-	.alignright, img.alignright {
-		margin-left: 1.5em;
-		display: inline;
-		float: right;
-	}
-	.aligncenter, img.aligncenter {
-		margin-right: auto;
-		margin-left: auto;
-		display: block;
-		clear: both;
-	}
-
-} /* end .entry-content */
-
-/*********************
-FOOTER STYLES
-*********************/
-
-.lower_content_curve {
-	width: 100%;
-
-	.lower_content_curve__background {
-		fill: $primary-surface;
-	}
-}
-/*
-check your menus here. do they look good?
-do they need tweaking?
-*/
-.footer-links {
-	ul {
-		li {}
-	}
-} /* end .footer-links */

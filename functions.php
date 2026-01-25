@@ -263,10 +263,23 @@ can replace these fonts, change it in your scss files
 and be up and running in seconds.
 */
 function custom_fonts() {
-  wp_enqueue_style('googleFonts', '//fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=DM+Serif+Text&display=swap');
+  wp_enqueue_style('tectn-google-fonts', 'https://fonts.googleapis.com/css2?family=Francois+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap', array(), null);
 }
 
 add_action('wp_enqueue_scripts', 'custom_fonts');
+add_action('admin_enqueue_scripts', 'custom_fonts');
+add_action('enqueue_block_editor_assets', 'custom_fonts');
+
+function tectn_fonts_preconnect( $urls, $relation_type ) {
+  if ( 'preconnect' === $relation_type ) {
+    $urls[] = array( 'href' => 'https://fonts.googleapis.com' );
+    $urls[] = array( 'href' => 'https://fonts.gstatic.com', 'crossorigin' => '' );
+  }
+  return $urls;
+}
+
+add_filter( 'wp_resource_hints', 'tectn_fonts_preconnect', 10, 2 );
+
 
 
 /* Load ScrollMagic Scripts 
