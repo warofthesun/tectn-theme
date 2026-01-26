@@ -67,7 +67,6 @@
   	margin-right: auto;
   }
 
-
   	/* .menu is clearfixed inside mixins.scss */
   	.menu {
   		ul {
@@ -121,8 +120,6 @@
   .hero {
 
   	&__container {
-  		@include gradient(0deg, $primary-700, $primary-500);
-  		margin-top: -10px;
 
   		h1 {
   			position: relative;
@@ -192,7 +189,7 @@
   				height: 550px;
 
   				&_text {
-  					@include gradient(0deg, $primary-700, $primary-500);
+  					@include gradient(50deg, $secondary-500_70, $primary-500_70);
   					position: initial;
   				}
 

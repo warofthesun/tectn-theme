@@ -201,6 +201,10 @@ body, .testimonials__background_gold::before, .hentry {
   background-color: #F5F6F7;
 }
 
+.header {
+  background-color: rgba(249, 247, 236, 0.95);
+}
+
 .container-fluid,
 .container {
   margin-right: auto;
@@ -1149,13 +1153,13 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   display: inline-block;
   position: relative;
   font-family: "Francois One", "Helvetica Neue", sans-serif;
-  color: #1C2A3A;
+  color: #05260B;
   text-decoration: none;
   font-size: 1em;
   font-weight: 700;
   padding: 8px 16px;
   border-radius: 4px;
-  border: 1px solid #456990;
+  border: 1px solid #389449;
   cursor: pointer;
   -webkit-transition: background-color 0.14s ease-in-out;
   transition: background-color 0.14s ease-in-out;
@@ -1553,10 +1557,10 @@ Stylesheet: Gradient Styles
 
 *********************/
 .dark_primary_gradient__stop-1 {
-  stop-color: #293F56;
+  stop-color: #0C4517;
 }
 .dark_primary_gradient__stop-2 {
-  stop-color: #456990;
+  stop-color: #389449;
 }
 
 /*********************
@@ -2159,6 +2163,7 @@ H1, H2, H3, H4, H5 STYLES
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
   text-rendering: optimizelegibility;
   font-weight: 400;
+  font-family: "Francois One", "Helvetica Neue", sans-serif;
   /*
   if you're going to use webfonts, be sure to check your weights
   http://css-tricks.com/watch-your-font-weight/
@@ -2172,8 +2177,7 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a {
 h1, .h1 {
   font-size: 3.5em;
   line-height: 0.9em;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
-  color: #A2B4C7;
+  color: #64AF72;
 }
 
 h2, .h2 {
@@ -2181,8 +2185,7 @@ h2, .h2 {
   line-height: 1em;
   margin-top: 0;
   margin-bottom: 0.375em;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
-  color: #304A65;
+  color: #389449;
 }
 h2.has-text-align-center::after, .h2.has-text-align-center::after {
   margin-left: auto;
@@ -2200,57 +2203,53 @@ h2::after, .h2::after {
 h3, .h3 {
   font-size: 2em;
   line-height: 1.1;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  color: #226B30;
 }
 
 h4, .h4 {
   font-size: 1.5em;
-  font-weight: 700;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  color: #226B30;
 }
 
 h5, .h5 {
   font-size: 1.2em;
   line-height: 1.6em;
   text-transform: normal;
-  font-weight: 400;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
-  color: #0E151D;
+  color: #0C4517;
 }
 
 /*********************
 HEADER STYLES
 *********************/
 .header {
-  background-color: #1C2A3A;
   -webkit-box-shadow: 0px 13px 21px -10px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 13px 21px -10px rgba(0, 0, 0, 0.3);
   position: relative;
   z-index: 99;
 }
 
-#logo, #trustmfa_logo {
-  height: 50px;
+#logo {
+  height: 60px;
   width: auto;
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
   margin-right: auto;
   margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
-#logo .st0, #trustmfa_logo .st0 {
-  fill: url(#logo-gradient2);
+#logo img {
+  height: 100%;
 }
-#logo .st1, #trustmfa_logo .st1 {
-  fill: url(#logo-gradient1);
-}
-#logo .st2, #trustmfa_logo .st2 {
-  fill: url(#logo-gradient);
-}
-#logo .st3, #trustmfa_logo .st3 {
-  fill: #F5FAFF;
-}
-#logo a, #trustmfa_logo a {
+#logo a {
   color: #fff;
 }
 
@@ -2318,7 +2317,7 @@ and more scalable.
   margin-bottom: 1em;
   margin-top: -2em;
   margin-left: auto;
-  color: #C7D2DE;
+  color: #EFF6F0;
   font-weight: 700;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
@@ -2427,7 +2426,7 @@ POSTS & CONTENT STYLES
 }
 .hero__container_landing h1 span {
   display: block;
-  color: #C7D2DE;
+  color: #EFF6F0;
   font-family: "Francois One", "Helvetica Neue", sans-serif;
   text-transform: uppercase;
   font-size: 0.4em;
@@ -2448,16 +2447,16 @@ POSTS & CONTENT STYLES
 }
 .hero__container_landing h3 ul li:nth-child(1):after, .hero__container_landing h3 ul li:nth-child(2):after {
   content: " • ";
-  color: #8FA5BC;
+  color: #A6DAAF;
 }
 .hero__container_landing .hero__content {
   height: 500px;
 }
 .hero__container_landing .hero__content_text {
-  background: -webkit-linear-gradient(0deg, rgba(41, 63, 86, 0.8), #456990);
-  background: -webkit-gradient(linear, left bottom, left top, from(rgba(41, 63, 86, 0.8)), to(#456990));
-  background: -webkit-linear-gradient(bottom, rgba(41, 63, 86, 0.8), #456990);
-  background: linear-gradient(0deg, rgba(41, 63, 86, 0.8), #456990);
+  background: -webkit-linear-gradient(0deg, rgba(12, 69, 23, 0.8), #389449);
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(12, 69, 23, 0.8)), to(#389449));
+  background: -webkit-linear-gradient(bottom, rgba(12, 69, 23, 0.8), #389449);
+  background: linear-gradient(0deg, rgba(12, 69, 23, 0.8), #389449);
   position: initial;
 }
 .hero__container_landing .hero__content_text-angle {
@@ -2471,10 +2470,10 @@ POSTS & CONTENT STYLES
   -ms-flex-pack: end;
   justify-content: flex-end;
   width: 100%;
-  background: -webkit-linear-gradient(0deg, #293f56, rgba(69, 105, 144, 0.8));
-  background: -webkit-gradient(linear, left bottom, left top, from(#293f56), to(rgba(69, 105, 144, 0.8)));
-  background: -webkit-linear-gradient(bottom, #293f56, rgba(69, 105, 144, 0.8));
-  background: linear-gradient(0deg, #293f56, rgba(69, 105, 144, 0.8));
+  background: -webkit-linear-gradient(0deg, #0c4517, rgba(56, 148, 73, 0.8));
+  background: -webkit-gradient(linear, left bottom, left top, from(#0c4517), to(rgba(56, 148, 73, 0.8)));
+  background: -webkit-linear-gradient(bottom, #0c4517, rgba(56, 148, 73, 0.8));
+  background: linear-gradient(0deg, #0c4517, rgba(56, 148, 73, 0.8));
 }
 .hero__container_large .hero__content_text-angle {
   display: none;
@@ -2487,10 +2486,10 @@ POSTS & CONTENT STYLES
   -ms-flex-pack: end;
   justify-content: flex-end;
   width: 100%;
-  background: -webkit-linear-gradient(0deg, #293f56, rgba(69, 105, 144, 0.8));
-  background: -webkit-gradient(linear, left bottom, left top, from(#293f56), to(rgba(69, 105, 144, 0.8)));
-  background: -webkit-linear-gradient(bottom, #293f56, rgba(69, 105, 144, 0.8));
-  background: linear-gradient(0deg, #293f56, rgba(69, 105, 144, 0.8));
+  background: -webkit-linear-gradient(0deg, #0c4517, rgba(56, 148, 73, 0.8));
+  background: -webkit-gradient(linear, left bottom, left top, from(#0c4517), to(rgba(56, 148, 73, 0.8)));
+  background: -webkit-linear-gradient(bottom, #0c4517, rgba(56, 148, 73, 0.8));
+  background: linear-gradient(0deg, #0c4517, rgba(56, 148, 73, 0.8));
 }
 .hero__container_small {
   background: url("../images/pattern_circle.png") repeat left top, -webkit-gradient(linear, left top, left bottom, from(#D3CA83), to(#A69E3F));
@@ -2529,7 +2528,7 @@ POSTS & CONTENT STYLES
   margin: auto;
 }
 .hero__container p {
-  color: #F5FAFF;
+  color: #FAFCFA;
 }
 .hero__content {
   display: -webkit-box;
@@ -2615,7 +2614,7 @@ POSTS & CONTENT STYLES
 .gallery_item .article-header .entry-title a {
   font-family: "Francois One", "Helvetica Neue", sans-serif;
   font-weight: 700;
-  color: #304A65;
+  color: #226B30;
   font-size: 0.9em;
 }
 .gallery_item .article-meta {
@@ -2681,12 +2680,12 @@ POSTS & CONTENT STYLES
   box-shadow: inset 0 8px 10px -10px rgba(69, 68, 34, 0.7);
 }
 .testimonials__background_gold .attribution {
-  background: -webkit-linear-gradient(45deg, #456990, #293F56);
-  background: linear-gradient(45deg, #456990, #293F56);
-  color: #C7D2DE;
+  background: -webkit-linear-gradient(45deg, #389449, #0C4517);
+  background: linear-gradient(45deg, #389449, #0C4517);
+  color: #EFF6F0;
 }
 .testimonials__background_gold h3, .testimonials__background_gold h4 {
-  color: #293F56;
+  color: #0C4517;
 }
 .testimonials__background_gold::before {
   content: "What our clients say";
@@ -2809,9 +2808,9 @@ POSTS & CONTENT STYLES
   margin-top: 0;
 }
 .testimonials__sidebar li .attribution {
-  background: -webkit-linear-gradient(45deg, #456990, #293F56);
-  background: linear-gradient(45deg, #456990, #293F56);
-  color: #C7D2DE;
+  background: -webkit-linear-gradient(45deg, #389449, #0C4517);
+  background: linear-gradient(45deg, #389449, #0C4517);
+  color: #EFF6F0;
   display: inline-block;
   border-radius: 20px;
   padding: 4px 16px;
@@ -2867,7 +2866,7 @@ article .hero--image img {
 /* style by tag (i.e. tag-news) */
 /* post meta */
 .byline {
-  color: #293F56;
+  color: #0C4517;
   font-style: normal;
   font-size: 0.8em;
   margin: 0;
@@ -3048,7 +3047,6 @@ article .hero--image img {
   display: table;
   font-family: "Francois One", "Helvetica Neue", sans-serif;
   font-size: 1.3em;
-  font-weight: 500;
   line-height: 1.1;
 }
 
@@ -3081,10 +3079,10 @@ article .hero--image img {
   -ms-flex-pack: distribute;
   justify-content: space-around;
   border-radius: 0.75em;
-  background: -webkit-linear-gradient(0deg, #A2B4C7, #C7D2DE);
-  background: -webkit-gradient(linear, left bottom, left top, from(#A2B4C7), to(#C7D2DE));
-  background: -webkit-linear-gradient(bottom, #A2B4C7, #C7D2DE);
-  background: linear-gradient(0deg, #A2B4C7, #C7D2DE);
+  background: -webkit-linear-gradient(0deg, #C7EACE, #EFF6F0);
+  background: -webkit-gradient(linear, left bottom, left top, from(#C7EACE), to(#EFF6F0));
+  background: -webkit-linear-gradient(bottom, #C7EACE, #EFF6F0);
+  background: linear-gradient(0deg, #C7EACE, #EFF6F0);
   margin-bottom: 1.5em;
 }
 .partners__container_highlighted .partners {
@@ -3153,7 +3151,7 @@ article .hero--image img {
   width: 90%;
   padding-left: 1em;
   padding-right: 1em;
-  color: #293F56;
+  color: #0C4517;
 }
 
 .resources {
@@ -3164,7 +3162,7 @@ article .hero--image img {
 .resources .resourse__item .resource__link {
   text-decoration: underline;
   display: block;
-  color: #293F56;
+  color: #0C4517;
 }
 .resources .resourse__item .resource__link:hover {
   color: #827D2E;
@@ -3178,8 +3176,7 @@ article .hero--image img {
   margin-bottom: 0.25em;
   margin-left: 0.25em;
   font-family: "Francois One", "Helvetica Neue", sans-serif;
-  font-weight: 500;
-  border-bottom: 2px solid #7D96B1;
+  border-bottom: 2px solid #85C992;
 }
 .resources .resourse__item h2 {
   margin-top: 1em;
@@ -3215,7 +3212,7 @@ article .hero--image img {
 .forms .form__item .form__link {
   text-decoration: underline;
   display: block;
-  color: #293F56;
+  color: #0C4517;
 }
 .forms .form__item .form__link:hover {
   color: #827D2E;
@@ -3229,9 +3226,8 @@ article .hero--image img {
   margin-bottom: 0.25em;
   margin-left: 0.25em;
   font-family: "Francois One", "Helvetica Neue", sans-serif;
-  font-weight: 500;
   display: inline-block;
-  border-bottom: 2px solid #7D96B1;
+  border-bottom: 2px solid #85C992;
 }
 .forms .form__item h2 {
   margin-top: 1em;
@@ -3336,7 +3332,7 @@ article .hero--image img {
   display: flex;
 }
 .wpcf7-form .grid__column_flex-item.column_header {
-  background-color: #293F56;
+  background-color: #0C4517;
   color: #fff;
   margin-bottom: 0.75em;
   padding: 0.5em;
@@ -3386,7 +3382,7 @@ article .hero--image img {
   align-items: center;
 }
 .wpcf7-form .grid__column_item.column_header {
-  background-color: #293F56;
+  background-color: #0C4517;
   color: #fff;
   margin-bottom: 0.75em;
   padding: 0.5em;
@@ -3686,10 +3682,10 @@ FOOTER STYLES
 *********************/
 .footer {
   clear: both;
-  background: -webkit-linear-gradient(180deg, #456990, #293F56);
-  background: -webkit-gradient(linear, left top, left bottom, from(#456990), to(#293F56));
-  background: -webkit-linear-gradient(top, #456990, #293F56);
-  background: linear-gradient(180deg, #456990, #293F56);
+  background: -webkit-linear-gradient(180deg, #389449, #0C4517);
+  background: -webkit-gradient(linear, left top, left bottom, from(#389449), to(#0C4517));
+  background: -webkit-linear-gradient(top, #389449, #0C4517);
+  background: linear-gradient(180deg, #389449, #0C4517);
 }
 .footer__logo {
   display: -webkit-box;
@@ -3736,7 +3732,7 @@ FOOTER STYLES
 }
 .footer__tagline em {
   font-style: normal;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Lato", "Helvetica Neue", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 1.5em;
@@ -3753,7 +3749,7 @@ FOOTER STYLES
 }
 
 #inner-footer .contact_info {
-  color: #A2B4C7;
+  color: #C7EACE;
   text-align: center;
 }
 #inner-footer .contact_info .address__physical {
@@ -3775,7 +3771,7 @@ view.
 } /* end .footer-links */
 .copyright {
   text-align: center;
-  color: #A2B4C7;
+  color: #C7EACE;
   margin: 1em 0;
   width: 100%;
 }
@@ -3833,12 +3829,12 @@ IMPORTING PARTIALS
     box-shadow: inset 0 8px 10px -10px rgba(69, 68, 34, 0.7);
   }
   .testimonials__background_gold .attribution {
-    background: -webkit-linear-gradient(45deg, #456990, #293F56);
-    background: linear-gradient(45deg, #456990, #293F56);
-    color: #C7D2DE;
+    background: -webkit-linear-gradient(45deg, #389449, #0C4517);
+    background: linear-gradient(45deg, #389449, #0C4517);
+    color: #EFF6F0;
   }
   .testimonials__background_gold h3, .testimonials__background_gold h4 {
-    color: #293F56;
+    color: #0C4517;
   }
   .testimonials__background_gold::before {
     content: "What our clients say";
@@ -3973,9 +3969,9 @@ IMPORTING PARTIALS
     margin-top: 0;
   }
   .testimonials__sidebar li .attribution {
-    background: -webkit-linear-gradient(45deg, #456990, #293F56);
-    background: linear-gradient(45deg, #456990, #293F56);
-    color: #C7D2DE;
+    background: -webkit-linear-gradient(45deg, #389449, #0C4517);
+    background: linear-gradient(45deg, #389449, #0C4517);
+    color: #EFF6F0;
     display: inline-block;
     border-radius: 20px;
     padding: 4px 16px;
@@ -4129,13 +4125,6 @@ IMPORTING PARTIALS
   /*********************
   HERO STYLES
   *********************/
-  .hero__container {
-    background: -webkit-linear-gradient(0deg, #293F56, #456990);
-    background: -webkit-gradient(linear, left bottom, left top, from(#293F56), to(#456990));
-    background: -webkit-linear-gradient(bottom, #293F56, #456990);
-    background: linear-gradient(0deg, #293F56, #456990);
-    margin-top: -10px;
-  }
   .hero__container h1 {
     position: relative;
   }
@@ -4157,7 +4146,7 @@ IMPORTING PARTIALS
   }
   .hero__container_landing h1 span {
     display: block;
-    color: #C7D2DE;
+    color: #EFF6F0;
     font-family: "Francois One", "Helvetica Neue", sans-serif;
     text-transform: uppercase;
     font-size: 0.4em;
@@ -4177,7 +4166,7 @@ IMPORTING PARTIALS
   }
   .hero__container_landing h3 ul li:nth-child(1):after, .hero__container_landing h3 ul li:nth-child(2):after {
     content: " • ";
-    color: #8FA5BC;
+    color: #A6DAAF;
   }
   .hero__container_landing p {
     font-size: 1.3em;
@@ -4186,10 +4175,9 @@ IMPORTING PARTIALS
     height: 550px;
   }
   .hero__container_landing .hero__content_text {
-    background: -webkit-linear-gradient(0deg, #293F56, #456990);
-    background: -webkit-gradient(linear, left bottom, left top, from(#293F56), to(#456990));
-    background: -webkit-linear-gradient(bottom, #293F56, #456990);
-    background: linear-gradient(0deg, #293F56, #456990);
+    background: -webkit-linear-gradient(50deg, rgba(166, 158, 63, 0.7), rgba(56, 148, 73, 0.7));
+    background: -webkit-linear-gradient(40deg, rgba(166, 158, 63, 0.7), rgba(56, 148, 73, 0.7));
+    background: linear-gradient(50deg, rgba(166, 158, 63, 0.7), rgba(56, 148, 73, 0.7));
     position: initial;
   }
   .hero__container_landing .hero__content_text-angle {
@@ -4247,7 +4235,7 @@ IMPORTING PARTIALS
     margin: auto;
   }
   .hero__container p {
-    color: #F5FAFF;
+    color: #FAFCFA;
   }
   .hero__content_image {
     background-size: cover;
@@ -4531,7 +4519,7 @@ IMPORTING PARTIALS
   }
   .hero__featured_post article .entry-title a {
     text-decoration: none;
-    color: #304A65;
+    color: #226B30;
   }
   .hero__featured_post article .hero--image {
     line-height: 0;

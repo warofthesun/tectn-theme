@@ -150,6 +150,7 @@ H1, H2, H3, H4, H5 STYLES
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 	text-rendering: optimizelegibility;
 	font-weight: 400;
+	font-family: $header-font;
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http://css-tricks.com/watch-your-font-weight/
@@ -164,8 +165,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 h1, .h1 {
 	font-size: 3.5em;
 	line-height: .9em;
-	font-family: $header-font;
-	color: $primary-100;
+	color: $primary-400;
 }
 
 h2, .h2 {
@@ -173,8 +173,7 @@ h2, .h2 {
 	line-height: 1em;
 	margin-top: 0;
 	margin-bottom: 0.375em;
-	font-family: $header-font;
-	color: $primary-600;
+	color: $primary-500;
 
 	&.has-text-align-center {
 		&::after {
@@ -196,22 +195,19 @@ h2, .h2 {
 h3, .h3 {
 	font-size: 2em;
 	line-height: 1.1;
-	font-family: $header-font;
+	color: $primary-600;
 }
 
 h4, .h4 {
 	font-size: 1.5em;
-	font-weight: 700;
-	font-family: $header-font;
+	color: $primary-600;
 }
 
 h5, .h5 {
 	font-size: 1.2em;
 	line-height: 1.6em;
 	text-transform: normal;
-	font-weight: 400;
-	font-family: $header-font;
-	color: $primary-900;
+	color: $primary-700;
 }
 
 
@@ -221,36 +217,27 @@ HEADER STYLES
 *********************/
 
 .header {
-	background-color: $primary-800;
+	@extend %content_surface__primary-95;
 	@include box-shadow($bottom-diffused);
 	position: relative;
 	z-index: 99;
 }
 
-#logo, #trustmfa_logo {
-	height: 50px;
+#logo {
+	height: 60px;
 	width: auto;
 	background-repeat: no-repeat;
 	background-size: contain;
 	display: inline-block;
 	margin-right: auto;
 	margin-left: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-	.st0 {
-		fill: url(#logo-gradient2);
-		}
-
-		.st1 {
-		fill: url(#logo-gradient1);
-		}
-
-		.st2 {
-		fill: url(#logo-gradient);
-		}
-
-		.st3 {
-		fill: $primary-10;
-		}
+	img {
+		height: 100%;
+	}
 
 	a {
 		color: $white;
@@ -1190,7 +1177,6 @@ article {
   display: table;
   font-family: $header-font;
   font-size: 1.3em;
-  font-weight: 500;
   line-height: 1.1;
 }
 
@@ -1326,7 +1312,6 @@ article {
 				margin-bottom: $spacing-xs;
 				margin-left: $spacing-xs;
 				font-family: $header-font;
-				font-weight: 500;
 				border-bottom: 2px solid $primary-300;
 			}
 		}
@@ -1383,7 +1368,6 @@ article {
 				margin-bottom: $spacing-xs;
 				margin-left: $spacing-xs;
 				font-family: $header-font;
-				font-weight: 500;
 				display: inline-block;
 				border-bottom: 2px solid $primary-300;
 			}
@@ -2038,7 +2022,7 @@ FOOTER STYLES
 
 		em {
 			font-style: normal;
-			font-family: $header-font;
+			font-family: $body-font;
 			font-weight: 700;
 			text-transform: uppercase;
 			font-size: 1.5em;

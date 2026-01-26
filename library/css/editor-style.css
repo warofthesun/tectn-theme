@@ -681,7 +681,7 @@ body#tinymce.wp-editor {
 }
 body#tinymce.wp-editor h1, body#tinymce.wp-editor .h1, body#tinymce.wp-editor h2, body#tinymce.wp-editor .h2, body#tinymce.wp-editor h3, body#tinymce.wp-editor .h3, body#tinymce.wp-editor h4, body#tinymce.wp-editor .h4, body#tinymce.wp-editor h5, body#tinymce.wp-editor .h5 {
   text-rendering: optimizelegibility;
-  font-weight: 500;
+  font-family: "Francois One", "Helvetica Neue", sans-serif;
 }
 body#tinymce.wp-editor h1 a, body#tinymce.wp-editor .h1 a, body#tinymce.wp-editor h2 a, body#tinymce.wp-editor .h2 a, body#tinymce.wp-editor h3 a, body#tinymce.wp-editor .h3 a, body#tinymce.wp-editor h4 a, body#tinymce.wp-editor .h4 a, body#tinymce.wp-editor h5 a, body#tinymce.wp-editor .h5 a {
   text-decoration: none;
@@ -700,7 +700,7 @@ body#tinymce.wp-editor h3, body#tinymce.wp-editor .h3 {
 }
 body#tinymce.wp-editor h4, body#tinymce.wp-editor .h4 {
   font-size: 1.1em;
-  font-weight: 700;
+  font-weight: 400;
 }
 body#tinymce.wp-editor h5, body#tinymce.wp-editor .h5 {
   font-size: 0.846em;

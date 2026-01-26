@@ -43,7 +43,7 @@
 					<nav role="navigation" class="header_nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
 					<a href="<?php echo home_url(); ?>" rel="nofollow">
 						<div id="logo" class="h1" itemscope itemtype="http://schema.org/Organization" aria-label="<?php bloginfo('name'); ?>">
-							<?php echo file_get_contents( get_template_directory() . '/library/images/mfa_logo_dark.svg' ); ?>
+							<img src="<?php echo get_template_directory_uri(); ?>/library/images/tectn-logo.png" alt="Tectn Logo">
 						</div>
 					</a>
 					<div class="nav__wrapper">

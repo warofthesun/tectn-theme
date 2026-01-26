@@ -13,3 +13,7 @@ Stylesheet: Tokens
 %border-radius-sm {
     border-radius: $spacing-sm;
 }
+
+%content_surface__primary-95 {
+    background-color: rgba($secondary-50, 0.95);
+}
