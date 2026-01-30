@@ -5,15 +5,14 @@ Stylesheet: Tokens
 @use "variables" as *;
 
 
+%surface_primary__content {
+    background-color: $secondary-50;
+}
 
-%content_background__primary {
-    background-color: $grey-10;
+%surface_primary__content-95 {
+    background-color: rgba($secondary-50, 0.95);
 }
 
 %border-radius-sm {
     border-radius: $spacing-sm;
-}
-
-%content_surface__primary-95 {
-    background-color: rgba($secondary-50, 0.95);
 }

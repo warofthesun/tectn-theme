@@ -13,7 +13,7 @@ body {
 	font-size: 100%;
 	line-height: 1.5;
 	color: $text-color;
-	@extend %content_background__primary;
+	@extend %surface_primary__content;
   	-webkit-font-smoothing: antialiased;
   	-moz-osx-font-smoothing: grayscale;
 }
@@ -217,7 +217,7 @@ HEADER STYLES
 *********************/
 
 .header {
-	@extend %content_surface__primary-95;
+	@extend %surface_primary__content-95;
 	@include box-shadow($bottom-diffused);
 	position: relative;
 	z-index: 99;
@@ -416,7 +416,7 @@ POSTS & CONTENT STYLES
 			position: relative;
 		}
 
-		&_landing, &_large {
+		&_landing {
 			.content_curve__up {
 				display: inline;
 				position: relative;
@@ -424,17 +424,6 @@ POSTS & CONTENT STYLES
 				svg {
 					margin-top: -90px;
 					margin-bottom: 10px;
-				}
-			}
-		}
-
-		&_medium {
-			.content_curve__outer {
-				svg {
-					margin-top: -45px;
-					margin-bottom: 0px;
-					position: relative;
-					z-index: 99;
 				}
 			}
 		}
@@ -478,82 +467,14 @@ POSTS & CONTENT STYLES
 			}
 
 			.hero__content {
-				height: 500px;
+				height: 90vh;
 
 				&_text {
-					@include gradient(0deg, rgba($primary-700, 0.8), $primary-500);
+					
 					position: initial;
 				}
-
-				&_text-angle {
-					display: none;;
-				}
 			}
 
-		}
-
-		&_large {
-			.hero__content {
-				height: 300px;
-
-				&_text {
-					justify-content: flex-end;
-					width: 100%;
-					@include gradient(0deg, rgba($primary-700, 1), rgba($primary-500, 0.8)); 
-				}
-
-				&_text-angle {
-					display: none;
-				}
-			}
-		}
-
-		&_medium {
-			.hero__content {
-				height: 200px;
-
-				&_text {
-					justify-content: flex-end;
-					width: 100%;
-					@include gradient(0deg, rgba($primary-700, 1), rgba($primary-500, 0.8));
-				}
-			}
-		}
-
-		&_small {
-			@include gold_overlay_gradient();
-			height: 250px;
-
-			.hero__container_inner {
-				height: 100%;
-				align-items: center;
-			}
-
-			.hero__content {
-				background-color: white;
-			}
-
-			.hero__content_text {
-				background: none;
-				padding: 0;
-				width: 100%;
-				left: 0;
-
-				h1 {
-					color: $secondary-50;
-					text-align: center;
-					text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.23);
-				}
-			}
-
-			.header_curve_lower {
-				display: none;
-			}
-
-			.content_curve__outer svg {
-				display: none;
-			}
-			
 		}
 
 		&_inner {
@@ -581,17 +502,6 @@ POSTS & CONTENT STYLES
 				justify-content: center;
 				padding-left: 7%;
 				padding-right: 5%;
-
-				&-angle {
-					padding-left: 0;
-					display: none;
-
-					svg {
-						margin-left: -10px;
-						width: 928px;
-						height: 109%;
-					}
-				}
 			}
 
 			
@@ -681,7 +591,7 @@ POSTS & CONTENT STYLES
 }
 
 #content {
-	margin-top: 1.5em;
+	
 }
 
 .testimonials {
@@ -715,7 +625,7 @@ POSTS & CONTENT STYLES
 
 			&::before {
 					content: "What our clients say";
-					@extend %content_background__primary;
+					@extend %surface_primary__content;
 					font-family: $header-font;
 					font-size: 2em;
 					line-height: 1;
@@ -869,7 +779,7 @@ article {
 }
 
 		.hentry {
-			@extend %content_background__primary;
+			@extend %surface_primary__content;
 
 			header {
 				border-bottom: 1px solid $light-gray;
