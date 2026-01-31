@@ -1,11 +1,11 @@
 {
     "key": "group_697d48d1e0f15",
-    "title": "Landing Page Content",
+    "title": "Custom Page Content",
     "fields": [
         {
             "key": "field_697d48d23757f",
-            "label": "Landing Page Content",
-            "name": "landing_page_content",
+            "label": "",
+            "name": "custom_page_content",
             "aria-label": "",
             "type": "flexible_content",
             "instructions": "",
@@ -19,55 +19,172 @@
             "layouts": {
                 "layout_697d48d6eb79f": {
                     "key": "layout_697d48d6eb79f",
-                    "name": "content_image_grouping",
-                    "label": "Content + Image Grouping",
+                    "name": "multi_row_content_image",
+                    "label": "Multi-row Content + Image",
                     "display": "block",
                     "sub_fields": [
                         {
                             "key": "field_697d493537580",
-                            "label": "Upper Content",
-                            "name": "upper_content",
+                            "label": "Row One",
+                            "name": "row_one",
                             "aria-label": "",
-                            "type": "wysiwyg",
+                            "type": "group",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "70",
+                                "width": "100",
                                 "class": "",
                                 "id": ""
                             },
-                            "default_value": "",
-                            "allow_in_bindings": 0,
-                            "tabs": "all",
-                            "toolbar": "full",
-                            "media_upload": 1,
-                            "delay": 0
-                        },
-                        {
-                            "key": "field_697d495237581",
-                            "label": "Upper Content Position",
-                            "name": "upper_content_position",
-                            "aria-label": "",
-                            "type": "button_group",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "top": "Top",
-                                "middle": "Middle",
-                                "bottom": "Bottom"
-                            },
-                            "default_value": "bottom : Bottom",
-                            "return_format": "value",
-                            "allow_null": 0,
-                            "allow_in_bindings": 0,
-                            "layout": "horizontal"
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_697e20f6fd26c",
+                                    "label": "Headline",
+                                    "name": "headline",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "70",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "Generally between 3–7 words",
+                                    "prepend": "",
+                                    "append": ""
+                                },
+                                {
+                                    "key": "field_697e28effd26d",
+                                    "label": "Headline Size",
+                                    "name": "headline_size",
+                                    "aria-label": "",
+                                    "type": "button_group",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "div class=\"hero\"": "Hero",
+                                        "h1": "H1",
+                                        "h2": "H2",
+                                        "h3": "H3",
+                                        "h4": "H4",
+                                        "h5": "H5"
+                                    },
+                                    "default_value": "",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "allow_in_bindings": 0,
+                                    "layout": "horizontal"
+                                },
+                                {
+                                    "key": "field_697e2d1e11a6a",
+                                    "label": "Body Copy",
+                                    "name": "body_copy",
+                                    "aria-label": "",
+                                    "type": "wysiwyg",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "70",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "allow_in_bindings": 0,
+                                    "tabs": "all",
+                                    "toolbar": "full",
+                                    "media_upload": 1,
+                                    "delay": 0
+                                },
+                                {
+                                    "key": "field_697e2eebf90e6",
+                                    "label": "Featured Image",
+                                    "name": "featured_image",
+                                    "aria-label": "",
+                                    "type": "image",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "min_width": "",
+                                    "min_height": "",
+                                    "min_size": "",
+                                    "max_width": "",
+                                    "max_height": "",
+                                    "max_size": "",
+                                    "mime_types": "",
+                                    "allow_in_bindings": 0,
+                                    "preview_size": "medium"
+                                },
+                                {
+                                    "key": "field_697e338f6638a",
+                                    "label": "Row One Content Position (Vertical)",
+                                    "name": "row_one_content_position_vertical",
+                                    "aria-label": "",
+                                    "type": "button_group",
+                                    "instructions": "This setting controls how the text content is aligned against the image. Top, will position the text vertically to the top, middle to the middle, and bottom to the bottom of the image.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "70",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "top": "Top",
+                                        "middle": "Middle",
+                                        "bottom": "Bottom"
+                                    },
+                                    "default_value": "bottom : Bottom",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "allow_in_bindings": 0,
+                                    "layout": "horizontal"
+                                },
+                                {
+                                    "key": "field_697e348599d4d",
+                                    "label": "Row One Image Alignment (Horizontal)",
+                                    "name": "row_one_image_alignment_horizontal",
+                                    "aria-label": "",
+                                    "type": "button_group",
+                                    "instructions": "Set the image to either the right or left of the content",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "left": "Left",
+                                        "right": "Right"
+                                    },
+                                    "default_value": "right",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "allow_in_bindings": 0,
+                                    "layout": "horizontal"
+                                }
+                            ]
                         }
                     ],
                     "min": "",
@@ -98,5 +215,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1769818584
+    "modified": 1769882504
 }

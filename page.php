@@ -14,12 +14,25 @@
 			<div id="content">
 
 				<div id="inner-content" class="wrap  row">
-						<?php 
-						$testimonial = get_field('include_sidebar_testimonials');
-						$sidebar = get_field('include_sidebar_on_site_pages');
-						?>
-						<main id="main" class="col-xs-12 <?php if($testimonial || $sidebar) :  ?>col-sm-8<?php endif; ?>" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+						<main id="main" class="col-xs-12" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+							<?php if( have_rows('custom_page_content')) : ?>
+								<?php while( have_rows('custom_page_content')) : the_row(); 
+									if( get_row_layout() == 'multi_row_content_image'):
+										$row_one = get_sub_field('row_one');
 
+										$headline       = $row_one['headline'] ?? '';
+										$body           = $row_one['body_copy'] ?? '';
+										$primary_cta    = $row_one['primary_cta'] ?? null;   // ACF Link array
+										$secondary_cta  = $row_one['secondary_cta'] ?? null; // ACF Link array
+										$feature_image  = $row_one['feature_image'] ?? null; // ACF Image array (recommended)
+										$support_1      = $row_one['support_image_1'] ?? null;
+										$support_2      = $row_one['support_image_2'] ?? null;
+									endif; ?>
+
+									<?php echo esc_html($headline); ?>
+									<?php echo wp_kses_post($body); ?>
+
+								<?php endwhile; endif; ?>
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<article id="post-<?php the_ID(); ?>" <?php post_class( '' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
@@ -51,12 +64,6 @@
 							<?php endwhile; endif; ?>
 
 						</main>
-
-						<?php if($testimonial) : ?>
-							<?php include 'partials/testimonials/testimonials-sidebar.php' ?>	
-						<?php elseif($sidebar) :  ?>
-							<?php get_sidebar(); ?>
-						<?php endif; ?>
 
 				</div>
 
