@@ -1,6 +1,6 @@
 @use "../globals" as *;
 @use "../partials/normalize";
-
+@use "../partials/tokens" as *;
 @use "../modules/buttons" as *;
 
 
@@ -13,7 +13,7 @@ body {
 	font-size: 100%;
 	line-height: 1.5;
 	color: $text-color;
-	@extend %surface_primary__content;
+	 @include surface_primary__content;
   	-webkit-font-smoothing: antialiased;
   	-moz-osx-font-smoothing: grayscale;
 }
@@ -217,7 +217,7 @@ HEADER STYLES
 *********************/
 
 .header {
-	@extend %surface_primary__content-95;
+	@include surface_primary__content-95;
 	@include box-shadow($bottom-diffused);
 	position: relative;
 	z-index: 99;
@@ -345,13 +345,20 @@ and more scalable.
 
 		a {
 			display: block;
-			color: $white;
+			@include color_text__nav-item_default;
 			text-decoration: none;
 			padding: 0.75em;
 			font-family: $header-font;
 			font-size: 1.1em;
 			text-transform: uppercase;
 
+			&:hover, &:focus {
+				@include color_text__nav-item_hover;
+			}
+
+			&:active {
+				@include color_text__nav-item_pressed;
+			}
 		}
 
 		&:first-child {}
@@ -625,7 +632,7 @@ POSTS & CONTENT STYLES
 
 			&::before {
 					content: "What our clients say";
-					@extend %surface_primary__content;
+					@include surface_primary__content;
 					font-family: $header-font;
 					font-size: 2em;
 					line-height: 1;
@@ -779,7 +786,7 @@ article {
 }
 
 		.hentry {
-			@extend %surface_primary__content;
+			@include surface_primary__content;
 
 			header {
 				border-bottom: 1px solid $light-gray;

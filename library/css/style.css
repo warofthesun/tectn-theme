@@ -92,6 +92,32 @@ p {
   hyphenate-lines: 3;
 }
 
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5 {
+  text-transform: uppercase;
+}
+h1 p,
+.h1 p,
+h2 p,
+.h2 p,
+h3 p,
+.h3 p,
+h4 p,
+.h4 p,
+h5 p,
+.h5 p {
+  line-height: 1em;
+  margin: 0;
+}
+
 /******************************************************************
 Site Name:
 Author:
@@ -197,14 +223,8 @@ probably best not to use it. I mean, were you going to anyway? */
 /******************************************************************
 Stylesheet: Tokens
 *********************/
-body, .testimonials__background_gold::before, .hentry {
-  background-color: #F9F7EC;
-}
-
-.header {
-  background-color: rgba(249, 247, 236, 0.95);
-}
-
+/* COLOR - SURFACE */
+/* COLOR - TEXT */
 .container-fluid,
 .container {
   margin-right: auto;
@@ -2038,6 +2058,7 @@ body {
   font-size: 100%;
   line-height: 1.5;
   color: #5c6b80;
+  background-color: #F9F7EC;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -2222,6 +2243,7 @@ h5, .h5 {
 HEADER STYLES
 *********************/
 .header {
+  background-color: rgba(249, 247, 236, 0.95);
   -webkit-box-shadow: 0px 13px 21px -10px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 13px 21px -10px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -2366,12 +2388,20 @@ and more scalable.
 }
 .nav li a {
   display: block;
-  color: #fff;
+  color: #226B30;
   text-decoration: none;
   padding: 0.75em;
   font-family: "Francois One", "Helvetica Neue", sans-serif;
   font-size: 1.1em;
   text-transform: uppercase;
+}
+.nav li a:hover, .nav li a:focus {
+  color: #021C07;
+  -webkit-transition: 600ms;
+  transition: 600ms;
+}
+.nav li a:active {
+  color: #05260B;
 }
 .nav li {
   /*
@@ -2602,6 +2632,7 @@ POSTS & CONTENT STYLES
 }
 .testimonials__background_gold::before {
   content: "What our clients say";
+  background-color: #F9F7EC;
   font-family: "Francois One", "Helvetica Neue", sans-serif;
   font-size: 2em;
   line-height: 1;
@@ -2744,6 +2775,9 @@ article .hero--image img {
   height: auto;
 }
 
+.hentry {
+  background-color: #F9F7EC;
+}
 .hentry header {
   border-bottom: 1px solid #f8f9fa;
   padding: 1.5em;
@@ -4014,11 +4048,13 @@ IMPORTING PARTIALS
   .menu ul li {
     text-align: left;
   }
-  .menu ul li a {
-    /*
-    you can use hover styles here even though this size
-    has the possibility of being a mobile device.
-    */
+  .menu ul li a:hover, .menu ul li a:focus {
+    color: #021C07;
+    -webkit-transition: 600ms;
+    transition: 600ms;
+  }
+  .menu ul li a:active {
+    color: #05260B;
   }
   .menu ul li {
     /*
@@ -4038,6 +4074,36 @@ IMPORTING PARTIALS
   /*********************
   HERO STYLES
   *********************/
+  .curve {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    -ms-transform: translateY(20px);
+    transform: translateY(20px);
+    -webkit-animation: curveIn 1200ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: curveIn 1200ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .curve--middle {
+    -webkit-animation-delay: 120ms;
+    animation-delay: 120ms;
+  }
+  .curve--back {
+    -webkit-animation-delay: 240ms;
+    animation-delay: 240ms;
+  }
+  @-webkit-keyframes curveIn {
+    to {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+  @keyframes curveIn {
+    to {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
   .hero__overlay {
     position: absolute;
     inset: 0;
@@ -4251,13 +4317,6 @@ IMPORTING PARTIALS
   .nav ul {
     background: #000;
     margin-top: 0;
-  }
-  .nav li a {
-    border-bottom: 0;
-  }
-  .nav li a:hover, .nav li a:focus {
-    color: #fff;
-    text-decoration: underline;
   }
   .nav li {
     /*

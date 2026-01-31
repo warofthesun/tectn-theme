@@ -1,4 +1,5 @@
 @use "../globals" as *;
+@use "../partials/tokens" as *;
 
 @media only screen and (min-width: 64em) {
   /*********************
@@ -75,14 +76,13 @@
   				text-align: left;
 
   				a {
-
-  					/*
-  					you can use hover styles here even though this size
-  					has the possibility of being a mobile device.
-  					*/
-  					&:hover, &:focus {
-
-  					}
+					&:hover, &:focus {
+						@include color_text__nav-item_hover;
+					}
+		
+					&:active {
+						@include color_text__nav-item_pressed;
+					}
   				}
 
   				&:first-child {}
@@ -117,6 +117,22 @@
   /*********************
   HERO STYLES
   *********************/
+
+  .curve {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: curveIn 1200ms cubic-bezier(.22,1,.36,1) forwards;
+  }
+  
+  .curve--middle { animation-delay: 120ms; }
+  .curve--back   { animation-delay: 240ms; }
+  
+  @keyframes curveIn {
+	to {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+  }
 
   .hero {
 

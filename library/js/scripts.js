@@ -2,7 +2,43 @@
  * Starter Scripts File
 
 */
-
+(() => {
+	const layers = [
+	  { el: document.getElementById("curveFront"), speed: 0.10 },
+	  { el: document.getElementById("curveMid"),   speed: 0.18 },
+	  { el: document.getElementById("curveBack"),  speed: 0.26 },
+	].filter(l => l.el);
+  
+	if (!layers.length) return;
+  
+	let ticking = false;
+  
+	const update = () => {
+	  ticking = false;
+  
+	  // If your page scrolls inside another container, swap this (see note below)
+	  const y = window.scrollY || document.documentElement.scrollTop || 0;
+  
+	  // Keep movement subtle (cap it)
+	  const max = 18; // px
+	  const base = Math.max(-max, Math.min(max, -y * 0.03));
+  
+	  layers.forEach(({ el, speed }) => {
+		const dy = base * (1 + speed); // slightly different per layer
+		el.setAttribute("transform", `translate(0 ${dy.toFixed(2)})`);
+	  });
+	};
+  
+	const onScroll = () => {
+	  if (!ticking) {
+		ticking = true;
+		requestAnimationFrame(update);
+	  }
+	};
+  
+	window.addEventListener("scroll", onScroll, { passive: true });
+	update(); // run once on load
+  })();
 
 /*
  * Get Viewport Dimensions

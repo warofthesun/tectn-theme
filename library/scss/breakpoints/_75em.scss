@@ -1,4 +1,5 @@
 @use "../globals" as *;
+@use "../partials/tokens" as *;
 
 @media only screen and (min-width: 75em) {
   .wrap {
@@ -28,16 +29,6 @@
   		margin-top:0;
   	}
   	li {
-
-
-  		a {
-  			border-bottom: 0;
-
-  			&:hover, &:focus {
-  				color: $white;
-  				text-decoration: underline;
-  			}
-  		}
 
   		&:first-child {}
   		&:last-child {}

@@ -4,15 +4,30 @@ Stylesheet: Tokens
 
 @use "variables" as *;
 
-
-%surface_primary__content {
+/* COLOR - SURFACE */
+@mixin surface_primary__content {
     background-color: $secondary-50;
 }
 
-%surface_primary__content-95 {
+@mixin surface_primary__content-95 {
     background-color: rgba($secondary-50, 0.95);
 }
 
-%border-radius-sm {
+/* COLOR - TEXT */
+
+@mixin color_text__nav-item_default {
+    color: $primary-600;
+}
+
+@mixin color_text__nav-item_hover {
+    color: $primary-900;
+    transition: 600ms;
+}
+
+@mixin color_text__nav-item_pressed {
+    color: $primary-800;
+}
+
+@mixin border-radius-sm {
     border-radius: $spacing-sm;
 }

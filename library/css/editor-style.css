@@ -543,6 +543,32 @@ p {
   hyphenate-lines: 3;
 }
 
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5 {
+  text-transform: uppercase;
+}
+h1 p,
+.h1 p,
+h2 p,
+.h2 p,
+h3 p,
+.h3 p,
+h4 p,
+.h4 p,
+h5 p,
+.h5 p {
+  line-height: 1em;
+  margin: 0;
+}
+
 /******************************************************************
 Site Name:
 Author:
@@ -648,6 +674,8 @@ probably best not to use it. I mean, were you going to anyway? */
 /******************************************************************
 Stylesheet: Tokens
 *********************/
+/* COLOR - SURFACE */
+/* COLOR - TEXT */
 /* Wrap the entire post style inside the TinyMCE selector, as suggested
 here http://codex.wordpress.org/Function_Reference/add_editor_style */
 body#tinymce.wp-editor {
