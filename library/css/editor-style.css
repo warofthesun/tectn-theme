@@ -113,12 +113,13 @@ a:hover {
 /**
  * Address variable `h1` font-size and margin within `section` and `article`
  * contexts in Firefox 4+, Safari 5, and Chrome.
- */
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
 
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+ */
 /**
  * Address styling not present in IE 8/9, Safari 5, and Chrome.
  */
@@ -157,10 +158,10 @@ hr {
  * proper formatting (http://blog.fontdeck.com/post/9037028497/hyphens)
 */
 p {
-  -webkit-hyphens: auto;
-  -epub-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
+  -webkit-hyphens: none;
+  -epub-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 }
 
 /*
@@ -676,6 +677,7 @@ Stylesheet: Tokens
 *********************/
 /* COLOR - SURFACE */
 /* COLOR - TEXT */
+/* COLOR - SURFACE */
 /* Wrap the entire post style inside the TinyMCE selector, as suggested
 here http://codex.wordpress.org/Function_Reference/add_editor_style */
 body#tinymce.wp-editor {

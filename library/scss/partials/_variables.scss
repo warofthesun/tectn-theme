@@ -89,14 +89,15 @@ http://sachagreif.com/sass-color-variables/
 
 
 $spacing-none: 0em;
-$spacing-xs: .25em;
-$spacing-sm: .5em;
-$spacing-md: .75em;
-$spacing-lg: 1em;
+$spacing-xxs: .25em;
+$spacing-xs: .5em;
+$spacing-sm: .75em;
+$spacing-md: 1em;
+$spacing-lg: 1.25em;
 $spacing-xl: 1.5em;
 $spacing-xxl: 2em;
 
-$radius-xs: .25em;
-$radius-sm: .5em;
-$radius-md: .75em;
-$radius-lg: 1em;
+$radius-xs: $spacing-xxs;
+$radius-sm: $spacing-xs;
+$radius-md: $spacing-sm;
+$radius-lg: $spacing-md;

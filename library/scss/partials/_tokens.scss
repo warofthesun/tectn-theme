@@ -28,6 +28,56 @@ Stylesheet: Tokens
     color: $primary-800;
 }
 
+@mixin color_text__label_primary--default {
+    color: rgba($white, 0.9);
+}
+
+@mixin color_text__label_secondary--default {
+    color: $primary-500;
+}
+
+@mixin border-radius-xs {
+    border-radius: $radius-xs;
+}
+
 @mixin border-radius-sm {
-    border-radius: $spacing-sm;
+    border-radius: $radius-sm;
+}
+
+@mixin border-radius-md {
+    border-radius: $radius-md;
+}
+
+@mixin border-radius-lg {
+    border-radius: $radius-lg;
+}
+
+/* COLOR - SURFACE */
+
+@mixin color_surface__button_primary--default {
+    background-color: $primary-400;
+}
+
+@mixin color_surface__button_primary--hover {
+    background-color: $primary-300;
+}
+
+@mixin color_surface__button_primary--is_active {
+    background-color: $primary-600;
+}
+
+@mixin color_border__button_primary--default {
+    border-color: $primary-400;
+}
+
+@mixin color_surface__button_secondary--default {
+    background-color: rgba($white, 0.8);
+}
+
+@mixin color_surface__button_secondary--hover {
+    background-color: $primary-300;
+}
+
+@mixin color_surface__button_secondary--is_active {
+    background-color: $primary-600;
 }

@@ -29,7 +29,7 @@
 
 									<h3 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 									<p class="byline vcard"><?php
-										printf( __( 'Posted <time class="updated" datetime="%1$s" itemprop="datePublished">%2$s</time> by <span class="author">%3$s</span>', 'trustmfa_theme' ), get_the_time( 'Y-m-j' ), get_the_time( __( 'F jS, Y', 'trustmfa_theme' ) ), get_author_posts_url( get_the_author_meta( 'ID' ) ));
+										printf( __( 'Posted <time class="updated" datetime="%1$s" itemprop="datePublished">%2$s</time> by <span class="author">%3$s</span>', 'tectn_theme' ), get_the_time( 'Y-m-j' ), get_the_time( __( 'F jS, Y', 'tectn_theme' ) ), get_author_posts_url( get_the_author_meta( 'ID' ) ));
 									?></p>
 
 								</header>
@@ -54,13 +54,13 @@
 
 									<article id="post-not-found" class="hentry ">
 										<header class="article-header">
-											<h1><?php _e( 'Oops, Post Not Found!', 'trustmfa_theme' ); ?></h1>
+											<h1><?php _e( 'Oops, Post Not Found!', 'tectn_theme' ); ?></h1>
 										</header>
 										<section class="entry-content">
-											<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'trustmfa_theme' ); ?></p>
+											<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'tectn_theme' ); ?></p>
 										</section>
 										<footer class="article-footer">
-												<p><?php _e( 'Error message archive custom type', 'trustmfa_theme' ); ?></p>
+												<p><?php _e( 'Error message archive custom type', 'tectn_theme' ); ?></p>
 										</footer>
 									</article>
 

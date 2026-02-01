@@ -1,7 +1,7 @@
 {
-  "name": "trustmfa",
+  "name": "tectn",
   "version": "1.0.0",
-  "description": "Custom Wordpress theme for TrustMFA.com",
+  "description": "Custom Wordpress theme for tectn.com",
   "main": "gulpfile.js",
   "devDependencies": {
     "browser-sync": "^3.0.4",
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/warofthesun/trustmfa.git"
+    "url": "git+https://github.com/warofthesun/tectn.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/warofthesun/trustmfa/issues"
+    "url": "https://github.com/warofthesun/tectn/issues"
   },
-  "homepage": "https://github.com/warofthesun/trustmfa#readme"
+  "homepage": "https://github.com/warofthesun/tectn#readme"
 }

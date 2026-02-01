@@ -20,11 +20,11 @@
 
 									<h3 class="h2 entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 									<p class="byline entry-meta vcard">
-										<?php printf( __( 'Posted', 'trustmfa_theme' ).' %1$s %2$s',
+										<?php printf( __( 'Posted', 'tectn_theme' ).' %1$s %2$s',
                   							     /* the time the post was published */
                   							     '<time class="updated entry-time" datetime="' . get_the_time('Y-m-d') . '" itemprop="datePublished">' . get_the_time(get_option('date_format')) . '</time>',
                        								/* the author of the post */
-                       								'<span class="by">'.__('by', 'trustmfa_theme').'</span> <span class="entry-author author" itemprop="author" itemscope itemptype="http://schema.org/Person">' . get_the_author_link( get_the_author_meta( 'ID' ) ) . '</span>'
+                       								'<span class="by">'.__('by', 'tectn_theme').'</span> <span class="entry-author author" itemprop="author" itemscope itemptype="http://schema.org/Person">' . get_the_author_link( get_the_author_meta( 'ID' ) ) . '</span>'
                     							); ?>
 									</p>
 
@@ -32,7 +32,7 @@
 
 								<section class="entry-content ">
 
-									<?php the_post_thumbnail( 'starter-thumb-300' ); ?>
+									<?php the_post_thumbnail( 'tectn-thumb-300' ); ?>
 
 									<?php the_excerpt(); ?>
 
@@ -52,13 +52,13 @@
 
 									<article id="post-not-found" class="hentry ">
 										<header class="article-header">
-											<h1><?php _e( 'Oops, Post Not Found!', 'trustmfa_theme' ); ?></h1>
+											<h1><?php _e( 'Oops, Post Not Found!', 'tectn_theme' ); ?></h1>
 										</header>
 										<section class="entry-content">
-											<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'trustmfa_theme' ); ?></p>
+											<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'tectn_theme' ); ?></p>
 										</section>
 										<footer class="article-footer">
-												<p><?php _e( 'This is the error message in the archive.php template.', 'trustmfa_theme' ); ?></p>
+												<p><?php _e( 'This is the error message in the archive.php template.', 'tectn_theme' ); ?></p>
 										</footer>
 									</article>
 

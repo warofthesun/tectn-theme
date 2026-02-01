@@ -50,7 +50,7 @@
 						<?php wp_nav_menu(array(
     					         'container' => false,                           // remove nav container
     					         'container_class' => 'menu ',                 // class of container (should you choose to use it)
-    					         'menu' => __( 'The Main Menu', 'trustmfa_theme' ),  // nav name
+    					         'menu' => __( 'The Main Menu', 'tectn_theme' ),  // nav name
     					         'menu_class' => 'nav top-nav ',               // adding custom nav class
     					         'theme_location' => 'main-nav',                 // where it's located in the theme
     					         'before' => '',                                 // before the menu
@@ -64,7 +64,7 @@
 						<?php wp_nav_menu(array(
     					         'container' => false,                           // remove nav container
     					         'container_class' => 'login_forms ',                 // class of container (should you choose to use it)
-    					         'menu' => __( 'Login and Forms', 'trustmfa_theme' ),  // nav name
+    					         'menu' => __( 'Login and Forms', 'tectn_theme' ),  // nav name
     					         'menu_class' => 'nav top-nav ',               // adding custom nav class
     					         'theme_location' => 'login_forms',                 // where it's located in the theme
     					         'before' => '',                                 // before the menu

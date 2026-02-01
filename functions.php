@@ -11,13 +11,13 @@ LAUNCH starter
 Let's get everything up and running.
 *********************/
 
-function trustmfa_setup() {
+function tectn_setup() {
 
   //Allow editor style.
   add_editor_style( get_stylesheet_directory_uri() . '/library/css/editor-style.css' );
 
   // let's get language support going, if you need it
-  load_theme_textdomain( 'trustmfa_theme', get_template_directory() . '/library/translation' );
+  load_theme_textdomain( 'tectn_theme', get_template_directory() . '/library/translation' );
 
   // USE THIS TEMPLATE TO CREATE CUSTOM POST TYPES EASILY
   require_once( 'library/custom-post-type.php' );
@@ -51,10 +51,10 @@ function trustmfa_setup() {
   //add additional menu locations
   register_nav_menu( 'login_forms', 'Login' );
 
-} /* end trustmfa_setup */
+} /* end tectn_setup */
 
 // let's get this party started
-add_action( 'after_setup_theme', 'trustmfa_setup' );
+add_action( 'after_setup_theme', 'tectn_setup' );
 
 
 /************* OEMBED SIZE OPTIONS *************/
@@ -66,8 +66,8 @@ if ( ! isset( $content_width ) ) {
 /************* THUMBNAIL SIZE OPTIONS *************/
 
 // Thumbnail sizes
-add_image_size( 'starter-thumb-600', 600, 150, true );
-add_image_size( 'starter-thumb-300', 300, 100, true );
+add_image_size( 'tectn-thumb-600', 600, 150, true );
+add_image_size( 'tectn-thumb-300', 300, 100, true );
 add_image_size( 'gallery-image', 680, 450, true );
 
 /*
@@ -82,9 +82,9 @@ inside the thumbnail function.
 
 For example, to call the 300 x 100 sized image,
 we would use the function:
-<?php the_post_thumbnail( 'starter-thumb-300' ); ?>
+<?php the_post_thumbnail( 'tectn-thumb-300' ); ?>
 for the 600 x 150 image:
-<?php the_post_thumbnail( 'starter-thumb-600' ); ?>
+<?php the_post_thumbnail( 'tectn-thumb-600' ); ?>
 
 You can change the names and dimensions to whatever
 you like. Enjoy!
@@ -95,8 +95,8 @@ add_filter( 'image_size_names_choose', 'starter_custom_image_sizes' );
 function starter_custom_image_sizes( $sizes ) {
     return array_merge( $sizes, array(
         'gallery-image' => __('Gallery Image'),
-        'starter-thumb-600' => __('600px by 150px'),
-        'starter-thumb-300' => __('300px by 100px'),
+        'tectn-thumb-600' => __('600px by 150px'),
+        'tectn-thumb-300' => __('300px by 100px'),
     ) );
 }
 
@@ -118,8 +118,8 @@ require_once locate_template('library/tgm-plugin-activation/class-tgm-plugin-act
 function starter_register_sidebars() {
 	register_sidebar(array(
 		'id' => 'sidebar1',
-		'name' => __( 'Sidebar 1', 'trustmfa_theme' ),
-		'description' => __( 'The first (primary) sidebar.', 'trustmfa_theme' ),
+		'name' => __( 'Sidebar 1', 'tectn_theme' ),
+		'description' => __( 'The first (primary) sidebar.', 'tectn_theme' ),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div>',
 		'before_title' => '<h4 class="widgettitle">',
@@ -136,8 +136,8 @@ function starter_register_sidebars() {
 
 	register_sidebar(array(
 		'id' => 'sidebar2',
-		'name' => __( 'Sidebar 2', 'trustmfa_theme' ),
-		'description' => __( 'The second (secondary) sidebar.', 'trustmfa_theme' ),
+		'name' => __( 'Sidebar 2', 'tectn_theme' ),
+		'description' => __( 'The second (secondary) sidebar.', 'tectn_theme' ),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div>',
 		'before_title' => '<h4 class="widgettitle">',
@@ -236,13 +236,13 @@ function starter_comments( $comment, $args, $depth ) {
         ?>
         <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( $bgauthemail ); ?>?s=40" class="load-gravatar avatar avatar-48 photo" height="40" width="40" src="<?php echo get_template_directory_uri(); ?>/library/images/nothing.gif" />
         <?php // end custom gravatar call ?>
-        <?php printf(__( '<cite class="fn">%1$s</cite> %2$s', 'trustmfa_theme' ), get_comment_author_link(), edit_comment_link(__( '(Edit)', 'trustmfa_theme' ),'  ','') ) ?>
-        <time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php comment_time(__( 'F jS, Y', 'trustmfa_theme' )); ?> </a></time>
+        <?php printf(__( '<cite class="fn">%1$s</cite> %2$s', 'tectn_theme' ), get_comment_author_link(), edit_comment_link(__( '(Edit)', 'tectn_theme' ),'  ','') ) ?>
+        <time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php comment_time(__( 'F jS, Y', 'tectn_theme' )); ?> </a></time>
 
       </header>
       <?php if ($comment->comment_approved == '0') : ?>
         <div class="alert alert-info">
-          <p><?php _e( 'Your comment is awaiting moderation.', 'trustmfa_theme' ) ?></p>
+          <p><?php _e( 'Your comment is awaiting moderation.', 'tectn_theme' ) ?></p>
         </div>
       <?php endif; ?>
       <section class="comment_content cf">
@@ -401,8 +401,8 @@ function display_custom_post_type(){
 }
 
 /* EDIT PASSWORD PROTECTED LANGUAGE */
-add_filter( 'the_password_form', 'trustmfa_password_form' );
-function trustmfa_password_form( $output ) {
+add_filter( 'the_password_form', 'tectn_password_form' );
+function tectn_password_form( $output ) {
 	$output = str_replace(
 		'This content is password protected. To view it please enter your password below:',
 		'To simplify your login process, you now only need to enter your password. Your password remains the same as the one you were previously provided.',

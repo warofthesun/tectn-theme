@@ -53,15 +53,15 @@ Buttons and such
 .button_pair {
 	.button:nth-child(1) {
 		@extend %btn;
-		@extend %btn_secondary;
-		@extend %btn_secondary__solid;
+		@extend %btn_primary;
+		@extend %btn_primary__solid;
 		margin-right: 1em;
 	}
 
 	.button:nth-child(2) {
 		@extend %btn;
-		@extend %btn_secondary;
-		@extend %btn_secondary__outline;
+		@extend %btn_primary;
+		@extend %btn_primary__outline;
 	}
 }
 
@@ -174,22 +174,6 @@ h2, .h2 {
 	margin-top: 0;
 	margin-bottom: 0.375em;
 	color: $primary-500;
-
-	&.has-text-align-center {
-		&::after {
-		margin-left: auto;
-		margin-right: auto;
-		}
-	}
-
-	&::after {
-		content: "";
-		display: block;
-		margin-top: $spacing-xs;
-		height: 4px;
-		width: 100px;
-		background-color: $secondary-500;
-	}
 }
 
 h3, .h3 {
@@ -535,6 +519,8 @@ POSTS & CONTENT STYLES
 
 #inner-content {
 	margin-bottom: $spacing-xxl;
+	position: relative;
+	z-index: 3;
 }
 
 .gallery_item {
@@ -786,7 +772,6 @@ article {
 }
 
 		.hentry {
-			@include surface_primary__content;
 
 			header {
 				border-bottom: 1px solid $light-gray;
@@ -940,6 +925,7 @@ article {
 				margin: 0 0 1.5em 0;
 				max-width: 100%;
 				height: auto;
+				@include border-radius-md;
 			}
 
 			/*
@@ -1905,7 +1891,7 @@ FOOTER STYLES
 		display: flex;
 		align-items: flex-end;
 
-		#trustmfa_logo {
+		#tectn_logo {
 			margin-top: 2em;
 			margin-left: auto;
 		}

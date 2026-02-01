@@ -225,6 +225,7 @@ Stylesheet: Tokens
 *********************/
 /* COLOR - SURFACE */
 /* COLOR - TEXT */
+/* COLOR - SURFACE */
 .container-fluid,
 .container {
   margin-right: auto;
@@ -1173,13 +1174,13 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   display: inline-block;
   position: relative;
   font-family: "Francois One", "Helvetica Neue", sans-serif;
-  color: #05260B;
   text-decoration: none;
+  text-transform: uppercase;
   font-size: 1em;
-  font-weight: 700;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: 1px solid #389449;
+  font-weight: 400;
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+  border: 2px solid;
   cursor: pointer;
   -webkit-transition: background-color 0.14s ease-in-out;
   transition: background-color 0.14s ease-in-out;
@@ -1195,15 +1196,29 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 .button_pair .button:active:nth-child(1), .button_pair .button:active:nth-child(2), #menu-login-and-forms.nav li a:active, .gallery_item .button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active {
   top: 1px;
 }
-.button_pair .button:nth-child(1), #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
+.button_pair .button:nth-child(1) {
+  background-color: #64AF72;
+  color: rgba(255, 255, 255, 0.9);
+  border-color: #64AF72;
+}
+.button_pair .button:nth-child(2) {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #389449;
+  border-color: #64AF72;
+}
+.button_pair .button:hover:nth-child(1), .button_pair .button:hover:nth-child(2), .button_pair .button:focus:nth-child(1), .button_pair .button:focus:nth-child(2) {
+  background-color: #85C992;
+  text-decoration: none;
+  outline: none;
+}
+.button_pair .button:active:nth-child(1), .button_pair .button:active:nth-child(2) {
+  background-color: #226B30;
+}
+#menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
   color: #25250e;
   border: 1px solid #A69E3F;
   background: -webkit-linear-gradient(45deg, #BFB55C, #A69E3F);
   background: linear-gradient(45deg, #BFB55C, #A69E3F);
-}
-.button_pair .button:nth-child(2) {
-  color: #A69E3F;
-  border: 2px solid #A69E3F;
 }
 .gallery_item .button {
   color: #A69E3F;
@@ -1215,7 +1230,7 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   text-decoration: none;
   outline: none;
 }
-.button_pair .button:hover:nth-child(1), .button_pair .button:hover:nth-child(2), #menu-login-and-forms.nav li a:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .button_pair .button:focus:nth-child(1), .button_pair .button:focus:nth-child(2), #menu-login-and-forms.nav li a:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
+#menu-login-and-forms.nav li a:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, #menu-login-and-forms.nav li a:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
   color: #BFB55C;
   background: -webkit-linear-gradient(90deg, #827D2E, #646127);
   background: -webkit-gradient(linear, left top, right top, from(#827D2E), to(#646127));
@@ -1700,12 +1715,13 @@ a:hover {
 /**
  * Address variable `h1` font-size and margin within `section` and `article`
  * contexts in Firefox 4+, Safari 5, and Chrome.
- */
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
 
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+ */
 /**
  * Address styling not present in IE 8/9, Safari 5, and Chrome.
  */
@@ -1744,10 +1760,10 @@ hr {
  * proper formatting (http://blog.fontdeck.com/post/9037028497/hyphens)
 */
 p {
-  -webkit-hyphens: auto;
-  -epub-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
+  -webkit-hyphens: none;
+  -epub-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 }
 
 /*
@@ -2208,18 +2224,6 @@ h2, .h2 {
   margin-bottom: 0.375em;
   color: #389449;
 }
-h2.has-text-align-center::after, .h2.has-text-align-center::after {
-  margin-left: auto;
-  margin-right: auto;
-}
-h2::after, .h2::after {
-  content: "";
-  display: block;
-  margin-top: 0.25em;
-  height: 4px;
-  width: 100px;
-  background-color: #A69E3F;
-}
 
 h3, .h3 {
   font-size: 2em;
@@ -2318,7 +2322,7 @@ and more scalable.
 }
 
 #menu-login-and-forms {
-  margin-top: 0.75em;
+  margin-top: 1em;
   margin-left: auto;
   margin-bottom: auto;
   -webkit-box-align: center;
@@ -2533,6 +2537,8 @@ POSTS & CONTENT STYLES
 
 #inner-content {
   margin-bottom: 2em;
+  position: relative;
+  z-index: 3;
 }
 
 .gallery_item {
@@ -2722,7 +2728,7 @@ POSTS & CONTENT STYLES
   margin: 0;
 }
 .testimonials__content > div:nth-last-of-type(2) .attribution, .testimonials__content > div:nth-last-of-type(2) ~ div .attribution, .testimonials__content > div:nth-last-of-type(3) .attribution, .testimonials__content > div:nth-last-of-type(3) ~ div .attribution {
-  padding: 0.75em 1.5em;
+  padding: 1em 1.5em;
   border-radius: 0 0 0.75em 0.75em;
   font-weight: 700;
   font-size: 1em;
@@ -2775,9 +2781,6 @@ article .hero--image img {
   height: auto;
 }
 
-.hentry {
-  background-color: #F9F7EC;
-}
 .hentry header {
   border-bottom: 1px solid #f8f9fa;
   padding: 1.5em;
@@ -2875,6 +2878,7 @@ article .hero--image img {
   margin: 0 0 1.5em 0;
   max-width: 100%;
   height: auto;
+  border-radius: 0.75em;
 }
 .entry-content {
   /*
@@ -3120,8 +3124,8 @@ article .hero--image img {
 .resources .resourse__item .resource__link .h4 {
   line-height: 1;
   display: inline-block;
-  margin-bottom: 0.25em;
-  margin-left: 0.25em;
+  margin-bottom: 0.5em;
+  margin-left: 0.5em;
   font-family: "Francois One", "Helvetica Neue", sans-serif;
   border-bottom: 2px solid #85C992;
 }
@@ -3154,7 +3158,7 @@ article .hero--image img {
 }
 .forms .form__item {
   display: block;
-  padding-bottom: 1em;
+  padding-bottom: 1.25em;
 }
 .forms .form__item .form__link {
   text-decoration: underline;
@@ -3170,8 +3174,8 @@ article .hero--image img {
 .forms .form__item .form__link .h4, .forms .form__item .form__link h4 {
   line-height: 1;
   margin-top: 0;
-  margin-bottom: 0.25em;
-  margin-left: 0.25em;
+  margin-bottom: 0.5em;
+  margin-left: 0.5em;
   font-family: "Francois One", "Helvetica Neue", sans-serif;
   display: inline-block;
   border-bottom: 2px solid #85C992;
@@ -3180,13 +3184,13 @@ article .hero--image img {
   margin-top: 1em;
 }
 .forms .form__item .form__description {
-  margin-left: 0.5em;
+  margin-left: 0.75em;
   display: inline-block;
   font-style: italic;
 }
 
 .entry-content .form__description {
-  margin-bottom: 1em;
+  margin-bottom: 1.25em;
 }
 
 .wpcf7-form .wpcf7-acceptance .wpcf7-list-item {
@@ -3281,8 +3285,8 @@ article .hero--image img {
 .wpcf7-form .grid__column_flex-item.column_header {
   background-color: #0C4517;
   color: #fff;
-  margin-bottom: 0.75em;
-  padding: 0.5em;
+  margin-bottom: 1em;
+  padding: 0.75em;
   text-align: center;
   font-weight: 700;
   -webkit-box-pack: center;
@@ -3331,8 +3335,8 @@ article .hero--image img {
 .wpcf7-form .grid__column_item.column_header {
   background-color: #0C4517;
   color: #fff;
-  margin-bottom: 0.75em;
-  padding: 0.5em;
+  margin-bottom: 1em;
+  padding: 0.75em;
   text-align: center;
   font-weight: 700;
   -webkit-box-pack: center;
@@ -3349,7 +3353,7 @@ article .hero--image img {
   margin: 0;
 }
 .wpcf7-form .grid .footer {
-  padding-left: 1em;
+  padding-left: 1.25em;
   font-weight: 700;
   color: #fff;
 }
@@ -3642,7 +3646,7 @@ FOOTER STYLES
   -ms-flex-align: end;
   align-items: flex-end;
 }
-.footer__logo #trustmfa_logo {
+.footer__logo #tectn_logo {
   margin-top: 2em;
   margin-left: auto;
 }
@@ -3701,7 +3705,7 @@ FOOTER STYLES
 }
 #inner-footer .contact_info .address__physical {
   line-height: 1;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.75em;
 }
 
 /*
@@ -3878,7 +3882,7 @@ IMPORTING PARTIALS
     margin: 0;
   }
   .testimonials__content > div:nth-last-of-type(2) .attribution, .testimonials__content > div:nth-last-of-type(2) ~ div .attribution, .testimonials__content > div:nth-last-of-type(3) .attribution, .testimonials__content > div:nth-last-of-type(3) ~ div .attribution {
-    padding: 0.75em 1.5em;
+    padding: 1em 1.5em;
     border-radius: 0 0 0.75em 0.75em;
     font-weight: 700;
     font-size: 1em;
@@ -3905,7 +3909,7 @@ IMPORTING PARTIALS
     display: inline;
     width: 50px;
     height: 50px;
-    margin-right: 1em;
+    margin-right: 1.25em;
   }
   .testimonials__sidebar li h3 {
     margin-top: 0;
@@ -4164,6 +4168,7 @@ IMPORTING PARTIALS
     max-width: 1920px;
     margin: auto;
     position: relative;
+    margin-bottom: -120px;
   }
   .hero__container p {
     color: #FAFCFA;
@@ -4202,6 +4207,41 @@ IMPORTING PARTIALS
   }
   .hero__post_text h1 {
     font-size: 3.5em;
+  }
+  /***************
+  CONTENT BLOCKS
+  *****************/
+  .content_group .content {
+    padding-right: 2em;
+  }
+  .content_group .featured_image {
+    padding-right: 6em;
+  }
+  .content_group .featured_image img {
+    margin-bottom: 0;
+  }
+  .content_group--middle .content {
+    margin-top: auto;
+  }
+  .content_group--bottom .content {
+    margin-top: auto;
+  }
+  .content_group--bottom .content > :last-child {
+    margin-bottom: 0;
+  }
+  .content_group--reverse {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+  .content_group--reverse .content {
+    padding-right: 0em;
+    padding-left: 2em;
+  }
+  .content_group--reverse .featured_image {
+    padding-right: 0em;
+    padding-left: 6em;
   }
   /*********************
   SIDEBARS & ASIDES
@@ -4255,7 +4295,7 @@ IMPORTING PARTIALS
   #inner-footer .contact_info {
     text-align: right;
   }
-  .footer__logo #trustmfa_logo {
+  .footer__logo #tectn_logo {
     margin-top: 0em;
     margin-left: 1em;
   }
@@ -4425,7 +4465,7 @@ IMPORTING PARTIALS
   .hero__featured_post article .post-category {
     color: #A69E3F;
     font-family: "Francois One", "Helvetica Neue", sans-serif;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.75em;
   }
   .hero__featured_post article .entry-title {
     font-size: 1.3em;

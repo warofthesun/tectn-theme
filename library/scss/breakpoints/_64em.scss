@@ -210,6 +210,7 @@
   			max-width: 1920px;
   			margin: auto;
 			position: relative;
+			margin-bottom: -120px;
   		}
 
   		p {
@@ -247,6 +248,53 @@
   		}
 
   	}
+  }
+
+  /***************
+  CONTENT BLOCKS
+  *****************/
+
+  .content_group {
+	.content {
+		padding-right: $spacing-xxl;
+	}
+
+	.featured_image {
+		padding-right: 6em;
+		img {
+			margin-bottom: 0;
+		}
+	}
+
+	&--middle {
+		.content {
+			margin-top: auto;
+		}
+	}
+
+	&--bottom {
+		.content {
+			margin-top: auto;
+
+			& > :last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	&--reverse {
+		flex-direction: row-reverse;
+
+		.content {
+			padding-right: 0em;
+			padding-left: $spacing-xxl;
+		}
+
+		.featured_image {
+			padding-right: 0em;
+			padding-left: 6em;
+		}
+	}
   }
 
   /*********************
@@ -393,7 +441,7 @@
   .footer {
   	&__logo {
 
-  		#trustmfa_logo {
+  		#tectn_logo {
   			margin-top: 0em;
   			margin-left: 1em;
   		}

@@ -185,8 +185,8 @@ function starter_theme_support() {
 	// registering wp3+ menus
 	register_nav_menus(
 		array(
-			'main-nav' => __( 'The Main Menu', 'trustmfa_theme' ),   // main nav in header
-			'footer-links' => __( 'Footer Links', 'trustmfa_theme' ) // secondary nav in footer
+			'main-nav' => __( 'The Main Menu', 'tectn_theme' ),   // main nav in header
+			'footer-links' => __( 'Footer Links', 'tectn_theme' ) // secondary nav in footer
 		)
 	);
 
@@ -224,7 +224,7 @@ function starter_related_posts() {
 				<li class="related_post"><a class="entry-unrelated" href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></li>
 			<?php endforeach; }
 		else { ?>
-			<?php echo '<li class="no_related_post">' . __( 'No Related Posts Yet!', 'trustmfa_theme' ) . '</li>'; ?>
+			<?php echo '<li class="no_related_post">' . __( 'No Related Posts Yet!', 'tectn_theme' ) . '</li>'; ?>
 		<?php }
 	}
 	wp_reset_postdata();
@@ -269,7 +269,7 @@ function starter_filter_ptags_on_images($content){
 function starter_excerpt_more($more) {
 	global $post;
 	// edit here if you like
-	return '...  <a class="excerpt-read-more" href="'. get_permalink( $post->ID ) . '" title="'. __( 'Read ', 'trustmfa_theme' ) . esc_attr( get_the_title( $post->ID ) ).'">'. __( 'Read more &raquo;', 'trustmfa_theme' ) .'</a>';
+	return '...  <a class="excerpt-read-more" href="'. get_permalink( $post->ID ) . '" title="'. __( 'Read ', 'tectn_theme' ) . esc_attr( get_the_title( $post->ID ) ).'">'. __( 'Read more &raquo;', 'tectn_theme' ) .'</a>';
 }
 
 

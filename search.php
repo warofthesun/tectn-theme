@@ -6,7 +6,7 @@
 				<div id="inner-content" class="wrap  row">
 
 					<main id="main" class="col-xs-12 col-sm-8 col-lg-9 " role="main">
-						<h1 class="archive-title"><span><?php _e( 'Search Results for:', 'trustmfa_theme' ); ?></span> <?php echo esc_attr(get_search_query()); ?></h1>
+						<h1 class="archive-title"><span><?php _e( 'Search Results for:', 'tectn_theme' ); ?></span> <?php echo esc_attr(get_search_query()); ?></h1>
 
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -17,7 +17,7 @@
 									<h3 class="search-title entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 
                   						<p class="byline entry-meta vcard">
-                    							<?php printf( __( 'Posted %1$s by %2$s', 'trustmfa_theme' ),
+                    							<?php printf( __( 'Posted %1$s by %2$s', 'tectn_theme' ),
                    							    /* the time the post was published */
                    							    '<time class="updated entry-time" datetime="' . get_the_time('Y-m-d') . '" itemprop="datePublished">' . get_the_time(get_option('date_format')) . '</time>',
                       							    /* the author of the post */
@@ -28,17 +28,17 @@
 								</header>
 
 								<section class="entry-content">
-										<?php the_excerpt( '<span class="read-more">' . __( 'Read more &raquo;', 'trustmfa_theme' ) . '</span>' ); ?>
+										<?php the_excerpt( '<span class="read-more">' . __( 'Read more &raquo;', 'tectn_theme' ) . '</span>' ); ?>
 
 								</section>
 
 								<footer class="article-footer">
 
 									<?php if(get_the_category_list(', ') != ''): ?>
-                  					<?php printf( __( 'Filed under: %1$s', 'trustmfa_theme' ), get_the_category_list(', ') ); ?>
+                  					<?php printf( __( 'Filed under: %1$s', 'tectn_theme' ), get_the_category_list(', ') ); ?>
                   					<?php endif; ?>
 
-                 					<?php the_tags( '<p class="tags"><span class="tags-title">' . __( 'Tags:', 'trustmfa_theme' ) . '</span> ', ', ', '</p>' ); ?>
+                 					<?php the_tags( '<p class="tags"><span class="tags-title">' . __( 'Tags:', 'tectn_theme' ) . '</span> ', ', ', '</p>' ); ?>
 
 								</footer> <!-- end article footer -->
 
@@ -52,13 +52,13 @@
 
 									<article id="post-not-found" class="hentry ">
 										<header class="article-header">
-											<h1><?php _e( 'Sorry, No Results.', 'trustmfa_theme' ); ?></h1>
+											<h1><?php _e( 'Sorry, No Results.', 'tectn_theme' ); ?></h1>
 										</header>
 										<section class="entry-content">
-											<p><?php _e( 'Try your search again.', 'trustmfa_theme' ); ?></p>
+											<p><?php _e( 'Try your search again.', 'tectn_theme' ); ?></p>
 										</section>
 										<footer class="article-footer">
-												<p><?php _e( 'This is the error message in the search.php template.', 'trustmfa_theme' ); ?></p>
+												<p><?php _e( 'This is the error message in the search.php template.', 'tectn_theme' ); ?></p>
 										</footer>
 									</article>
 

@@ -19,7 +19,7 @@
 										<div class="article-meta">
 										<?php printf( '<p class="post-category">' . get_the_category_list(', ') ); ?>
 										<p class="byline entry-meta vcard">
-											<?php printf( __( '', 'trustmfa_theme' ).' %1$s', '<time class="updated entry-time" datetime="' . get_the_time('Y-m-d') . '" itemprop="datePublished">' . get_the_time(get_option('date_format')) . '</time>',); ?>
+											<?php printf( __( '', 'tectn_theme' ).' %1$s', '<time class="updated entry-time" datetime="' . get_the_time('Y-m-d') . '" itemprop="datePublished">' . get_the_time(get_option('date_format')) . '</time>',); ?>
 										</p>
 										</div>
 										<h1 class="h2 entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
@@ -39,13 +39,13 @@
 
 									<article id="post-not-found" class="hentry ">
 											<header class="article-header">
-												<h1><?php _e( 'Oops, Post Not Found!', 'trustmfa_theme' ); ?></h1>
+												<h1><?php _e( 'Oops, Post Not Found!', 'tectn_theme' ); ?></h1>
 										</header>
 											<section class="entry-content">
-												<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'trustmfa_theme' ); ?></p>
+												<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'tectn_theme' ); ?></p>
 										</section>
 										<footer class="article-footer">
-												<p><?php _e( 'This is the error message in the index.php template.', 'trustmfa_theme' ); ?></p>
+												<p><?php _e( 'This is the error message in the index.php template.', 'tectn_theme' ); ?></p>
 										</footer>
 									</article>
 

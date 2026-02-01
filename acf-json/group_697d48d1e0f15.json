@@ -75,7 +75,7 @@
                                         "id": ""
                                     },
                                     "choices": {
-                                        "div class=\"hero\"": "Hero",
+                                        "h2 class=hero": "Hero",
                                         "h1": "H1",
                                         "h2": "H2",
                                         "h3": "H3",
@@ -138,7 +138,7 @@
                                 {
                                     "key": "field_697e338f6638a",
                                     "label": "Row One Content Position (Vertical)",
-                                    "name": "row_one_content_position_vertical",
+                                    "name": "content_vertical",
                                     "aria-label": "",
                                     "type": "button_group",
                                     "instructions": "This setting controls how the text content is aligned against the image. Top, will position the text vertically to the top, middle to the middle, and bottom to the bottom of the image.",
@@ -163,7 +163,7 @@
                                 {
                                     "key": "field_697e348599d4d",
                                     "label": "Row One Image Alignment (Horizontal)",
-                                    "name": "row_one_image_alignment_horizontal",
+                                    "name": "image_horizontal",
                                     "aria-label": "",
                                     "type": "button_group",
                                     "instructions": "Set the image to either the right or left of the content",
@@ -183,6 +183,215 @@
                                     "allow_null": 0,
                                     "allow_in_bindings": 0,
                                     "layout": "horizontal"
+                                },
+                                {
+                                    "key": "field_697e9cd9630ec",
+                                    "label": "",
+                                    "name": "buttons",
+                                    "aria-label": "",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_697e9a0ce752e"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_697ec5e314662",
+                            "label": "Row Two",
+                            "name": "row_two",
+                            "aria-label": "",
+                            "type": "group",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_697ec5e314664",
+                                    "label": "Headline",
+                                    "name": "headline",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "70",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "Generally between 3–7 words",
+                                    "prepend": "",
+                                    "append": ""
+                                },
+                                {
+                                    "key": "field_697ec5e314665",
+                                    "label": "Headline Size",
+                                    "name": "headline_size",
+                                    "aria-label": "",
+                                    "type": "button_group",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "h2 class=hero": "Hero",
+                                        "h1": "H1",
+                                        "h2": "H2",
+                                        "h3": "H3",
+                                        "h4": "H4",
+                                        "h5": "H5"
+                                    },
+                                    "default_value": "",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "allow_in_bindings": 0,
+                                    "layout": "horizontal"
+                                },
+                                {
+                                    "key": "field_697ec5e314666",
+                                    "label": "Body Copy",
+                                    "name": "body_copy",
+                                    "aria-label": "",
+                                    "type": "wysiwyg",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "70",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "allow_in_bindings": 0,
+                                    "tabs": "all",
+                                    "toolbar": "full",
+                                    "media_upload": 1,
+                                    "delay": 0
+                                },
+                                {
+                                    "key": "field_697ec5e314667",
+                                    "label": "Supporting Images",
+                                    "name": "supporting_images",
+                                    "aria-label": "",
+                                    "type": "gallery",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "min": "",
+                                    "max": 2,
+                                    "min_width": "",
+                                    "min_height": "",
+                                    "min_size": "",
+                                    "max_width": "",
+                                    "max_height": "",
+                                    "max_size": "",
+                                    "mime_types": "",
+                                    "insert": "append",
+                                    "preview_size": "medium"
+                                },
+                                {
+                                    "key": "field_697ec5e314668",
+                                    "label": "Row Two Content Position (Vertical)",
+                                    "name": "row_two_content_position_vertical",
+                                    "aria-label": "",
+                                    "type": "button_group",
+                                    "instructions": "This setting controls how the text content is aligned against the image. Top, will position the text vertically to the top, middle to the middle, and bottom to the bottom of the image.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "70",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "top": "Top",
+                                        "middle": "Middle",
+                                        "bottom": "Bottom"
+                                    },
+                                    "default_value": "bottom : Bottom",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "allow_in_bindings": 0,
+                                    "layout": "horizontal"
+                                },
+                                {
+                                    "key": "field_697ec5e314669",
+                                    "label": "Row Two Image Alignment (Horizontal)",
+                                    "name": "row_two_image_alignment_horizontal",
+                                    "aria-label": "",
+                                    "type": "button_group",
+                                    "instructions": "Set the image to either the right or left of the content",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "left": "Left",
+                                        "right": "Right"
+                                    },
+                                    "default_value": "right",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "allow_in_bindings": 0,
+                                    "layout": "horizontal"
+                                },
+                                {
+                                    "key": "field_697ec5e31466a",
+                                    "label": "",
+                                    "name": "buttons",
+                                    "aria-label": "",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_697e9a0ce752e"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
                                 }
                             ]
                         }
@@ -215,5 +424,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1769882504
+    "modified": 1769966370
 }

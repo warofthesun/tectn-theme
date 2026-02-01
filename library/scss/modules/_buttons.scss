@@ -30,13 +30,13 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   display: inline-block;
   position: relative;
   font-family: $header-font;
-  color: $primary-800;
   text-decoration: none;
+  text-transform: uppercase;
   font-size: 1em;
-  font-weight: 700;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: 1px solid $primary-500;
+  font-weight: 400;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-xs;
+  border: 2px solid;
   cursor: pointer;
   @include transition(background-color 0.14s ease-in-out);
 
@@ -55,6 +55,42 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   &:active {
     top: 1px; // adds a tiny hop to the click
   } // end active
+
+  &_primary {
+    &__solid {
+      @include color_surface__button_primary--default;
+      @include color_text__label_primary--default;
+      @include color_border__button_primary--default;
+    }
+
+    &__outline {
+      @include color_surface__button_secondary--default;
+      @include color_text__label_secondary--default;
+      @include color_border__button_primary--default;
+    }
+
+    &__text {
+      color: $secondary-500;
+      border: 0px;
+      display: block;
+
+      &:hover, &:focus {
+        color: $secondary-600;
+        text-decoration: none;
+        outline: none;
+      }
+    }
+
+    &:hover, &:focus {
+        @include color_surface__button_primary--hover;
+        text-decoration: none;
+        outline: none;
+      }
+
+    &:active {
+      @include color_surface__button_primary--is_active;
+    }
+  }
 
   &_secondary {
     &__solid {
