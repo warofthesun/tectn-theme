@@ -4220,6 +4220,18 @@ IMPORTING PARTIALS
   .content_group .featured_image img {
     margin-bottom: 0;
   }
+  .content_group .supporting_images {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 0;
+  }
+  .content_group .supporting_images li {
+    margin-left: 1.25em;
+  }
+  .content_group--row_two {
+    margin-top: 1.25em;
+  }
   .content_group--middle .content {
     margin-top: auto;
   }

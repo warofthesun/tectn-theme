@@ -325,7 +325,7 @@
                                 {
                                     "key": "field_697ec5e314668",
                                     "label": "Row Two Content Position (Vertical)",
-                                    "name": "row_two_content_position_vertical",
+                                    "name": "content_vertical",
                                     "aria-label": "",
                                     "type": "button_group",
                                     "instructions": "This setting controls how the text content is aligned against the image. Top, will position the text vertically to the top, middle to the middle, and bottom to the bottom of the image.",
@@ -350,7 +350,7 @@
                                 {
                                     "key": "field_697ec5e314669",
                                     "label": "Row Two Image Alignment (Horizontal)",
-                                    "name": "row_two_image_alignment_horizontal",
+                                    "name": "image_horizontal",
                                     "aria-label": "",
                                     "type": "button_group",
                                     "instructions": "Set the image to either the right or left of the content",
@@ -424,5 +424,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1769966370
+    "modified": 1769988988
 }

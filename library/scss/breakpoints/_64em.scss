@@ -266,6 +266,19 @@
 		}
 	}
 
+	.supporting_images {
+		display: flex;
+		margin-top: 0;
+
+		li {
+			margin-left: $spacing-lg;
+		}
+	}
+
+	&--row_two {
+		margin-top: $spacing-lg;
+	}
+
 	&--middle {
 		.content {
 			margin-top: auto;
