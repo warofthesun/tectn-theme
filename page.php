@@ -1,7 +1,7 @@
 <!--page-->
 <?php get_header(); ?>
 <?php if (is_front_page() ) : include 'partials/hero/hero-headline.php'; else : $hero_style = get_field('hero_style'); ?>
-	<?php if ($hero_style == 'landing'): include 'partials/hero/hero-landing.php'; ?>
+	<?php if ($hero_style == 'headline'): include 'partials/hero/hero-headline.php'; ?>
 	<?php elseif ($hero_style == 'large'): include 'partials/hero/hero-large.php'; ?>
 	<?php elseif ($hero_style == 'medium'): include 'partials/hero/hero-medium.php'; ?>
 	<?php elseif ($hero_style == 'small'): include 'partials/hero/hero-small.php'; ?>

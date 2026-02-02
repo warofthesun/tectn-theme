@@ -21,14 +21,15 @@
                 "small": "Small - Page title",
                 "medium": "Medium - Image and page title",
                 "large": "Large - Large image and page title",
-                "landing": "Landing - Extra large with content area"
+                "headline": "Headline - Large left aligned headline with ability to add a subheadline and two buttons"
             },
             "default_value": false,
-            "allow_null": 0,
+            "return_format": "value",
             "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 1,
             "ui": 1,
             "ajax": 0,
-            "return_format": "value",
             "placeholder": "",
             "create_options": 0,
             "save_options": 0
@@ -46,7 +47,7 @@
                     {
                         "field": "field_68260aefb86c7",
                         "operator": "==",
-                        "value": "landing"
+                        "value": "headline"
                     }
                 ]
             ],
@@ -56,7 +57,9 @@
                 "id": ""
             },
             "clone": [
-                "group_68224fa77d735"
+                "field_68225159eee20",
+                "field_68225191eee21",
+                "field_682251bfeee22"
             ],
             "display": "group",
             "layout": "block",
@@ -193,7 +196,7 @@
     ],
     "active": true,
     "description": "",
-    "show_in_rest": false,
+    "show_in_rest": 0,
     "display_title": "",
-    "modified": 1769993662
+    "modified": 1769995686
 }
