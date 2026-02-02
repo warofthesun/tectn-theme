@@ -1,11 +1,12 @@
 {
     "key": "group_68224fa77d735",
-    "title": "Landing Page Hero Settings",
+    "title": "Hero Settings",
     "fields": [
         {
             "key": "field_6822510aeee1f",
-            "label": "Hero Image",
+            "label": "Hero Background Image",
             "name": "hero_image",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -16,7 +17,6 @@
                 "id": ""
             },
             "return_format": "url",
-            "preview_size": "medium",
             "library": "all",
             "min_width": "",
             "min_height": "",
@@ -24,22 +24,34 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": ""
+            "mime_types": "",
+            "allow_in_bindings": 1,
+            "preview_size": "medium"
         },
         {
             "key": "field_68225159eee20",
             "label": "Hero Headline",
             "name": "hero_headline",
+            "aria-label": "",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_697fe85af2201",
+                        "operator": "==",
+                        "value": "headline"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
+            "allow_in_bindings": 0,
             "tabs": "text",
             "media_upload": 0,
             "toolbar": "full",
@@ -49,44 +61,66 @@
             "key": "field_68225191eee21",
             "label": "Hero Paragraph",
             "name": "hero_paragraph",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_697fe85af2201",
+                        "operator": "==",
+                        "value": "headline"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "rows": 3,
+            "placeholder": "",
             "new_lines": ""
         },
         {
             "key": "field_682251bfeee22",
             "label": "Hero CTA",
             "name": "hero_cta",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_697fe85af2201",
+                        "operator": "==",
+                        "value": "headline"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "collapsed": "",
+            "layout": "table",
+            "pagination": 0,
             "min": 0,
             "max": 2,
-            "layout": "table",
-            "button_label": "",
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
             "sub_fields": [
                 {
                     "key": "field_682251dceee23",
                     "label": "Hero CTA Button",
                     "name": "hero_cta_button",
+                    "aria-label": "",
                     "type": "link",
                     "instructions": "",
                     "required": 0,
@@ -96,28 +130,10 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "array"
+                    "return_format": "array",
+                    "parent_repeater": "field_682251bfeee22"
                 }
             ]
-        },
-        {
-            "key": "field_6841ffa53e3bd",
-            "label": "Include Featured Post",
-            "name": "include_featured_post",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "Yes",
-            "ui_off_text": "No"
         }
     ],
     "location": [
@@ -137,7 +153,9 @@
     "hide_on_screen": [
         "featured_image"
     ],
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1749155778
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1769994168
 }

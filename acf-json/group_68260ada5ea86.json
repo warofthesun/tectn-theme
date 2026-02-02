@@ -6,6 +6,7 @@
             "key": "field_68260aefb86c7",
             "label": "Hero Style",
             "name": "hero_style",
+            "aria-label": "",
             "type": "select",
             "instructions": "Select hero size",
             "required": 0,
@@ -22,18 +23,21 @@
                 "large": "Large - Large image and page title",
                 "landing": "Landing - Extra large with content area"
             },
-            "default_value": [],
+            "default_value": false,
             "allow_null": 0,
             "multiple": 0,
             "ui": 1,
             "ajax": 0,
             "return_format": "value",
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_68261ac5504a3",
             "label": "Landing Page Hero Options",
             "name": "landing_page_hero_options",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -63,6 +67,7 @@
             "key": "field_682626e226785",
             "label": "Large Hero Options",
             "name": "large_hero_options",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -92,6 +97,7 @@
             "key": "field_6826270c26786",
             "label": "Medium Hero Options",
             "name": "medium_hero_options",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -121,6 +127,7 @@
             "key": "field_6826277407a14",
             "label": "Small Hero Options",
             "name": "small_hero_options",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -184,7 +191,9 @@
     "hide_on_screen": [
         "featured_image"
     ],
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1748896505
+    "show_in_rest": false,
+    "display_title": "",
+    "modified": 1769993662
 }

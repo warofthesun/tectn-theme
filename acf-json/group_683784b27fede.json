@@ -6,6 +6,7 @@
             "key": "field_683784b283105",
             "label": "Include Sidebar Testimonials",
             "name": "include_sidebar_testimonials",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -25,6 +26,7 @@
             "key": "field_683784b28356e",
             "label": "Choose Testimonial(s)",
             "name": "choose_sidebar_testimonials",
+            "aria-label": "",
             "type": "relationship",
             "instructions": "",
             "required": 0,
@@ -50,7 +52,8 @@
             "elements": "",
             "min": "",
             "max": 3,
-            "return_format": "object"
+            "return_format": "object",
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -68,7 +71,9 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": false,
     "description": "",
-    "modified": 1748552791
+    "show_in_rest": false,
+    "display_title": "",
+    "modified": 1769989677
 }

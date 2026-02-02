@@ -6,6 +6,7 @@
             "key": "field_682b78683eb1e",
             "label": "Include Footer Testimonials",
             "name": "include_footer_testimonials",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -25,6 +26,7 @@
             "key": "field_682a5c67a423b",
             "label": "Choose Testimonial(s)",
             "name": "choose_testimonials",
+            "aria-label": "",
             "type": "relationship",
             "instructions": "",
             "required": 0,
@@ -50,12 +52,14 @@
             "elements": "",
             "min": "",
             "max": 3,
-            "return_format": "object"
+            "return_format": "object",
+            "bidirectional_target": []
         },
         {
             "key": "field_682b7b103eb20",
             "label": "Testimonial Background",
             "name": "testimonial_background",
+            "aria-label": "",
             "type": "button_group",
             "instructions": "",
             "required": 0,
@@ -110,7 +114,9 @@
         "format",
         "featured_image"
     ],
-    "active": 1,
+    "active": false,
     "description": "",
-    "modified": 1748885538
+    "show_in_rest": false,
+    "display_title": "",
+    "modified": 1769989674
 }

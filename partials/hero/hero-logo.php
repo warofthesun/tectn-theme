@@ -1,7 +1,8 @@
-<!--HERO-LANDING-->
+<!--HERO-LOGO-->
 <div class="hero__container hero__container_landing">
 	<div class="hero__container_inner">
-		<div class="hero__content hero__content_image col-xs-12"  style="background-image: url('<?php if( get_field('hero_image') ) : the_field('hero_image');  endif; ?>')">
+	<?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' ); ?>
+		<div class="hero__content hero__content_image col-xs-12"  style="background-image: url('<?php echo esc_url( $backgroundImg[0] ); ?>')">
 		<div class="hero__content hero__content_text col-xs-12 col-md-7">
 		
 		<svg class="hero__overlay_full_width" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">

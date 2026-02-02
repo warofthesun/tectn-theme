@@ -6,6 +6,7 @@
             "key": "field_6829220cf032e",
             "label": "Site Pages",
             "name": "include_sidebar_on_site_pages",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -25,6 +26,7 @@
             "key": "field_682923bce3ecf",
             "label": "Blog Page",
             "name": "include_sidebar_on_blog_page",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -44,6 +46,7 @@
             "key": "field_682923d7e3ed0",
             "label": "Blog Posts",
             "name": "include_sidebar_on_blog_posts",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -75,7 +78,9 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": false,
     "description": "",
-    "modified": 1747526633
+    "show_in_rest": false,
+    "display_title": "",
+    "modified": 1769989668
 }
