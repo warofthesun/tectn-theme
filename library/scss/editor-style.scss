@@ -14,6 +14,8 @@ http://codex.wordpress.org/Editor_Style
 
 @use "partials/normalize";
 @use "globals" as *;
+@use "breakpoints/base" as *;
+@use "breakpoints/75em" as *;
 
 
 

@@ -6,6 +6,18 @@ require_once( 'library/starter.php' );
 // CUSTOMIZE THE WORDPRESS ADMIN (off by default)
 // require_once( 'library/admin.php' );
 
+function tectn_register_acf_blocks() {
+  /**
+   * We register our block's with WordPress's handy
+   * register_block_type();
+   *
+   * @link https://developer.wordpress.org/reference/functions/register_block_type/
+   */
+  register_block_type( __DIR__ . '/blocks/text-image' );
+}
+// Here we call our tectn_register_acf_block() function on init.
+add_action( 'init', 'tectn_register_acf_blocks' );
+
 /*********************
 LAUNCH starter
 Let's get everything up and running.
@@ -13,8 +25,11 @@ Let's get everything up and running.
 
 function tectn_setup() {
 
+  // Add theme support for editor styles
+  add_theme_support( 'editor-styles' );
+
   //Allow editor style.
-  add_editor_style( get_stylesheet_directory_uri() . '/library/css/editor-style.css' );
+  add_editor_style( '/library/css/style.css' );
 
   // let's get language support going, if you need it
   load_theme_textdomain( 'tectn_theme', get_template_directory() . '/library/translation' );

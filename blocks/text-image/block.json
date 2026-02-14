@@ -1,0 +1,16 @@
+{
+    "name": "tectn/text-image",
+    "title": "Text + Image",
+    "description": "Header, body copy, CTAs, and 1-3 images",
+    "style": [ "file:../library/css/style.css" ],
+    "category": "formatting",
+    "icon": "admin-comments",
+    "keywords": ["image", "content", "layout"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "text_image.php"
+    },
+    "supports": {
+        "anchor": true
+    }
+}
