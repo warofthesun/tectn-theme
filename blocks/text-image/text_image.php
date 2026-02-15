@@ -24,7 +24,7 @@
     <div class="col-xs-12 col-md-6 content">
         <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
         <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
-            <?php if (have_rows('buttons')) : ?>snoop
+            <?php if (have_rows('buttons')) : ?>
   <div class="button_pair">
     <?php while (have_rows('buttons')) : the_row();
       $link = get_sub_field('button');
