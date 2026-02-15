@@ -15,11 +15,15 @@
     if ($count === 1) {
         $text_col  = 'col-xs-12 col-md-6';
         $image_col = 'col-xs-12 col-md-6';
-        $image_style = 'featured_image';
-      } elseif ($count >= 2) {
+        $grid_class = 'image_grid image_grid--one';
+      } elseif ($count === 2) {
         $text_col  = 'col-xs-12 col-md-4';
         $image_col = 'col-xs-12 col-md-8';
-        $image_style = 'supporting_images';
+        $grid_class = 'image_grid image_grid--two';
+      } elseif ($count === 3) {
+        $text_col  = 'col-xs-12 col-md-4';
+        $image_col = 'col-xs-12 col-md-8';
+        $grid_class = 'image_grid image_grid--three';
       } else {
         // Optional: fallback if no images (choose whatever makes sense)
         $text_col  = 'col-xs-12 col-md-12';
@@ -60,14 +64,42 @@
 <?php endif; ?>
     </div>
     <div class="<?= esc_attr($image_col); ?>">
-    <?php if( $images ): ?>
-            <ul class="gallery <?= esc_attr($image_style); ?>">
-                <?php foreach( $images as $image ): ?>
-                    <li>
-                        <img src="<?php echo esc_url($image['sizes']['large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
-                    </li>
+    <?php if( $images ) : ?>
+        <ul class="image_grid <?= esc_attr($grid_class); ?>">
+            <?php if ($count === 3): ?>
+
+                <li class="image_grid__item image_grid__item--1">
+                <?php
+                $img = $images[0];
+                $url = is_array($img) ? $img['url'] : wp_get_attachment_url($img);
+                $alt = is_array($img) ? ($img['alt'] ?? '') : get_post_meta($img, '_wp_attachment_image_alt', true);
+                ?>
+                <img class="image_grid__img" src="<?= esc_url($url); ?>" alt="<?= esc_attr($alt); ?>">
+                </li>
+
+                <li class="image_grid__right">
+                <?php for ($i = 1; $i < 3; $i++):
+                    $img = $images[$i];
+                    $url = is_array($img) ? $img['url'] : wp_get_attachment_url($img);
+                    $alt = is_array($img) ? ($img['alt'] ?? '') : get_post_meta($img, '_wp_attachment_image_alt', true);
+                ?>
+                    <div class="image_grid__right-item image_grid__right-item--<?= $i+1; ?>">
+                    <img class="image_grid__img" src="<?= esc_url($url); ?>" alt="<?= esc_attr($alt); ?>">
+                    </div>
+                <?php endfor; ?>
+                </li>
+
+            <?php else: ?>
+                <?php foreach ($images as $i => $img):
+                $url = is_array($img) ? $img['url'] : wp_get_attachment_url($img);
+                $alt = is_array($img) ? ($img['alt'] ?? '') : get_post_meta($img, '_wp_attachment_image_alt', true);
+                ?>
+                <li class="image_grid__item image_grid__item--<?= $i+1; ?>">
+                    <img class="image_grid__img" src="<?= esc_url($url); ?>" alt="<?= esc_attr($alt); ?>">
+                </li>
                 <?php endforeach; ?>
-            </ul>
+            <?php endif; ?>
+        </ul>
         <?php endif; ?>
     </div>
 </div>

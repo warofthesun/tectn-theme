@@ -2170,6 +2170,20 @@ LAYOUT & GRID STYLES
   margin: 0 auto;
 }
 
+.image_grid--two,
+.image_grid--three {
+  grid-template-columns: 1fr;
+  grid-template-areas: none;
+}
+.image_grid--two .image_grid__item--1,
+.image_grid--two .image_grid__item--2,
+.image_grid--two .image_grid__item--3,
+.image_grid--three .image_grid__item--1,
+.image_grid--three .image_grid__item--2,
+.image_grid--three .image_grid__item--3 {
+  grid-area: auto;
+}
+
 /*********************
 LINK STYLES
 *********************/
@@ -4218,30 +4232,72 @@ IMPORTING PARTIALS
   .content_group .content {
     padding-right: 2em;
   }
-  .content_group .featured_image {
+  .content_group .image_grid {
+    display: grid;
+    margin: 0;
+  }
+  .content_group .image_grid li {
+    margin-left: 1.25em;
+  }
+  .content_group .image_grid__item {
+    margin: 0;
+  }
+  .content_group .image_grid__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 0;
+  }
+  .content_group .image_grid--one {
     padding-right: 6em;
     padding-left: 0em;
   }
-  .content_group .featured_image li {
+  .content_group .image_grid--one li {
     margin: 0;
   }
-  .content_group .featured_image li img {
+  .content_group .image_grid--one li img {
     margin: 0;
   }
-  .content_group .gallery {
+  .content_group {
+    /* --- 2 images: 50/50 --- */
+  }
+  .content_group .image_grid--two {
+    grid-template-columns: 1fr 1fr;
+  }
+  .content_group .image_grid--two .image_grid__item--1 {
+    grid-column: 1;
+  }
+  .content_group .image_grid--two .image_grid__item--2 {
+    grid-column: 2;
+  }
+  .content_group {
+    /* --- 3 images: big left, two stacked right --- */
+  }
+  .content_group .image_grid--three {
+    grid-template-columns: 2fr 1fr;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    grid-template-areas: "big right";
+  }
+  .content_group .image_grid--three .image_grid__item--1 {
+    grid-area: big;
+    align-self: start;
+  }
+  .content_group .image_grid--three .image_grid__item--2, .content_group .image_grid--three .image_grid__item--3 {
+    grid-area: right;
+    align-self: start;
+  }
+  .content_group .image_grid__right {
     margin: 0;
-  }
-  .content_group .supporting_images {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin-top: 0;
-  }
-  .content_group .supporting_images li {
-    margin-left: 1.25em;
+    display: grid;
+    -ms-flex-line-pack: start;
+    align-content: start;
+    gap: 1.25em;
   }
   .content_group--middle .content {
     margin-top: auto;
+    margin-bottom: auto;
   }
   .content_group--bottom .content {
     margin-top: auto;

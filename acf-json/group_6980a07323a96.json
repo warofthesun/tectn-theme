@@ -89,7 +89,7 @@
             "return_format": "array",
             "library": "all",
             "min": "",
-            "max": "",
+            "max": 3,
             "min_width": "",
             "min_height": "",
             "min_size": "",
@@ -169,5 +169,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771110741
+    "modified": 1771164516
 }

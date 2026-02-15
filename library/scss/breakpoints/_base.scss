@@ -116,6 +116,18 @@ LAYOUT & GRID STYLES
 	margin: 0 auto;
 }
 
+.image_grid--two,
+  .image_grid--three {
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+
+    .image_grid__item--1,
+    .image_grid__item--2,
+    .image_grid__item--3 {
+      grid-area: auto;
+    }
+  }
+
 /*********************
 LINK STYLES
 *********************/
