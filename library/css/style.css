@@ -2196,63 +2196,67 @@ LAYOUT & GRID STYLES
 
 :root {
   --wave-h: 130px;
-  --overlap: 70px;
+  --bg-max-h: 300px;
+  --content-top: 140px; /* how far down content sits from top wave */
+  --hang: 120px; /* how far content hangs past bottom wave */
 }
 
 .c-waveband {
   position: relative;
-  background: var(--waveband-bg);
-  padding-bottom: 0;
   overflow: visible;
 }
 
-.c-waveband.is-bg {
+/* BG is a backdrop, not a container */
+.c-waveband__bg {
+  position: absolute;
+  inset: 0 0 auto 0; /* top:0, left:0, right:0 */
+  height: min(var(--bg-max-h), 70vh); /* max 300px, responsive cap */
+  max-height: var(--bg-max-h);
   background: var(--waveband-bg);
+  z-index: 0;
 }
 
-.c-waveband__inner {
-  max-width: 1192px;
-  margin-inline: auto;
+/* Content is normal flow, above the bg */
+.c-waveband__content {
   position: relative;
   z-index: 2;
-  -webkit-transform: translateY(var(--overlap));
-  -ms-transform: translateY(var(--overlap));
-  transform: translateY(var(--overlap));
+  max-width: 1192px;
+  margin-inline: auto;
+  /* Put content on top of the backdrop */
+  margin-top: var(--content-top);
+  padding-inline: 1.5rem;
+  /* Make it “break out” past the bottom wave */
+  margin-bottom: var(--hang);
 }
 
-.c-waveband.is-bg .c-waveband__inner {
-  margin-bottom: -webkit-calc(var(--wave-h) + var(--overlap));
-  margin-bottom: calc(var(--wave-h) + var(--overlap));
-}
-
-.c-waveband__wave {
+/* Full-bleed waves inside the bg layer */
+.c-waveband__bg .c-waveband__wave {
   position: absolute;
   left: 50%;
+  width: 100vw;
+  height: -webkit-calc(var(--wave-h) + 2px);
+  height: calc(var(--wave-h) + 2px); /* overscan prevents seams */
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  width: 100vw; /* key */
-  height: var(--wave-h);
   background: var(--waveband-bg);
   pointer-events: none;
-  /* Show only a wave-shaped slice */
   -webkit-mask: url("../images/curve.svg") no-repeat center/100% 100%;
   mask: url("../images/curve.svg") no-repeat center/100% 100%;
-  pointer-events: none;
 }
 
-.c-waveband__wave--top {
+.c-waveband__bg .c-waveband__wave--top {
   top: 0;
   -webkit-transform: translateX(-50%) translateY(-100%);
   -ms-transform: translateX(-50%) translateY(-100%);
   transform: translateX(-50%) translateY(-100%);
 }
 
-.c-waveband__wave--bottom {
+.c-waveband__bg .c-waveband__wave--bottom {
   bottom: 0;
-  -webkit-transform: translateX(-50%) translateY(100%) scaleX(-1) scaleY(-1);
-  -ms-transform: translateX(-50%) translateY(100%) scaleX(-1) scaleY(-1);
-  transform: translateX(-50%) translateY(100%) scaleX(-1) scaleY(-1);
+  -webkit-transform: translateX(-50%) translateY(100%) scaleY(-1) scaleX(-1);
+  -ms-transform: translateX(-50%) translateY(100%) scaleY(-1) scaleX(-1);
+  transform: translateX(-50%) translateY(100%) scaleY(-1) scaleX(-1);
 }
 
 /*********************

@@ -69,16 +69,17 @@
     }
 ?>
 <?php if ($enable_bg): ?>
-<div class="<?php echo esc_attr(implode(' ', array_filter($classes_band))); ?>"
-  <?php if ($style) echo 'style="' . esc_attr($style) . '"'; ?>
->
-  
-    <span class="c-waveband__wave c-waveband__wave--top" aria-hidden="true"></span>
-    <span class="c-waveband__wave c-waveband__wave--bottom" aria-hidden="true"></span>
+<div class="<?php echo esc_attr(implode(' ', array_filter($classes_band))); ?>">
 
-    <div <?php if ($enable_bg): ?>class="c-waveband__inner"<?php endif; ?>>
+    <div class="c-waveband__bg"
+      <?php if ($style) echo 'style="' . esc_attr($style) . ' --waveband-max-h: 800px;"'; ?>
+    >
+        <span class="c-waveband__wave c-waveband__wave--top" aria-hidden="true"></span>
+        <span class="c-waveband__wave c-waveband__wave--bottom" aria-hidden="true"></span>
+    </div>
 
- <?php endif; ?>
+    <div class="c-waveband__content">
+<?php endif; ?>
 
   
         <div class="<?php echo esc_attr(implode(' ', $classes_cg)); ?> row">
@@ -146,7 +147,7 @@
                 <?php endif; ?>
             </div>
         </div>
-        <?php if ($enable_bg): ?>
+<?php if ($enable_bg): ?>
     </div>
 </div>
 <?php endif; ?>
