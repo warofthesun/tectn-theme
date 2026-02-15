@@ -998,6 +998,80 @@ LAYOUT & GRID STYLES
   transform: translateX(-50%) translateY(100%) scaleY(-1) scaleX(-1);
 }
 
+/* =========================================================
+   Card Repeater — Base (mobile-first)
+   Targets markup from card_repeater.php
+   ========================================================= */
+.c-cardrepeater__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-stepcard {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f2f5ef;
+}
+
+.c-stepcard__head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background: var(--c-sage, #6f8b2f);
+}
+
+.c-stepcard__kicker {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #fff;
+}
+
+.c-stepcard__icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.c-stepcard__icon .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  color: #fff;
+}
+
+.c-stepcard__body {
+  padding: 0.75rem;
+  font-size: 0.95rem;
+}
+.c-stepcard__body p:last-child {
+  margin-bottom: 0;
+}
+
 /*********************
 LINK STYLES
 *********************/
@@ -2559,6 +2633,23 @@ view.
 @media only screen and (min-width: 75em) {
   .wrap {
     width: 1040px;
+  }
+  /* 1–4 cards should fit on ONE row at larger widths */
+  .c-cardrepeater--count-1 .c-cardrepeater__grid {
+    grid-template-columns: 1fr;
+  }
+  .c-cardrepeater--count-2 .c-cardrepeater__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .c-cardrepeater--count-3 .c-cardrepeater__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .c-cardrepeater--count-4 .c-cardrepeater__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  /* 5+ should ALWAYS be 3 per row (so 5 => 3 + 2) */
+  .c-cardrepeater--count-many .c-cardrepeater__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   /*************
   NAVIGATION STYLES

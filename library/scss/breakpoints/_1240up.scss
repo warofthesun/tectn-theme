@@ -15,4 +15,29 @@
   .wrap {
     width: 1240px;
   }
+
+  .c-cardrepeater__grid {
+    gap: 1.5rem;
+  }
+
+  .c-stepcard__head {
+    padding: 0.65rem 0.9rem;
+  }
+
+  .c-stepcard__body {
+    padding: 0.9rem;
+    font-size: 1rem;
+  }
+
+  .c-stepcard__icon {
+    width: 24px;
+    height: 24px;
+
+    .dashicons {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+    }
+  }
 }

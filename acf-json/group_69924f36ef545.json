@@ -1,0 +1,120 @@
+{
+    "key": "group_69924f36ef545",
+    "title": "Content Cards",
+    "fields": [
+        {
+            "key": "field_69924f3748309",
+            "label": "Content Cards",
+            "name": "content_cards",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 1,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_69924f904830a",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Keep it short; one to two words. ie Step One, or Location",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_69924f3748309"
+                },
+                {
+                    "key": "field_69924fdf4830b",
+                    "label": "Icon",
+                    "name": "icon",
+                    "aria-label": "",
+                    "type": "icon_picker",
+                    "instructions": "Choose an icon to include in the title bar (Optional)",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "tabs": [
+                        "dashicons"
+                    ],
+                    "return_format": "string",
+                    "allow_in_bindings": 0,
+                    "library": "all",
+                    "default_value": {
+                        "type": null,
+                        "value": null
+                    },
+                    "parent_repeater": "field_69924f3748309"
+                },
+                {
+                    "key": "field_699250204830c",
+                    "label": "Body",
+                    "name": "body",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "tabs": "text",
+                    "media_upload": 0,
+                    "toolbar": "full",
+                    "delay": 0,
+                    "parent_repeater": "field_69924f3748309"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn\/content-cards"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1771197423
+}

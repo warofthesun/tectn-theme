@@ -17,6 +17,18 @@
   	width: 96%;
   }
 
+  /* Move to 3-up for 3 cards and for "many" (5+) */
+  .c-cardrepeater--count-3 .c-cardrepeater__grid,
+  .c-cardrepeater--count-many .c-cardrepeater__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* 4 cards can still be 2-up here (keeps cards comfortable),
+     the full 4-up happens at 75em. */
+  .c-cardrepeater--count-4 .c-cardrepeater__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   /*********************
   HEADER STYLES
   *********************/

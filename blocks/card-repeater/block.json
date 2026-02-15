@@ -1,0 +1,16 @@
+{
+    "name": "tectn/content-cards",
+    "title": "Multi-card repeater",
+    "description": "Informational cards with title and brief body copy",
+    "style": [ "file:../library/css/style.css" ],
+    "category": "formatting",
+    "icon": "admin-comments",
+    "keywords": ["card", "text", "steps"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "card_repeater.php"
+    },
+    "supports": {
+        "anchor": true
+    }
+}

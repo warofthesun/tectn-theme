@@ -14,6 +14,7 @@ function tectn_register_acf_blocks() {
    * @link https://developer.wordpress.org/reference/functions/register_block_type/
    */
   register_block_type( __DIR__ . '/blocks/text-image' );
+  register_block_type( __DIR__ . '/blocks/card-repeater' );
 }
 // Here we call our tectn_register_acf_block() function on init.
 add_action( 'init', 'tectn_register_acf_blocks' );
@@ -393,6 +394,7 @@ if( function_exists('acf_add_options_page') ) {
 	));
 
 }
+
 
 /*CUSTOM SHORTCODE TO PULL FORM POSTS */
 
