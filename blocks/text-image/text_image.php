@@ -43,11 +43,11 @@
 
     $classes_cg = ['content-group'];
     if ($content_position === 'middle') {
-        $classes[] = 'content-group--middle';
+        $classes_cg[] = 'content-group--middle';
     }
     
     if ($content_position === 'bottom') {
-        $classes[] = 'content-group--bottom';
+        $classes_cg[] = 'content-group--bottom';
     }
     
     if ($image_position === 'left') {
