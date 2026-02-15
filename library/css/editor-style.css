@@ -860,6 +860,7 @@ Buttons and such
 ****************/
 .button_pair .button:nth-child(1) {
   margin-right: 1em;
+  margin-bottom: 1em;
 }
 /********************
 WORDPRESS BODY CLASSES

@@ -2121,6 +2121,7 @@ Buttons and such
 ****************/
 .button_pair .button:nth-child(1) {
   margin-right: 1em;
+  margin-bottom: 1em;
 }
 /********************
 WORDPRESS BODY CLASSES
@@ -4211,14 +4212,24 @@ IMPORTING PARTIALS
   /***************
   CONTENT BLOCKS
   *****************/
+  .content_group {
+    margin-bottom: 1em;
+  }
   .content_group .content {
     padding-right: 2em;
   }
   .content_group .featured_image {
     padding-right: 6em;
+    padding-left: 0em;
   }
-  .content_group .featured_image img {
-    margin-bottom: 0;
+  .content_group .featured_image li {
+    margin: 0;
+  }
+  .content_group .featured_image li img {
+    margin: 0;
+  }
+  .content_group .gallery {
+    margin: 0;
   }
   .content_group .supporting_images {
     display: -webkit-box;
@@ -4228,9 +4239,6 @@ IMPORTING PARTIALS
   }
   .content_group .supporting_images li {
     margin-left: 1.25em;
-  }
-  .content_group--row_two {
-    margin-top: 1.25em;
   }
   .content_group--middle .content {
     margin-top: auto;

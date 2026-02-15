@@ -55,7 +55,8 @@ Buttons and such
 		@extend %btn;
 		@extend %btn_primary;
 		@extend %btn_primary__solid;
-		margin-right: 1em;
+		margin-right: $spacing-md;
+		margin-bottom: $spacing-md;
 	}
 
 	.button:nth-child(2) {

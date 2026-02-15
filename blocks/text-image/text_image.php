@@ -11,7 +11,21 @@
     $content_position = get_field('content_vertical');
     $image_position = get_field('image_horizontal');
     $images = get_field('images');
-    // Repeater (array of rows)
+    $count = is_array($images) ? count($images) : 0;
+    if ($count === 1) {
+        $text_col  = 'col-xs-12 col-md-6';
+        $image_col = 'col-xs-12 col-md-6';
+        $image_style = 'featured_image';
+      } elseif ($count >= 2) {
+        $text_col  = 'col-xs-12 col-md-4';
+        $image_col = 'col-xs-12 col-md-8';
+        $image_style = 'supporting_images';
+      } else {
+        // Optional: fallback if no images (choose whatever makes sense)
+        $text_col  = 'col-xs-12 col-md-12';
+        $image_col = 'd-none'; // or 'col-xs-12 col-md-12' and show a placeholder
+      }
+    
     $buttons     = get_field('buttons');
 
     $classes = ['content_group'];
@@ -21,7 +35,7 @@
 ?>
 
 <div class="<?php echo esc_attr(implode(' ', $classes)); ?> row">
-    <div class="col-xs-12 col-md-6 content">
+    <div class="<?= esc_attr($text_col); ?> content">
         <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
         <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
             <?php if (have_rows('buttons')) : ?>
@@ -38,16 +52,16 @@
       <a class="button"
          href="<?php echo esc_url($url); ?>"
          target="<?php echo esc_attr($target); ?>"
-         <?php echo ($target === '_blank') ? 'rel="noopener noreferrer"' : ''; ?>>button
+         <?php echo ($target === '_blank') ? 'rel="noopener noreferrer"' : ''; ?>>
         <?php echo esc_html($title); ?>
       </a>
     <?php endwhile; ?>
   </div>
 <?php endif; ?>
     </div>
-    <div class="col-xs-12 col-md-6 featured_image">
+    <div class="<?= esc_attr($image_col); ?>">
     <?php if( $images ): ?>
-            <ul>
+            <ul class="gallery <?= esc_attr($image_style); ?>">
                 <?php foreach( $images as $image ): ?>
                     <li>
                         <img src="<?php echo esc_url($image['sizes']['large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />

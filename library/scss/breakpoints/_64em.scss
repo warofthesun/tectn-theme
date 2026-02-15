@@ -255,15 +255,28 @@
   *****************/
 
   .content_group {
+	margin-bottom: $spacing-md;
+
 	.content {
 		padding-right: $spacing-xxl;
 	}
 
 	.featured_image {
-		padding-right: 6em;
-		img {
-			margin-bottom: 0;
+		
+			padding-right: 6em;
+			padding-left: 0em;
+		
+		li {
+			margin:0;
+
+			img {
+				margin: 0;
+			}
 		}
+	}
+
+	.gallery {
+		margin:0;
 	}
 
 	.supporting_images {
@@ -273,10 +286,6 @@
 		li {
 			margin-left: $spacing-lg;
 		}
-	}
-
-	&--row_two {
-		margin-top: $spacing-lg;
 	}
 
 	&--middle {
