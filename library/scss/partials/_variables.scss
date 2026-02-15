@@ -81,11 +81,12 @@ $disabled-gray:     #cfcfcf;
 
 $primary-surface: $secondary-50;
 
-/*
-Here's a great tutorial on how to
-use color variables properly:
-http://sachagreif.com/sass-color-variables/
-*/
+:root {
+	--c-sage: #C7EACE;
+	--c-cream: #EFF6F0;
+	--c-charcoal: #B3B9BF;
+	--c-white: #ffffff;
+  }
 
 
 $spacing-none: 0em;

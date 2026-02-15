@@ -31,6 +31,8 @@ function tectn_setup() {
   //Allow editor style.
   add_editor_style( '/library/css/style.css' );
 
+  add_theme_support( 'align-wide' );
+
   // let's get language support going, if you need it
   load_theme_textdomain( 'tectn_theme', get_template_directory() . '/library/translation' );
 

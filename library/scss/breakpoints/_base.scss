@@ -111,6 +111,12 @@ style a page via class
 LAYOUT & GRID STYLES
 *********************/
 
+.alignfull {
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+}
+
 .wrap {
 	width: 96%;
 	margin: 0 auto;
@@ -128,6 +134,57 @@ LAYOUT & GRID STYLES
     }
   }
 
+
+  :root {
+	--wave-h: 110px;
+	--overlap: 50px;
+  }
+  
+  .c-waveband {
+	position: relative;
+	background: var(--waveband-bg);
+	padding-bottom: 0;
+  }
+  
+  .c-waveband.is-bg {
+	background: var(--waveband-bg);
+  }
+  
+  .c-waveband__inner {
+	max-width: 1192px;     // your site container
+	margin-inline: auto;
+	position: relative;
+	z-index: 2;
+  }
+
+  .c-waveband.is-bg .c-waveband__inner {
+	margin-bottom: calc(var(--wave-h) + var(--overlap));
+  }
+
+  .c-waveband__wave {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100vw;              /* key */
+	height: var(--wave-h);
+	background: var(--waveband-bg);
+	pointer-events: none;
+  
+	/* Show only a wave-shaped slice */
+	-webkit-mask: url("../images/curve-top.svg") no-repeat center / 100% 100%;
+	mask: url("../images/curve-top.svg") no-repeat center / 100% 100%;
+	pointer-events: none;
+  }
+  
+  .c-waveband__wave--top {
+	top: 0;
+	transform: translateX(-50%) translateY(-100%);
+  }
+  
+  .c-waveband__wave--bottom {
+	bottom: 0;
+	transform: translateX(-50%) translateY(100%) scaleX(-1) scaleY(-1);
+  }
 /*********************
 LINK STYLES
 *********************/
