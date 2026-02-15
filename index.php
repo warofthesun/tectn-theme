@@ -8,7 +8,7 @@
 						<main id="main" class="col-xs-12 <?php if(get_field('include_sidebar_on_blog_page', 'option')) :  ?>col-sm-8 col-lg-9<?php endif; ?> row" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-							<div class="gallery_item col-xs-12 <?php if(get_field('include_sidebar_on_blog_page', 'option')) :  ?>col-md-12 col-lg-6<?php else :?>col-sm-6 col-lg-4<?php endif; ?>">
+							<div class="gallery-item col-xs-12 <?php if(get_field('include_sidebar_on_blog_page', 'option')) :  ?>col-md-12 col-lg-6<?php else :?>col-sm-6 col-lg-4<?php endif; ?>">
 								<article id="post-<?php the_ID(); ?>" <?php post_class( ' single-post' ); ?> role="article" >
 									<div class="hero--image">
 										<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">

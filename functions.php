@@ -260,7 +260,7 @@ function starter_comments( $comment, $args, $depth ) {
           <p><?php _e( 'Your comment is awaiting moderation.', 'tectn_theme' ) ?></p>
         </div>
       <?php endif; ?>
-      <section class="comment_content cf">
+      <section class="comment-content cf">
         <?php comment_text() ?>
       </section>
       <?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>

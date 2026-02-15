@@ -50,19 +50,19 @@ CONTROLS
 Buttons and such
 ****************/
 
-.button_pair {
+.button-pair {
 	.button:nth-child(1) {
 		@extend %btn;
-		@extend %btn_primary;
-		@extend %btn_primary__solid;
+		@extend %btn--primary;
+		@extend %btn--primary--solid;
 		margin-right: $spacing-md;
 		margin-bottom: $spacing-md;
 	}
 
 	.button:nth-child(2) {
 		@extend %btn;
-		@extend %btn_primary;
-		@extend %btn_primary__outline;
+		@extend %btn--primary;
+		@extend %btn--primary--outline;
 	}
 }
 
@@ -116,14 +116,14 @@ LAYOUT & GRID STYLES
 	margin: 0 auto;
 }
 
-.image_grid--two,
-  .image_grid--three {
+.image-grid--two,
+  .image-grid--three {
     grid-template-columns: 1fr;
     grid-template-areas: none;
 
-    .image_grid__item--1,
-    .image_grid__item--2,
-    .image_grid__item--3 {
+    .image-grid__item--1,
+    .image-grid__item--2,
+    .image-grid__item--3 {
       grid-area: auto;
     }
   }
@@ -254,7 +254,7 @@ and more scalable.
 
 */
 
-.header_nav {
+.header-nav {
 	width: 100%;
 	display: flex;
 	justify-content: flex-start;
@@ -265,7 +265,7 @@ and more scalable.
 	}
 }
 
-.nav__wrapper {
+.header-nav__wrapper {
 	display: flex;
 	width: 100%;
 	align-items: center;
@@ -292,8 +292,8 @@ and more scalable.
 
 	&.nav li a {
 		@extend %btn;
-		@extend %btn_secondary;
-		@extend %btn_secondary__solid;
+		@extend %btn--secondary;
+		@extend %btn--secondary--solid;
 	}
 }
 #mobile-nav {
@@ -420,8 +420,8 @@ POSTS & CONTENT STYLES
 			position: relative;
 		}
 
-		&_landing {
-			.content_curve__up {
+		&--landing {
+			.content-curve--up {
 				display: inline;
 				position: relative;
 				z-index: 99;
@@ -432,7 +432,7 @@ POSTS & CONTENT STYLES
 			}
 		}
 
-		&_landing {
+		&--landing {
 			h1 {
 				font-size: 2.5em;
 				margin-top: 0;
@@ -473,7 +473,7 @@ POSTS & CONTENT STYLES
 			.hero__content {
 				height: 90vh;
 
-				&_text {
+				&--text {
 					
 					position: initial;
 				}
@@ -481,7 +481,7 @@ POSTS & CONTENT STYLES
 
 		}
 
-		&_inner {
+		&--inner {
 			max-width: 1440px;
 			margin: auto;
 		}
@@ -493,13 +493,13 @@ POSTS & CONTENT STYLES
 
 	&__content {
 			display: flex;
-			&_image {
+			&--image {
 				background-size: cover;
 				background-position: right top;
 				padding: 0;
 			}
 
-			&_text {
+			&--text {
 				position: absolute;
 				display: flex;
 				flex-direction: column;
@@ -509,10 +509,10 @@ POSTS & CONTENT STYLES
 			}
 
 			
-	}
+		}
 
 	&__post {
-		&_text {
+		&--text {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -524,7 +524,7 @@ POSTS & CONTENT STYLES
 		
 	}
 
-	&__featured_post {
+	&__featured-post {
 		position:absolute;
 		display: none;
 	}
@@ -536,7 +536,7 @@ POSTS & CONTENT STYLES
 	z-index: 3;
 }
 
-.gallery_item {
+.gallery-item {
 	padding: 1em;
 	margin-bottom: 3em;
 	display: flex;
@@ -577,7 +577,7 @@ POSTS & CONTENT STYLES
 		padding: 1em;
 		margin-top: auto;
 		@extend %btn;
-		@extend %btn_secondary__text;
+		@extend %btn--secondary--text;
 	}
 }
 
@@ -603,7 +603,7 @@ POSTS & CONTENT STYLES
 .testimonials {
 	margin-bottom: 2em;
 	&__background {
-		&_white {
+		&--white {
 			@include pattern_overlay;
 
 			.attribution {
@@ -612,7 +612,7 @@ POSTS & CONTENT STYLES
 			}
 		}
 
-		&_gold {
+		&--gold {
 			@include gold_overlay_gradient_light;
 			border-top: 2px solid $secondary-500;
 			border-bottom: 2px solid $secondary-600;
@@ -657,7 +657,7 @@ POSTS & CONTENT STYLES
 			flex-direction: column;
 			margin-left: auto;
 			margin-right: auto;
-			.quote_mark {
+			.quote-mark {
 				display: none;
 			}
 			
@@ -694,7 +694,7 @@ POSTS & CONTENT STYLES
 				border: 1px solid $secondary-500;
 				margin-top: $spacing-xxl;
 
-				.quote_mark {
+				.quote-mark {
 					display: inline;
 					width: 25px;
 					position: absolute;
@@ -742,7 +742,7 @@ POSTS & CONTENT STYLES
 			margin-left: auto;
 			margin-right: auto;
 
-			.quote_mark {
+			.quote-mark {
 				display: none;
 			}
 
@@ -1068,7 +1068,7 @@ article {
 
 .faq {
 	&.open {
-		.faq_question {
+		.faq__question {
 			margin-bottom: 1em;
 		}
 	}
@@ -1084,7 +1084,7 @@ article {
 	background-color: $white;
 }
 
-.faq_question {
+.faq__question {
   margin: 0px;
   padding: 0px 0px 5px 0px;
   display: inline-block;
@@ -1103,7 +1103,7 @@ article {
   padding-right: 2em;
 }
  
-.faq_answer_container {
+.faq__answer-container {
   height: 0px;
   overflow: hidden;
   padding: 0px;
@@ -1169,7 +1169,7 @@ article {
 			}
 		}
 	}
-	.callout_text {
+	.callout-text {
 		margin: $spacing-xxl;
 	}
 }
@@ -1208,7 +1208,7 @@ article {
 .resources {
 	columns: 2;
 	
-	.resourse__item {
+	.resource__item {
 		
 		.resource__link {
 			text-decoration: underline;
@@ -1307,8 +1307,8 @@ article {
 
 input[type="submit"], input[type="file"], #wp-submit {
 	@extend %btn;
-		@extend %btn_secondary;
-		@extend %btn_secondary__solid;
+		@extend %btn--secondary;
+		@extend %btn--secondary--solid;
 }
 
 .wpcf7-form {
@@ -1488,7 +1488,7 @@ input[type="submit"], input[type="file"], #wp-submit {
 			}
 		}
 
-		&.row-highlight__even {
+		&.row-highlight--even {
 			
 				.grid__row {
 					padding-left: 1em;
@@ -1509,7 +1509,7 @@ input[type="submit"], input[type="file"], #wp-submit {
 
 	.margin {
 		&__remove {
-			&_btm {
+			&--btm {
 				input[type="text"], input[type="date"] {
 					margin-bottom: 0;
 				}
@@ -1518,7 +1518,7 @@ input[type="submit"], input[type="file"], #wp-submit {
 	}
 
 	.length {
-		&_200 {
+		&--200 {
 			max-width: 200px;
 		}
 	}
@@ -1758,7 +1758,7 @@ COMMENT STYLES
 	}
 
 	/* comment content */
-	.comment_content {
+	.comment-content {
 
 		p {
 			margin: 0.7335em 0 1.5em;
@@ -1766,7 +1766,7 @@ COMMENT STYLES
 			line-height: 1.5em;
 		}
 
-	} /* end .commentlist .comment_content */
+	} /* end .commentlist .comment-content */
 
 	/* comment reply link 
 	.comment-reply-link {
@@ -1952,12 +1952,12 @@ FOOTER STYLES
 		}
 	}
 
-.lower_content_curve {
+.lower-content-curve {
 	width: 0;
 }
 
 #inner-footer {
-	.contact_info {
+	.contact-info {
 		color: $primary-100;
 		text-align: center;
 

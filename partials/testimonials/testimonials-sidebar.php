@@ -6,7 +6,7 @@ if( $sidebar_testimonials ) : ?>
     <ul>
 	<?php foreach ( $sidebar_testimonials as $post) : setup_postdata($post); ?>
     <li class="testimonial">
-        <img class="quote_mark" src="<?php echo get_template_directory_uri() . '/library/images/marker/quote.png'; ?>">
+        <img class="quote-mark" src="<?php echo get_template_directory_uri() . '/library/images/marker/quote.png'; ?>">
         <div class="testimonial_content">
             <h3><?php the_content(); ?></h3>
             <div class="attribution"><?php the_title(); ?></div>

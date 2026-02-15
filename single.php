@@ -12,7 +12,7 @@
 								
 							 <div class="hero__post row wrap">
 								
-								<div class="hero__post_text col-xs-12 col-md-6">
+								<div class="hero__post-text col-xs-12 col-md-6">
 									<?php printf( '<p class="post-category">' . get_the_category_list(', ') ); ?>
 								<h1 class="entry-title single-title" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1><p class="byline entry-meta vcard">
 
@@ -24,7 +24,7 @@
 									); ?>
 
 								</p></div>
-								<div class="hero__post_image col-xs-12 col-md-6"> <div class="hero--image"><?php the_post_thumbnail('gallery-image'); ?></div></div>
+								<div class="hero__post-image col-xs-12 col-md-6"> <div class="hero--image"><?php the_post_thumbnail('gallery-image'); ?></div></div>
 							</div>
 
 							<section class="entry-content cf <?php if(get_field('include_sidebar_on_blog_posts', 'option')) :  ?>col-xs-12 col-sm-7<?php else : ?>col-xs-12 col-md-9<?php endif; ?>" itemprop="articleBody">

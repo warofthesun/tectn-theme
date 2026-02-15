@@ -56,20 +56,20 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
     top: 1px; // adds a tiny hop to the click
   } // end active
 
-  &_primary {
-    &__solid {
+  &--primary {
+    &--solid {
       @include color_surface__button_primary--default;
       @include color_text__label_primary--default;
       @include color_border__button_primary--default;
     }
 
-    &__outline {
+    &--outline {
       @include color_surface__button_secondary--default;
       @include color_text__label_secondary--default;
       @include color_border__button_primary--default;
     }
 
-    &__text {
+    &--text {
       color: $secondary-500;
       border: 0px;
       display: block;
@@ -92,19 +92,19 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
     }
   }
 
-  &_secondary {
-    &__solid {
+  &--secondary {
+    &--solid {
       color: $secondary-950;
       border: 1px solid $secondary-500;
       @include gradient(45deg, $secondary-two_stops);
     }
 
-    &__outline {
+    &--outline {
       color: $secondary-500;
       border: 2px solid $secondary-500;
     }
 
-    &__text {
+    &--text {
       color: $secondary-500;
       border: 0px;
       display: block;

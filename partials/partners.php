@@ -34,7 +34,7 @@
 </div>
 
 <?php else : endif; ?> 
-<div class="partners callout_text">
+<div class="partners callout-text">
     <?php if(get_field('highlighted_partners_callout_text')): the_field('highlighted_partners_callout_text'); endif; ?>
 </div>
 <?php endif; ?>

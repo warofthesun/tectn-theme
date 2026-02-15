@@ -26,19 +26,19 @@
       }
 
 endif; 
-    $classes = ['content_group'];
-    if ( $row_one )  $classes[] = 'content_group--row_one';
-    if ( $content_position === 'middle')  $classes[] = 'content_group--middle';
-    if ( $content_position === 'bottom')  $classes[] = 'content_group--bottom';
-    if ( $image_position === 'left')  $classes[] = 'content_group--reverse';
+    $classes = ['content-group'];
+    if ( $row_one )  $classes[] = 'content-group--row-one';
+    if ( $content_position === 'middle')  $classes[] = 'content-group--middle';
+    if ( $content_position === 'bottom')  $classes[] = 'content-group--bottom';
+    if ( $image_position === 'left')  $classes[] = 'content-group--reverse';
 ?>
 
 <div class="<?php echo esc_attr(implode(' ', $classes)); ?> row">
-    <div class="col-xs-12 col-md-6 content">
+    <div class="col-xs-12 col-md-6 content-group__content">
         <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
         <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
         <?php if (!empty($buttons)) : ?>
-        <div class="button_pair">
+        <div class="button-pair">
             <?php foreach ($buttons as $btn) : ?>
             <a class="button"
                 href="<?php echo esc_url($btn['url']); ?>"
@@ -50,7 +50,7 @@ endif;
         </div>
         <?php endif; ?>
     </div>
-    <div class="col-xs-12 col-md-6 featured_image">
+    <div class="col-xs-12 col-md-6 content-group__image">
         <?php if( $featured_image ) :
         // Image variables.
         $url = $featured_image['url'];
@@ -97,19 +97,19 @@ endif;
      }
    }
 endif; 
-    $classes = ['content_group'];
-    if ( $row_two )  $classes[] = 'content_group--row_two';
-    if ( $content_position === 'middle')  $classes[] = 'content_group--middle';
-    if ( $content_position === 'bottom')  $classes[] = 'content_group--bottom';
-    if ( $image_position === 'left')  $classes[] = 'content_group--reverse';
+    $classes = ['content-group'];
+    if ( $row_two )  $classes[] = 'content-group--row-two';
+    if ( $content_position === 'middle')  $classes[] = 'content-group--middle';
+    if ( $content_position === 'bottom')  $classes[] = 'content-group--bottom';
+    if ( $image_position === 'left')  $classes[] = 'content-group--reverse';
 ?>
 
 <div class="<?php echo esc_attr(implode(' ', $classes)); ?> row">
-    <div class="col-xs-12 col-md-4 content">
+    <div class="col-xs-12 col-md-4 content-group__content">
         <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
         <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
         <?php if (!empty($buttons)) : ?>
-        <div class="button_pair">
+        <div class="button-pair">
             <?php foreach ($buttons as $btn) : ?>
             <a class="button"
                 href="<?php echo esc_url($btn['url']); ?>"

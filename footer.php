@@ -4,7 +4,7 @@
 <footer class="footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
 	
 <div class="footer__curve">
-	<div class="lower_content_curve"><?php echo file_get_contents( get_template_directory() . '/library/images/lower_content_curve.svg' ); ?></div>
+	<div class="lower-content-curve"><?php echo file_get_contents( get_template_directory() . '/library/images/lower_content_curve.svg' ); ?></div>
 </div>
 <div id="inner-footer" class="wrap row">
 	<div class="col-xs-12 col-md-6 logo_nav">
@@ -25,7 +25,7 @@
 			)); ?>
 		</nav>
 	</div>
-	<div class="col-xs-12 col-md-6 contact_info">
+	<div class="col-xs-12 col-md-6 contact-info">
 		<?php if(get_field('address', 'option')): ?><div class="address__physical"><?php the_field('address', 'option'); ?></div><?php endif; ?>
 		<?php if(get_field('phone_number', 'option')): ?><div class="phone_number"><?php the_field('phone_number', 'option'); ?></div><?php endif; ?>
 		<?php if(get_field('email_address', 'option')): ?><a href="mailto:<?php the_field('email_address', 'option');?>" class="address__email">email</a><?php endif; ?>

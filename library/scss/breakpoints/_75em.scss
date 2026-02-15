@@ -16,7 +16,7 @@
   	align-items: center;
   }
 
-  .header_nav {
+  .header-nav {
   	flex-direction: row;
   }
 
@@ -116,16 +116,16 @@
 
 
 
-  		&_large {
+  		&--large {
   			.hero__content {
   				height: 650px;
 
-  				&_text {
+  				&--text {
   					justify-content: flex-end;
   					background: transparent;
   				}
 
-  				&_text-angle {
+  				&--text-angle {
   					display: inline;
   					svg {
   						width: 650px;
@@ -137,7 +137,7 @@
   		}
   	}
 
-  	&__featured_post {
+  	&__featured-post {
   		display: flex;
   		right: $spacing-xxl;
   		bottom: 80px;

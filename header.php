@@ -40,13 +40,13 @@
 			<header class="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 
 				<div id="inner-header" class="row">
-					<nav role="navigation" class="header_nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
+					<nav role="navigation" class="header-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
 					<a href="<?php echo home_url(); ?>" rel="nofollow">
 						<div id="logo" class="h1" itemscope itemtype="http://schema.org/Organization" aria-label="<?php bloginfo('name'); ?>">
 							<img src="<?php echo get_template_directory_uri(); ?>/library/images/tectn-logo.png" alt="Tectn Logo">
 						</div>
 					</a>
-					<div class="nav__wrapper">
+					<div class="header-nav__wrapper">
 						<?php wp_nav_menu(array(
     					         'container' => false,                           // remove nav container
     					         'container_class' => 'menu ',                 // class of container (should you choose to use it)

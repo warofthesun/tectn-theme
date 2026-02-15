@@ -1,11 +1,11 @@
 <!--HERO-HEADLINE-->
-<div class="hero__container hero__container_landing">
-	<div class="hero__container_inner">
+<div class="hero__container hero__container--landing">
+	<div class="hero__container--inner">
 	<?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' ); ?>
-		<div class="hero__content hero__content_image col-xs-12"  style="background-image: url('<?php echo esc_url( $backgroundImg[0] ); ?>')">
-		<div class="hero__content hero__content_text col-xs-12 col-md-7">
+		<div class="hero__content hero__content--image col-xs-12"  style="background-image: url('<?php echo esc_url( $backgroundImg[0] ); ?>')">
+		<div class="hero__content hero__content--text col-xs-12 col-md-7">
 		
-		<svg class="hero__overlay_full_width" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+		<svg class="hero__overlay--full-width" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
 			<defs>
 				<linearGradient id="heroGrad" x1="1.5" y1="0" x2="0" y2="1">
 				<stop offset="0" stop-color="#238c55" stop-opacity="0.70"/>
@@ -76,7 +76,7 @@
 					<?php
 					// Check rows exists.
 						if( have_rows('hero_cta') ): ?>
-						<div class="button_pair">
+						<div class="button-pair">
 							<?php
 							// Loop through rows.
 							while( have_rows('hero_cta') ) : the_row();
@@ -119,7 +119,7 @@
 
 			// Check if there are posts and start the loop
 			if ( $the_query->have_posts() ) : ?>
-	<div class="hero__featured_post">
+	<div class="hero__featured-post">
 
    			 <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 
