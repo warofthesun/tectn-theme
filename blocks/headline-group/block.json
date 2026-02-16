@@ -1,14 +1,14 @@
 {
-    "name": "tectn/text-image",
-    "title": "Text + Image",
-    "description": "Header, body copy, CTAs, and 1-3 images",
+    "name": "tectn/headline-group",
+    "title": "Headline group",
+    "description": "Headline, body copy, and 1 to 2 CTA buttons",
     "style": [ "file:../library/css/style.css" ],
     "category": "tectn-blocks",
     "icon": "screenoptions",
-    "keywords": ["image", "content", "layout"],
+    "keywords": ["headline", "content", "buttons"],
     "acf": {
         "mode": "preview",
-        "renderTemplate": "text_image.php"
+        "renderTemplate": "headline_group.php"
     },
     "supports": {
         "mode": false,

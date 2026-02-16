@@ -1,6 +1,6 @@
 {
     "key": "group_69910166eac11",
-    "title": "Buttons",
+    "title": "Buttons - TecTN Block Piece",
     "fields": [
         {
             "key": "field_69910167d0290",
@@ -52,6 +52,13 @@
                 "operator": "==",
                 "value": "tectn\/text-image"
             }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn\/headline-group"
+            }
         ]
     ],
     "menu_order": 10,
@@ -64,5 +71,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771110973
+    "modified": 1771205718
 }

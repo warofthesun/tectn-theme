@@ -1,6 +1,6 @@
 {
     "key": "group_69924f36ef545",
-    "title": "Content Cards",
+    "title": "Content Cards - TecTN Block",
     "fields": [
         {
             "key": "field_69924f3748309",
@@ -116,5 +116,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771197423
+    "modified": 1771201863
 }

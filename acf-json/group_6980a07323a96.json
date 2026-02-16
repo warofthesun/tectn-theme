@@ -1,56 +1,7 @@
 {
     "key": "group_6980a07323a96",
-    "title": "Text + Image",
+    "title": "Text + Image - TecTN Block",
     "fields": [
-        {
-            "key": "field_6980a0732e9e3",
-            "label": "Headline",
-            "name": "headline",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "Your headline goes here",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_6990ba350ab44",
-            "label": "Headline size",
-            "name": "headline_size",
-            "aria-label": "",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "h2 class=hero": "Hero",
-                "h1": "H1",
-                "h2": "H2",
-                "h3": "H3",
-                "h4": "H4",
-                "h5": "H5"
-            },
-            "default_value": "h2",
-            "return_format": "value",
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "layout": "horizontal"
-        },
         {
             "key": "field_6990ba610ab45",
             "label": "Body copy",
@@ -101,31 +52,6 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_6990ba970ab47",
-            "label": "Content Position (Vertical)",
-            "name": "content_vertical",
-            "aria-label": "",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "top": "Top",
-                "middle": "Middle",
-                "bottom": "Bottom"
-            },
-            "default_value": "middle",
-            "return_format": "value",
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "layout": "horizontal"
-        },
-        {
             "key": "field_6990bac10ab48",
             "label": "Image alignment (horizontal)",
             "name": "image_horizontal",
@@ -148,6 +74,31 @@
             "allow_null": 0,
             "allow_in_bindings": 0,
             "layout": "horizontal"
+        },
+        {
+            "key": "field_6990b511a5af6",
+            "label": "Content position (vertical)",
+            "name": "content_vertical",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "top": "Top",
+                "middle": "Middle",
+                "bottom": "Bottom"
+            },
+            "default_value": "bottom : Bottom",
+            "return_format": "value",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "layout": "horizontal"
         }
     ],
     "location": [
@@ -161,7 +112,7 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
@@ -169,5 +120,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771171454
+    "modified": 1771202256
 }

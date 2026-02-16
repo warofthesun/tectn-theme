@@ -15,6 +15,7 @@ function tectn_register_acf_blocks() {
    */
   register_block_type( __DIR__ . '/blocks/text-image' );
   register_block_type( __DIR__ . '/blocks/card-repeater' );
+  register_block_type( __DIR__ . '/blocks/headline-group' );
 }
 // Here we call our tectn_register_acf_block() function on init.
 add_action( 'init', 'tectn_register_acf_blocks' );
@@ -394,6 +395,21 @@ if( function_exists('acf_add_options_page') ) {
 	));
 
 }
+
+  /* Add a custom block category for TecTN ACF Blocks. */
+  add_filter('block_categories_all', function ($categories, $editor_context) {
+
+    $tectn_category = [
+      'slug'  => 'tectn-blocks',
+      'title' => __('TecTN Blocks', 'tectn'),
+      'icon'  => null,
+    ];
+
+    // Put it at the top
+    array_unshift($categories, $tectn_category);
+
+    return $categories;
+  }, 10, 2);
 
 
 /*CUSTOM SHORTCODE TO PULL FORM POSTS */
