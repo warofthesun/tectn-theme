@@ -1,62 +1,23 @@
 {
-    "name": "tectn/content-cards",
-    "title": "Multi-card repeater",
-    "description": "Informational cards with title and brief body copy",
-    "style": ["file:../library/css/style.css"],
-    "category": "tectn-blocks",
-    "icon": "admin-comments",
-    "keywords": ["card", "text", "steps"],
-    "acf": {
+  "name": "tectn/content-cards",
+  "title": "Multi-card repeater",
+  "description": "Informational cards with title and brief body copy",
+  "style": ["file:../library/css/style.css"],
+  "category": "tectn-blocks",
+  "icon": "admin-comments",
+  "keywords": ["card", "text", "steps"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "card_repeater.php"
+  },
+  "supports": {
+    "jsx": true,
+    "anchor": true
+  },
+  "example": {
+    "attributes": {
       "mode": "preview",
-      "renderTemplate": "card_repeater.php"
-    },
-    "supports": {
-      "jsx": true,
-      "anchor": true
-    },
-    "example": {
-      "attributes": {
-        "mode": "preview",
-        "data": {
-          "inserter_preview": true,
-          "preview_variant": "default"
-        }
-      }
-    },
-    "variations": [
-      {
-        "name": "three-steps",
-        "title": "3 Step Cards",
-        "description": "Three cards (Step One–Three).",
-        "attributes": {
-          "data": {
-            "inserter_preview": true,
-            "preview_variant": "three"
-          }
-        },
-        "scope": ["inserter"]
-      },
-      {
-        "name": "four-steps",
-        "title": "4 Step Cards",
-        "description": "Four cards (Step One–Four).",
-        "attributes": {
-          "data": {
-            "preview_variant": "four"
-          }
-        },
-        "scope": ["inserter"]
-      },
-      {
-        "name": "many",
-        "title": "Many Cards (3-column wrap)",
-        "description": "Shows the 3-column wrapping behavior.",
-        "attributes": {
-          "data": {
-            "preview_variant": "many"
-          }
-        },
-        "scope": ["inserter"]
-      }
-    ]
-  }
+      "data": {"inserter_preview": true}
+    }
+  } 
+}
