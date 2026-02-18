@@ -11,10 +11,8 @@
         "renderTemplate": "headline_group.php"
     },
     "supports": {
-        "mode": false,
         "jsx": true,
-        "anchor": true,
-        "align": ["full", "wide"]
+        "anchor": true
     },
     "example": {
     "attributes": {
@@ -25,3 +23,4 @@
     }
   }
 }
+

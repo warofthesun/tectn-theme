@@ -14,7 +14,7 @@
     $is_preview = !empty($block['data']['is_preview']);
 
     if ($is_preview) {
-    $preview = get_template_directory_uri() . '/blocks/text-image/preview.png';
+    $preview = get_template_directory_uri() . '/blocks/headline-group/preview.png';
     echo '<img src="' . esc_url($preview) . '" style="width:100%;height:auto;display:block;" alt="">';
     return;
     }

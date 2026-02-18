@@ -1009,6 +1009,19 @@ LAYOUT & GRID STYLES
    Card Repeater — Base (mobile-first)
    Targets markup from card_repeater.php
    ========================================================= */
+/* Card Repeater — editor empty state */
+.c-cardrepeater__placeholder {
+  padding: 1rem;
+  border: 1px dashed rgba(0, 0, 0, 0.28);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.03);
+  line-height: 1.35;
+}
+.c-cardrepeater__placeholder strong {
+  display: inline-block;
+  margin-bottom: 0.25rem;
+}
+
 .c-cardrepeater__grid {
   display: grid;
   grid-template-columns: 1fr;

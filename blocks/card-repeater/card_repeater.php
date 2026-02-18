@@ -43,10 +43,48 @@ $dashicon_class = function ($icon_string) {
   // Otherwise assume it's the slug
   return 'dashicons dashicons-' . $icon_string;
 };
+
+// Inserter-only preview image
+// Variations can pass preview_variant via example.attributes.data
+$is_inserter_preview =
+  !empty($block['data']['is_preview']) &&
+  !empty($block['mode']) &&
+  $block['mode'] === 'preview';
+
+if ($is_inserter_preview) {
+  $variant = !empty($block['data']['preview_variant'])
+    ? sanitize_key($block['data']['preview_variant'])
+    : 'default';
+
+  // Map variants to files in this block folder
+  $map = [
+    'default' => 'preview.png',
+    'three'   => 'preview--three.png',
+    'four'    => 'preview--four.png',
+    'many'    => 'preview--many.png',
+  ];
+
+  $file = $map[$variant] ?? $map['default'];
+  $src  = get_template_directory_uri() . '/blocks/card-repeater/' . $file;
+
+  echo '<img src="' . esc_url($src) . '" style="width:100%;height:auto;display:block;" alt="">';
+  return;
+}
+
+// Editor-only empty state (so the block isn't blank when no cards are added yet)
+if (is_admin() && empty($rows)) {
+  echo '<div class="' . esc_attr(implode(' ', $classes)) . ' row">';
+  echo '  <div class="c-cardrepeater__placeholder">';
+  echo '    <strong>' . esc_html__('Card Repeater', 'tectn') . '</strong><br>';
+  echo '    ' . esc_html__('Add one or more cards in the block settings.', 'tectn');
+  echo '  </div>';
+  echo '</div>';
+  return;
+}
 ?>
 
 <?php if (have_rows('content_cards')) : ?>
-  <div class="<?php echo esc_attr(implode(' ', $classes)); ?> row">
+  <div class="<?php echo esc_attr(implode(' ', $classes)); ?>">
     <ul class="c-cardrepeater__grid" role="list">
       <?php while (have_rows('content_cards')) : the_row(); ?>
         <?php
