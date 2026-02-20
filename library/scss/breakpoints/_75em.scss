@@ -16,6 +16,18 @@
 	.c-cardrepeater--count-many .c-cardrepeater__grid {
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
+
+	.c-posts {
+		padding: 96px 0;
+	  }
+	
+	  .c-posts__header {
+		margin-bottom: 32px;
+	  }
+	
+	  .c-postCard__body {
+		padding: 18px 18px 20px;
+	  }
   /*************
   NAVIGATION STYLES
   **************/

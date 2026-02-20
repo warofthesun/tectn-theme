@@ -16,7 +16,12 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "post": "Post",
+                "page": "Page",
+                "testimonials": "Testimonial",
+                "form": "Form"
+            },
             "default_value": false,
             "return_format": "value",
             "multiple": 0,
@@ -50,27 +55,6 @@
             "append": ""
         },
         {
-            "key": "field_69966624ec2bb",
-            "label": "Section heading",
-            "name": "section_heading",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_69966660ec2bc",
             "label": "CTA",
             "name": "cta_label",
@@ -97,7 +81,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "all"
+                "value": "tectn\/posts-grid"
             }
         ]
     ],
@@ -111,5 +95,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771539749
+    "modified": 1771544774
 }

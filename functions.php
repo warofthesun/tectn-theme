@@ -16,6 +16,7 @@ function tectn_register_acf_blocks() {
   register_block_type( __DIR__ . '/blocks/text-image' );
   register_block_type( __DIR__ . '/blocks/card-repeater' );
   register_block_type( __DIR__ . '/blocks/headline-group' );
+  register_block_type( __DIR__ . '/blocks/posts-grid' );
 }
 // Here we call our tectn_register_acf_block() function on init.
 add_action( 'init', 'tectn_register_acf_blocks' );
@@ -40,6 +41,8 @@ function tectn_setup() {
 
   // USE THIS TEMPLATE TO CREATE CUSTOM POST TYPES EASILY
   require_once( 'library/custom-post-type.php' );
+
+  require_once get_template_directory() . '/inc/acf_inc.php';
 
   // launching operation cleanup
   add_action( 'init', 'starter_head_cleanup' );

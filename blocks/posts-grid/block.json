@@ -1,0 +1,23 @@
+{
+  "name": "tectn/posts-grid",
+  "title": "Posts Grid",
+  "description": "Grid of posts pulled from Blog or Custom Post Types",
+  "style": ["file:../library/css/style.css"],
+  "category": "tectn-blocks",
+  "icon": "admin-comments",
+  "keywords": ["card", "blog", "posts"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "posts_grid.php"
+  },
+  "supports": {
+    "jsx": true,
+    "anchor": true
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {"inserter_preview": true}
+    }
+  } 
+}
