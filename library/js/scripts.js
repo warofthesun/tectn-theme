@@ -142,7 +142,28 @@ Uncomment  the below to exclude first section from animation
 
 sr.reveal('.single-post');
 
-
+document.addEventListener("DOMContentLoaded", () => {
+	const sections = document.querySelectorAll(".c-posts");
+  
+	if (!("IntersectionObserver" in window)) {
+	  sections.forEach(s => s.classList.add("is-inview"));
+	  return;
+	}
+  
+	const io = new IntersectionObserver(
+	  (entries) => {
+		entries.forEach((entry) => {
+		  if (entry.isIntersecting) {
+			entry.target.classList.add("is-inview");
+			io.unobserve(entry.target);
+		  }
+		});
+	  },
+	  { threshold: 0.15 }
+	);
+  
+	sections.forEach((s) => io.observe(s));
+  });
 
 
 /*

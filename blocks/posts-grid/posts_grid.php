@@ -88,18 +88,53 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
 <section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?>  alignfull" style="--bg-max-h: <?= esc_attr($bg_max_height); ?>px;">
   <!-- Background art layer (decorative only) -->
   <div class="c-posts__bg" aria-hidden="true">
-    <?php if ($bg_url): ?>
-      <div class="c-posts__bgImage" style="background-image:url('<?= $bg_url; ?>')"></div>
-    <?php endif; ?>
+  <?php if ($bg_url): ?>
+    <div class="c-posts__bgImage" style="background-image:url('<?= $bg_url; ?>')"></div>
+  <?php endif; ?>
 
-    <div class="c-posts__blob c-posts__blob--gold"></div>
-    <div class="c-posts__blob c-posts__blob--green"></div>
-    <div class="c-posts__blob c-posts__blob--deep"></div>
+  <!-- Green curved overlay -->
+  <svg class="c-posts__overlaySvg c-posts__overlaySvg--green" viewBox="0 0 1440 <?= esc_attr($bg_max_height); ?>" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="postsGreenGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="rgba(185,220,105,0.70)" />
+        <stop offset="55%" stop-color="rgba(39,140,85,0.55)" />
+        <stop offset="100%" stop-color="rgba(20,110,60,0.25)" />
+      </linearGradient>
+    </defs>
 
-    <svg class="c-posts__wave" viewBox="0 0 1440 160" preserveAspectRatio="none" focusable="false">
-      <path d="M0,96 C240,160 480,160 720,112 C960,64 1200,32 1440,64 L1440,160 L0,160 Z" />
-    </svg>
-  </div>
+    <!-- This is a “band” shape. Adjust points to match your comp -->
+    <path
+      d="M 0 300
+         C 200 100, 1200 800, 1440 300
+         L 1500 1200
+         L -50 1200 Z"
+      fill="url(#postsGreenGrad)"
+    />
+  </svg>
+
+  <!-- Gold curved overlay -->
+  <svg class="c-posts__overlaySvg c-posts__overlaySvg--gold" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <radialGradient id="postsGoldGrad" cx="75%" cy="20%" r="85%">
+        <stop offset="0%" stop-color="rgba(235,185,68,0.75)" />
+        <stop offset="45%" stop-color="rgba(235,185,68,0.45)" />
+        <stop offset="100%" stop-color="rgba(235,185,68,0.00)" />
+      </radialGradient>
+    </defs>
+
+    <path
+      d="M 0 300
+         C 0 300, 200 100, 700 400
+         C 700 400, 1180 800, 1500 400
+         L 1500 0
+         L -50 0 Z"
+      fill="url(#postsGoldGrad)"
+    />
+  </svg>
+
+  <span class="c-posts__wave c-posts__wave--top" aria-hidden="true"></span>
+  <span class="c-posts__wave c-posts__wave--bottom" aria-hidden="true"></span>
+</div>
 
   <!-- Foreground content -->
   <div class="c-posts__inner l-container wrap">
