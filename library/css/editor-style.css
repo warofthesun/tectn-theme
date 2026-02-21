@@ -861,9 +861,12 @@ CONTROLS
 Buttons and such
 ****************/
 .button-pair .button:nth-child(1) {
-  margin-right: 1em;
   margin-bottom: 1em;
 }
+.button-pair .button:nth-child(2) {
+  margin-right: 1em;
+}
+
 /********************
 WORDPRESS BODY CLASSES
 style a page via class
@@ -1009,6 +1012,10 @@ LAYOUT & GRID STYLES
    Card Repeater — Base (mobile-first)
    Targets markup from card_repeater.php
    ========================================================= */
+.c-cardrepeater {
+  margin-bottom: 1.5em;
+}
+
 /* Card Repeater — editor empty state */
 .c-cardrepeater__placeholder {
   padding: 1rem;
@@ -1025,7 +1032,7 @@ LAYOUT & GRID STYLES
 .c-cardrepeater__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
+  gap: 1.25em;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1097,6 +1104,14 @@ LAYOUT & GRID STYLES
   position: relative;
   overflow: hidden;
   padding: clamp(48px, 6vw, 96px) 0;
+}
+.c-posts .button-pair {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 /* =========================
@@ -1222,7 +1237,8 @@ Grid (mobile)
 .c-posts__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 1em;
+  margin-bottom: 1.5em;
 }
 
 /* =========================

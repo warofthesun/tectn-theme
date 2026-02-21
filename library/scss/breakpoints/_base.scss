@@ -55,7 +55,6 @@ Buttons and such
 		@extend %btn;
 		@extend %btn--primary;
 		@extend %btn--primary--solid;
-		margin-right: $spacing-md;
 		margin-bottom: $spacing-md;
 	}
 
@@ -63,6 +62,7 @@ Buttons and such
 		@extend %btn;
 		@extend %btn--primary;
 		@extend %btn--primary--outline;
+		margin-right: $spacing-md;
 	}
 }
 
@@ -209,6 +209,10 @@ LAYOUT & GRID STYLES
    Targets markup from card_repeater.php
    ========================================================= */
 
+   .c-cardrepeater {
+	margin-bottom: $spacing-xl;
+   }
+
    /* Card Repeater — editor empty state */
 	.c-cardrepeater__placeholder {
 		padding: 1rem;
@@ -227,7 +231,7 @@ LAYOUT & GRID STYLES
    .c-cardrepeater__grid {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 1.25rem;
+	gap: $spacing-lg;
   
 	margin: 0;
 	padding: 0;
@@ -292,6 +296,11 @@ LAYOUT & GRID STYLES
 	position: relative;
 	overflow: hidden;
 	padding: clamp(48px, 6vw, 96px) 0;
+
+	.button-pair {
+		display: flex;
+		justify-content: center;
+	}
   }
   
   /* =========================
@@ -408,7 +417,8 @@ LAYOUT & GRID STYLES
   .c-posts__grid {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 16px;
+	gap: $spacing-md;
+	margin-bottom: $spacing-xl;
   }
   
   /* =========================

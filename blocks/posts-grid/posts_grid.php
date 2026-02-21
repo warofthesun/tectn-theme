@@ -17,8 +17,6 @@ $bg_image      = get_field('background_image');
 $bg_max_height = (int) (get_field('max_bg_height') ?: 800);
 
 $heading   = get_field('section_heading');
-$cta_label = get_field('cta_label') ?: 'View all posts';
-$cta_link  = get_field('cta_link');
 
 $bg_url = '';
 if (!empty($bg_image) && is_array($bg_image)) {
@@ -92,21 +90,44 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
     <div class="c-posts__bgImage" style="background-image:url('<?= $bg_url; ?>')"></div>
   <?php endif; ?>
 
-  <svg class="c-posts__overlaySvg c-posts__overlaySvg--front" viewBox="0 0 1440 1200" preserveAspectRatio="none" aria-hidden="true">
+    <svg
+      class="c-posts__overlaySvg c-posts__overlaySvg--front"
+      viewBox="0 0 1440 1200"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
     <defs>
       <linearGradient id="postsGreenGrad" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0%" stop-color="rgba(185,220,105,0.70)" />
         <stop offset="55%" stop-color="rgba(39,140,85,0.55)" />
         <stop offset="100%" stop-color="rgba(20,110,60,0.25)" />
       </linearGradient>
+
+      <!-- Blur for soft edge -->
+      <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="12 8" />
+      </filter>
     </defs>
 
+    <!-- Soft halo (edge feather) -->
     <path
       d="M 0 300
-         C 200 100, 1200 800, 1440 300
-         L 1500 1200
-         L -50 1200 Z"
+        C 200 100, 1200 800, 1440 300
+        L 1500 1200
+        L -50 1200 Z"
       fill="url(#postsGreenGrad)"
+      opacity="0.55"
+      filter="url(#softBlur)"
+    />
+
+    <!-- Crisp core -->
+    <path
+      d="M 0 300
+        C 200 100, 1200 800, 1440 300
+        L 1500 1200
+        L -50 1200 Z"
+      fill="url(#postsGreenGrad)"
+      opacity="0.85"
     />
   </svg>
 
@@ -117,15 +138,28 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
         <stop offset="45%" stop-color="rgba(235,185,68,0.45)" />
         <stop offset="100%" stop-color="rgba(235,185,68,0.00)" />
       </radialGradient>
+      <!-- Blur for soft edge -->
+      <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="8 12" />
+      </filter>
     </defs>
 
     <path
       d="M 0 300
-         C 0 300, 200 100, 700 400
-         C 700 400, 1180 800, 1500 400
+         C 0 300, 200 100, 700 300
+         C 700 300, 1180 500, 1500 400
          L 1500 0
          L -50 0 Z"
-      fill="url(#postsGoldGrad)"
+      fill="url(#postsGoldGrad)"  opacity="0.55" filter="url(#softBlur)"
+    />
+
+    <path
+      d="M 0 300
+         C 0 300, 200 100, 700 300
+         C 700 300, 1180 500, 1500 400
+         L 1500 0
+         L -50 0 Z"
+      fill="url(#postsGoldGrad)"  opacity="0.85"
     />
   </svg>
 
@@ -201,13 +235,7 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
     <?php else: ?>
       <p>No posts found.</p>
     <?php endif; ?>
-
-    <?php if (!empty($cta_link['url'])): ?>
-      <div class="c-posts__footer">
-        <a class="c-button c-button--gold" href="<?= esc_url($cta_link['url']); ?>" <?= !empty($cta_link['target']) ? 'target="_blank" rel="noopener"' : ''; ?>>
-          <?= esc_html($cta_label); ?>
-        </a>
-      </div>
-    <?php endif; ?>
+    <?php $partial_path = get_theme_file_path('/partials/button_pair.php'); ?>
+        <?php include $partial_path; ?>
   </div>
 </section>

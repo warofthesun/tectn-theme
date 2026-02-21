@@ -1,6 +1,6 @@
 {
     "key": "group_69910166eac11",
-    "title": "Buttons - TecTN Block Piece",
+    "title": "2. Buttons - TecTN Block Piece",
     "fields": [
         {
             "key": "field_69910167d0290",
@@ -59,6 +59,13 @@
                 "operator": "==",
                 "value": "tectn\/headline-group"
             }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn\/posts-grid"
+            }
         ]
     ],
     "menu_order": 10,
@@ -71,5 +78,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771205718
+    "modified": 1771639748
 }
