@@ -85,15 +85,14 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
 }
 ?>
 
-<section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?>  alignfull" style="--bg-max-h: <?= esc_attr($bg_max_height); ?>px;">
+<section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?>  alignfull" style="--posts-bg-max-h: <?= esc_attr($bg_max_height); ?>px;">
   <!-- Background art layer (decorative only) -->
   <div class="c-posts__bg" aria-hidden="true">
   <?php if ($bg_url): ?>
     <div class="c-posts__bgImage" style="background-image:url('<?= $bg_url; ?>')"></div>
   <?php endif; ?>
 
-  <!-- Green curved overlay -->
-  <svg class="c-posts__overlaySvg c-posts__overlaySvg--green" viewBox="0 0 1440 <?= esc_attr($bg_max_height); ?>" preserveAspectRatio="none" aria-hidden="true">
+  <svg class="c-posts__overlaySvg c-posts__overlaySvg--front" viewBox="0 0 1440 1200" preserveAspectRatio="none" aria-hidden="true">
     <defs>
       <linearGradient id="postsGreenGrad" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0%" stop-color="rgba(185,220,105,0.70)" />
@@ -102,7 +101,6 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
       </linearGradient>
     </defs>
 
-    <!-- This is a “band” shape. Adjust points to match your comp -->
     <path
       d="M 0 300
          C 200 100, 1200 800, 1440 300
@@ -112,8 +110,7 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
     />
   </svg>
 
-  <!-- Gold curved overlay -->
-  <svg class="c-posts__overlaySvg c-posts__overlaySvg--gold" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true">
+  <svg class="c-posts__overlaySvg c-posts__overlaySvg--back" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true">
     <defs>
       <radialGradient id="postsGoldGrad" cx="75%" cy="20%" r="85%">
         <stop offset="0%" stop-color="rgba(235,185,68,0.75)" />

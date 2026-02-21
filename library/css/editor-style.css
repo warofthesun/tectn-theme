@@ -1093,6 +1093,7 @@ LAYOUT & GRID STYLES
 }
 
 .c-posts {
+  --posts-bg-max-h: 800px;
   position: relative;
   overflow: hidden;
   padding: clamp(48px, 6vw, 96px) 0;
@@ -1106,6 +1107,8 @@ LAYOUT & GRID STYLES
   inset: 0;
   pointer-events: none;
   z-index: 0;
+  height: min(var(--posts-bg-max-h));
+  max-height: var(--posts-bg-max-h);
   /* Page background color used for the masked waves */
   --posts-bg: var(--c-page-bg, #f7f7f2);
   /* Height of your curve.svg (match what you used before) */
@@ -1123,21 +1126,6 @@ LAYOUT & GRID STYLES
 /* =========================
 Overlays (between image and waves)
 ========================= */
-.c-posts__bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.c-posts__bgImage {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-}
-
 /* SVG overlays */
 .c-posts__overlaySvg {
   position: absolute;
@@ -1153,11 +1141,17 @@ Overlays (between image and waves)
   transition: opacity 700ms ease, -webkit-transform 900ms ease;
   transition: opacity 700ms ease, transform 900ms ease;
   transition: opacity 700ms ease, transform 900ms ease, -webkit-transform 900ms ease;
+  height: 100%;
 }
 
-.c-posts__overlaySvg--gold {
+.c-posts__overlaySvg--back {
   -webkit-transition-delay: 120ms;
   transition-delay: 120ms;
+}
+
+.c-posts__overlaySvg--front {
+  -webkit-transition-delay: 20ms;
+  transition-delay: 20ms;
 }
 
 /* On scroll-in */
