@@ -52,6 +52,66 @@ function updateViewportDimensions() {
 // setting the viewport width
 var viewport = updateViewportDimensions();
 
+// Animate SVG background overlays on scroll
+document.addEventListener("DOMContentLoaded", () => {
+	const sections = document.querySelectorAll(".c-posts");
+	if (!sections.length) return;
+  
+	let active = new Set();
+  
+	// Only animate when in view
+	const io = new IntersectionObserver((entries) => {
+	  entries.forEach((e) => {
+		if (e.isIntersecting) active.add(e.target);
+		else active.delete(e.target);
+	  });
+	}, { threshold: 0.15 });
+  
+	sections.forEach((s) => io.observe(s));
+  
+	// Scroll speed tracking
+	let lastY = window.scrollY;
+	let lastT = performance.now();
+  
+	// Smoothed blur values
+	let blurFront = 12;
+	let blurBack  = 8;
+  
+	const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+	const lerp = (a, b, t) => a + (b - a) * t;
+  
+	function tick(now) {
+	  const y = window.scrollY;
+	  const dt = Math.max(16, now - lastT);  // ms
+	  const dy = Math.abs(y - lastY);
+  
+	  // px/ms -> scale up a bit
+	  const v = (dy / dt) * 1000; // px/s
+  
+	  // map velocity to blur range
+	  const targetFront = clamp(12 + v * 0.05, 12, 45); // 12..22
+	  const targetBack  = clamp(8  + v * 0.010, 8, 16);  // 8..16
+  
+	  // smooth (prevents jitter)
+	  blurFront = lerp(blurFront, targetFront, 0.12);
+	  blurBack  = lerp(blurBack,  targetBack,  0.12);
+  
+	  // apply only to active sections
+	  active.forEach((section) => {
+		const g = section.querySelector(".js-blurFront");
+		const d = section.querySelector(".js-blurBack");
+  
+		if (g) g.setAttribute("stdDeviation", blurFront.toFixed(2));
+		if (d) d.setAttribute("stdDeviation", blurBack.toFixed(2));
+	  });
+  
+	  lastY = y;
+	  lastT = now;
+	  requestAnimationFrame(tick);
+	}
+  
+	requestAnimationFrame(tick);
+  });
 
 /*
  * Throttle Resize-triggered Events
@@ -138,7 +198,7 @@ Uncomment  the below to exclude first section from animation
 */
 
 
-//sr.reveal('.single-post:not(:first-child)');
+sr.reveal('.single-post:not(:first-child)');
 
 sr.reveal('.single-post');
 

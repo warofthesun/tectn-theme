@@ -90,22 +90,31 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
     <div class="c-posts__bgImage" style="background-image:url('<?= $bg_url; ?>')"></div>
   <?php endif; ?>
 
-    <svg
-      class="c-posts__overlaySvg c-posts__overlaySvg--front"
-      viewBox="0 0 1440 1200"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
+    <svg class="c-posts__overlaySvg c-posts__overlaySvg--front" viewBox="0 0 1440 1200" preserveAspectRatio="none" aria-hidden="true">
     <defs>
-      <linearGradient id="postsGreenGrad" x1="0" y1="0" x2="1" y2="1">
+      <linearGradient id="gradientFront" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0%" stop-color="rgba(185,220,105,0.70)" />
         <stop offset="55%" stop-color="rgba(39,140,85,0.55)" />
         <stop offset="100%" stop-color="rgba(20,110,60,0.25)" />
       </linearGradient>
 
       <!-- Blur for soft edge -->
-      <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="12 8" />
+      <filter id="softBlurFront" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur class="js-blurFront" in="SourceGraphic" stdDeviation="12" />
+      </filter>
+
+      <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+        <!-- base noise -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="noise"/>
+        <!-- make it subtle: convert to low-alpha gray -->
+        <feColorMatrix in="noise" type="matrix"
+          values="
+            1 0 0 0 0
+            0 1 0 0 0
+            0 0 1 0 0
+            0 0 0 0.06 0" result="grainAlpha"/>
+        <!-- blend grain over the source -->
+        <feBlend in="SourceGraphic" in2="grainAlpha" mode="multiply"/>
       </filter>
     </defs>
 
@@ -115,32 +124,44 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
         C 200 100, 1200 800, 1440 300
         L 1500 1200
         L -50 1200 Z"
-      fill="url(#postsGreenGrad)"
-      opacity="0.55"
-      filter="url(#softBlur)"
+      fill="url(#gradientFront)" opacity="0.55" filter="url(#softBlurFront)"
     />
 
     <!-- Crisp core -->
-    <path
-      d="M 0 300
-        C 200 100, 1200 800, 1440 300
-        L 1500 1200
-        L -50 1200 Z"
-      fill="url(#postsGreenGrad)"
-      opacity="0.85"
-    />
+    <g filter="url(#grain)">
+      <path
+        d="M 0 300
+          C 200 100, 1200 800, 1440 300
+          L 1500 1200
+          L -50 1200 Z"
+        fill="url(#gradientFront)" opacity="0.85"
+      />
+    </g>
   </svg>
 
   <svg class="c-posts__overlaySvg c-posts__overlaySvg--back" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true">
     <defs>
-      <radialGradient id="postsGoldGrad" cx="75%" cy="20%" r="85%">
-        <stop offset="0%" stop-color="rgba(235,185,68,0.75)" />
-        <stop offset="45%" stop-color="rgba(235,185,68,0.45)" />
-        <stop offset="100%" stop-color="rgba(235,185,68,0.00)" />
+      <radialGradient id="gradientBack" cx="75%" cy="20%" r="85%">
+        <stop offset="0%" stop-color="rgba(236,186,39,0.75)" />
+        <stop offset="100%" stop-color="rgba(105,143,61,0.70)" />
       </radialGradient>
       <!-- Blur for soft edge -->
-      <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="8 12" />
+      <filter id="softBlurBack" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur class="js-blurBack" in="SourceGraphic" stdDeviation="8" />
+      </filter>
+
+      <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+        <!-- base noise -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="noise"/>
+        <!-- make it subtle: convert to low-alpha gray -->
+        <feColorMatrix in="noise" type="matrix"
+          values="
+            1 0 0 0 0
+            0 1 0 0 0
+            0 0 1 0 0
+            0 0 0 0.06 0" result="grainAlpha"/>
+        <!-- blend grain over the source -->
+        <feBlend in="SourceGraphic" in2="grainAlpha" mode="multiply"/>
       </filter>
     </defs>
 
@@ -150,17 +171,18 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
          C 700 300, 1180 500, 1500 400
          L 1500 0
          L -50 0 Z"
-      fill="url(#postsGoldGrad)"  opacity="0.55" filter="url(#softBlur)"
+      fill="url(#gradientBack)"  opacity="0.55" filter="url(#softBlurBack)"
     />
-
-    <path
-      d="M 0 300
-         C 0 300, 200 100, 700 300
-         C 700 300, 1180 500, 1500 400
-         L 1500 0
-         L -50 0 Z"
-      fill="url(#postsGoldGrad)"  opacity="0.85"
-    />
+    <g filter="url(#grain)">
+      <path
+        d="M 0 300
+          C 0 300, 200 100, 700 300
+          C 700 300, 1180 500, 1500 400
+          L 1500 0
+          L -50 0 Z"
+        fill="url(#gradientBack)"  opacity="0.85"
+      />
+    </g>
   </svg>
 
   <span class="c-posts__wave c-posts__wave--top" aria-hidden="true"></span>
