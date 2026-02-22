@@ -51,19 +51,56 @@ Buttons and such
 ****************/
 
 .button-pair {
-	.button:nth-child(1) {
+
+	.button {
 		@extend %btn;
-		@extend %btn--primary;
-		@extend %btn--primary--solid;
 		margin-bottom: $spacing-md;
+
+		&:nth-child(2) {
+			margin-left: $spacing-md;
+		}
 	}
 
-	.button:nth-child(2) {
-		@extend %btn;
-		@extend %btn--primary;
-		@extend %btn--primary--outline;
-		margin-right: $spacing-md;
+	&.primary {
+		.button {
+			@extend %btn--primary;
+
+			&.solid {
+				@extend %btn--primary--solid;
+			}
+	
+			&.outline {
+				@extend %btn--primary--outline;
+			}
+	
+			&.text {
+				@extend %btn--primary--text;
+			}
+	
+	
+		}
 	}
+
+	&.secondary {
+		.button {
+			@extend %btn--secondary;
+
+			&.solid {
+				@extend %btn--secondary--solid;
+			}
+	
+			&.outline {
+				@extend %btn--secondary--outline;
+			}
+	
+			&.text {
+				@extend %btn--secondary--text;
+			}
+	
+	
+		}
+	}
+	
 }
 
 /********************
