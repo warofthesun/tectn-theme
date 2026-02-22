@@ -279,7 +279,7 @@ LAYOUT & GRID STYLES
 	border-radius: 6px;
 	overflow: hidden;
 	border: 1px solid rgba(0, 0, 0, 0.08);
-	background: #f2f5ef;
+	@include color_surface__card_primary;
   }
   
   .c-stepcard__head {
@@ -289,7 +289,7 @@ LAYOUT & GRID STYLES
 	gap: 0.75rem;
   
 	padding: 0.55rem 0.75rem;
-	background: var(--c-sage, #6f8b2f);
+	@include color_surface__dark_primary;
   }
   
   .c-stepcard__kicker {

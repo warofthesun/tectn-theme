@@ -81,3 +81,11 @@ Stylesheet: Tokens
 @mixin color_surface__button_secondary--is_active {
     background-color: $primary-600;
 }
+
+@mixin color_surface__card_primary {
+    background-color: $primary-200;
+}
+
+@mixin color_surface__dark_primary {
+    background-color: $primary-600;
+}
