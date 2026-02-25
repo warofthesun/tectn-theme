@@ -69,13 +69,26 @@
     }
 ?>
 <?php
-    $is_preview = !empty($block['data']['is_preview']);
+  // Editor-only placeholder so empty blocks are still visible when inserted.
+  // NOTE: `$block['data']['is_preview']` is not consistently present across all editor render paths,
+  // so we rely on `is_admin()` to detect the editor.
+  $is_editor = is_admin();
 
-    if ($is_preview) {
-    $preview = get_template_directory_uri() . '/blocks/text-image/preview.png';
-    echo '<img src="' . esc_url($preview) . '" style="width:100%;height:auto;display:block;" alt="">';
+  // Treat WYSIWYG as empty if it's only whitespace / empty tags.
+  $body_plain = is_string($body) ? trim( wp_strip_all_tags( $body ) ) : '';
+
+  // Consider the block "empty" if it has no headline, no meaningful body, and no images.
+  $is_empty = empty($headline) && empty($body_plain) && ($count === 0);
+
+  if ( $is_editor && $is_empty ) :
+?>
+  <div class="block-placeholder" style="border: 1px dashed #cfd3d7; padding: 1rem; border-radius: .5rem; background: rgba(255,255,255,.8);">
+    <strong style="display:block; margin-bottom:.25rem;">Text + Image</strong>
+    <p style="margin:0;">Add a headline, body copy, and at least one image.</p>
+  </div>
+<?php
     return;
-    }
+  endif;
 ?>
 <?php if ($enable_bg): ?>
 <div class="<?php echo esc_attr(implode(' ', array_filter($classes_band))); ?>">

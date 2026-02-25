@@ -159,6 +159,82 @@ LAYOUT & GRID STYLES
 	margin: 0 auto;
 }
 
+/************************************************
+BAND / SECTION WRAPPER
+- Generic wrapper for grouping blocks into a single section
+- Optional full-bleed background image layer (clipped to this band)
+- Background does NOT bleed upward (no negative offsets)
+************************************************/
+
+.c-band {
+  position: relative;
+  overflow: hidden; // clips full-bleed bg to this section only
+
+  // Default vertical padding (override via modifier classes below)
+  --band-py: #{$spacing-xl};
+
+  padding-block: var(--band-py);
+}
+
+// Background layer (optional). Full-bleed to viewport, clipped by .c-band.
+.c-band__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// Full-bleed background media layer.
+// Expect inline CSS vars on .c-band (from PHP):
+// --band-bg-image: url('...');
+// --band-bg-height: 800px;
+// --band-bg-opacity: 1;
+// --band-bg-overlay: rgba(...);
+.c-band__bg-media {
+  position: absolute;
+  left: 50%;
+  top: var(--band-bg-anchor-y, 0%);
+  transform: translate(-50%, var(--band-bg-translate-y, 0%));
+
+  width: 100vw;
+  height: var(--band-bg-height, 800px);
+
+  background-image: var(--band-bg-image, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: var(--band-bg-opacity, 1);
+}
+
+// Optional overlay for readability
+.c-band__bg-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--band-bg-overlay, transparent);
+}
+
+// Foreground content should always sit above bg
+.c-band__container {
+  position: relative;
+  z-index: 1;
+}
+
+.c-band__inner {
+  display: block;
+}
+
+/* Padding modifiers */
+.c-band--py-none { --band-py: #{$spacing-none}; }
+.c-band--py-xxs  { --band-py: #{$spacing-xxs}; }
+.c-band--py-xs   { --band-py: #{$spacing-xs}; }
+.c-band--py-sm   { --band-py: #{$spacing-sm}; }
+.c-band--py-md   { --band-py: #{$spacing-md}; }
+.c-band--py-lg   { --band-py: #{$spacing-lg}; }
+.c-band--py-xl   { --band-py: #{$spacing-xl}; }
+.c-band--py-xxl  { --band-py: #{$spacing-xxl}; }
+
 .image-grid--two,
   .image-grid--three {
     grid-template-columns: 1fr;

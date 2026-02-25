@@ -754,7 +754,7 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   border-color: #D4E485;
 }
 .button-pair.primary .button.text {
-  color: #698F3D;
+  color: #698f3d;
   border: 0px;
   display: block;
 }
@@ -773,16 +773,16 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 }
 .button-pair.secondary .button.solid, #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
   color: rgb(12, 12, 4);
-  border: 1px solid #698F3D;
-  background: -webkit-linear-gradient(45deg, #87A564, #698F3D);
-  background: linear-gradient(45deg, #87A564, #698F3D);
+  border: 1px solid #698f3d;
+  background: -webkit-linear-gradient(45deg, #87A564, #698f3d);
+  background: linear-gradient(45deg, #87A564, #698f3d);
 }
 .button-pair.secondary .button.outline {
-  color: #698F3D;
-  border: 2px solid #698F3D;
+  color: #698f3d;
+  border: 2px solid #698f3d;
 }
 .button-pair.secondary .button.text, .gallery-item .button {
-  color: #698F3D;
+  color: #698f3d;
   border: 0px;
   display: block;
 }
@@ -933,6 +933,91 @@ LAYOUT & GRID STYLES
 .wrap {
   width: 96%;
   margin: 0 auto;
+}
+
+/************************************************
+BAND / SECTION WRAPPER
+- Generic wrapper for grouping blocks into a single section
+- Optional full-bleed background image layer (clipped to this band)
+- Background does NOT bleed upward (no negative offsets)
+************************************************/
+.c-band {
+  position: relative;
+  overflow: hidden;
+  --band-py: 1.5em;
+  padding-block: var(--band-py);
+}
+
+.c-band__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.c-band__bg-media {
+  position: absolute;
+  left: 50%;
+  top: var(--band-bg-anchor-y, 0%);
+  -webkit-transform: translate(-50%, var(--band-bg-translate-y, 0%));
+  -ms-transform: translate(-50%, var(--band-bg-translate-y, 0%));
+  transform: translate(-50%, var(--band-bg-translate-y, 0%));
+  width: 100vw;
+  height: var(--band-bg-height, 800px);
+  background-image: var(--band-bg-image, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: var(--band-bg-opacity, 1);
+}
+
+.c-band__bg-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--band-bg-overlay, transparent);
+}
+
+.c-band__container {
+  position: relative;
+  z-index: 1;
+}
+
+.c-band__inner {
+  display: block;
+}
+
+/* Padding modifiers */
+.c-band--py-none {
+  --band-py: 0em;
+}
+
+.c-band--py-xxs {
+  --band-py: 0.25em;
+}
+
+.c-band--py-xs {
+  --band-py: 0.5em;
+}
+
+.c-band--py-sm {
+  --band-py: 0.75em;
+}
+
+.c-band--py-md {
+  --band-py: 1em;
+}
+
+.c-band--py-lg {
+  --band-py: 1.25em;
+}
+
+.c-band--py-xl {
+  --band-py: 1.5em;
+}
+
+.c-band--py-xxl {
+  --band-py: 2em;
 }
 
 .image-grid--two,
@@ -1349,7 +1434,7 @@ Card
 LINK STYLES
 *********************/
 a, a:visited {
-  color: #698F3D;
+  color: #698f3d;
   /* on hover */
 }
 a:hover, a:focus, a:visited:hover, a:visited:focus {
@@ -1646,7 +1731,7 @@ POSTS & CONTENT STYLES
 }
 .hero__container--landing h3 ul li {
   display: inline-block;
-  color: #698F3D;
+  color: #698f3d;
   font-weight: 800;
 }
 .hero__container--landing h3 ul li:nth-child(1):after, .hero__container--landing h3 ul li:nth-child(2):after {
@@ -1762,7 +1847,7 @@ POSTS & CONTENT STYLES
 
 .hero--image img {
   border-radius: 16px;
-  border: 1px solid #698F3D;
+  border: 1px solid #698f3d;
   -webkit-box-shadow: 0px 13px 21px -10px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 13px 21px -10px rgba(0, 0, 0, 0.3);
 }
@@ -1784,15 +1869,15 @@ POSTS & CONTENT STYLES
   background: linear-gradient(rgba(245, 246, 247, 0.8), rgba(245, 246, 247, 0.5)), url("../images/pattern_circle.png") repeat left top;
 }
 .testimonials__background--white .attribution {
-  background: -webkit-linear-gradient(45deg, #87A564, #698F3D);
-  background: linear-gradient(45deg, #87A564, #698F3D);
+  background: -webkit-linear-gradient(45deg, #87A564, #698f3d);
+  background: linear-gradient(45deg, #87A564, #698f3d);
   color: #F9FBF3;
 }
 .testimonials__background--gold {
   background: url("../images/pattern_circle.png") repeat left top, -webkit-gradient(linear, left top, left bottom, from(#A5BC8B), to(#87A564));
   background: url("../images/pattern_circle.png") repeat left top, -webkit-linear-gradient(#A5BC8B, #87A564);
   background: url("../images/pattern_circle.png") repeat left top, linear-gradient(#A5BC8B, #87A564);
-  border-top: 2px solid #698F3D;
+  border-top: 2px solid #698f3d;
   border-bottom: 2px solid #547231;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1824,8 +1909,8 @@ POSTS & CONTENT STYLES
   margin-right: auto;
   margin-top: -5px;
   padding: 0 1em 0.5em 1em;
-  -webkit-box-shadow: 0px 3px 0px #698F3D, 0 8px 10px -10px rgba(21, 29, 12, 0.7);
-  box-shadow: 0px 3px 0px #698F3D, 0 8px 10px -10px rgba(21, 29, 12, 0.7);
+  -webkit-box-shadow: 0px 3px 0px #698f3d, 0 8px 10px -10px rgba(21, 29, 12, 0.7);
+  box-shadow: 0px 3px 0px #698f3d, 0 8px 10px -10px rgba(21, 29, 12, 0.7);
 }
 .testimonials__content {
   -webkit-box-pack: justify;
@@ -1879,7 +1964,7 @@ POSTS & CONTENT STYLES
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  border: 1px solid #698F3D;
+  border: 1px solid #698f3d;
   margin-top: 2em;
 }
 .testimonials__content > div:nth-last-of-type(2) .quote-mark, .testimonials__content > div:nth-last-of-type(2) ~ div .quote-mark, .testimonials__content > div:nth-last-of-type(3) .quote-mark, .testimonials__content > div:nth-last-of-type(3) ~ div .quote-mark {
@@ -1911,7 +1996,7 @@ POSTS & CONTENT STYLES
   margin: 0;
 }
 .testimonials__sidebar {
-  border-top: 2px solid #698F3D;
+  border-top: 2px solid #698f3d;
   padding-top: 2em;
 }
 .testimonials__sidebar li {
@@ -1963,7 +2048,7 @@ article .hero--image img {
 }
 .hentry footer {
   padding: 1.5em;
-  border-top: 1px solid #698F3D;
+  border-top: 1px solid #698f3d;
   width: 100%;
 }
 .hentry footer p {
@@ -2040,7 +2125,7 @@ article .hero--image img {
 .entry-content blockquote {
   margin: 0 0 1.5em 0.75em;
   padding: 0 0 0 0.75em;
-  border-left: 3px solid #698F3D;
+  border-left: 3px solid #698f3d;
   font-style: italic;
   color: #9fa6b4;
 }
@@ -2160,8 +2245,8 @@ article .hero--image img {
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;
-  -webkit-box-shadow: 0px 3px 0px #698F3D, 0 8px 10px -10px rgba(21, 29, 12, 0.7);
-  box-shadow: 0px 3px 0px #698F3D, 0 8px 10px -10px rgba(21, 29, 12, 0.7);
+  -webkit-box-shadow: 0px 3px 0px #698f3d, 0 8px 10px -10px rgba(21, 29, 12, 0.7);
+  box-shadow: 0px 3px 0px #698f3d, 0 8px 10px -10px rgba(21, 29, 12, 0.7);
   background-color: #fff;
 }
 
@@ -2193,7 +2278,7 @@ article .hero--image img {
 .accordion-button-icon {
   display: table-cell;
   line-height: inherit;
-  color: #698F3D;
+  color: #698f3d;
   padding-left: 15px;
   vertical-align: middle;
 }
@@ -2592,10 +2677,10 @@ PAGE NAVI STYLES
   padding: 0.75em;
   min-width: 1em;
   display: block;
-  color: #698F3D;
+  color: #698f3d;
 }
 .pagination a:hover, .pagination a:focus, .pagination span:hover, .pagination span:focus {
-  background-color: #698F3D;
+  background-color: #698f3d;
   color: #fff;
 }
 .pagination .current {
@@ -2866,7 +2951,7 @@ FOOTER STYLES
 }
 .footer__tagline strong {
   font-family: "Lato", "Helvetica Neue", sans-serif;
-  color: #698F3D;
+  color: #698f3d;
   font-size: 2.5em;
   line-height: 1;
 }
@@ -3063,7 +3148,7 @@ view.
     padding: 0 1.5em;
   }
   .hero__featured-post article .post-category {
-    color: #698F3D;
+    color: #698f3d;
     font-family: "Francois One", "Helvetica Neue", sans-serif;
     margin-bottom: 0.75em;
   }
@@ -3094,7 +3179,7 @@ body#tinymce.wp-editor {
   *********************/
 }
 body#tinymce.wp-editor a, body#tinymce.wp-editor a:visited {
-  color: #698F3D;
+  color: #698f3d;
   /* on hover */
 }
 body#tinymce.wp-editor a:hover, body#tinymce.wp-editor a:focus, body#tinymce.wp-editor a:visited:hover, body#tinymce.wp-editor a:visited:focus {
@@ -3182,7 +3267,7 @@ body#tinymce.wp-editor th:last-child {
 body#tinymce.wp-editor blockquote {
   margin: 0 0 1.5em 0.75em;
   padding: 0 0 0 0.75em;
-  border-left: 3px solid #698F3D;
+  border-left: 3px solid #698f3d;
   font-style: italic;
   color: #9fa6b4;
 }

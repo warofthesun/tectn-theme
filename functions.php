@@ -7,18 +7,10 @@ require_once( 'library/starter.php' );
 // require_once( 'library/admin.php' );
 
 function tectn_register_acf_blocks() {
-  /**
-   * We register our block's with WordPress's handy
-   * register_block_type();
-   *
-   * @link https://developer.wordpress.org/reference/functions/register_block_type/
-   */
-  register_block_type( __DIR__ . '/blocks/text-image' );
-  register_block_type( __DIR__ . '/blocks/card-repeater' );
-  register_block_type( __DIR__ . '/blocks/headline-group' );
-  register_block_type( __DIR__ . '/blocks/posts-grid' );
+  foreach ( glob( __DIR__ . '/blocks/*', GLOB_ONLYDIR ) as $dir ) {
+    register_block_type( $dir );
+  }
 }
-// Here we call our tectn_register_acf_block() function on init.
 add_action( 'init', 'tectn_register_acf_blocks' );
 
 /*********************
