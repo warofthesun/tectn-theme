@@ -2225,18 +2225,41 @@ BAND / SECTION WRAPPER
   transform: translate(-50%, var(--band-bg-translate-y, 0%));
   width: 100vw;
   height: var(--band-bg-height, 800px);
-  background-image: var(--band-bg-image, none);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: var(--band-bg-opacity, 1);
+  background-color: transparent;
+  background-image: none;
 }
 
-.c-band__bg-media::before {
-  content: "";
+.c-band__bg-media--image {
+  background-image: var(--band-bg-image, none);
+}
+
+.c-band__bg-media--color {
+  background-color: var(--band-bg-color, transparent);
+}
+
+.c-band__bg-gradient {
   position: absolute;
   inset: 0;
-  background: var(--band-bg-overlay, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.c-band--grad-soft .c-band__bg-gradient {
+  background: -webkit-linear-gradient(315deg, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0) 72%);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0) 72%);
+}
+
+.c-band--grad-strong .c-band__bg-gradient {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(236, 186, 39, 0.55)), color-stop(68%, rgba(105, 143, 61, 0.7)));
+  background: -webkit-linear-gradient(top, rgba(236, 186, 39, 0.55) 0%, rgba(105, 143, 61, 0.7) 68%);
+  background: linear-gradient(180deg, rgba(236, 186, 39, 0.55) 0%, rgba(105, 143, 61, 0.7) 68%);
+}
+
+.c-band--grad-none .c-band__bg-gradient {
+  display: none;
 }
 
 .c-band__container {

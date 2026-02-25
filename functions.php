@@ -292,7 +292,29 @@ function tectn_fonts_preconnect( $urls, $relation_type ) {
   return $urls;
 }
 
+
 add_filter( 'wp_resource_hints', 'tectn_fonts_preconnect', 10, 2 );
+
+// Final fallback: enforce palettes via ACF's JS hook (covers editor + classic admin screens)
+add_action( 'acf/input/admin_footer', function () {
+  ?>
+  <script>
+    (function(){
+      if (!window.acf || !acf.add_filter) return;
+      acf.add_filter('color_picker_args', function(args, $field){
+        args.palettes = [
+          '#EFF5D1', // sage
+          '#F0F4EC', // cream
+          '#5C6B80', // charcoal
+          '#FFFFFF', // white
+          '#698F3D'  // green
+        ];
+        return args;
+      });
+    })();
+  </script>
+  <?php
+}, 20 );
 
 
 
@@ -441,5 +463,6 @@ function tectn_password_form( $output ) {
 
 	return $output;
 }
+
 
 /* DON'T DELETE THIS CLOSING TAG */ ?>

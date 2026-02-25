@@ -56,6 +56,43 @@
             "ui": 1
         },
         {
+            "key": "field_699e4c097468e",
+            "label": "Background Type",
+            "name": "bg_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_699ba4f70a535",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "image": "Image",
+                "color": "Color"
+            },
+            "default_value": "image",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_699ba5360a536",
             "label": "Background Image",
             "name": "bg_image",
@@ -66,9 +103,9 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_699ba4f70a535",
+                        "field": "field_699e4c097468e",
                         "operator": "==",
-                        "value": "1"
+                        "value": "image"
                     }
                 ]
             ],
@@ -88,6 +125,37 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_699e4c897468f",
+            "label": "Background Color",
+            "name": "bg_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_699e4c097468e",
+                        "operator": "==",
+                        "value": "color"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "enable_opacity": 1,
+            "return_format": "string",
+            "allow_in_bindings": 0,
+            "show_custom_palette": 0,
+            "show_color_wheel": 1,
+            "custom_palette_source": "",
+            "palette_colors": ""
         },
         {
             "key": "field_699ba5540a537",
@@ -157,52 +225,6 @@
             "placeholder": "",
             "create_options": 0,
             "save_options": 0
-        },
-        {
-            "key": "field_699e3ff99c992",
-            "label": "Background Opacity",
-            "name": "bg_opacity",
-            "aria-label": "",
-            "type": "number",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "min": "",
-            "max": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "step": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_699e400b9c993",
-            "label": "Background Overlay",
-            "name": "bg_overlay",
-            "aria-label": "",
-            "type": "color_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "rgba(105, 143, 61,0.7)",
-            "enable_opacity": 1,
-            "return_format": "string",
-            "allow_in_bindings": 0,
-            "show_custom_palette": 1,
-            "palette_colors": "#698f3d, #C9DD67",
-            "show_color_wheel": 1,
-            "custom_palette_source": ""
         }
     ],
     "location": [
@@ -224,5 +246,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771979340
+    "modified": 1771983404
 }

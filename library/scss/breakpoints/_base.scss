@@ -199,20 +199,54 @@ BAND / SECTION WRAPPER
   width: 100vw;
   height: var(--band-bg-height, 800px);
 
-  background-image: var(--band-bg-image, none);
+  // Base bg slab styling (type-specific rules below)
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  opacity: var(--band-bg-opacity, 1);
+  // Default (no bg) is transparent
+  background-color: transparent;
+  background-image: none;
 }
 
-// Optional overlay for readability
-.c-band__bg-media::before {
-  content: "";
+
+// Image background
+.c-band__bg-media--image {
+  background-image: var(--band-bg-image, none);
+}
+
+// Solid color background
+.c-band__bg-media--color {
+  background-color: var(--band-bg-color, transparent);
+}
+
+// Single, non-curved gradient overlay layer (sits above bg slab)
+.c-band__bg-gradient {
   position: absolute;
   inset: 0;
-  background: var(--band-bg-overlay, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+// Default gradient variants (applied via .c-band modifier classes)
+.c-band--grad-soft .c-band__bg-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0) 72%
+  );
+}
+
+.c-band--grad-strong .c-band__bg-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba($accent-500, 0.55) 0%,
+    rgba($secondary-500, 0.7) 68%
+  );
+}
+
+.c-band--grad-none .c-band__bg-gradient {
+  display: none;
 }
 
 // Foreground content should always sit above bg
