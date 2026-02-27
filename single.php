@@ -1,5 +1,6 @@
 <!--single-->
 <?php get_header(); ?>
+<?php if ( tectn_get_hero_config()['show'] ) { include get_template_directory() . '/partials/hero/hero.php'; } ?>
 
 			<div id="content">
 
@@ -9,23 +10,6 @@
 
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 							 <article id="post-<?php the_ID(); ?>" <?php post_class('cf row'); ?> role="article" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
-								
-							 <div class="hero__post row wrap">
-								
-								<div class="hero__post-text col-xs-12 col-md-6">
-									<?php printf( '<p class="post-category">' . get_the_category_list(', ') ); ?>
-								<h1 class="entry-title single-title" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1><p class="byline entry-meta vcard">
-
-									<?php printf( __( 'Posted', 'tectn_theme' ).' %1$s %2$s',
-									/* the time the post was published */
-									'<time class="updated entry-time" datetime="' . get_the_time('Y-m-d') . '" itemprop="datePublished">' . get_the_time(get_option('date_format')) . '</time>',
-									/* the author of the post */
-									'<span class="by">'.__( 'by', 'tectn_theme' ).'</span> <span class="entry-author author" itemprop="author" itemscope itemptype="http://schema.org/Person">' . get_the_author_link( get_the_author_meta( 'ID' ) ) . '</span>'
-									); ?>
-
-								</p></div>
-								<div class="hero__post-image col-xs-12 col-md-6"> <div class="hero--image"><?php the_post_thumbnail('gallery-image'); ?></div></div>
-							</div>
 
 							<section class="entry-content cf <?php if(get_field('include_sidebar_on_blog_posts', 'option')) :  ?>col-xs-12 col-sm-7<?php else : ?>col-xs-12 col-md-9<?php endif; ?>" itemprop="articleBody">
 								<?php the_content(); ?>

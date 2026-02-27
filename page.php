@@ -1,6 +1,6 @@
 <!--page-->
 <?php get_header(); ?>
-<?php if ( is_front_page() || get_field( 'hero_style' ) ) : include get_template_directory() . '/partials/hero/hero.php'; endif; ?>
+<?php if ( tectn_get_hero_config()['show'] ) { include get_template_directory() . '/partials/hero/hero.php'; } ?>
 
 			<div id="content">
 

@@ -53,6 +53,128 @@ function tectn_content_group_classes( $args = array() ) {
   return $classes;
 }
 
+/**
+ * Hero configuration for the current template context.
+ * Use this to decide whether to show the hero and what data to pass to partials/hero/hero.php.
+ *
+ * - Pages (incl. front): editor chooses via ACF "Hero Style" (show hero when not "none"); data from ACF + featured image.
+ * - Single post: hero shown automatically with post title, meta, featured image.
+ * - Blog index: hero shown automatically; title from options or "News", optional image from options.
+ * - Archive: hero shown automatically with archive title and description.
+ *
+ * @return array{ show: bool, type: string, data: array } 'show', 'type' (landing|post|blog|archive), 'data' (headline, paragraph, image_id, ctas, title, etc.).
+ */
+function tectn_get_hero_config() {
+  static $config = null;
+  if ( $config !== null ) {
+    return $config;
+  }
+
+  $default = array( 'show' => false, 'type' => 'landing', 'data' => array() );
+
+  // Single post: automatic hero with title, meta, featured image
+  if ( is_singular( 'post' ) ) {
+    $post = get_queried_object();
+    if ( ! $post ) {
+      $config = $default;
+      return $config;
+    }
+    $config = array(
+      'show' => true,
+      'type' => 'post',
+      'data' => array(
+        'title'        => get_the_title( $post ),
+        'permalink'    => get_permalink( $post ),
+        'date'         => get_the_date( '', $post ),
+        'date_iso'     => get_the_date( 'c', $post ),
+        'author_link'  => get_the_author_posts_link( $post->post_author ),
+        'categories'   => get_the_category_list( ', ', '', $post->ID ),
+        'image_id'     => get_post_thumbnail_id( $post->ID ),
+      ),
+    );
+    return $config;
+  }
+
+  // Blog index (posts page): automatic hero; title/image from options or defaults
+  if ( is_home() && ! is_front_page() ) {
+    $page_for_posts = (int) get_option( 'page_for_posts' );
+    $title          = $page_for_posts ? get_the_title( $page_for_posts ) : __( 'News', 'tectn_theme' );
+    $image_id       = $page_for_posts ? get_post_thumbnail_id( $page_for_posts ) : 0;
+    $config = array(
+      'show' => true,
+      'type' => 'blog',
+      'data' => array( 'title' => $title, 'image_id' => $image_id ),
+    );
+    return $config;
+  }
+
+  // Archive: automatic hero with archive title and description
+  if ( is_archive() ) {
+    $config = array(
+      'show' => true,
+      'type' => 'archive',
+      'data' => array(
+        'title'       => get_the_archive_title( '', false ),
+        'description' => get_the_archive_description(),
+      ),
+    );
+    return $config;
+  }
+
+  // Pages (including front page): editor choice via ACF Hero Style
+  if ( is_front_page() || is_page() ) {
+    $hero_style = get_field( 'hero_style' );
+    $show       = is_front_page() || ( $hero_style && $hero_style !== 'none' );
+    if ( ! $show ) {
+      $config = $default;
+      return $config;
+    }
+    $post = get_queried_object();
+    if ( ! $post ) {
+      $config = $default;
+      return $config;
+    }
+    $image_id = get_post_thumbnail_id( $post->ID );
+    if ( ! $image_id && function_exists( 'get_field' ) ) {
+      $hero_img = get_field( 'hero_image', $post->ID );
+      if ( is_array( $hero_img ) && ! empty( $hero_img['ID'] ) ) {
+        $image_id = (int) $hero_img['ID'];
+      } elseif ( is_numeric( $hero_img ) ) {
+        $image_id = (int) $hero_img;
+      }
+    }
+    $ctas = array();
+    if ( function_exists( 'have_rows' ) && have_rows( 'hero_cta', $post->ID ) ) {
+      while ( have_rows( 'hero_cta', $post->ID ) ) {
+        the_row();
+        $link = get_sub_field( 'hero_cta_button' );
+        if ( ! empty( $link['url'] ) ) {
+          $ctas[] = array(
+            'url'    => $link['url'],
+            'title'  => isset( $link['title'] ) ? $link['title'] : '',
+            'target' => isset( $link['target'] ) ? $link['target'] : '_self',
+          );
+        }
+      }
+    }
+    $config = array(
+      'show' => true,
+      'type' => 'landing',
+      'data' => array(
+        'headline'             => get_field( 'hero_headline', $post->ID ),
+        'paragraph'             => get_field( 'hero_paragraph', $post->ID ),
+        'image_id'              => $image_id,
+        'ctas'                  => $ctas,
+        'include_featured_post' => (bool) get_field( 'include_featured_post', $post->ID ),
+      ),
+    );
+    return $config;
+  }
+
+  $config = $default;
+  return $config;
+}
+
 /*********************
 LAUNCH starter
 Let's get everything up and running.

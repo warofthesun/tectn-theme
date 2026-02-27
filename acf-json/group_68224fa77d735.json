@@ -1,6 +1,6 @@
 {
     "key": "group_68224fa77d735",
-    "title": "Hero Settings",
+    "title": "0. Hero - TecTN Hero Settings",
     "fields": [
         {
             "key": "field_6822510aeee1f",
@@ -157,5 +157,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1769994168
+    "modified": 1772158072
 }
