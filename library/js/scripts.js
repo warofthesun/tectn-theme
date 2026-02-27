@@ -251,18 +251,18 @@ jQuery(document).ready(function($) {
         .trigger('resize');
  
       
-	 $('.faq_question').click(function() {	 
+	 $('.faq__question').on('click', function() {
 		 if ($(this).parent().is('.open')){
-			 $(this).closest('.faq').find('.faq_answer_container').animate({'height':'0'},500);
+			 $(this).closest('.faq').find('.faq__answer-wrapper').animate({'height':'0'},500);
 			 $(this).closest('.faq').removeClass('open');
-			 $(this).parent().find('.accordion-button-icon').removeClass('fa-regular fa-circle-caret-up').addClass('fa-regular fa-circle-caret-down');
+			 $(this).parent().find('.faq__toggle-icon').removeClass('fa-regular fa-circle-caret-up').addClass('fa-regular fa-circle-caret-down');
 		 }
 		 else{
-			 var newHeight =$(this).closest('.faq').find('.faq_answer').height() +'px';
-			 $(this).closest('.faq').find('.faq_answer_container').animate({'height':newHeight},500);
+			 var newHeight = $(this).closest('.faq').find('.faq__answer').height() + 'px';
+			 $(this).closest('.faq').find('.faq__answer-wrapper').animate({'height': newHeight},500);
 			 $(this).closest('.faq').addClass('open');
-			 $(this).parent().find('.accordion-button-icon').removeClass('fa-regular fa-circle-caret-down').addClass('fa-regular fa-circle-caret-up');
-		}	 
+			 $(this).parent().find('.faq__toggle-icon').removeClass('fa-regular fa-circle-caret-down').addClass('fa-regular fa-circle-caret-up');
+		 }
 	 });
 
 

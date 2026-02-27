@@ -26,21 +26,21 @@
       }
 
 endif; 
-    $classes = ['content-group'];
-    if ( $row_one )  $classes[] = 'content-group--row-one';
-    if ( $content_position === 'middle')  $classes[] = 'content-group--middle';
-    if ( $content_position === 'bottom')  $classes[] = 'content-group--bottom';
-    if ( $image_position === 'left')  $classes[] = 'content-group--reverse';
+    $classes = ['c-content-group'];
+    if ( $row_one )  $classes[] = 'c-content-group--row-one';
+    if ( $content_position === 'middle')  $classes[] = 'c-content-group--middle';
+    if ( $content_position === 'bottom')  $classes[] = 'c-content-group--bottom';
+    if ( $image_position === 'left')  $classes[] = 'c-content-group--reverse';
 ?>
 
 <div class="<?php echo esc_attr(implode(' ', $classes)); ?> row">
-    <div class="col-xs-12 col-md-6 content-group__content">
+    <div class="col-xs-12 col-md-6 c-content-group__content">
         <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
         <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
         <?php if (!empty($buttons)) : ?>
-        <div class="button-pair">
+        <div class="c-button-pair">
             <?php foreach ($buttons as $btn) : ?>
-            <a class="button"
+            <a class="c-button-pair__button"
                 href="<?php echo esc_url($btn['url']); ?>"
                 target="<?php echo esc_attr($btn['target']); ?>"
                 <?php echo ($btn['target'] === '_blank') ? 'rel="noopener noreferrer"' : ''; ?>>
@@ -50,7 +50,7 @@ endif;
         </div>
         <?php endif; ?>
     </div>
-    <div class="col-xs-12 col-md-6 content-group__image">
+    <div class="col-xs-12 col-md-6 c-content-group__image">
         <?php if( $featured_image ) :
         // Image variables.
         $url = $featured_image['url'];
@@ -97,21 +97,21 @@ endif;
      }
    }
 endif; 
-    $classes = ['content-group'];
-    if ( $row_two )  $classes[] = 'content-group--row-two';
-    if ( $content_position === 'middle')  $classes[] = 'content-group--middle';
-    if ( $content_position === 'bottom')  $classes[] = 'content-group--bottom';
-    if ( $image_position === 'left')  $classes[] = 'content-group--reverse';
+    $classes = ['c-content-group'];
+    if ( $row_two )  $classes[] = 'c-content-group--row-two';
+    if ( $content_position === 'middle')  $classes[] = 'c-content-group--middle';
+    if ( $content_position === 'bottom')  $classes[] = 'c-content-group--bottom';
+    if ( $image_position === 'left')  $classes[] = 'c-content-group--reverse';
 ?>
 
 <div class="<?php echo esc_attr(implode(' ', $classes)); ?> row">
-    <div class="col-xs-12 col-md-4 content-group__content">
+    <div class="col-xs-12 col-md-4 c-content-group__content">
         <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
         <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
         <?php if (!empty($buttons)) : ?>
-        <div class="button-pair">
+        <div class="c-button-pair">
             <?php foreach ($buttons as $btn) : ?>
-            <a class="button"
+            <a class="c-button-pair__button"
                 href="<?php echo esc_url($btn['url']); ?>"
                 target="<?php echo esc_attr($btn['target']); ?>"
                 <?php echo ($btn['target'] === '_blank') ? 'rel="noopener noreferrer"' : ''; ?>>
@@ -122,19 +122,19 @@ endif;
         <?php endif; ?>
     </div>
     <?php if (!empty($supporting_images)) : ?>
-    <ul class="col-xs-12 col-md-8 supporting_images">
+    <ul class="col-xs-12 col-md-8 c-content-group__image-list">
             <?php foreach ($supporting_images as $image) : ?>
-                <li>
-            <figure class="gallery__item">
+                <li class="c-content-group__image-item">
+            <figure>
                 <?php
                 echo wp_get_attachment_image(
                     $image['ID'],
-                    'large',            // change size as needed: thumbnail, medium, large, full, or custom
+                    'large',
                     false,
                     [
-                    'class'   => 'gallery__img',
+                    'class'   => 'c-content-group__image',
                     'loading' => 'lazy',
-                    'alt'     => $image['alt'] ?: '', // wp_get_attachment_image usually handles alt, but this is fine too
+                    'alt'     => $image['alt'] ?: '',
                     ]
                 );
                 ?>

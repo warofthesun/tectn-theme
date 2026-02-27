@@ -14,33 +14,35 @@ you can just remove this stylesheet.
 
 
 
-// alerts and notices
+// Alerts: BEM block .alert with modifiers --help, --info, --error, --success
 %alert {
   margin: 10px;
   padding: 5px 18px;
   border: 1px solid;
 }
 
-.alert-help {
-  @extend %alert;
-  border-color: color.adjust($alert-yellow, $lightness: -5%);
-  background: $alert-yellow;
-}
+.alert {
+  &--help {
+    @extend %alert;
+    border-color: color.adjust($alert-yellow, $lightness: -5%);
+    background: $alert-yellow;
+  }
 
-.alert-info {
-  @extend %alert;
-  border-color: color.adjust($alert-blue, $lightness: -5%);
-  background: $alert-blue;
-}
+  &--info {
+    @extend %alert;
+    border-color: color.adjust($alert-blue, $lightness: -5%);
+    background: $alert-blue;
+  }
 
-.alert-error {
-  @extend %alert;
-  border-color: color.adjust($alert-red, $lightness: -5%);
-  background: $alert-red;
-}
+  &--error {
+    @extend %alert;
+    border-color: color.adjust($alert-red, $lightness: -5%);
+    background: $alert-red;
+  }
 
-.alert-success {
-  @extend %alert;
-  border-color: color.adjust($alert-green, $lightness: -5%);
-  background: $alert-green;
+  &--success {
+    @extend %alert;
+    border-color: color.adjust($alert-green, $lightness: -5%);
+    background: $alert-green;
+  }
 }

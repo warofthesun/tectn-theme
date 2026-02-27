@@ -12,7 +12,7 @@
 
 							<article id="post-<?php the_ID(); ?>" <?php post_class(''); ?> role="article">
 
-								<header class="entry-header article-header">
+								<header class="entry-header article__header">
 
 									<h3 class="search-title entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 
@@ -32,7 +32,7 @@
 
 								</section>
 
-								<footer class="article-footer">
+								<footer class="article__footer">
 
 									<?php if(get_the_category_list(', ') != ''): ?>
                   					<?php printf( __( 'Filed under: %1$s', 'tectn_theme' ), get_the_category_list(', ') ); ?>
@@ -51,13 +51,13 @@
 							<?php else : ?>
 
 									<article id="post-not-found" class="hentry ">
-										<header class="article-header">
+										<header class="article__header">
 											<h1><?php _e( 'Sorry, No Results.', 'tectn_theme' ); ?></h1>
 										</header>
 										<section class="entry-content">
 											<p><?php _e( 'Try your search again.', 'tectn_theme' ); ?></p>
 										</section>
-										<footer class="article-footer">
+										<footer class="article__footer">
 												<p><?php _e( 'This is the error message in the search.php template.', 'tectn_theme' ); ?></p>
 										</footer>
 									</article>

@@ -9,7 +9,7 @@
 
 						<article id="post-not-found" class="hentry ">
 
-							<header class="article-header">
+							<header class="article__header">
 
 								<h1><?php _e( '404 - Article Not Found', 'tectn_theme' ); ?></h1>
 
@@ -27,7 +27,7 @@
 
 							</section>
 
-							<footer class="article-footer">
+							<footer class="article__footer">
 
 									<p><?php _e( 'This is the 404.php template.', 'tectn_theme' ); ?></p>
 

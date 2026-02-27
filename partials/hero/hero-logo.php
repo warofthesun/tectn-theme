@@ -76,7 +76,7 @@
 					<?php
 					// Check rows exists.
 						if( have_rows('hero_cta') ): ?>
-						<div class="button-pair">
+						<div class="c-button-pair">
 							<?php
 							// Loop through rows.
 							while( have_rows('hero_cta') ) : the_row();
@@ -87,7 +87,7 @@
 								$link_title = $link['title'];
 								$link_target = $link['target'] ? $link['target'] : '_self';
 								?>
-								<a class="button" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+								<a class="c-button-pair__button" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
 							<?php endif; 
 
 							// End loop.
@@ -126,8 +126,8 @@
        
 								<article id="post-<?php the_ID(); ?>" <?php post_class( ' single-post' ); ?> role="article" >
 									
-									<header class="article-header">
-										<div class="article-meta">
+									<header class="article__header">
+										<div class="article__meta">
 										<p class="post-category">Update</p>
 										
 										</div>

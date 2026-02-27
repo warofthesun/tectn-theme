@@ -239,20 +239,17 @@
   FOOTER STYLES
   *********************/
 
-  .lower-content-curve {
+  .footer__curve-inner {
   	width: 100%;
 
-  	.lower-content-curve__background {
+  	.footer__curve-inner-bg {
   		fill: $primary-surface;
   	}
   }
-  /*
-  check your menus here. do they look good?
-  do they need tweaking?
-  */
-  .footer-links {
+
+  .footer__links {
   	ul {
   		li {}
   	}
-  } /* end .footer-links */
+  }
 }

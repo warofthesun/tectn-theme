@@ -50,9 +50,9 @@ CONTROLS
 Buttons and such
 ****************/
 
-.button-pair {
+.c-button-pair {
 
-	.button {
+	.c-button-pair__button {
 		@extend %btn;
 		margin-bottom: $spacing-md;
 
@@ -61,46 +61,41 @@ Buttons and such
 		}
 	}
 
-	&.primary {
-		.button {
+	&.c-button-pair--primary {
+		.c-button-pair__button {
 			@extend %btn--primary;
 
-			&.solid {
+			&.c-button-pair__button--solid {
 				@extend %btn--primary--solid;
 			}
-	
-			&.outline {
+
+			&.c-button-pair__button--outline {
 				@extend %btn--primary--outline;
 			}
-	
-			&.text {
+
+			&.c-button-pair__button--text {
 				@extend %btn--primary--text;
 			}
-	
-	
 		}
 	}
 
-	&.secondary {
-		.button {
+	&.c-button-pair--secondary {
+		.c-button-pair__button {
 			@extend %btn--secondary;
 
-			&.solid {
+			&.c-button-pair__button--solid {
 				@extend %btn--secondary--solid;
 			}
-	
-			&.outline {
+
+			&.c-button-pair__button--outline {
 				@extend %btn--secondary--outline;
 			}
-	
-			&.text {
+
+			&.c-button-pair__button--text {
 				@extend %btn--secondary--text;
 			}
-	
-	
 		}
 	}
-	
 }
 
 /********************
@@ -269,19 +264,21 @@ BAND / SECTION WRAPPER
 .c-band--py-xl   { --band-py: #{$spacing-xl}; }
 .c-band--py-xxl  { --band-py: #{$spacing-xxl}; }
 
-.image-grid--two,
-  .image-grid--three {
+// Use the c-image-grid block name consistently across modifier rules
+.c-image-grid--two,
+  .c-image-grid--three {
     grid-template-columns: 1fr;
     grid-template-areas: none;
 
-    .image-grid__item--1,
-    .image-grid__item--2,
-    .image-grid__item--3 {
+    .c-image-grid__item--1,
+    .c-image-grid__item--2,
+    .c-image-grid__item--3 {
       grid-area: auto;
     }
   }
 
-  .headline-group {
+  // Renamed to c-headline-group for BEM consistency
+  .c-headline-group {
 	text-align: center;
 	max-width: 600px;
 	margin-left: auto;
@@ -438,16 +435,16 @@ BAND / SECTION WRAPPER
 	}
   }
 
-  .c-posts {
-	--posts-bg-max-h: 800px;
-	position: relative;
-	overflow: hidden;
-	padding: clamp(48px, 6vw, 96px) 0;
+.c-posts {
+		--posts-bg-max-h: 800px;
+		position: relative;
+		overflow: hidden;
+		padding: clamp(48px, 6vw, 96px) 0;
 
-	.button-pair {
-		display: flex;
-		justify-content: center;
-	}
+		.c-button-pair {
+			display: flex;
+			justify-content: center;
+		}
   }
   
   /* =========================
@@ -943,7 +940,7 @@ POSTS & CONTENT STYLES
 		}
 
 		&--landing {
-			.content-curve--up {
+			.hero__content-curve--up {
 				display: inline;
 				position: relative;
 				z-index: 99;
@@ -1063,39 +1060,36 @@ POSTS & CONTENT STYLES
 	margin-bottom: 3em;
 	display: flex;
 	flex-direction: column;
-	.article {
-		&-header {
-			padding: 0 1em;
 
-			.entry-title {
-				line-height: 1;
-				margin-bottom: 1em;
-				font-size: 1.5em;
+	.article__header {
+		padding: 0 1em;
 
-				&::after {
-					content: "";
-					display: none;
-				}
+		.entry-title {
+			line-height: 1;
+			margin-bottom: 1em;
+			font-size: 1.5em;
 
-				a {
-					font-family: $header-font;
-					font-weight: 700;
-					color: $primary-600;
-					font-size: .9em;
-					
-				}
-				
+			&::after {
+				content: "";
+				display: none;
 			}
-		}	
 
-		&-meta {
-			display: flex;
-			justify-content: space-between;
-			padding-bottom: 16px;
+			a {
+				font-family: $header-font;
+				font-weight: 700;
+				color: $primary-600;
+				font-size: .9em;
+			}
 		}
 	}
 
-	.button {
+	.article__meta {
+		display: flex;
+		justify-content: space-between;
+		padding-bottom: 16px;
+	}
+
+	.c-button-pair__button {
 		padding: 1em;
 		margin-top: auto;
 		@extend %btn;
@@ -1308,12 +1302,12 @@ article {
 
 		.hentry {
 
-			header {
+			.article__header {
 				border-bottom: 1px solid $light-gray;
 				padding: 1.5em;
 			}
 
-			footer {
+			.article__footer {
 				padding: 1.5em;
 				border-top: 1px solid $secondary-500;
 				width: 100%;
@@ -1322,8 +1316,7 @@ article {
 					margin: 0;
 				}
 			}
-
-		} /* end .hentry */
+		}
 
 		.single-title,
 		.page-title,
@@ -1595,7 +1588,7 @@ article {
 		}
 	}
 }
-#faq_container {
+.faq-container {
 	margin-bottom: 2em;
 	padding: 10px 15px;
 	max-width: 940px;
@@ -1618,20 +1611,20 @@ article {
   line-height: 1.1;
 }
 
-.question {
+.faq__question-text {
   margin-bottom: 5px;
   display: table-cell;
   width: 100%;
   padding-right: 2em;
 }
- 
-.faq__answer-container {
+
+.faq__answer-wrapper {
   height: 0px;
   overflow: hidden;
   padding: 0px;
 }
 
-.accordion-button-icon {
+.faq__toggle-icon {
   display: table-cell;
   line-height: inherit;
   color: $secondary-500;
@@ -1641,24 +1634,24 @@ article {
 
 /// END FAQs
 
-// PARTNERS
+// PARTNERS (BEM: block .partners, elements __container, __card, __callout; modifier __container--highlighted)
 .partners {
 	&__container {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
-		&_highlighted {
+		&--highlighted {
 			justify-content: space-around;
 			border-radius: $radius-md;
 			@include gradient(0deg, $primary-100, $primary-50);
 			margin-bottom: $spacing-xl;
 
-			.partners {
+			.partners__card {
 				margin: $spacing-xxl;
 			}
 		}
 
-		.partners {
+		.partners__card {
 			background: $white;
 			border-radius: $radius-md;
 			@include box-shadow($bottom-diffused);
@@ -1670,28 +1663,28 @@ article {
 			margin-bottom: $spacing-xxl;
 			margin-right: auto;
 			margin-left: auto;
-			
+
 			img {
 				width: 100%;
 				max-width: 120px;
 				height: auto;
-
 			}
 		}
 
 		a:hover {
-			.partners {
+			.partners__card {
 				@include box-shadow($diffused);
 			}
 		}
 
 		a:active {
-			.partners {
+			.partners__card {
 				@include box-shadow($minimal);
 			}
 		}
 	}
-	.callout-text {
+
+	&__callout {
 		margin: $spacing-xxl;
 	}
 }
@@ -1864,12 +1857,10 @@ input[type="submit"], input[type="file"], #wp-submit {
 		}
 	}
 
-	label {
+		label {
 		font-weight: 600;
-		&.label {
-			&__stacked {
-				display: inline-block;
-			}
+		&.form__label--stacked {
+			display: inline-block;
 		}
 	}
 
@@ -1879,16 +1870,16 @@ input[type="submit"], input[type="file"], #wp-submit {
 
 	.form__fields {
 		display: flex;
-			justify-content: space-between;
-			flex-wrap: wrap;
+		justify-content: space-between;
+		flex-wrap: wrap;
 
-		&_two-up {
+		&--two-up {
 			p {
 				width: 48%;
 			}
 		}
 
-		&_three-up {
+		&--three-up {
 			p {
 				width: 32%;
 			}
@@ -1924,10 +1915,10 @@ input[type="submit"], input[type="file"], #wp-submit {
 			display: flex;
 			flex-direction: column;
 
-			&_flex-item {
+			&--flex-item {
 				display: flex;
 
-				&.column_header {
+				&.grid__column--header {
 					background-color: $primary-700;
 					color: $white;
 					margin-bottom: $spacing-md;
@@ -1968,13 +1959,12 @@ input[type="submit"], input[type="file"], #wp-submit {
 				}
 			}
 
-
-			&_item {
+			&--item {
 				height: 40px;
 				display: flex;
 				align-items: center;
 
-				&.column_header {
+				&.grid__column--header {
 					background-color: $primary-700;
 					color: $white;
 					margin-bottom: $spacing-md;
@@ -2474,23 +2464,20 @@ FOOTER STYLES
 		}
 	}
 
-.lower-content-curve {
+.footer__curve-inner {
 	width: 0;
 }
 
 #inner-footer {
-	.contact-info {
+	.footer__contact {
 		color: $primary-100;
 		text-align: center;
 
-		.address {
-			&__physical {
-				line-height: 1;
-				margin-bottom: $spacing-sm;
-			}
+		.footer__address {
+			line-height: 1;
+			margin-bottom: $spacing-sm;
 		}
 	}
-	
 }
 
 	/*
@@ -2502,18 +2489,14 @@ FOOTER STYLES
 	override these styles for the desktop
 	view.
 	*/
-	.footer-links {
+	.footer__links {
 		margin-bottom: $spacing-xxl;
 		ul {
-
 			li {}
-
 		}
+	}
 
-	} /* end .footer-links */
-
-
-	.copyright {
+	.footer__copyright {
 		text-align: center;
 		color: $primary-100;
 		margin: 1em 0;

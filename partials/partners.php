@@ -1,12 +1,12 @@
 <!--partners-->
 <?php if (get_field('include_highlighted_partners_section')) : ?>
 <?php if( have_rows('highlighted_partners') ): ?>
-<div class="partners__container partners__container_highlighted row"> 
+<div class="partners__container partners__container--highlighted row"> 
     <?php while ( have_rows('highlighted_partners') ) : the_row(); ?>
     <?php $link = get_sub_field('partner_website'); ?>
     <?php if( $link ): $link_url = $link['url']; $link_target = $link['target'] ? $link['target'] : '_self';?>
     <a href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php endif; ?>
-    <div class="partners">
+    <div class="partners__card">
         <?php
             $image = get_sub_field('partner_logo');
             $alt_text = get_sub_field('partner_name');
@@ -34,7 +34,7 @@
 </div>
 
 <?php else : endif; ?> 
-<div class="partners callout-text">
+<div class="partners partners__callout">
     <?php if(get_field('highlighted_partners_callout_text')): the_field('highlighted_partners_callout_text'); endif; ?>
 </div>
 <?php endif; ?>
@@ -47,7 +47,7 @@
     <?php $link = get_sub_field('partner_website'); ?>
     <?php if( $link ): $link_url = $link['url']; $link_target = $link['target'] ? $link['target'] : '_self';?>
     <a href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php endif; ?>
-    <div class="partners">
+    <div class="partners__card">
         <?php
             $image = get_sub_field('partner_logo');
             $alt_text = get_sub_field('partner_name');

@@ -78,6 +78,28 @@ The following is based of Typebase:
 https://github.com/devinhunt/typebase.css
 I've edited it a bit, but it's a nice starting point.
 */
+/* Embed Glacial Indifference font files stored in library/fonts.
+ * Regular, Bold, and Italic variants are defined here using @font-face.
+ * These declarations allow the theme to serve the font locally rather than relying on external CDNs.
+ */
+@font-face {
+  font-family: "Glacial Indifference";
+  src: url("../fonts/GlacialIndifference-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Glacial Indifference";
+  src: url("../fonts/GlacialIndifference-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Glacial Indifference";
+  src: url("../fonts/GlacialIndifference-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+}
 /*
 some nice typographical defaults
 more here: http://www.newnet-soft.com/blog/csstypography
@@ -1109,28 +1131,25 @@ If you want to use these alerts in your design, you can. If not,
 you can just remove this stylesheet.
 
 ******************************************************************/
-.alert-success, .alert-error, .alert-info, .alert-help {
+.alert--success, .alert--error, .alert--info, .alert--help {
   margin: 10px;
   padding: 5px 18px;
   border: 1px solid;
 }
 
-.alert-help {
+.alert--help {
   border-color: rgb(231.8902439024, 220.3353658537, 88.6097560976);
   background: #ebe16f;
 }
-
-.alert-info {
+.alert--info {
   border-color: rgb(191.1428571429, 227.6326530612, 244.3571428571);
   background: #d5edf8;
 }
-
-.alert-error {
+.alert--error {
   border-color: rgb(247.8125, 204.6875, 206.484375);
   background: #fbe3e4;
 }
-
-.alert-success {
+.alert--success {
   border-color: rgb(221.7207792208, 233.7012987013, 173.7987012987);
   background: #e6efc2;
 }
@@ -1172,10 +1191,10 @@ Here's a quick video to show how it works:
 http://www.youtube.com/watch?v=hwdVpKiJzac
 
 *********************/
-.button-pair .button, #menu-login-and-forms.nav li a, .gallery-item .button, input[type=submit], input[type=file], #wp-submit {
+.c-button-pair .c-button-pair__button, #menu-login-and-forms.nav li a, .gallery-item .c-button-pair__button, input[type=submit], input[type=file], #wp-submit {
   display: inline-block;
   position: relative;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 1em;
@@ -1187,66 +1206,66 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   -webkit-transition: background-color 0.14s ease-in-out;
   transition: background-color 0.14s ease-in-out;
 }
-.button-pair .button .svg-inline--fa, #menu-login-and-forms.nav li a .svg-inline--fa, .gallery-item .button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa {
+.c-button-pair .c-button-pair__button .svg-inline--fa, #menu-login-and-forms.nav li a .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa {
   font-size: 0.9em;
 }
-.button-pair .button:hover, #menu-login-and-forms.nav li a:hover, .gallery-item .button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .button-pair .button:focus, #menu-login-and-forms.nav li a:focus, .gallery-item .button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
+.c-button-pair .c-button-pair__button:hover, #menu-login-and-forms.nav li a:hover, .gallery-item .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-pair .c-button-pair__button:focus, #menu-login-and-forms.nav li a:focus, .gallery-item .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
   color: #fff;
   text-decoration: none;
   outline: none;
 }
-.button-pair .button:active, #menu-login-and-forms.nav li a:active, .gallery-item .button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active {
+.c-button-pair .c-button-pair__button:active, #menu-login-and-forms.nav li a:active, .gallery-item .c-button-pair__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active {
   top: 1px;
 }
-.button-pair.primary .button.solid {
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid {
   background-color: #D4E485;
   color: rgba(255, 255, 255, 0.9);
   border-color: #D4E485;
 }
-.button-pair.primary .button.outline {
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline {
   background-color: rgba(255, 255, 255, 0.8);
   color: #C9DD67;
   border-color: #D4E485;
 }
-.button-pair.primary .button.text {
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text {
   color: #698f3d;
   border: 0px;
   display: block;
 }
-.button-pair.primary .button.text:hover, .button-pair.primary .button.text:focus {
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:focus {
   color: #547231;
   text-decoration: none;
   outline: none;
 }
-.button-pair.primary .button:hover, .button-pair.primary .button:focus {
+.c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus {
   background-color: #DFEBA4;
   text-decoration: none;
   outline: none;
 }
-.button-pair.primary .button:active {
+.c-button-pair.c-button-pair--primary .c-button-pair__button:active {
   background-color: #A1B152;
 }
-.button-pair.secondary .button.solid, #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid, #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
   color: rgb(12, 12, 4);
   border: 1px solid #698f3d;
   background: -webkit-linear-gradient(45deg, #87A564, #698f3d);
   background: linear-gradient(45deg, #87A564, #698f3d);
 }
-.button-pair.secondary .button.outline {
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline {
   color: #698f3d;
   border: 2px solid #698f3d;
 }
-.button-pair.secondary .button.text, .gallery-item .button {
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text, .gallery-item .c-button-pair__button {
   color: #698f3d;
   border: 0px;
   display: block;
 }
-.button-pair.secondary .button.text:hover, .gallery-item .button:hover, .button-pair.secondary .button.text:focus, .gallery-item .button:focus {
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:hover, .gallery-item .c-button-pair__button:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:focus, .gallery-item .c-button-pair__button:focus {
   color: #547231;
   text-decoration: none;
   outline: none;
 }
-.button-pair.secondary .button:hover, #menu-login-and-forms.nav li a:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .button-pair.secondary .button:focus, #menu-login-and-forms.nav li a:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
+.c-button-pair.c-button-pair--secondary .c-button-pair__button:hover, #menu-login-and-forms.nav li a:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button:focus, #menu-login-and-forms.nav li a:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
   color: #87A564;
   background: -webkit-linear-gradient(90deg, #547231, #3F5625);
   background: -webkit-gradient(linear, left top, right top, from(#547231), to(#3F5625));
@@ -1340,7 +1359,7 @@ textarea,
   border: 1px solid #698f3d;
   width: 100%;
   max-width: 400px;
-  font-family: "Lato", "Helvetica Neue", sans-serif;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
   background-color: rgb(246.6, 247.8, 249.8);
   -webkit-transition: background-color 0.24s ease-in-out;
   transition: background-color 0.24s ease-in-out;
@@ -1607,10 +1626,10 @@ Author:
 Stylesheet: Gradient Styles
 
 *********************/
-.dark_primary_gradient__stop-1 {
+.c-gradient--dark-primary .c-gradient__stop-1 {
   stop-color: #79853E;
 }
-.dark_primary_gradient__stop-2 {
+.c-gradient--dark-primary .c-gradient__stop-2 {
   stop-color: #C9DD67;
 }
 
@@ -2086,7 +2105,7 @@ span.amp {
 GENERAL STYLES
 *********************/
 body {
-  font-family: "Lato", "Helvetica Neue", sans-serif;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
   font-size: 100%;
   line-height: 1.5;
   color: #5c6b80;
@@ -2135,10 +2154,10 @@ img {
 CONTROLS
 Buttons and such
 ****************/
-.button-pair .button {
+.c-button-pair .c-button-pair__button {
   margin-bottom: 1em;
 }
-.button-pair .button:nth-child(2) {
+.c-button-pair .c-button-pair__button:nth-child(2) {
   margin-left: 1em;
 }
 /********************
@@ -2304,21 +2323,21 @@ BAND / SECTION WRAPPER
   --band-py: 2em;
 }
 
-.image-grid--two,
-.image-grid--three {
+.c-image-grid--two,
+.c-image-grid--three {
   grid-template-columns: 1fr;
   grid-template-areas: none;
 }
-.image-grid--two .image-grid__item--1,
-.image-grid--two .image-grid__item--2,
-.image-grid--two .image-grid__item--3,
-.image-grid--three .image-grid__item--1,
-.image-grid--three .image-grid__item--2,
-.image-grid--three .image-grid__item--3 {
+.c-image-grid--two .c-image-grid__item--1,
+.c-image-grid--two .c-image-grid__item--2,
+.c-image-grid--two .c-image-grid__item--3,
+.c-image-grid--three .c-image-grid__item--1,
+.c-image-grid--three .c-image-grid__item--2,
+.c-image-grid--three .c-image-grid__item--3 {
   grid-area: auto;
 }
 
-.headline-group {
+.c-headline-group {
   text-align: center;
   max-width: 600px;
   margin-left: auto;
@@ -2487,7 +2506,7 @@ BAND / SECTION WRAPPER
   overflow: hidden;
   padding: clamp(48px, 6vw, 96px) 0;
 }
-.c-posts .button-pair {
+.c-posts .c-button-pair {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2745,7 +2764,7 @@ H1, H2, H3, H4, H5 STYLES
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
   text-rendering: optimizelegibility;
   font-weight: 400;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   /*
   if you're going to use webfonts, be sure to check your weights
   http://css-tricks.com/watch-your-font-weight/
@@ -2940,7 +2959,7 @@ and more scalable.
   color: #A1B152;
   text-decoration: none;
   padding: 0.75em;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   font-size: 1.1em;
   text-transform: uppercase;
 }
@@ -2983,12 +3002,12 @@ POSTS & CONTENT STYLES
 .hero__container h1 {
   position: relative;
 }
-.hero__container--landing .content-curve--up {
+.hero__container--landing .hero__content-curve--up {
   display: inline;
   position: relative;
   z-index: 99;
 }
-.hero__container--landing .content-curve--up svg {
+.hero__container--landing .hero__content-curve--up svg {
   margin-top: -90px;
   margin-bottom: 10px;
 }
@@ -3000,7 +3019,7 @@ POSTS & CONTENT STYLES
 .hero__container--landing h1 span {
   display: block;
   color: #EFF1E5;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   text-transform: uppercase;
   font-size: 0.4em;
   line-height: 1.1;
@@ -3010,7 +3029,7 @@ POSTS & CONTENT STYLES
   font-size: 1.5em;
 }
 .hero__container--landing h3 ul {
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   margin: 0;
 }
 .hero__container--landing h3 ul li {
@@ -3097,25 +3116,25 @@ POSTS & CONTENT STYLES
   -ms-flex-direction: column;
   flex-direction: column;
 }
-.gallery-item .article-header {
+.gallery-item .article__header {
   padding: 0 1em;
 }
-.gallery-item .article-header .entry-title {
+.gallery-item .article__header .entry-title {
   line-height: 1;
   margin-bottom: 1em;
   font-size: 1.5em;
 }
-.gallery-item .article-header .entry-title::after {
+.gallery-item .article__header .entry-title::after {
   content: "";
   display: none;
 }
-.gallery-item .article-header .entry-title a {
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+.gallery-item .article__header .entry-title a {
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   font-weight: 700;
   color: #A1B152;
   font-size: 0.9em;
 }
-.gallery-item .article-meta {
+.gallery-item .article__meta {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3124,7 +3143,7 @@ POSTS & CONTENT STYLES
   justify-content: space-between;
   padding-bottom: 16px;
 }
-.gallery-item .button {
+.gallery-item .c-button-pair__button {
   padding: 1em;
   margin-top: auto;
 }
@@ -3141,7 +3160,7 @@ POSTS & CONTENT STYLES
 }
 .post-category a {
   text-decoration: none;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
 }
 
 .testimonials {
@@ -3184,7 +3203,7 @@ POSTS & CONTENT STYLES
 .testimonials__background--gold::before {
   content: "What our clients say";
   background-color: #F9FBF3;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   font-size: 2em;
   line-height: 1;
   border-radius: 0 0 20px 20px;
@@ -3227,7 +3246,7 @@ POSTS & CONTENT STYLES
   display: inline-block;
   border-radius: 20px;
   padding: 4px 16px;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   font-weight: 700;
   font-size: 1.1em;
   margin: auto;
@@ -3309,7 +3328,7 @@ POSTS & CONTENT STYLES
   display: inline-block;
   border-radius: 20px;
   padding: 4px 16px;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   font-weight: 700;
   font-size: 1em;
   margin: auto;
@@ -3326,20 +3345,19 @@ article .hero--image img {
   height: auto;
 }
 
-.hentry header {
+.hentry .article__header {
   border-bottom: 1px solid #f8f9fa;
   padding: 1.5em;
 }
-.hentry footer {
+.hentry .article__footer {
   padding: 1.5em;
   border-top: 1px solid #698f3d;
   width: 100%;
 }
-.hentry footer p {
+.hentry .article__footer p {
   margin: 0;
 }
 
-/* end .hentry */
 .single-title,
 .page-title,
 .entry-title {
@@ -3522,7 +3540,7 @@ article .hero--image img {
   margin-bottom: 1em;
 }
 
-#faq_container {
+.faq-container {
   margin-bottom: 2em;
   padding: 10px 15px;
   max-width: 940px;
@@ -3541,25 +3559,25 @@ article .hero--image img {
   cursor: pointer;
   font-weight: bold;
   display: table;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   font-size: 1.3em;
   line-height: 1.1;
 }
 
-.question {
+.faq__question-text {
   margin-bottom: 5px;
   display: table-cell;
   width: 100%;
   padding-right: 2em;
 }
 
-.faq__answer-container {
+.faq__answer-wrapper {
   height: 0px;
   overflow: hidden;
   padding: 0px;
 }
 
-.accordion-button-icon {
+.faq__toggle-icon {
   display: table-cell;
   line-height: inherit;
   color: #698f3d;
@@ -3571,7 +3589,7 @@ article .hero--image img {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
-.partners__container_highlighted {
+.partners__container--highlighted {
   -ms-flex-pack: distribute;
   justify-content: space-around;
   border-radius: 0.75em;
@@ -3581,10 +3599,10 @@ article .hero--image img {
   background: linear-gradient(0deg, #EFF5D1, #EFF1E5);
   margin-bottom: 1.5em;
 }
-.partners__container_highlighted .partners {
+.partners__container--highlighted .partners__card {
   margin: 2em;
 }
-.partners__container .partners {
+.partners__container .partners__card {
   background: #fff;
   border-radius: 0.75em;
   -webkit-box-shadow: 0px 13px 21px -10px rgba(0, 0, 0, 0.3);
@@ -3604,20 +3622,20 @@ article .hero--image img {
   margin-right: auto;
   margin-left: auto;
 }
-.partners__container .partners img {
+.partners__container .partners__card img {
   width: 100%;
   max-width: 120px;
   height: auto;
 }
-.partners__container a:hover .partners {
+.partners__container a:hover .partners__card {
   -webkit-box-shadow: 0px 0px 21px -10px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 21px -10px rgba(0, 0, 0, 0.3);
 }
-.partners__container a:active .partners {
+.partners__container a:active .partners__card {
   -webkit-box-shadow: 0px 0px 10px -10px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 10px -10px rgba(0, 0, 0, 0.3);
 }
-.partners .callout-text {
+.partners__callout {
   margin: 2em;
 }
 
@@ -3671,7 +3689,7 @@ article .hero--image img {
   display: inline-block;
   margin-bottom: 0.5em;
   margin-left: 0.5em;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   border-bottom: 2px solid #DFEBA4;
 }
 .resources .resource__item h2 {
@@ -3721,7 +3739,7 @@ article .hero--image img {
   margin-top: 0;
   margin-bottom: 0.5em;
   margin-left: 0.5em;
-  font-family: "Francois One", "Helvetica Neue", sans-serif;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   display: inline-block;
   border-bottom: 2px solid #DFEBA4;
 }
@@ -3765,7 +3783,7 @@ article .hero--image img {
 .wpcf7-form label {
   font-weight: 600;
 }
-.wpcf7-form label.label__stacked {
+.wpcf7-form label.form__label--stacked {
   display: inline-block;
 }
 .wpcf7-form .inline {
@@ -3783,10 +3801,10 @@ article .hero--image img {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.wpcf7-form .form__fields_two-up p {
+.wpcf7-form .form__fields--two-up p {
   width: 48%;
 }
-.wpcf7-form .form__fields_three-up p {
+.wpcf7-form .form__fields--three-up p {
   width: 32%;
 }
 .wpcf7-form .grid {
@@ -3822,12 +3840,12 @@ article .hero--image img {
   -ms-flex-direction: column;
   flex-direction: column;
 }
-.wpcf7-form .grid__column_flex-item {
+.wpcf7-form .grid__column--flex-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
-.wpcf7-form .grid__column_flex-item.column_header {
+.wpcf7-form .grid__column--flex-item.grid__column--header {
   background-color: #79853E;
   color: #fff;
   margin-bottom: 1em;
@@ -3840,35 +3858,35 @@ article .hero--image img {
   font-size: 0.8em;
   line-height: 1;
 }
-.wpcf7-form .grid__column_flex-item input[type=text], .wpcf7-form .grid__column_flex-item input[type=date] {
+.wpcf7-form .grid__column--flex-item input[type=text], .wpcf7-form .grid__column--flex-item input[type=date] {
   border-radius: 0;
   margin-bottom: 0;
 }
-.wpcf7-form .grid__column_flex-item p {
+.wpcf7-form .grid__column--flex-item p {
   margin: 0;
 }
-.wpcf7-form .grid__column_flex-item.h40 {
+.wpcf7-form .grid__column--flex-item.h40 {
   height: 40px;
 }
-.wpcf7-form .grid__column_flex-item.h100per {
+.wpcf7-form .grid__column--flex-item.h100per {
   height: 100%;
 }
-.wpcf7-form .grid__column_flex-item.align-center {
+.wpcf7-form .grid__column--flex-item.align-center {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
 }
-.wpcf7-form .grid__column_flex-item.align-right {
+.wpcf7-form .grid__column--flex-item.align-right {
   -webkit-box-align: right;
   -ms-flex-align: right;
   align-items: right;
 }
-.wpcf7-form .grid__column_flex-item.valign-middle {
+.wpcf7-form .grid__column--flex-item.valign-middle {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
 }
-.wpcf7-form .grid__column_item {
+.wpcf7-form .grid__column--item {
   height: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3877,7 +3895,7 @@ article .hero--image img {
   -ms-flex-align: center;
   align-items: center;
 }
-.wpcf7-form .grid__column_item.column_header {
+.wpcf7-form .grid__column--item.grid__column--header {
   background-color: #79853E;
   color: #fff;
   margin-bottom: 1em;
@@ -3890,11 +3908,11 @@ article .hero--image img {
   font-size: 0.8em;
   line-height: 1;
 }
-.wpcf7-form .grid__column_item input[type=text], .wpcf7-form .grid__column_item input[type=date] {
+.wpcf7-form .grid__column--item input[type=text], .wpcf7-form .grid__column--item input[type=date] {
   border-radius: 0;
   margin-bottom: 0;
 }
-.wpcf7-form .grid__column_item p {
+.wpcf7-form .grid__column--item p {
   margin: 0;
 }
 .wpcf7-form .grid .footer {
@@ -4228,27 +4246,27 @@ FOOTER STYLES
 }
 .footer__tagline em {
   font-style: normal;
-  font-family: "Lato", "Helvetica Neue", sans-serif;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 1.5em;
 }
 .footer__tagline strong {
-  font-family: "Lato", "Helvetica Neue", sans-serif;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
   color: #698f3d;
   font-size: 2.5em;
   line-height: 1;
 }
 
-.lower-content-curve {
+.footer__curve-inner {
   width: 0;
 }
 
-#inner-footer .contact-info {
+#inner-footer .footer__contact {
   color: #EFF5D1;
   text-align: center;
 }
-#inner-footer .contact-info .address__physical {
+#inner-footer .footer__contact .footer__address {
   line-height: 1;
   margin-bottom: 0.75em;
 }
@@ -4262,10 +4280,10 @@ it simple because you'll have to
 override these styles for the desktop
 view.
 */
-.footer-links {
+.footer__links {
   margin-bottom: 2em;
-} /* end .footer-links */
-.copyright {
+}
+.footer__copyright {
   text-align: center;
   color: #EFF5D1;
   margin: 1em 0;
@@ -4334,7 +4352,7 @@ IMPORTING PARTIALS
   }
   .testimonials__background--gold::before {
     content: "What our clients say";
-    font-family: "Francois One", "Helvetica Neue", sans-serif;
+    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
     font-size: 2em;
     line-height: 1;
     border-radius: 0 0 20px 20px;
@@ -4381,7 +4399,7 @@ IMPORTING PARTIALS
     display: inline-block;
     border-radius: 20px;
     padding: 4px 16px;
-    font-family: "Francois One", "Helvetica Neue", sans-serif;
+    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
     font-weight: 700;
     font-size: 1.2em;
     margin: auto;
@@ -4471,7 +4489,7 @@ IMPORTING PARTIALS
     display: inline-block;
     border-radius: 20px;
     padding: 4px 16px;
-    font-family: "Francois One", "Helvetica Neue", sans-serif;
+    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
     font-weight: 700;
     font-size: 1em;
     margin: auto;
@@ -4516,17 +4534,12 @@ IMPORTING PARTIALS
   /*********************
   FOOTER STYLES
   *********************/
-  .lower-content-curve {
+  .footer__curve-inner {
     width: 100%;
   }
-  .lower-content-curve .lower-content-curve__background {
+  .footer__curve-inner .footer__curve-inner-bg {
     fill: #F9FBF3;
   }
-  /*
-  check your menus here. do they look good?
-  do they need tweaking?
-  */
-  /* end .footer-links */
 }
 /*********************
 TABLET & SMALLER LAPTOPS
@@ -4723,7 +4736,7 @@ IMPORTING PARTIALS
   .hero__container--landing h1 span {
     display: block;
     color: #EFF1E5;
-    font-family: "Francois One", "Helvetica Neue", sans-serif;
+    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
     text-transform: uppercase;
     font-size: 0.4em;
     line-height: 1.1;
@@ -4732,7 +4745,7 @@ IMPORTING PARTIALS
     margin-top: 0;
   }
   .hero__container--landing h3 ul {
-    font-family: "Francois One", "Helvetica Neue", sans-serif;
+    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
     margin: 0;
   }
   .hero__container--landing h3 ul li {
@@ -4794,96 +4807,96 @@ IMPORTING PARTIALS
   /***************
   CONTENT BLOCKS
   *****************/
-  .content-group {
+  .c-content-group {
     margin-bottom: 1em;
   }
-  .content-group .content-group__content {
+  .c-content-group .c-content-group__content {
     padding-right: 2em;
   }
-  .content-group .image-grid {
+  .c-content-group .c-image-grid {
     display: grid;
     margin: 0;
   }
-  .content-group .image-grid li {
+  .c-content-group .c-image-grid li {
     margin-left: 1.25em;
   }
-  .content-group .image-grid__item {
+  .c-content-group .c-image-grid__item {
     margin: 0;
   }
-  .content-group .image-grid__img {
+  .c-content-group .c-image-grid__img {
     width: 100%;
     height: auto;
     display: block;
     margin-bottom: 0;
   }
-  .content-group .image-grid--one {
+  .c-content-group .c-image-grid--one {
     padding-right: 6em;
     padding-left: 0em;
   }
-  .content-group .image-grid--one li {
+  .c-content-group .c-image-grid--one li {
     margin: 0;
   }
-  .content-group .image-grid--one li img {
+  .c-content-group .c-image-grid--one li img {
     margin: 0;
   }
-  .content-group {
+  .c-content-group {
     /* --- 2 images: 50/50 --- */
   }
-  .content-group .image-grid--two {
+  .c-content-group .c-image-grid--two {
     grid-template-columns: 1fr 1fr;
   }
-  .content-group .image-grid--two .image-grid__item--1 {
+  .c-content-group .c-image-grid--two .c-image-grid__item--1 {
     grid-column: 1;
   }
-  .content-group .image-grid--two .image-grid__item--2 {
+  .c-content-group .c-image-grid--two .c-image-grid__item--2 {
     grid-column: 2;
   }
-  .content-group {
+  .c-content-group {
     /* --- 3 images: big left, two stacked right --- */
   }
-  .content-group .image-grid--three {
+  .c-content-group .c-image-grid--three {
     grid-template-columns: 2fr 1fr;
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: start;
     grid-template-areas: "big right";
   }
-  .content-group .image-grid--three .image-grid__item--1 {
+  .c-content-group .c-image-grid--three .c-image-grid__item--1 {
     grid-area: big;
     align-self: start;
   }
-  .content-group .image-grid--three .image-grid__item--2, .content-group .image-grid--three .image-grid__item--3 {
+  .c-content-group .c-image-grid--three .c-image-grid__item--2, .c-content-group .c-image-grid--three .c-image-grid__item--3 {
     grid-area: right;
     align-self: start;
   }
-  .content-group .image-grid__right {
+  .c-content-group .c-image-grid__right {
     margin: 0;
     display: grid;
     -ms-flex-line-pack: start;
     align-content: start;
     gap: 1.25em;
   }
-  .content-group--middle .content-group__content {
+  .c-content-group--middle .c-content-group__content {
     margin-top: auto;
     margin-bottom: auto;
   }
-  .content-group--bottom .content-group__content {
+  .c-content-group--bottom .c-content-group__content {
     margin-top: auto;
   }
-  .content-group--bottom .content-group__content > :last-child {
+  .c-content-group--bottom .c-content-group__content > :last-child {
     margin-bottom: 0;
   }
-  .content-group--reverse {
+  .c-content-group--reverse {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;
     -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
-  .content-group--reverse .content-group__content {
+  .c-content-group--reverse .c-content-group__content {
     padding-right: 0em;
     padding-left: 2em;
   }
-  .content-group--reverse .content-group__image {
+  .c-content-group--reverse .c-content-group__image {
     padding-right: 0em;
     padding-left: 6em;
   }
@@ -4936,7 +4949,7 @@ IMPORTING PARTIALS
     -ms-flex-direction: row;
     flex-direction: row;
   }
-  #inner-footer .contact-info {
+  #inner-footer .footer__contact {
     text-align: right;
   }
   .footer__logo #tectn_logo {
@@ -4948,14 +4961,6 @@ IMPORTING PARTIALS
     -ms-flex-pack: start;
     justify-content: flex-start;
   }
-  .footer-links ul li {
-    /*
-    be careful with the depth of your menus.
-    it's very rare to have multi-depth menus in
-    the footer.
-    */
-  }
-  /* end .footer-links */
 }
 /*********************
 DESKTOP
@@ -5134,13 +5139,13 @@ IMPORTING PARTIALS
   }
   .hero__featured-post article .post-category {
     color: #698f3d;
-    font-family: "Francois One", "Helvetica Neue", sans-serif;
+    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
     margin-bottom: 0.75em;
   }
   .hero__featured-post article .entry-title {
     font-size: 1.3em;
     line-height: 1;
-    font-family: "Francois One", "Helvetica Neue", sans-serif;
+    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   }
   .hero__featured-post article .entry-title a {
     text-decoration: none;

@@ -282,14 +282,14 @@
   CONTENT BLOCKS
   *****************/
 
-  .content-group {
+  .c-content-group {
 	margin-bottom: $spacing-md;
 
-	.content-group__content {
+    .c-content-group__content {
 		padding-right: $spacing-xxl;
 	}
 
-	.image-grid {
+    .c-image-grid {
 		display: grid;
 		margin: 0;
 
@@ -297,11 +297,11 @@
 			margin-left: $spacing-lg;
 		}
 
-		&__item {
+        &__item {
 			margin: 0;
 		}
 
-		&__img {
+        &__img {
 			width: 100%;
 			height: auto;
 			display: block;
@@ -309,7 +309,7 @@
 		}
 	}
 
-		.image-grid--one {
+    		.c-image-grid--one {
 			
 			padding-right: 6em;
 			padding-left: 0em;
@@ -323,62 +323,62 @@
 		}
 	}
 
-	/* --- 2 images: 50/50 --- */
-	.image-grid--two {
+    		/* --- 2 images: 50/50 --- */
+    		.c-image-grid--two {
 		grid-template-columns: 1fr 1fr;
 	
-		.image-grid__item--1 { grid-column: 1; }
-		.image-grid__item--2 { grid-column: 2; }
+    			.c-image-grid__item--1 { grid-column: 1; }
+    			.c-image-grid__item--2 { grid-column: 2; }
 	}
 	
-	/* --- 3 images: big left, two stacked right --- */
-	.image-grid--three {
+    		/* --- 3 images: big left, two stacked right --- */
+    		.c-image-grid--three {
 		grid-template-columns: 2fr 1fr;
 		align-items:start;           
 		grid-template-areas:
 		"big right";
 	
-		.image-grid__item--1 { grid-area: big; align-self: start;}
-		.image-grid__item--2, .image-grid__item--3 { grid-area: right; align-self: start; }
+    			.c-image-grid__item--1 { grid-area: big; align-self: start;}
+    			.c-image-grid__item--2, .c-image-grid__item--3 { grid-area: right; align-self: start; }
 	}
 
-	.image-grid__right {
+    		.c-image-grid__right {
 		margin: 0;
 		display: grid;
 		align-content: start;
 		gap: $spacing-lg;
 	}
 
-	&--middle {
-		.content-group__content {
-			margin-top: auto;
-			margin-bottom: auto;
-		}
-	}
+    &--middle {
+        .c-content-group__content {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
 
-	&--bottom {
-		.content-group__content {
-			margin-top: auto;
+    &--bottom {
+        .c-content-group__content {
+            margin-top: auto;
 
-			& > :last-child {
-				margin-bottom: 0;
-			}
-		}
-	}
+            & > :last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
 
-	&--reverse {
-		flex-direction: row-reverse;
+    &--reverse {
+        flex-direction: row-reverse;
 
-		.content-group__content {
-			padding-right: 0em;
-			padding-left: $spacing-xxl;
-		}
+        .c-content-group__content {
+            padding-right: 0em;
+            padding-left: $spacing-xxl;
+        }
 
-		.content-group__image {
-			padding-right: 0em;
-			padding-left: 6em;
-		}
-	}
+        .c-content-group__image {
+            padding-right: 0em;
+            padding-left: 6em;
+        }
+    }
   }
 
   /*********************
@@ -517,7 +517,7 @@
   #inner-footer {
   	flex-direction: row;
 
-  	.contact-info {
+  	.footer__contact {
   		text-align: right;
   	}
   }
@@ -535,19 +535,14 @@
   		justify-content: flex-start;
   	}
   }
-  .footer-links {
+  .footer__links {
   	ul {
   		li {
   			a {
   				&:hover {}
   			}
-  			/*
-  			be careful with the depth of your menus.
-  			it's very rare to have multi-depth menus in
-  			the footer.
-  			*/
   			ul {}
   		}
   	}
-  } /* end .footer-links */
+  }
 }

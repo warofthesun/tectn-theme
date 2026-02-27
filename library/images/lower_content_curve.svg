@@ -1,7 +1,7 @@
 <svg viewBox="0 0 1440 141" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_2408_26033)">
 <g filter="url(#filter0_d_2408_26033)">
-<path class="lower_content_curve__background" d="M1440 0H0V26.9127C0 26.9127 40.4642 26.6662 136 26.9127C216.893 27.1215 337.271 38.8592 506 81.5C874 174.5 1440 42.5 1440 42.5V0Z" fill="#E52222"/>
+<path class="footer__curve-inner-bg" d="M1440 0H0V26.9127C0 26.9127 40.4642 26.6662 136 26.9127C216.893 27.1215 337.271 38.8592 506 81.5C874 174.5 1440 42.5 1440 42.5V0Z" fill="#E52222"/>
 </g>
 </g>
 <defs>

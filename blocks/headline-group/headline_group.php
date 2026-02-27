@@ -20,7 +20,7 @@
 ?>
 
 <div class="row">
-    <div class="col-xs-12 headline-group">
+    <div class="col-xs-12 c-headline-group">
     <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
     <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
         <?php $partial_path = get_theme_file_path('/partials/button_pair.php'); ?>

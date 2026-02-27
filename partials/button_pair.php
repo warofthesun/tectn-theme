@@ -4,22 +4,20 @@
 if (have_rows('buttons')) :
 
     // Field OUTSIDE the repeater (on the block / group / post) used to theme the whole pair.
-    // Example stored values: "button-pair--green", "button-pair--dark", etc.
+    // BEM: block c-button-pair, modifiers e.g. c-button-pair--primary
     $pair_color = get_field('button_color');
 
-    $pair_classes = ['button-pair'];
+    $pair_classes = ['c-button-pair'];
     if (!empty($pair_color)) {
-        // Allow either a single class or a space-separated list
         foreach (preg_split('/\s+/', trim((string) $pair_color)) as $cls) {
-            if ($cls !== '') $pair_classes[] = sanitize_html_class($cls);
+            if ($cls !== '') $pair_classes[] = 'c-button-pair--' . sanitize_html_class($cls);
         }
     }
 ?>
     <div class="<?php echo esc_attr(implode(' ', array_filter($pair_classes))); ?>">
         <?php while (have_rows('buttons')) : the_row();
 
-            // Field INSIDE the repeater (per-row) used to style the individual button.
-            // Example stored values: "button--solid", "button--outline", "button--ghost", etc.
+            // Field INSIDE the repeater: BEM element c-button-pair__button, modifiers e.g. c-button-pair__button--solid
             $style = get_sub_field('button_style');
 
             $link = get_sub_field('button');
@@ -30,11 +28,10 @@ if (have_rows('buttons')) :
             $target = $link['target'] ?? '_self';
             if (!$url || !$title) continue;
 
-            $btn_classes = ['button'];
+            $btn_classes = ['c-button-pair__button'];
             if (!empty($style)) {
-                // Allow either a single class or a space-separated list
                 foreach (preg_split('/\s+/', trim((string) $style)) as $cls) {
-                    if ($cls !== '') $btn_classes[] = sanitize_html_class($cls);
+                    if ($cls !== '') $btn_classes[] = 'c-button-pair__button--' . sanitize_html_class($cls);
                 }
             }
         ?>

@@ -1,8 +1,8 @@
 <svg width="253" height="100%" viewBox="0 0 253 100%" fill="none" xmlns="http://www.w3.org/2000/svg">
 <defs>
-			<linearGradient id="dark_primary_gradient" x1="0" x2="0" y1="1" y2="0">
-				<stop class="dark_primary_gradient__stop-1" offset="0%" />
-				<stop class="dark_primary_gradient__stop-2" offset="100%" />
+			<linearGradient id="dark_primary_gradient" class="c-gradient c-gradient--dark-primary" x1="0" x2="0" y1="1" y2="0">
+				<stop class="c-gradient__stop-1" offset="0%" />
+				<stop class="c-gradient__stop-2" offset="100%" />
 			</linearGradient>
 		</defs>
 <mask id="mask0_2127_25389" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="253" height="550">

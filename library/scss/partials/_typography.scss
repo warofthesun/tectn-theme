@@ -49,8 +49,32 @@ I've edited it a bit, but it's a nice starting point.
 
 
 // font stacks
-$header-font:        "Francois One", "Helvetica Neue", sans-serif;
-$body-font:             "Lato", "Helvetica Neue", sans-serif;
+// Updated header and body fonts. Bebas Neue comes from Google Fonts; Glacial Indifference is embedded locally.
+$header-font:        "Bebas Neue", "Helvetica Neue", sans-serif;
+$body-font:          "Glacial Indifference", "Helvetica Neue", sans-serif;
+
+/* Embed Glacial Indifference font files stored in library/fonts.
+ * Regular, Bold, and Italic variants are defined here using @font-face.
+ * These declarations allow the theme to serve the font locally rather than relying on external CDNs.
+ */
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('../fonts/GlacialIndifference-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('../fonts/GlacialIndifference-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('../fonts/GlacialIndifference-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
 
 
 /*

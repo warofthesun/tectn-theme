@@ -11,7 +11,7 @@
 
 							<article id="post-<?php the_ID(); ?>" <?php post_class(''); ?> role="article">
 
-								<header class="article-header">
+								<header class="article__header">
 
 									<h1 class="single-title custom-post-type-title"><?php the_title(); ?></h1>
 									<?php if(get_field('form_description')) : ?>
@@ -40,13 +40,13 @@
 							<?php else : ?>
 
 									<article id="post-not-found" class="hentry ">
-										<header class="article-header">
+										<header class="article__header">
 											<h1><?php _e( 'Oops, Post Not Found!', 'tectn_theme' ); ?></h1>
 										</header>
 										<section class="entry-content">
 											<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'tectn_theme' ); ?></p>
 										</section>
-										<footer class="article-footer">
+										<footer class="article__footer">
 											<p><?php _e( 'Error Message', 'tectn_theme' ); ?></p>
 										</footer>
 									</article>

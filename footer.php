@@ -4,15 +4,15 @@
 <footer class="footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
 	
 <div class="footer__curve">
-	<div class="lower-content-curve"><?php echo file_get_contents( get_template_directory() . '/library/images/lower_content_curve.svg' ); ?></div>
+	<div class="footer__curve-inner"><?php echo file_get_contents( get_template_directory() . '/library/images/lower_content_curve.svg' ); ?></div>
 </div>
 <div id="inner-footer" class="wrap row">
-	<div class="col-xs-12 col-md-6 logo_nav">
+	<div class="col-xs-12 col-md-6 footer__logo-nav">
 		<div class="footer__logo"><?php echo file_get_contents( get_template_directory() . '/library/images/mfa_logo_dark.svg' ); ?></div>
 		<nav role="navigation">
 			<?php wp_nav_menu(array(
-			'container' => 'div',                           // enter '' to remove nav container (just make sure .footer-links in _base.scss isn't wrapping)
-			'container_class' => 'footer-links ',         // class of container (should you choose to use it)
+			'container' => 'div',
+			'container_class' => 'footer__links ',
 			'menu' => __( 'Footer Links', 'tectn_theme' ),   // nav name
 			'menu_class' => 'nav footer-nav ',            // adding custom nav class
 			'theme_location' => 'footer-links',             // where it's located in the theme
@@ -25,15 +25,15 @@
 			)); ?>
 		</nav>
 	</div>
-	<div class="col-xs-12 col-md-6 contact-info">
-		<?php if(get_field('address', 'option')): ?><div class="address__physical"><?php the_field('address', 'option'); ?></div><?php endif; ?>
-		<?php if(get_field('phone_number', 'option')): ?><div class="phone_number"><?php the_field('phone_number', 'option'); ?></div><?php endif; ?>
-		<?php if(get_field('email_address', 'option')): ?><a href="mailto:<?php the_field('email_address', 'option');?>" class="address__email">email</a><?php endif; ?>
+	<div class="col-xs-12 col-md-6 footer__contact">
+		<?php if(get_field('address', 'option')): ?><div class="footer__address"><?php the_field('address', 'option'); ?></div><?php endif; ?>
+		<?php if(get_field('phone_number', 'option')): ?><div class="footer__phone"><?php the_field('phone_number', 'option'); ?></div><?php endif; ?>
+		<?php if(get_field('email_address', 'option')): ?><a href="mailto:<?php the_field('email_address', 'option');?>" class="footer__email">email</a><?php endif; ?>
 		
 	</div>
 	
 	
-<div class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</div>
+<div class="footer__copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</div>
 </div>
 
 

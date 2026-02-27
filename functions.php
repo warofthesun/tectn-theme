@@ -255,7 +255,7 @@ function starter_comments( $comment, $args, $depth ) {
 
       </header>
       <?php if ($comment->comment_approved == '0') : ?>
-        <div class="alert alert-info">
+        <div class="alert alert--info">
           <p><?php _e( 'Your comment is awaiting moderation.', 'tectn_theme' ) ?></p>
         </div>
       <?php endif; ?>
@@ -277,7 +277,8 @@ can replace these fonts, change it in your scss files
 and be up and running in seconds.
 */
 function custom_fonts() {
-  wp_enqueue_style('tectn-google-fonts', 'https://fonts.googleapis.com/css2?family=Francois+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap', array(), null);
+  // Enqueue Bebas Neue from Google Fonts. Previous fonts (Francois One and Lato) have been removed.
+  wp_enqueue_style('tectn-google-fonts', 'https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap', array(), null);
 }
 
 add_action('wp_enqueue_scripts', 'custom_fonts');

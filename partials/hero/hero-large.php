@@ -10,7 +10,7 @@
 		</div>
 		</div>
 	</div>
-	<div class="content-curve content-curve--up">
+	<div class="hero__content-curve hero__content-curve--up">
 		<?php echo file_get_contents( get_template_directory() . '/library/images/content_curve__up.svg' ); ?>
 	</div>
 </div>

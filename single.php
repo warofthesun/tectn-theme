@@ -34,7 +34,7 @@
 							<?php get_sidebar(); ?>
 							<?php endif; ?>
 
-                <footer class="article-footer">
+                <footer class="article__footer">
                   <?php the_tags( '<p class="tags"><span class="tags-title">' . __( 'Tags:', 'tectn_theme' ) . '</span> ', ', ', '</p>' ); ?>
 
                 </footer> <?php // end article footer ?>
@@ -46,13 +46,13 @@
 						<?php else : ?>
 
 							<article id="post-not-found" class="hentry ">
-									<header class="article-header">
+									<header class="article__header">
 										<h1><?php _e( 'Oops, Post Not Found!', 'tectn_theme' ); ?></h1>
 									</header>
 									<section class="entry-content">
 										<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'tectn_theme' ); ?></p>
 									</section>
-									<footer class="article-footer">
+									<footer class="article__footer">
 											<p><?php _e( 'This is the error message in the single.php template.', 'tectn_theme' ); ?></p>
 									</footer>
 							</article>
