@@ -6,12 +6,52 @@ require_once( 'library/starter.php' );
 // CUSTOMIZE THE WORDPRESS ADMIN (off by default)
 // require_once( 'library/admin.php' );
 
+/**
+ * Register ACF blocks (single source of truth).
+ */
 function tectn_register_acf_blocks() {
-  foreach ( glob( __DIR__ . '/blocks/*', GLOB_ONLYDIR ) as $dir ) {
+  $block_dirs = glob( __DIR__ . '/blocks/*', GLOB_ONLYDIR );
+  if ( ! $block_dirs ) {
+    return;
+  }
+  foreach ( $block_dirs as $dir ) {
     register_block_type( $dir );
   }
 }
 add_action( 'init', 'tectn_register_acf_blocks' );
+
+/**
+ * Shared BEM class list for content-group block (text + image layout).
+ * Use in blocks/partials that output c-content-group to avoid duplication.
+ *
+ * @param array $args Keys: content_position (middle|bottom), image_position (left), row_one, row_two.
+ * @return string[] Class list for the wrapper.
+ */
+function tectn_content_group_classes( $args = array() ) {
+  $classes = array( 'c-content-group' );
+  $args = wp_parse_args( $args, array(
+    'content_position' => '',
+    'image_position'   => '',
+    'row_one'          => false,
+    'row_two'          => false,
+  ) );
+  if ( $args['content_position'] === 'middle' ) {
+    $classes[] = 'c-content-group--middle';
+  }
+  if ( $args['content_position'] === 'bottom' ) {
+    $classes[] = 'c-content-group--bottom';
+  }
+  if ( $args['image_position'] === 'left' ) {
+    $classes[] = 'c-content-group--reverse';
+  }
+  if ( ! empty( $args['row_one'] ) ) {
+    $classes[] = 'c-content-group--row-one';
+  }
+  if ( ! empty( $args['row_two'] ) ) {
+    $classes[] = 'c-content-group--row-two';
+  }
+  return $classes;
+}
 
 /*********************
 LAUNCH starter
@@ -83,6 +123,7 @@ if ( ! isset( $content_width ) ) {
 add_image_size( 'tectn-thumb-600', 600, 150, true );
 add_image_size( 'tectn-thumb-300', 300, 100, true );
 add_image_size( 'gallery-image', 680, 450, true );
+add_image_size( 'hero-bg', 1920, 1080, true ); // Hero background; use instead of full for better mobile performance
 
 /*
 to add more sizes, simply copy a line from above
@@ -109,6 +150,7 @@ add_filter( 'image_size_names_choose', 'starter_custom_image_sizes' );
 function starter_custom_image_sizes( $sizes ) {
     return array_merge( $sizes, array(
         'gallery-image' => __('Gallery Image'),
+        'hero-bg' => __('Hero background (1920×1080)'),
         'tectn-thumb-600' => __('600px by 150px'),
         'tectn-thumb-300' => __('300px by 100px'),
     ) );

@@ -1,8 +1,8 @@
 <!--HERO-LOGO-->
 <div class="hero__container hero__container--landing">
 	<div class="hero__container--inner">
-	<?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' ); ?>
-		<div class="hero__content hero__content--image col-xs-12"  style="background-image: url('<?php echo esc_url( $backgroundImg[0] ); ?>')">
+	<?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'hero-bg' ); ?>
+		<div class="hero__content hero__content--image col-xs-12"  style="background-image: url('<?php echo esc_url( $backgroundImg ? $backgroundImg[0] : '' ); ?>')">
 		<div class="hero__content hero__content--text col-xs-12 col-md-7">
 		
 		<svg class="hero__overlay--full-width" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">

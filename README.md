@@ -1,4 +1,19 @@
-# Starter Theme
+# TECTN Theme (Refactor)
+
+WordPress theme for Tennessee Environmental Council. Built on a starter theme with ACF blocks and BEM-style SCSS.
+
+## Development & build
+
+- **SCSS pipeline:** Gulp (Compass/config.rb is deprecated; do not use it).
+- **Compile SCSS:** `npm run build` or `gulp sass` — compiles only entry files: `style.scss`, `editor-style.scss`, `login.scss`, `admin.scss`.
+- **Production CSS (minified):** `gulp build:production` — compressed output for deployment.
+- **Watch + live reload:** `npm run watch` or `gulp watch`.
+
+Before release, run `npm run build` (or `gulp build:production` for minified CSS) and test on a staging site.
+
+---
+
+# Starter Theme (legacy)
 Base line Wordpress theme.
 
 # H1

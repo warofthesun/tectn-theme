@@ -90,44 +90,61 @@ function starter_gallery_style($css) {
 SCRIPTS & ENQUEUEING
 *********************/
 
-// loading modernizr and jquery, and reply script
+// Cache-busting version: theme version in production; filemtime in dev when file exists.
+function tectn_asset_version( $path_relative_to_theme ) {
+	$path = get_template_directory() . '/' . $path_relative_to_theme;
+	if ( file_exists( $path ) ) {
+		return (string) filemtime( $path );
+	}
+	return wp_get_theme()->get( 'Version' ) ?: '1.0.0';
+}
+
+// Load ScrollReveal only on front page / blog where hero or archive cards are used.
+function tectn_needs_scroll_reveal() {
+	return is_front_page() || is_home() || is_archive();
+}
+
+// loading scripts and styles with versioning and conditional third-party assets
 function starter_scripts_and_styles() {
+	if ( is_admin() ) {
+		return;
+	}
 
+	$theme_uri = get_stylesheet_directory_uri();
+	$version   = tectn_asset_version( 'library/css/style.css' );
+	$js_version = tectn_asset_version( 'library/js/scripts.js' );
 
-  if (!is_admin()) {
+	// Main stylesheet (always)
+	wp_register_style( 'starter-stylesheet', $theme_uri . '/library/css/style.css', array(), $version, 'all' );
+	wp_enqueue_style( 'starter-stylesheet' );
 
-		// modernizr (without media query polyfill)
-		wp_register_script( 'starter-modernizr', get_stylesheet_directory_uri() . '/library/js/libs/modernizr.custom.min.js', array(), '2.5.3', true );
+	// Comment reply script for threaded comments
+	if ( is_singular() && comments_open() && ( get_option( 'thread_comments' ) == 1 ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
 
-		// register main stylesheet
-		wp_register_style( 'starter-stylesheet', get_stylesheet_directory_uri() . '/library/css/style.css', array(), '', 'all' );
+	// Font Awesome: enqueue in footer so it doesn't block render
+	wp_register_script( 'font-awesome-kit', 'https://kit.fontawesome.com/059e62f330.js', array(), null, true );
+	wp_enqueue_script( 'font-awesome-kit' );
 
+	// ScrollReveal: only on front, blog, archive so other pages stay light
+	$script_deps = array( 'jquery' );
+	if ( tectn_needs_scroll_reveal() ) {
+		wp_register_script( 'scrollreveal', 'https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js', array(), '4.0.9', true );
+		wp_enqueue_script( 'scrollreveal' );
+		wp_add_inline_script( 'scrollreveal', "window.sr = ScrollReveal({ duration: 600, reset: true, easing: 'ease-in', scale: .98, distance: '50px' });", 'after' );
+		$script_deps[] = 'scrollreveal';
+	}
 
-    // comment reply script for threaded comments
-    if ( is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) {
-		  wp_enqueue_script( 'comment-reply' );
-    }
+	// Main theme script (footer); depends on ScrollReveal when loaded so sr is defined before scripts.js runs
+	wp_register_script( 'starter-js', $theme_uri . '/library/js/scripts.js', $script_deps, $js_version, true );
+	wp_enqueue_script( 'starter-js' );
 
-		//adding scripts file in the footer
-	  wp_register_script( 'starter-js', get_stylesheet_directory_uri() . '/library/js/scripts.js', array( 'jquery' ), '', true );
-
-
-
-		// enqueue styles and scripts
+	// Modernizr: only if a script or style depends on it (filter to true to load)
+	$use_modernizr = apply_filters( 'tectn_load_modernizr', false );
+	if ( $use_modernizr ) {
+		wp_register_script( 'starter-modernizr', $theme_uri . '/library/js/libs/modernizr.custom.min.js', array(), '2.5.3', true );
 		wp_enqueue_script( 'starter-modernizr' );
-		wp_enqueue_style( 'starter-stylesheet' );
-
-
-		/*
-		I recommend using a plugin to call jQuery
-		using the google cdn. That way it stays cached
-		and your site will load faster.
-		*/
-		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'starter-js' );
-
-
-
 	}
 }
 

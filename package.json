@@ -15,6 +15,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp sass",
+    "build:production": "gulp build:production",
     "watch": "gulp watch",
     "postinstall": "node scripts/patch-http-proxy.js"
   },

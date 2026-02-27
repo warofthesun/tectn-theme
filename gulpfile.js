@@ -3,10 +3,18 @@ const sass = require('gulp-sass')(require('sass'));
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 
+// Only compile entry SCSS files (they @use partials). Avoids duplicate output from partials.
+const SCSS_ENTRIES = [
+  'library/scss/style.scss',
+  'library/scss/editor-style.scss',
+  'library/scss/login.scss',
+  'library/scss/admin.scss'
+];
+
 function styles() {
   return gulp
-    .src('library/scss/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
+    .src(SCSS_ENTRIES)
+    .pipe(sass({ includePaths: ['library/scss'] }).on('error', sass.logError))
     .pipe(
       autoprefixer({
         overrideBrowserslist: [
@@ -24,6 +32,16 @@ function styles() {
     .pipe(browserSync.stream());
 }
 
+function stylesProduction() {
+  const cleanCSS = require('gulp-clean-css');
+  return gulp
+    .src(SCSS_ENTRIES)
+    .pipe(sass({ includePaths: ['library/scss'], outputStyle: 'compressed' }).on('error', sass.logError))
+    .pipe(autoprefixer({ overrideBrowserslist: ['last 2 versions'], cascade: false }))
+    .pipe(cleanCSS({ level: 1 }))
+    .pipe(gulp.dest('library/css'));
+}
+
 function serve() {
   browserSync.init({
     port: 8000,
@@ -35,4 +53,6 @@ function serve() {
 }
 
 gulp.task('sass', styles);
+gulp.task('build', gulp.series(styles));
+gulp.task('build:production', stylesProduction);
 gulp.task('watch', gulp.series(styles, serve));

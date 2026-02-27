@@ -1,7 +1,6 @@
-# Compass is a great cross-platform tool for compiling SASS. 
-# This compass config file will allow you to 
-# quickly dive right in.
-# For more info about compass + SASS: http://net.tutsplus.com/tutorials/html-css-techniques/using-compass-and-sass-for-css-in-your-next-project/
+# DEPRECATED: This theme uses Gulp for SCSS. Run: npm run build (or gulp sass)
+# Compass is no longer used. See README.md for build instructions.
+# Legacy Compass config kept for reference only.
 
 
 #########

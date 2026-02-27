@@ -192,15 +192,12 @@ function loadGravatars() {
 } // end function
 
 
-/* This is the bit that makes the scroll animation
-
-Uncomment  the below to exclude first section from animation
-*/
-
-
-sr.reveal('.single-post:not(:first-child)');
-
-sr.reveal('.single-post');
+/* ScrollReveal: only run when ScrollReveal was enqueued (front/blog/archive) */
+document.addEventListener("DOMContentLoaded", () => {
+	if (typeof window.sr === "object" && window.sr.reveal) {
+		window.sr.reveal(".single-post");
+	}
+});
 
 document.addEventListener("DOMContentLoaded", () => {
 	const sections = document.querySelectorAll(".c-posts");
