@@ -4,7 +4,7 @@
 */
 ?>
 <?php get_header(); ?>
-<?php include 'partials/hero/hero-medium.php'; ?>
+<?php include get_template_directory() . '/partials/hero/hero.php'; ?>
 
 			<div id="content">
 

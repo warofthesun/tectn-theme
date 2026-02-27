@@ -1,6 +1,6 @@
 <!--index-->
 <?php get_header(); ?>
-<?php include 'partials/hero/hero-small.php'; ?>
+<?php include get_template_directory() . '/partials/hero/hero.php'; ?>
 			<div id="content">
 
 				<div id="inner-content" class="wrap row">
