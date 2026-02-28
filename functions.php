@@ -477,6 +477,49 @@ add_action('wp_enqueue_scripts', 'custom_fonts');
 add_action('admin_enqueue_scripts', 'custom_fonts');
 add_action('enqueue_block_editor_assets', 'custom_fonts');
 
+/**
+ * Enqueue Events Calendar list-view overrides after plugin CSS
+ * so theme fonts and colors (from :root) apply.
+ */
+function tectn_enqueue_tribe_events_overrides() {
+	if ( ! is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' ) ) {
+		return;
+	}
+	$path = get_template_directory() . '/tribe-events/tribe-events.css';
+	if ( ! file_exists( $path ) ) {
+		return;
+	}
+	wp_enqueue_style(
+		'tectn-tribe-events-overrides',
+		get_template_directory_uri() . '/tribe-events/tribe-events.css',
+		array( 'tribe-events-views-v2-full' ),
+		(string) filemtime( $path )
+	);
+}
+add_action( 'wp_enqueue_scripts', 'tectn_enqueue_tribe_events_overrides', 100 );
+
+// Inject event categories (tags) below the body content; structure matches posts-grid chips.
+add_action( 'tribe_template_after_include:events/v2/list/event/description', function() {
+  global $post;
+  if ( ! $post || ! isset( $post->ID ) ) {
+    return;
+  }
+  $taxonomy = Tribe__Events__Main::instance()->get_event_taxonomy();
+  $terms    = get_the_terms( $post->ID, $taxonomy );
+  if ( ! $terms || is_wp_error( $terms ) ) {
+    return;
+  }
+  echo '<div class="tribe-event-categories c-postCard__chips">';
+  foreach ( $terms as $term ) {
+    $url = get_term_link( $term, $taxonomy );
+    if ( is_wp_error( $url ) ) {
+      $url = '#';
+    }
+    echo '<a href="' . esc_url( $url ) . '" class="c-chip">' . esc_html( $term->name ) . '</a>';
+  }
+  echo '</div>';
+} );
+
 function tectn_fonts_preconnect( $urls, $relation_type ) {
   if ( 'preconnect' === $relation_type ) {
     $urls[] = array( 'href' => 'https://fonts.googleapis.com' );
