@@ -180,6 +180,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
               <feDropShadow dx="0" dy="-1" stdDeviation="2" flood-color="#fff" flood-opacity="0.35"/>
             </filter>
           </defs>
+          <rect class="rectangle" width="100%" height="100%" x="0" y="0" style="fill:url(#heroGrad)"></rect>
           <path class="curve curve--back" id="curveBack" d="M0,0 H220 C500,140 540,560 760,600 H0 Z" fill="url(#heroGrad)"/>
           <path class="curve curve--middle" id="curveMid" d="M0,550 C300,450 720,660 1000,430 L1000,600 L0,600 Z" fill="url(#heroGradTwo)"/>
           <path d="M0,565 C350,460 700,690 1000,510 L1000,610 L0,610 Z" fill="#FCF7EE" filter="url(#layerShadow)"/>

@@ -4013,7 +4013,7 @@ POSTS & CONTENT STYLES
   color: #EFF5D1;
 }
 .hero__container--landing .hero__content {
-  height: 90vh;
+  height: 50vh;
 }
 .hero__container--inner {
   position: relative;
@@ -4066,6 +4066,9 @@ POSTS & CONTENT STYLES
   inset: 0;
   width: 100%;
   height: 100%;
+}
+.hero__overlay-svg .curve--back, .hero__overlay-svg .curve--middle {
+  display: none;
 }
 .hero__overlay--initiative {
   background: -webkit-gradient(linear, right top, left bottom, from(rgba(35, 140, 85, 0.7)), color-stop(55%, rgba(60, 170, 110, 0.7)), to(rgba(245, 176, 73, 0.9)));
@@ -4469,190 +4472,130 @@ IMPORTING PARTIALS
   NAVIGATION STYLES
   *********************/
   /*********************
+  HERO STYLES
+  *********************/
+  .hero__container--landing .rectangle {
+    display: none;
+  }
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    width: 100vw;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero__overlay--full-width {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero__overlay-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero__overlay-svg .curve--back, .hero__overlay-svg .curve--middle {
+    display: inline;
+  }
+  .hero__content--text {
+    z-index: 2;
+  }
+  .hero__container {
+    position: relative;
+    top: -76px;
+  }
+  .hero__container h1 {
+    position: relative;
+    z-index: 2;
+  }
+  .hero__container--landing h1 {
+    font-size: 4.5em;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .hero__container--landing h1 span {
+    display: block;
+    color: #EFF1E5;
+    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.4em;
+    line-height: 1.1;
+  }
+  .hero__container--landing h3 {
+    margin-top: 0;
+  }
+  .hero__container--landing h3 ul {
+    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+    margin: 0;
+  }
+  .hero__container--landing h3 ul li {
+    display: inline-block;
+    color: #698f3d;
+    font-weight: 800;
+  }
+  .hero__container--landing h3 ul li:nth-child(1):after, .hero__container--landing h3 ul li:nth-child(2):after {
+    content: " • ";
+    color: #EFF5D1;
+  }
+  .hero__container--landing p {
+    font-size: 1.3em;
+  }
+  .hero__container--inner {
+    max-width: 1920px;
+    margin: auto;
+    position: relative;
+    margin-bottom: -120px;
+  }
+  .hero__container p {
+    color: #F4F5ED;
+  }
+  .hero__content--image {
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+  }
+  .hero__content--text {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 7%;
+    padding-right: 5%;
+  }
+  .hero__post--text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .hero__post--text h1 {
+    font-size: 3.5em;
+  }
+  /*********************
   POSTS & CONTENT STYLES
   *********************/
-  .testimonials {
-    margin-bottom: 2em;
-  }
-  .testimonials__background--white {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(245, 246, 247, 0.8)), to(rgba(245, 246, 247, 0.5))), url("../images/pattern_circle.png") repeat left top;
-    background: -webkit-linear-gradient(rgba(245, 246, 247, 0.8), rgba(245, 246, 247, 0.5)), url("../images/pattern_circle.png") repeat left top;
-    background: linear-gradient(rgba(245, 246, 247, 0.8), rgba(245, 246, 247, 0.5)), url("../images/pattern_circle.png") repeat left top;
-  }
-  .testimonials__background--white .attribution {
-    background: -webkit-linear-gradient(45deg, #87A564, #698f3d);
-    background: linear-gradient(45deg, #87A564, #698f3d);
-    color: #F9FBF3;
-  }
-  .testimonials__background--gold {
-    background: url("../images/pattern_circle.png") repeat left top, -webkit-gradient(linear, left top, left bottom, from(#A5BC8B), to(#87A564));
-    background: url("../images/pattern_circle.png") repeat left top, -webkit-linear-gradient(#A5BC8B, #87A564);
-    background: url("../images/pattern_circle.png") repeat left top, linear-gradient(#A5BC8B, #87A564);
-    border-top: 2px solid #698f3d;
-    border-bottom: 2px solid #547231;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-shadow: inset 0 8px 10px -10px rgba(21, 29, 12, 0.7);
-    box-shadow: inset 0 8px 10px -10px rgba(21, 29, 12, 0.7);
-  }
-  .testimonials__background--gold .attribution {
-    background: -webkit-linear-gradient(45deg, #C9DD67, #79853E);
-    background: linear-gradient(45deg, #C9DD67, #79853E);
-    color: #EFF1E5;
-  }
-  .testimonials__background--gold h3, .testimonials__background--gold h4 {
-    color: #79853E;
-  }
-  .testimonials__background--gold::before {
-    content: "What our clients say";
-    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
-    font-size: 2em;
-    line-height: 1;
-    border-radius: 0 0 20px 20px;
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -5px;
-    padding: 0 1em 0.5em 1em;
-    -webkit-box-shadow: 0px 3px 0px #698f3d, 0 8px 10px -10px rgba(21, 29, 12, 0.7);
-    box-shadow: 0px 3px 0px #698f3d, 0 8px 10px -10px rgba(21, 29, 12, 0.7);
-  }
-  .testimonials__content {
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding-bottom: 0em;
-  }
-  .testimonials__content .testimonial .quote-mark {
-    display: none;
-  }
-  .testimonials__content .testimonial {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .testimonials__content .testimonial h3 {
-    font-size: 2em;
-  }
-  .testimonials__content .testimonial h3::before {
-    content: "";
-    background-image: url(../images/marker/quote.png);
-    display: block;
-    height: 58px;
-    width: 58px;
-    margin: auto;
-  }
-  .testimonials__content .testimonial .attribution {
-    display: inline-block;
-    border-radius: 20px;
-    padding: 4px 16px;
-    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
-    font-weight: 700;
-    font-size: 1.2em;
-    margin: auto;
-    margin-bottom: 2em;
-  }
-  .testimonials__content > div:nth-last-of-type(2) .quote-mark, .testimonials__content > div:nth-last-of-type(2) ~ div .quote-mark, .testimonials__content > div:nth-last-of-type(3) .quote-mark, .testimonials__content > div:nth-last-of-type(3) ~ div .quote-mark {
-    display: inline;
-    width: 25px;
-    position: absolute;
-    margin-top: 1.5em;
-    margin-left: 1.5em;
-  }
-  .testimonials__content > div:nth-last-of-type(2), .testimonials__content > div:nth-last-of-type(2) ~ div, .testimonials__content > div:nth-last-of-type(3), .testimonials__content > div:nth-last-of-type(3) ~ div {
-    background-color: #fff;
-    border-radius: 1em;
-    padding: 0;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    border: 1px solid #698f3d;
-    margin-top: 2em;
-    margin-bottom: 2em;
-  }
-  .testimonials__content > div:nth-last-of-type(2) h3, .testimonials__content > div:nth-last-of-type(2) ~ div h3, .testimonials__content > div:nth-last-of-type(3) h3, .testimonials__content > div:nth-last-of-type(3) ~ div h3 {
-    font-size: 1.1em;
-    margin: 0;
-    padding: 1.5em;
-    padding-left: 3.5em;
-    text-align: left;
-  }
-  .testimonials__content > div:nth-last-of-type(2) h3::before, .testimonials__content > div:nth-last-of-type(2) ~ div h3::before, .testimonials__content > div:nth-last-of-type(3) h3::before, .testimonials__content > div:nth-last-of-type(3) ~ div h3::before {
-    display: none;
-  }
-  .testimonials__content > div:nth-last-of-type(2) h3 p, .testimonials__content > div:nth-last-of-type(2) ~ div h3 p, .testimonials__content > div:nth-last-of-type(3) h3 p, .testimonials__content > div:nth-last-of-type(3) ~ div h3 p {
-    padding: 0;
-    margin: 0;
-  }
-  .testimonials__content > div:nth-last-of-type(2) .attribution, .testimonials__content > div:nth-last-of-type(2) ~ div .attribution, .testimonials__content > div:nth-last-of-type(3) .attribution, .testimonials__content > div:nth-last-of-type(3) ~ div .attribution {
-    padding: 1em 1.5em;
-    border-radius: 0 0 0.75em 0.75em;
-    font-weight: 700;
-    font-size: 1em;
-    margin: 0;
-  }
-  .testimonials__content > div:nth-last-of-type(2), .testimonials__content > div:nth-last-of-type(2) ~ div {
-    width: 48%;
-  }
-  .testimonials__content > div:nth-last-of-type(3), .testimonials__content > div:nth-last-of-type(3) ~ div {
-    width: 32%;
-  }
-  .testimonials__sidebar {
-    border-left: 2px solid #698f3d;
-    border-top: 0;
-    padding-left: 2em;
-  }
-  .testimonials__sidebar li {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    max-width: 100%;
-  }
-  .testimonials__sidebar li .quote-mark {
-    display: inline;
-    width: 50px;
-    height: 50px;
-    margin-right: 1.25em;
-  }
-  .testimonials__sidebar li h3 {
-    margin-top: 0;
-    font-size: 1.2em;
-    line-height: 1.2;
-  }
-  .testimonials__sidebar li h3 p {
-    margin-top: 0;
-  }
-  .testimonials__sidebar li .attribution {
-    background: -webkit-linear-gradient(45deg, #C9DD67, #79853E);
-    background: linear-gradient(45deg, #C9DD67, #79853E);
-    color: #EFF1E5;
-    display: inline-block;
-    border-radius: 20px;
-    padding: 4px 16px;
-    font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
-    font-weight: 700;
-    font-size: 1em;
-    margin: auto;
-    margin-bottom: 2em;
-  }
   /* entry content */
   .entry-content {
     /* at this larger size, we can start to align images */
@@ -4930,6 +4873,9 @@ IMPORTING PARTIALS
   }
   .hero__container--landing p {
     font-size: 1.3em;
+  }
+  .hero__container--landing .hero__content {
+    height: 90vh;
   }
   .hero__container--inner {
     max-width: 1920px;

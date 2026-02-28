@@ -6,192 +6,152 @@
   *********************/
 
 
-
-
   /*********************
-  POSTS & CONTENT STYLES
+  HERO STYLES
   *********************/
 
-  .testimonials {
-  	margin-bottom: 2em;
-  	&__background {
-  		&--white {
-  			@include pattern_overlay;
+  .hero__container--landing {
+	.rectangle {
+		display: none;
+	}
+  }
 
-  			.attribution {
-  				@include gradient(45deg, $secondary-two_stops);
-  				color: $secondary-50;
-  			}
+  .hero {
+
+	&__overlay {
+		position: absolute;
+		inset: 0;
+		width: 100vw;
+		height: 100%;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	&__overlay--full-width {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		width: 100vw;
+		transform: translateX(-50%);
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	&__overlay-svg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+
+		.curve--back, .curve--middle {
+			display: inline;
+		}
+	}
+
+	&__content--text {
+		z-index: 2;
+	}
+
+  	&__container {
+		position: relative;
+		top: -76px;
+
+  		h1 {
+  			position: relative;
+			z-index: 2;
   		}
 
-  		&--gold {
-  			@include gold_overlay_gradient_light;
-  			border-top: 2px solid $secondary-500;
-  			border-bottom: 2px solid $secondary-600;
-  			display: flex;
-  			flex-direction: column;
-  			box-shadow: inset 0 8px 10px -10px rgba($secondary-900, 0.7);
+  		&--landing {
+  			h1 {
+  			font-size: 4.5em;
+  			margin-top: 0;
+  			margin-bottom: 0;
 
-  			.attribution {
-  				@include gradient(45deg, $primary-two_stops__dark);
+  			span {
+  				display: block;
   				color: $primary-50;
+  				font-family: $header-font;
+  				text-transform: uppercase;
+  				font-size: .4em;
+  				line-height: 1.1;
   			}
-
-  			h3, h4 {
-  				color: $primary-700;
-  			}
-
-  			&::before {
-  					content: "What our clients say";
-  					font-family: $header-font;
-  					font-size: 2em;
-  					line-height: 1;
-  					border-radius: 0 0 20px 20px;
-  					display: inline-block;
-  					margin-left: auto;
-  					margin-right: auto;
-  					margin-top: -5px;
-  					padding: 0 1em .5em 1em;
-  					box-shadow: 0px 3px 0px $secondary-500, 0 8px 10px -10px rgba($secondary-900, 0.7);
-
-  				}
-
-  		}
-  	}
-
-  	&__content {
-  		justify-content: space-between;
-  		padding-bottom: $spacing-none;
-
-  		.testimonial {
-  			.quote-mark {
-  				display: none;
-  			}
-  			display: flex;
-  			flex-direction: column;
-  			margin-left: auto;
-  			margin-right: auto;
-
-  				h3 {
-  					font-size: 2em;
-
-  					&::before {
-  						content: "";
-  						background-image: url(../images/marker/quote.png);
-  						display: block;
-  						height: 58px;
-  						width: 58px;
-  						margin: auto;
-  					}
-  				}
-
-  				.attribution {
-  					display: inline-block;
-  					border-radius: 20px;
-  					padding: 4px 16px;
-  					font-family: $header-font;
-  					font-weight: 700;
-  					font-size: 1.2em;
-  					margin: auto;
-  					margin-bottom: $spacing-xxl;
-  				}
-  			}
-
-  			& > div:nth-last-of-type(2), & > div:nth-last-of-type(2) ~ div, & > div:nth-last-of-type(3), & > div:nth-last-of-type(3) ~ div {
-  				.quote-mark {
-  					display: inline;
-  					width: 25px;
-  					position: absolute;
-  					margin-top: 1.5em;
-  					margin-left: 1.5em;
-  				}
-  				background-color: $white;
-  				border-radius: $radius-lg;
-  				padding: 0;
-  				justify-content: space-between;
-  				display: flex;
-  				flex-direction: column;
-  				border: 1px solid $secondary-500;
-  				margin-top: $spacing-xxl;
-  				margin-bottom: $spacing-xxl;
-
-  				h3 {
-  					font-size: 1.1em;
-  					margin: 0;
-  					padding: $spacing-xl;
-  					padding-left: 3.5em;
-  					text-align: left;
-
-  					&::before {
-  						display: none;
-  					}
-
-
-  					p {
-  						padding: 0;
-  						margin: 0;
-  					}
-  				}
-
-  				.attribution {
-  					padding: $spacing-md $spacing-xl;
-  					border-radius: 0 0 $radius-md $radius-md;
-  					font-weight: 700;
-  					font-size: 1em;
-  					margin: 0;
-
-  				}
-  			}
-
-  			& > div:nth-last-of-type(2), & > div:nth-last-of-type(2) ~ div {
-  				width: 48%;
-  			}
-
-  			& > div:nth-last-of-type(3), & > div:nth-last-of-type(3) ~ div {
-  				width: 32%;
-  			}
-  		}
-
-  	&__sidebar {
-  		border-left: 2px solid $secondary-500;
-  		border-top: 0;
-  		padding-left: 2em;
-
-  		li {
-  			display: flex;
-  			max-width: 100%;
-
-  			.quote-mark {
-  				display: inline;
-  				width: 50px;
-  				height: 50px;
-  				margin-right: $spacing-lg;
   			}
 
   			h3 {
   				margin-top: 0;
-  				font-size: 1.2em;
-  				line-height: 1.2;
-
-  				p {
-  					margin-top: 0;
-  				}
-  		}
-  		.attribution {
-  			@include gradient(45deg, $primary-two_stops__dark);
-  				color: $primary-50;
-  				display: inline-block;
-  				border-radius: 20px;
-  				padding: 4px 16px;
+  				ul {
   				font-family: $header-font;
-  				font-weight: 700;
-  				font-size: 1em;
-  				margin: auto;
-  				margin-bottom: $spacing-xxl;
+  				margin:0;
+
+  				li {
+  					display: inline-block;
+  					color: $secondary-500;
+  					font-weight: 800;
+
+  					&:nth-child(1), &:nth-child(2) {
+  						&:after {
+  							content: " • ";
+  							color: $primary-200;
+  						}
+  					}
+  				}
+  				}
   			}
+
+  			p {
+  				font-size: 1.3em;
+  			}
+
+  		}
+
+  		&--inner {
+  			max-width: 1920px;
+  			margin: auto;
+			position: relative;
+			margin-bottom: -120px;
+  		}
+
+  		p {
+  			color: $primary-10;
   		}
   	}
+
+  	&__content {
+
+  			&--image {
+  				background-size: cover;
+  				background-position: center;
+  				padding: 0;
+  			}
+
+  			&--text {
+  				position: absolute;
+  				display: flex;
+  				flex-direction: column;
+  				justify-content: center;
+  				padding-left: 7%;
+  				padding-right: 5%;
+  			}
+  	}
+
+  	&__post {
+  		&--text {
+  			display: flex;
+  			flex-direction: column;
+  			justify-content: center;
+
+  			h1 {
+  			font-size: 3.5em;
+  			}
+  		}
+
+  	}
   }
+
+  /*********************
+  POSTS & CONTENT STYLES
+  *********************/
 
   /* entry content */
   .entry-content {

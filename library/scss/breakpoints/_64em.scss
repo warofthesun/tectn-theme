@@ -164,6 +164,7 @@
 
   .hero {
 
+
 	&__overlay {
 		position: absolute;
 		inset: 0;
@@ -244,6 +245,10 @@
   			p {
   				font-size: 1.3em;
   			}
+
+			.hero__content {
+				height: 90vh;
+			}
 
   		}
 
