@@ -65,6 +65,87 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
     </div>
   </div>
 
+<?php elseif ( $hero_type === 'initiative' ) : ?>
+  <?php
+  $init_bg_style = '';
+  if ( isset( $d['background_type'] ) && $d['background_type'] === 'color' && ! empty( $d['background_color'] ) ) {
+    $init_bg_style = 'background-color: ' . esc_attr( $d['background_color'] ) . ';';
+  } elseif ( ! empty( $d['background_image'] ) ) {
+    $img = wp_get_attachment_image_src( (int) $d['background_image'], 'hero-bg' );
+    if ( $img ) {
+      $init_bg_style = 'background-image: url(' . esc_url( $img[0] ) . ');';
+    }
+  }
+  $gradient_class = ( isset( $d['gradient_style'] ) && $d['gradient_style'] === 'contained' ) ? 'hero__container--gradient-contained' : 'hero__container--gradient-full';
+  ?>
+  <div class="hero__container hero__container--initiative <?php echo esc_attr( $gradient_class ); ?>">
+    <div class="hero__container--inner">
+      <?php if ( $init_bg_style ) : ?>
+        <div class="hero__content hero__content--bg col-xs-12" style="<?php echo $init_bg_style; ?>"></div>
+      <?php endif; ?>
+
+      <?php if ( $gradient_class === 'hero__container--gradient-full' ) : ?>
+        <div class="hero__overlay hero__overlay--initiative hero__overlay--full-width" aria-hidden="true"></div>
+      <?php endif; ?>
+
+      <?php if ( $gradient_class === 'hero__container--gradient-full' ) : ?>
+        <div class="hero__wave hero__wave--initiative" aria-hidden="true">
+          <svg class="hero__wave-svg" viewBox="0 455 1000 160" preserveAspectRatio="none">
+            <defs>
+              <filter id="layerShadowWave" x="-35%" y="-35%" width="170%" height="170%">
+                <feDropShadow dx="0" dy="-6" stdDeviation="14" flood-color="#000" flood-opacity="0.14"/>
+                <feDropShadow dx="0" dy="-2" stdDeviation="5" flood-color="#000" flood-opacity="0.18"/>
+              </filter>
+              <filter id="edgeHighlightWave" x="-35%" y="-35%" width="170%" height="170%">
+                <feDropShadow dx="0" dy="-1" stdDeviation="2" flood-color="#fff" flood-opacity="0.35"/>
+              </filter>
+            </defs>
+            <path d="M0,565 C350,460 700,690 1000,510 L1000,610 L0,610 Z" fill="#FCF7EE" filter="url(#layerShadowWave)"/>
+            <path d="M0,565 C350,460 700,690 1000,510" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round" filter="url(#edgeHighlightWave)" opacity="0.55"/>
+          </svg>
+        </div>
+      <?php endif; ?>
+
+      <div class="hero__content hero__content--text hero__content--initiative col-xs-12">
+        <div class="hero__headline hero__headline--initiative">
+          <?php if ( ! empty( $d['headline_type'] ) && $d['headline_type'] === 'logo' && ! empty( $d['logo_id'] ) ) : ?>
+            <?php echo wp_get_attachment_image( (int) $d['logo_id'], 'medium', false, array( 'class' => 'hero__logo' ) ); ?>
+          <?php elseif ( ! empty( $d['headline_text'] ) ) : ?>
+            <h1 class="hero__title hero__title--initiative"><?php echo esc_html( $d['headline_text'] ); ?></h1>
+          <?php endif; ?>
+        </div>
+      </div>
+
+      <?php if ( ! empty( $d['lower_content'] ) || $gradient_class === 'hero__container--gradient-contained' ) : ?>
+        <div class="hero__lower hero__lower--initiative <?php echo $gradient_class === 'hero__container--gradient-contained' ? 'hero__lower--gradient-contained' : ''; ?>">
+          <?php if ( $gradient_class === 'hero__container--gradient-contained' ) : ?>
+            <div class="hero__lower-gradient hero__overlay hero__overlay--initiative hero__overlay--full-width" aria-hidden="true"></div>
+            <div class="hero__wave hero__wave--initiative hero__wave--lower" aria-hidden="true">
+              <svg class="hero__wave-svg" viewBox="0 455 1000 160" preserveAspectRatio="none">
+                <defs>
+                  <filter id="layerShadowWaveLower" x="-35%" y="-35%" width="170%" height="170%">
+                    <feDropShadow dx="0" dy="-6" stdDeviation="14" flood-color="#000" flood-opacity="0.14"/>
+                    <feDropShadow dx="0" dy="-2" stdDeviation="5" flood-color="#000" flood-opacity="0.18"/>
+                  </filter>
+                  <filter id="edgeHighlightWaveLower" x="-35%" y="-35%" width="170%" height="170%">
+                    <feDropShadow dx="0" dy="-1" stdDeviation="2" flood-color="#fff" flood-opacity="0.35"/>
+                  </filter>
+                </defs>
+                <path d="M0,565 C350,460 700,690 1000,510 L1000,610 L0,610 Z" fill="#FCF7EE" filter="url(#layerShadowWaveLower)"/>
+                <path d="M0,565 C350,460 700,690 1000,510" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round" filter="url(#edgeHighlightWaveLower)" opacity="0.55"/>
+              </svg>
+            </div>
+          <?php endif; ?>
+          <?php if ( ! empty( $d['lower_content'] ) ) : ?>
+            <div class="hero__lower-content">
+              <?php echo $d['lower_content']; ?>
+            </div>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
+    </div>
+  </div>
+
 <?php else : ?>
   <?php
   // Landing (full hero with overlay, optional headline/paragraph/CTAs, optional featured post)
