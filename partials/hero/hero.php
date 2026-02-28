@@ -100,7 +100,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
                 <feDropShadow dx="0" dy="-1" stdDeviation="2" flood-color="#fff" flood-opacity="0.35"/>
               </filter>
             </defs>
-            <path d="M0,565 C350,460 700,690 1000,510 L1000,610 L0,610 Z" fill="#FCF7EE" filter="url(#layerShadowWave)"/>
+            <path d="M0,565 C350,460 700,690 1000,510 L1000,615 L0,615 Z" fill="#FCF7EE" filter="url(#layerShadowWave)"/>
             <path d="M0,565 C350,460 700,690 1000,510" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round" filter="url(#edgeHighlightWave)" opacity="0.55"/>
           </svg>
         </div>
@@ -131,7 +131,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
                     <feDropShadow dx="0" dy="-1" stdDeviation="2" flood-color="#fff" flood-opacity="0.35"/>
                   </filter>
                 </defs>
-                <path d="M0,565 C350,460 700,690 1000,510 L1000,610 L0,610 Z" fill="#FCF7EE" filter="url(#layerShadowWaveLower)"/>
+                <path class="hero__wave-fill" d="M0,565 C350,460 700,690 1000,510 L1000,615 L0,615 Z" filter="url(#layerShadowWaveLower)"/>
                 <path d="M0,565 C350,460 700,690 1000,510" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round" filter="url(#edgeHighlightWaveLower)" opacity="0.55"/>
               </svg>
             </div>
@@ -154,8 +154,9 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
     $img = wp_get_attachment_image_src( (int) $d['image_id'], 'hero-bg' );
     $bg_url = $img ? $img[0] : '';
   }
+  $landing_internal = ! is_front_page();
   ?>
-  <div class="hero__container hero__container--landing">
+  <div class="hero__container hero__container--landing<?php echo $landing_internal ? ' hero__container--landing-internal' : ''; ?>">
     <div class="hero__container--inner">
       <div class="hero__content hero__content--image col-xs-12" style="background-image: url('<?php echo esc_url( $bg_url ); ?>');"></div>
 
@@ -183,7 +184,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
           <rect class="rectangle" width="100%" height="100%" x="0" y="0" style="fill:url(#heroGrad)"></rect>
           <path class="curve curve--back" id="curveBack" d="M0,0 H220 C500,140 540,560 760,600 H0 Z" fill="url(#heroGrad)"/>
           <path class="curve curve--middle" id="curveMid" d="M0,550 C300,450 720,660 1000,430 L1000,600 L0,600 Z" fill="url(#heroGradTwo)"/>
-          <path d="M0,565 C350,460 700,690 1000,510 L1000,610 L0,610 Z" fill="#FCF7EE" filter="url(#layerShadow)"/>
+          <path class="hero__wave-fill" d="M0,565 C350,460 700,690 1000,510 L1000,615 L0,615 Z" filter="url(#layerShadow)"/>
           <path d="M0,565 C350,460 700,690 1000,510" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round" filter="url(#edgeHighlight)" opacity="0.55"/>
         </svg>
       </div>

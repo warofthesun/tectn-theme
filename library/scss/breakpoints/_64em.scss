@@ -259,6 +259,11 @@
 			margin-bottom: -120px;
   		}
 
+		// Internal pages: no overlap so green overlay doesn't cover content below
+		&--landing-internal &--inner {
+			margin-bottom: 0;
+		}
+
   		p {
   			color: $primary-10;
   		}

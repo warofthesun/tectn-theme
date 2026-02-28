@@ -143,16 +143,13 @@ function tectn_get_hero_config() {
         $image_id = (int) $hero_img;
       }
     }
-    // Initiative hero: use initiative_hero_options group
+    // Initiative hero: use initiative_hero_options group; background = page featured image unless "use solid color" is on
     if ( $hero_style === 'initiative' ) {
       $init = get_field( 'initiative_hero_options', $post->ID );
       if ( ! is_array( $init ) ) {
         $init = array();
       }
-      $bg_image_id = 0;
-      if ( ! empty( $init['background_image'] ) ) {
-        $bg_image_id = is_array( $init['background_image'] ) && ! empty( $init['background_image']['ID'] ) ? (int) $init['background_image']['ID'] : (int) $init['background_image'];
-      }
+      $use_solid_color = ! empty( $init['use_solid_color'] );
       $logo_id = 0;
       if ( ! empty( $init['logo'] ) ) {
         $logo_id = is_array( $init['logo'] ) && ! empty( $init['logo']['ID'] ) ? (int) $init['logo']['ID'] : (int) $init['logo'];
@@ -161,8 +158,8 @@ function tectn_get_hero_config() {
         'show' => true,
         'type' => 'initiative',
         'data' => array(
-          'background_type'  => isset( $init['background_type'] ) ? $init['background_type'] : 'image',
-          'background_image' => $bg_image_id,
+          'background_type'  => $use_solid_color ? 'color' : 'image',
+          'background_image' => $use_solid_color ? 0 : $image_id,
           'background_color' => isset( $init['background_color'] ) ? $init['background_color'] : '#238c55',
           'headline_type'    => isset( $init['headline_type'] ) ? $init['headline_type'] : 'text',
           'logo_id'          => $logo_id,

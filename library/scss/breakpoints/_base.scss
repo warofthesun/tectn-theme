@@ -8,6 +8,12 @@
 GENERAL STYLES
 *********************/
 
+// Prevent horizontal scroll from 100vw / full-bleed elements (100vw includes scrollbar width)
+html,
+body {
+	overflow-x: hidden;
+}
+
 body {
 	font-family: $body-font;
 	font-size: 100%;
@@ -330,7 +336,7 @@ BAND / SECTION WRAPPER
   width: 100vw;
   height: calc(var(--wave-h) + 2px); /* overscan prevents seams */
   transform: translateX(-50%);
-  background: var(--waveband-bg);
+  @include surface_primary__content;
   pointer-events: none;
 
   -webkit-mask: url("../images/curve.svg") no-repeat center / 100% 100%;
@@ -459,7 +465,7 @@ BAND / SECTION WRAPPER
   	max-height: var(--posts-bg-max-h);
   
 	/* Page background color used for the masked waves */
-	--posts-bg: var(--c-page-bg, #f7f7f2);
+	--posts-bg: var(--c-page-bg, #F9FBF3);
   
 	/* Height of your curve.svg (match what you used before) */
 	--wave-h: 120px;
@@ -1093,6 +1099,7 @@ POSTS & CONTENT STYLES
 			display: flex;
 			flex-direction: column;
 			min-height: 70vh;
+			margin-bottom: -120px; // pull content up so wave meets page with no gap
 		}
 	}
 
@@ -1174,9 +1181,23 @@ POSTS & CONTENT STYLES
 		z-index: 1;
 	}
 
+	// Match surface_primary__content (page background) so wave meets content with no visible seam
+	&__wave--lower .hero__wave-svg .hero__wave-fill {
+		fill: $secondary-50;
+	}
+
+	// Landing hero: same fill from surface_primary__content
+	&__container--landing .hero__overlay-svg .hero__wave-fill {
+		fill: $secondary-50;
+	}
+
 	&__lower-content {
 		position: relative;
 		z-index: 2;
+		width: 96%;
+		max-width: 1440px;
+		margin-left: auto;
+		margin-right: auto;
 		color: $primary-10;
 
 		p:last-child {
