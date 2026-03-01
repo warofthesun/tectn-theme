@@ -5,6 +5,7 @@
  * Match: cream bg, date block black (Bebas), date/time olive, title & description dark, tags sage+green.
  */
 
+ 
 /* ========== Theme fonts – must override plugin's var(--tec-font-family-*) ========== */
 .tribe-events-view--list,
 .tribe-events-view--month,
@@ -199,6 +200,9 @@
 .tribe-events .tribe-events-c-view-selector__list,
 .tribe-events .tribe-events-c-view-selector__list-item {
   list-style: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .tribe-events .tribe-events-c-view-selector__list-item-link,
@@ -229,6 +233,11 @@
   text-transform: uppercase !important;
   letter-spacing: 0.02em !important;
   color: inherit !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-top: 2px !important;
 }
 
 .tribe-events .tribe-events-c-view-selector__list-item-icon-svg path {
@@ -241,6 +250,10 @@
   background-color: #698f3d !important;
   color: #fff !important;
   border: 1px solid #698f3d !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-text {
@@ -252,6 +265,10 @@
   background-color: #547231 !important;
   border-color: #547231 !important;
   color: #fff !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-icon-svg path {
@@ -321,8 +338,9 @@
   color: #698f3d !important;
   background-color: #fff !important;
   border: 1px solid #698f3d !important;
-  border-radius: 4px !important;
+  border-radius: $border-radius-md !important;
   padding: 0.35rem 0.75rem !important;
+  padding-top: 8px !important;
   text-decoration: none !important;
 }
 
@@ -386,10 +404,6 @@
   font-weight: 500 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.04em !important;
-}
-
-.tribe-events-view--list .tribe-events-calendar-list__month-separator {
-  border-bottom-color: #E2E5E7 !important;
 }
 
 /* ========== Date block – both WED and 25 black (per second image) ========== */

@@ -89,3 +89,9 @@ Stylesheet: Tokens
 @mixin color_surface__dark_primary {
     background-color: $primary-600;
 }
+
+/* COLOR - BORDER */
+
+@mixin color_border__primary {
+    border-color: $primary-400;
+}

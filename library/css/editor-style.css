@@ -702,6 +702,7 @@ Stylesheet: Tokens
 /* COLOR - SURFACE */
 /* COLOR - TEXT */
 /* COLOR - SURFACE */
+/* COLOR - BORDER */
 /******************************************************************
 Site Name:
 Author:
@@ -1875,6 +1876,59 @@ Buttons and such
 .c-button-pair .c-button-pair__button:nth-child(2) {
   margin-left: 1em;
 }
+/*********************
+THE EVENTS CALENDAR
+*********************/
+.tribe-events-calendar-month {
+  border: none !important;
+}
+
+.tribe-events-calendar-month__header-column {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.tribe-events-calendar-list__event-row {
+  max-width: 960px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.tribe-events-calendar-list__month-separator {
+  border-bottom: 1px solid #A1B152 !important;
+}
+
+.tribe-events .tribe-events-c-events-bar {
+  border: 1px solid #A1B152 !important;
+  border-radius: 0.75em !important;
+  background-color: #fff !important;
+}
+
+.tribe-events-calendar-month__day.tribe-events-calendar-month__day--current {
+  background-color: #EFF1E5 !important;
+}
+.tribe-events-calendar-month__day.tribe-events-calendar-month__day--current .tribe-events-calendar-month__day-date-daynum {
+  color: #79853E !important;
+}
+
+.tribe-events-c-view-selector__list-item-text {
+  padding-top: 2px !important;
+}
+
+.tribe-events-c-search__input {
+  max-width: 95% !important;
+}
+
+.tribe-events-c-top-bar__today-button {
+  padding-top: 8px !important;
+}
+
+.events-intro {
+  margin-top: 100px !important;
+  max-width: 960px;
+  text-align: center;
+}
+
 /********************
 WORDPRESS BODY CLASSES
 style a page via class
