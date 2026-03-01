@@ -65,6 +65,40 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
     </div>
   </div>
 
+<?php elseif ( $hero_type === 'events' ) : ?>
+  <?php
+  // Events hero: same gradient overlay as initiative when image; solid color when no image; no wave, no logo.
+  $events_bg_style = '';
+  if ( isset( $d['background_type'] ) && $d['background_type'] === 'color' && ! empty( $d['background_color'] ) ) {
+    $events_bg_style = 'background-color: ' . esc_attr( $d['background_color'] ) . ';';
+  } elseif ( ! empty( $d['background_image'] ) ) {
+    $img = wp_get_attachment_image_src( (int) $d['background_image'], 'hero-bg' );
+    if ( $img ) {
+      $events_bg_style = 'background-image: url(' . esc_url( $img[0] ) . ');';
+    }
+  }
+  $has_image = ! empty( $events_bg_style ) && strpos( $events_bg_style, 'background-image' ) !== false;
+  ?>
+  <div class="hero__container hero__container--events hero__container--initiative hero__container--gradient-full">
+    <div class="hero__container--inner">
+      <?php if ( $events_bg_style ) : ?>
+        <div class="hero__content hero__content--bg col-xs-12" style="<?php echo $events_bg_style; ?>"></div>
+      <?php endif; ?>
+
+      <?php if ( $has_image ) : ?>
+        <div class="hero__overlay hero__overlay--initiative hero__overlay--full-width" aria-hidden="true"></div>
+      <?php endif; ?>
+
+      <div class="hero__content hero__content--text hero__content--initiative hero__content--events col-xs-12">
+        <div class="hero__headline hero__headline--initiative hero__headline--events">
+          <?php if ( ! empty( $d['headline_text'] ) ) : ?>
+            <h1 class="hero__title hero__title--initiative"><?php echo esc_html( $d['headline_text'] ); ?></h1>
+          <?php endif; ?>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <?php elseif ( $hero_type === 'initiative' ) : ?>
   <?php
   $init_bg_style = '';

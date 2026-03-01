@@ -1,5 +1,6 @@
 /**
  * The Events Calendar – list, month, and day views: theme fonts and colors.
+ * Intended for both Skeleton and Full styles; enqueue dependency is set in functions.php.
  * Uses !important so overrides win over plugin CSS. No layout changes.
  * Match: cream bg, date block black (Bebas), date/time olive, title & description dark, tags sage+green.
  */
@@ -59,13 +60,233 @@
   background-color: var(--posts-bg, #F9FBF3) !important;
 }
 
+/* List and day content area: max-width 1144px, centered (view wrapper and inner section) */
+.tribe-events-calendar-list {
+  max-width: 1044px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.tribe-events-view--list,
+.tribe-events-view--day {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.tribe-events-view--list section.tribe-common-l-container,
+.tribe-events-view--list .tribe-common-l-container.tribe-events-l-container,
+.tribe-events-view--day section.tribe-common-l-container,
+.tribe-events-view--day .tribe-common-l-container.tribe-events-l-container {
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* ========== Search bar (list, month, day): match image – light bg, olive accents, rounded corners ========== */
+.tribe-events .tribe-events-c-events-bar {
+  background-color: var(--posts-bg, #F9FBF3) !important;
+  border-color: #E2E5E7 !important;
+}
+
+/* Search form and input group: rounded corners – form clips so input area shows rounded left */
+.tribe-events .tribe-events-c-search.tribe-events-c-events-bar__search-form {
+  border-radius: 8px !important;
+  -webkit-border-radius: 8px !important;
+  overflow: hidden !important;
+  display: flex !important;
+}
+
+.tribe-events .tribe-events-c-search__input-group {
+  border-radius: 8px 0 0 8px !important;
+  -webkit-border-radius: 8px 0 0 8px !important;
+  overflow: hidden !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+.tribe-events .tribe-common-form-control-text.tribe-events-c-search__input-control--keyword,
+.tribe-events .tribe-events-c-search__input-control--keyword {
+  background-color: #fff !important;
+  border: none !important;
+  border-radius: 8px 0 0 8px !important;
+  -webkit-border-radius: 8px 0 0 8px !important;
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+/* Search input: rounded left corners (high specificity so plugin cannot override) */
+.tribe-events #tribe-events-events-bar-search .tribe-events-c-search__input,
+.tribe-events #tribe-events-events-bar-search .tribe-common-form-control-text__input.tribe-events-c-search__input,
+.tribe-events .tribe-events-c-events-bar__search-container .tribe-events-c-search__input,
+.tribe-events .tribe-events-c-search__input,
+.tribe-events .tribe-common-form-control-text__input.tribe-events-c-search__input {
+  background-color: #fff !important;
+  color: #698f3d !important;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.02em !important;
+  border: none !important;
+  border-radius: 8px 0 0 8px !important;
+  -webkit-border-radius: 8px 0 0 8px !important;
+  box-sizing: border-box !important;
+}
+
+.tribe-events .tribe-events-c-search__input::placeholder {
+  color: #698f3d !important;
+  opacity: 0.9 !important;
+}
+
+.tribe-events .tribe-events-c-search__input-control-icon-svg path {
+  fill: #698f3d !important;
+}
+
+/* Find Events button: transparent bg, thin olive border, olive text, rounded right corners */
+.tribe-events .tribe-events-c-search__button,
+.tribe-events .tribe-common-c-btn.tribe-events-c-search__button,
+.tribe-events button.tribe-events-c-search__button {
+  background-color: transparent !important;
+  color: #698f3d !important;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.02em !important;
+  border: 1px solid #698f3d !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.tribe-events .tribe-events-c-search__button:hover,
+.tribe-events .tribe-common-c-btn.tribe-events-c-search__button:hover,
+.tribe-events button.tribe-events-c-search__button:hover {
+  background-color: rgba(105, 143, 61, 0.08) !important;
+  color: #547231 !important;
+  border-color: #547231 !important;
+}
+
+/* View selector button (shows current view e.g. DAY): active style – olive bg, white text, rounded */
+.tribe-events .tribe-events-c-view-selector__button,
+.tribe-events button.tribe-events-c-view-selector__button {
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.02em !important;
+  background-color: #698f3d !important;
+  color: #fff !important;
+  border: 1px solid #698f3d !important;
+  border-radius: 8px !important;
+  padding: 0.35rem 0.75rem !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__button:hover,
+.tribe-events .tribe-events-c-view-selector__button:focus,
+.tribe-events button.tribe-events-c-view-selector__button:hover,
+.tribe-events button.tribe-events-c-view-selector__button:focus {
+  background-color: #547231 !important;
+  border-color: #547231 !important;
+  color: #fff !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__button-icon-svg path,
+.tribe-events .tribe-events-c-view-selector__button-icon-caret-svg path {
+  fill: #fff !important;
+}
+
+/* View selector list (LIST, MONTH, DAY): links as pill-style tabs */
+.tribe-events .tribe-events-c-view-selector__list,
+.tribe-events .tribe-events-c-view-selector__list-item {
+  list-style: none !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item-link,
+.tribe-events a.tribe-events-c-view-selector__list-item-link {
+  display: inline-block !important;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.02em !important;
+  color: var(--c-charcoal) !important;
+  text-decoration: none !important;
+  border-radius: 8px !important;
+  padding: 0.35rem 0.75rem !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item-link:hover,
+.tribe-events .tribe-events-c-view-selector__list-item-link:focus,
+.tribe-events a.tribe-events-c-view-selector__list-item-link:hover,
+.tribe-events a.tribe-events-c-view-selector__list-item-link:focus {
+  color: #698f3d !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item-text {
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.02em !important;
+  color: inherit !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item-icon-svg path {
+  fill: currentColor !important;
+}
+
+/* Active view tab (e.g. DAY when on day view): olive background, white text, thin olive border */
+.tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link,
+.tribe-events .tribe-events-c-view-selector__list-item--active a.tribe-events-c-view-selector__list-item-link {
+  background-color: #698f3d !important;
+  color: #fff !important;
+  border: 1px solid #698f3d !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-text {
+  color: #fff !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link:hover,
+.tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link:focus {
+  background-color: #547231 !important;
+  border-color: #547231 !important;
+  color: #fff !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-icon-svg path {
+  fill: #fff !important;
+}
+
+/* Remove underline/artifact under view selector button and active tab (plugin may add ::after or border) */
+.tribe-events .tribe-events-c-view-selector__button::after,
+.tribe-events .tribe-events-c-view-selector__button::before,
+.tribe-events .tribe-events-c-view-selector__list-item-link::after,
+.tribe-events .tribe-events-c-view-selector__list-item-link::before,
+.tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link::after,
+.tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link::before,
+.tribe-events .tribe-events-c-view-selector__list-item::after,
+.tribe-events .tribe-events-c-view-selector__list-item--active::after {
+  display: none !important;
+  content: none !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__button,
+.tribe-events button.tribe-events-c-view-selector__button {
+  box-shadow: none !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item-link,
+.tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link {
+  box-shadow: none !important;
+}
+
 /* ========== Top bar (list, month, day): cream bg, olive arrows & Today, dark date text ========== */
 .tribe-events-view--list .tribe-events-c-top-bar,
 .tribe-events-view--month .tribe-events-c-top-bar,
 .tribe-events-view--day .tribe-events-c-top-bar {
   background-color: var(--posts-bg, #F9FBF3) !important;
   padding: 0.75rem 0 !important;
-  border-bottom: 1px solid #E2E5E7 !important;
   margin-bottom: 1rem !important;
 }
 

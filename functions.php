@@ -72,6 +72,31 @@ function tectn_get_hero_config() {
 
   $default = array( 'show' => false, 'type' => 'landing', 'data' => array() );
 
+  // Events archive: hero and intro from Theme Settings > Events (no wave, gradient or solid, headline only)
+  if ( is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' ) ) {
+    $use_solid = function_exists( 'get_field' ) ? (bool) tectn_get_events_option( 'events_hero_use_solid_color' ) : false;
+    $bg_color  = function_exists( 'get_field' ) ? tectn_get_events_option( 'events_hero_background_color' ) : '';
+    $bg_image  = function_exists( 'get_field' ) ? tectn_get_events_option( 'events_hero_background_image' ) : 0;
+    if ( is_array( $bg_image ) && ! empty( $bg_image['ID'] ) ) {
+      $bg_image = (int) $bg_image['ID'];
+    } elseif ( ! is_numeric( $bg_image ) ) {
+      $bg_image = 0;
+    }
+    $headline = function_exists( 'get_field' ) ? tectn_get_events_option( 'events_hero_headline_text' ) : '';
+    $show_hero = $use_solid && $bg_color || $bg_image || $headline !== '';
+    $config = array(
+      'show' => true,
+      'type' => 'events',
+      'data' => array(
+        'background_type'   => $use_solid ? 'color' : 'image',
+        'background_color'  => $bg_color ? $bg_color : '#238c55',
+        'background_image' => $use_solid ? 0 : $bg_image,
+        'headline_text'     => is_string( $headline ) ? $headline : '',
+      ),
+    );
+    return $config;
+  }
+
   // Single post: automatic hero with title, meta, featured image
   if ( is_singular( 'post' ) ) {
     $post = get_queried_object();
@@ -478,8 +503,8 @@ add_action('admin_enqueue_scripts', 'custom_fonts');
 add_action('enqueue_block_editor_assets', 'custom_fonts');
 
 /**
- * Enqueue Events Calendar list-view overrides after plugin CSS
- * so theme fonts and colors (from :root) apply.
+ * Enqueue Events Calendar overrides after plugin CSS (Skeleton or Full)
+ * so theme fonts and colors apply. Loads after the active stylesheet to avoid duplicate enqueue.
  */
 function tectn_enqueue_tribe_events_overrides() {
 	if ( ! is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' ) ) {
@@ -489,14 +514,71 @@ function tectn_enqueue_tribe_events_overrides() {
 	if ( ! file_exists( $path ) ) {
 		return;
 	}
+	// Depend on the active style so override loads after it; avoid loading the same file twice.
+	wp_dequeue_style( 'tribe-events-views-v2-override-style' );
+	$dep = ( function_exists( 'tribe_get_option' ) && 'skeleton' === tribe_get_option( 'stylesheetOption', 'tribe' ) )
+		? 'tribe-events-views-v2-skeleton'
+		: 'tribe-events-views-v2-full';
 	wp_enqueue_style(
 		'tectn-tribe-events-overrides',
 		get_template_directory_uri() . '/tribe-events/tribe-events.css',
-		array( 'tribe-events-views-v2-full' ),
+		array( $dep ),
 		(string) filemtime( $path )
 	);
 }
 add_action( 'wp_enqueue_scripts', 'tectn_enqueue_tribe_events_overrides', 100 );
+
+/**
+ * Get an Events page option (Theme Settings > Events). Tries 'option' then sub-page slug.
+ */
+function tectn_get_events_option( $field_name ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return null;
+	}
+	$val = get_field( $field_name, 'option' );
+	if ( $val !== null && $val !== false && $val !== '' ) {
+		return $val;
+	}
+	$val = get_field( $field_name, 'theme-events-settings' );
+	return $val;
+}
+
+/**
+ * Prepend Events hero and intro HTML before the calendar view (Theme Settings > Events).
+ * When "Default Page Template" is used, hero and intro are already output in archive.php – do not duplicate.
+ */
+function tectn_events_hero_and_intro_before_html( $before ) {
+	if ( ! is_post_type_archive( 'tribe_events' ) || is_singular( 'tribe_events' ) ) {
+		return $before;
+	}
+	// Default Page Template = theme template (archive.php) already shows hero + intro; skip to avoid duplicate.
+	if ( function_exists( 'tribe_get_option' ) && tribe_get_option( 'tribeEventsTemplate', 'default' ) === 'default' ) {
+		return $before;
+	}
+	$hero_config = tectn_get_hero_config();
+	$out        = '';
+	if ( ! empty( $hero_config['show'] ) && $hero_config['type'] === 'events' ) {
+		ob_start();
+		$hero_config = $hero_config; // pass to partial
+		include get_template_directory() . '/partials/hero/hero.php';
+		$out .= ob_get_clean();
+	}
+	$intro_heading = tectn_get_events_option( 'events_intro_heading' );
+	$intro_body    = tectn_get_events_option( 'events_intro_body' );
+	if ( ( $intro_heading !== null && $intro_heading !== '' ) || ( $intro_body !== null && $intro_body !== '' ) ) {
+		$out .= '<div class="events-intro wrap row">';
+		$out .= '<div class="events-intro__inner col-xs-12">';
+		if ( $intro_heading !== null && $intro_heading !== '' ) {
+			$out .= '<h2 class="events-intro__heading">' . esc_html( $intro_heading ) . '</h2>';
+		}
+		if ( $intro_body !== null && $intro_body !== '' ) {
+			$out .= '<div class="events-intro__body">' . wp_kses_post( $intro_body ) . '</div>';
+		}
+		$out .= '</div></div>';
+	}
+	return $out . $before;
+}
+add_filter( 'tribe_events_before_html', 'tectn_events_hero_and_intro_before_html', 10, 1 );
 
 // Inject event categories (tags) below the body content; structure matches posts-grid chips.
 add_action( 'tribe_template_after_include:events/v2/list/event/description', function() {
@@ -647,7 +729,115 @@ if( function_exists('acf_add_options_page') ) {
 		'parent_slug'	=> 'theme-general-settings',
 	));
 
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Events Page Settings',
+		'menu_title'	=> 'Events',
+		'menu_slug'     => 'theme-events-settings',
+		'parent_slug'	=> 'theme-general-settings',
+	));
+
 }
+
+/**
+ * Register ACF field group for Events page (hero + intro) in Theme Settings > Events.
+ */
+function tectn_register_acf_events_settings() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+	acf_add_local_field_group( array(
+		'key'                   => 'group_tectn_events_settings',
+		'title'                 => 'Events Page Hero & Intro',
+		'fields'                => array(
+			array(
+				'key'   => 'field_tectn_events_hero_tab',
+				'label' => 'Hero',
+				'name'  => '',
+				'type'  => 'tab',
+			),
+			array(
+				'key'           => 'field_tectn_events_use_solid_color',
+				'label'         => 'Background',
+				'name'          => 'events_hero_use_solid_color',
+				'type'          => 'true_false',
+				'instructions'  => 'Use a solid color (no overlay). Leave off to use a background image with gradient overlay.',
+				'ui'            => 1,
+				'default_value' => 0,
+			),
+			array(
+				'key'               => 'field_tectn_events_hero_bg_color',
+				'label'             => 'Background color',
+				'name'              => 'events_hero_background_color',
+				'type'              => 'color_picker',
+				'default_value'     => '#238c55',
+				'conditional_logic' => array(
+					array(
+						array(
+							'field'    => 'field_tectn_events_use_solid_color',
+							'operator' => '==',
+							'value'    => '1',
+						),
+					),
+				),
+			),
+			array(
+				'key'               => 'field_tectn_events_hero_bg_image',
+				'label'             => 'Background image',
+				'name'              => 'events_hero_background_image',
+				'type'              => 'image',
+				'return_format'     => 'id',
+				'preview_size'      => 'medium',
+				'conditional_logic' => array(
+					array(
+						array(
+							'field'    => 'field_tectn_events_use_solid_color',
+							'operator' => '!=',
+							'value'    => '1',
+						),
+					),
+				),
+			),
+			array(
+				'key'   => 'field_tectn_events_hero_headline',
+				'label' => 'Hero headline',
+				'name'  => 'events_hero_headline_text',
+				'type'  => 'text',
+				'instructions' => 'Text shown over the hero (e.g. "Events").',
+			),
+			array(
+				'key'   => 'field_tectn_events_intro_tab',
+				'label' => 'Intro (above calendar)',
+				'name'  => '',
+				'type'  => 'tab',
+			),
+			array(
+				'key'   => 'field_tectn_events_intro_heading',
+				'label' => 'Intro heading',
+				'name'  => 'events_intro_heading',
+				'type'  => 'text',
+			),
+			array(
+				'key'   => 'field_tectn_events_intro_body',
+				'label' => 'Intro body',
+				'name'  => 'events_intro_body',
+				'type'  => 'wysiwyg',
+				'tabs'  => 'all',
+				'toolbar' => 'full',
+				'media_upload' => 1,
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param'    => 'options_page',
+					'operator' => '==',
+					'value'    => 'theme-events-settings',
+				),
+			),
+		),
+	) );
+}
+add_action( 'acf/init', 'tectn_register_acf_events_settings' );
 
   /* Add a custom block category for TecTN ACF Blocks. */
   add_filter('block_categories_all', function ($categories, $editor_context) {
