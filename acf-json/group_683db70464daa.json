@@ -70,14 +70,19 @@
         [
             {
                 "param": "options_page",
+                "operator": "!=",
+                "value": "site-settings"
+            },
+            {
+                "param": "options_page",
                 "operator": "==",
-                "value": "theme-general-settings"
+                "value": "site-settings"
             }
         ]
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
@@ -85,5 +90,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770000377
+    "modified": 1772415957
 }

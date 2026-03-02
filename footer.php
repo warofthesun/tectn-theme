@@ -3,9 +3,7 @@
 
 <footer class="footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
 	
-<div class="footer__curve">
-	<div class="footer__curve-inner"><?php echo file_get_contents( get_template_directory() . '/library/images/lower_content_curve.svg' ); ?></div>
-</div>
+
 <div id="inner-footer" class="wrap row">
 	<div class="col-xs-12 col-md-6 footer__logo-nav">
 		<div class="footer__logo"><?php echo file_get_contents( get_template_directory() . '/library/images/mfa_logo_dark.svg' ); ?></div>
