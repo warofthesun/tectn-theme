@@ -540,8 +540,12 @@
   #inner-footer {
   	flex-direction: row;
 
-  	.footer__contact {
+  	.footer__right {
   		text-align: right;
+  	}
+
+  	.footer__contact--left {
+  		text-align: left;
   	}
   }
 

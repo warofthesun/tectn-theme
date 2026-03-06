@@ -38,7 +38,24 @@
 					<nav role="navigation" class="header-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
 					<a href="<?php echo home_url(); ?>" rel="nofollow">
 						<div id="logo" class="h1" itemscope itemtype="http://schema.org/Organization" aria-label="<?php bloginfo('name'); ?>">
-							<img src="<?php echo get_template_directory_uri(); ?>/library/images/tectn-logo.png" alt="Tectn Logo">
+							<?php
+							$logo = null;
+							if ( function_exists( 'get_field' ) ) {
+								$site_settings = get_field( 'site_settings', 'site-settings' );
+								if ( ! is_array( $site_settings ) || ! isset( $site_settings['primary_logo'] ) ) {
+									$site_settings = get_field( 'site_settings', 'option' );
+								}
+								if ( is_array( $site_settings ) && isset( $site_settings['primary_logo'] ) ) {
+									$logo = $site_settings['primary_logo'];
+								}
+							}
+							if ( $logo && is_array( $logo ) && ! empty( $logo['url'] ) ) {
+								$alt = ! empty( $logo['alt'] ) ? $logo['alt'] : get_bloginfo( 'name' );
+								echo '<img src="' . esc_url( $logo['url'] ) . '" alt="' . esc_attr( $alt ) . '">';
+							} else {
+								echo '<img src="' . esc_url( get_template_directory_uri() . '/library/images/tectn-logo.png' ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '">';
+							}
+							?>
 						</div>
 					</a>
 					<div class="header-nav__wrapper">
