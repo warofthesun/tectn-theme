@@ -357,6 +357,16 @@ function starter_register_sidebars() {
 		'after_title' => '</h4>',
 	));
 
+	register_sidebar(array(
+		'id' => 'header-widget-area',
+		'name' => __( 'Header', 'tectn_theme' ),
+		'description' => __( 'Widget area in the header (right of the navigation).', 'tectn_theme' ),
+		'before_widget' => '<div id="%1$s" class="widget header-widget %2$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<h4 class="widgettitle">',
+		'after_title' => '</h4>',
+	));
+
 	/*
 	to add more sidebars or widgetized areas, just copy
 	and edit the above sidebar code. In order to call

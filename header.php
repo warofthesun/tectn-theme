@@ -35,8 +35,7 @@
 			<header class="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 
 				<div id="inner-header" class="row">
-					<nav role="navigation" class="header-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
-					<a href="<?php echo home_url(); ?>" rel="nofollow">
+					<a href="<?php echo home_url(); ?>" class="header-logo" rel="nofollow">
 						<div id="logo" class="h1" itemscope itemtype="http://schema.org/Organization" aria-label="<?php bloginfo('name'); ?>">
 							<?php
 							$logo = null;
@@ -58,36 +57,42 @@
 							?>
 						</div>
 					</a>
-					<div class="header-nav__wrapper">
-						<?php wp_nav_menu(array(
-    					         'container' => false,                           // remove nav container
-    					         'container_class' => 'menu ',                 // class of container (should you choose to use it)
-    					         'menu' => __( 'The Main Menu', 'tectn_theme' ),  // nav name
-    					         'menu_class' => 'nav top-nav ',               // adding custom nav class
-    					         'theme_location' => 'main-nav',                 // where it's located in the theme
-    					         'before' => '',                                 // before the menu
-        			               'after' => '',                                  // after the menu
-        			               'link_before' => '',                            // before each link
-        			               'link_after' => '',                             // after each link
-        			               'depth' => 0,                                   // limit the depth of the nav
-    					         'fallback_cb' => ''                             // fallback function (if there is one)
-						)); ?>
+					<nav role="navigation" class="header-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
+						<div class="header-nav__wrapper">
+							<?php wp_nav_menu(array(
+								'container' => false,
+								'container_class' => 'menu ',
+								'menu' => __( 'The Main Menu', 'tectn_theme' ),
+								'menu_class' => 'nav top-nav ',
+								'theme_location' => 'main-nav',
+								'before' => '',
+								'after' => '',
+								'link_before' => '',
+								'link_after' => '',
+								'depth' => 0,
+								'fallback_cb' => ''
+							)); ?>
 
-						<?php wp_nav_menu(array(
-    					         'container' => false,                           // remove nav container
-    					         'container_class' => 'login_forms ',                 // class of container (should you choose to use it)
-    					         'menu' => __( 'Login and Forms', 'tectn_theme' ),  // nav name
-    					         'menu_class' => 'nav top-nav ',               // adding custom nav class
-    					         'theme_location' => 'login_forms',                 // where it's located in the theme
-    					         'before' => '',                                 // before the menu
-        			               'after' => '',                                  // after the menu
-        			               'link_before' => '',                            // before each link
-        			               'link_after' => '',                             // after each link
-        			               'depth' => 0,                                   // limit the depth of the nav
-    					         'fallback_cb' => ''                             // fallback function (if there is one)
-						)); ?>
-					</div>
+							<?php wp_nav_menu(array(
+								'container' => false,
+								'container_class' => 'login_forms ',
+								'menu' => __( 'Login and Forms', 'tectn_theme' ),
+								'menu_class' => 'nav top-nav ',
+								'theme_location' => 'login_forms',
+								'before' => '',
+								'after' => '',
+								'link_before' => '',
+								'link_after' => '',
+								'depth' => 0,
+								'fallback_cb' => ''
+							)); ?>
+						</div>
 					</nav>
+					<?php if ( is_active_sidebar( 'header-widget-area' ) ) : ?>
+						<div class="header-widget-area" role="complementary">
+							<?php dynamic_sidebar( 'header-widget-area' ); ?>
+						</div>
+					<?php endif; ?>
 					<div id="mobile-nav">
 						Menu <i class="fas fa-chevron-down"></i>
 					</div>

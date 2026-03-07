@@ -3174,10 +3174,15 @@ img {
 }
 
 #inner-header {
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -3926,14 +3931,20 @@ HEADER STYLES
   z-index: 99;
 }
 
+.header-logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 #logo {
   height: 60px;
   width: auto;
   background-repeat: no-repeat;
   background-size: contain;
-  display: inline-block;
-  margin-right: auto;
-  margin-left: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3974,9 +3985,11 @@ and more scalable.
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-}
-.header-nav > a {
-  text-align: center;
+  -webkit-box-ordinal-group: 5;
+  -ms-flex-order: 4;
+  order: 4;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
 }
 
 .header-nav__wrapper {
@@ -4010,18 +4023,46 @@ and more scalable.
 #menu-login-and-forms.nav li {
   border: 0;
 }
+.header-logo {
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+}
+
+.header-widget-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  -webkit-box-ordinal-group: 4;
+  -ms-flex-order: 3;
+  order: 3;
+  margin-left: 0;
+}
+.header-widget-area .widget {
+  margin-bottom: 0;
+}
+
 #mobile-nav {
-  text-align: right;
-  margin-bottom: 1em;
-  margin-top: -2em;
-  margin-left: auto;
+  -webkit-box-ordinal-group: 3;
+  -ms-flex-order: 2;
+  order: 2;
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-left: 0;
   color: #EFF1E5;
   font-weight: 700;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
 #mobile-nav.show {
-  margin-top: 1em;
+  margin-top: 0;
   padding: 0.5em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4032,6 +4073,27 @@ and more scalable.
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   padding-right: 0.5em;
+}
+
+#inner-header:has(#mobile-nav.show) .header-widget-area {
+  -webkit-box-ordinal-group: 3;
+  -ms-flex-order: 2;
+  order: 2;
+}
+#inner-header:has(#mobile-nav.show) .header-nav {
+  -webkit-box-ordinal-group: 4;
+  -ms-flex-order: 3;
+  order: 3;
+}
+#inner-header:has(#mobile-nav.show) #mobile-nav {
+  -webkit-box-ordinal-group: 5;
+  -ms-flex-order: 4;
+  order: 4;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .nav {
@@ -4866,9 +4928,67 @@ IMPORTING PARTIALS
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    border: 0;
+  }
+  .nav ul {
+    background: #000;
+    margin-top: 0;
   }
   .nav li {
     border-bottom: 0;
+  }
+  .nav li {
+    /*
+    plan your menus and drop-downs wisely.
+    */
+  }
+  .nav li ul.sub-menu,
+  .nav li ul.children {
+    margin-top: 0;
+    border: 1px solid #ccc;
+    border-top: 0;
+    position: absolute;
+    visibility: hidden;
+    z-index: 8999;
+  }
+  .nav li ul.sub-menu li a,
+  .nav li ul.children li a {
+    padding-left: 10px;
+    border-right: 0;
+    display: block;
+    width: 180px;
+    border-bottom: 1px solid #ccc;
+  }
+  .nav li ul.sub-menu li:last-child a,
+  .nav li ul.children li:last-child a {
+    border-bottom: 0;
+  }
+  .nav li ul.sub-menu li,
+  .nav li ul.children li {
+    /*
+    if you need to go deeper, go nuts
+    just remember deeper menus suck
+    for usability. k, bai.
+    */
+  }
+  .nav li ul.sub-menu li ul,
+  .nav li ul.children li ul {
+    top: 0;
+    left: 100%;
+  }
+  .nav li ul.sub-menu,
+  .nav li ul.children {
+    /* highlight sub-menu current page */
+  }
+  .nav li {
+    /* showing sub-menus */
+  }
+  .nav li:hover > ul {
+    top: auto;
+    visibility: visible;
+  }
+  .nav {
+    /* highlight current page */
   }
   .header-nav {
     width: 100%;
@@ -4892,12 +5012,56 @@ IMPORTING PARTIALS
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
     flex-direction: row;
+    width: auto;
   }
   #inner-header {
     width: 100%;
     max-width: 1440px;
     margin-left: auto;
     margin-right: auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 1em;
+  }
+  .header-logo {
+    -webkit-box-ordinal-group: unset;
+    -ms-flex-order: unset;
+    order: unset;
+    justify-self: start;
+  }
+  .header-nav {
+    -webkit-box-ordinal-group: unset;
+    -ms-flex-order: unset;
+    order: unset;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    width: auto;
+    justify-self: center;
+  }
+  #mobile-nav {
+    -webkit-box-ordinal-group: unset;
+    -ms-flex-order: unset;
+    order: unset;
+  }
+  .header-widget-area {
+    -webkit-box-ordinal-group: unset;
+    -ms-flex-order: unset;
+    order: unset;
+    justify-self: end;
+    margin: 0;
+  }
+  .header-widget-area .widget {
+    margin: 0;
+  }
+  .header-widget-area .widget input[type=search] {
+    margin-bottom: 0;
+    border-radius: 0.5em;
+    border: 0px;
+    -webkit-box-shadow: 6px 6px 12px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 6px 6px 12px 0px rgba(0, 0, 0, 0.1);
   }
   /* .menu is clearfixed inside mixins.scss */
   .menu ul li {
@@ -4915,6 +5079,51 @@ IMPORTING PARTIALS
     /*
     plan your menus and drop-downs wisely.
     */
+  }
+  .menu ul li ul.sub-menu,
+  .menu ul li ul.children {
+    margin-top: 0;
+    border: 1px solid #ccc;
+    border-top: 0;
+    position: absolute;
+    visibility: hidden;
+    z-index: 8999;
+  }
+  .menu ul li ul.sub-menu li a,
+  .menu ul li ul.children li a {
+    padding-left: 10px;
+    border-right: 0;
+    display: block;
+    width: 180px;
+    border-bottom: 1px solid #ccc;
+  }
+  .menu ul li ul.sub-menu li:last-child a,
+  .menu ul li ul.children li:last-child a {
+    border-bottom: 0;
+  }
+  .menu ul li ul.sub-menu li,
+  .menu ul li ul.children li {
+    /*
+    if you need to go deeper, go nuts
+    just remember deeper menus suck
+    for usability. k, bai.
+    */
+  }
+  .menu ul li ul.sub-menu li ul,
+  .menu ul li ul.children li ul {
+    top: 0;
+    left: 100%;
+  }
+  .menu ul li ul.sub-menu,
+  .menu ul li ul.children {
+    /* highlight sub-menu current page */
+  }
+  .menu ul li {
+    /* showing sub-menus */
+  }
+  .menu ul li:hover > ul {
+    top: auto;
+    visibility: visible;
   }
   .menu ul {
     /* end .menu ul li */
@@ -5285,88 +5494,6 @@ IMPORTING PARTIALS
   .c-postCard__body {
     padding: 18px 18px 20px;
   }
-  /*************
-  NAVIGATION STYLES
-  **************/
-  #inner-header {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-  }
-  .header-nav {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-  }
-  .nav {
-    border: 0;
-  }
-  .nav ul {
-    background: #000;
-    margin-top: 0;
-  }
-  .nav li {
-    /*
-    plan your menus and drop-downs wisely.
-    */
-  }
-  .nav li ul.sub-menu,
-  .nav li ul.children {
-    margin-top: 0;
-    border: 1px solid #ccc;
-    border-top: 0;
-    position: absolute;
-    visibility: hidden;
-    z-index: 8999;
-  }
-  .nav li ul.sub-menu li a,
-  .nav li ul.children li a {
-    padding-left: 10px;
-    border-right: 0;
-    display: block;
-    width: 180px;
-    border-bottom: 1px solid #ccc;
-  }
-  .nav li ul.sub-menu li:last-child a,
-  .nav li ul.children li:last-child a {
-    border-bottom: 0;
-  }
-  .nav li ul.sub-menu li,
-  .nav li ul.children li {
-    /*
-    if you need to go deeper, go nuts
-    just remember deeper menus suck
-    for usability. k, bai.
-    */
-  }
-  .nav li ul.sub-menu li ul,
-  .nav li ul.children li ul {
-    top: 0;
-    left: 100%;
-  }
-  .nav li ul.sub-menu,
-  .nav li ul.children {
-    /* highlight sub-menu current page */
-  }
-  .nav li {
-    /* showing sub-menus */
-  }
-  .nav li:hover > ul {
-    top: auto;
-    visibility: visible;
-  }
-  .nav {
-    /* end .menu ul li */
-    /* highlight current page */
-  }
-  .nav {
-    /* end current highlighters */
-  } /* end .nav */
   /********************
   HERO STYLES
   ********************/

@@ -68,9 +68,84 @@
   	opacity: 1;
   	display: flex;
   	flex-wrap: wrap;
+  	border: 0;
+
+  	ul {
+  		background: $black;
+  		margin-top: 0;
+  	}
 
   	li {
   		border-bottom: 0;
+
+  		&:first-child {}
+  		&:last-child {}
+
+  		/*
+  		plan your menus and drop-downs wisely.
+  		*/
+  		ul.sub-menu,
+  		ul.children {
+  			margin-top: 0;
+  			border: 1px solid #ccc;
+  			border-top: 0;
+  			position: absolute;
+  			visibility: hidden;
+  			z-index: 8999;
+
+  			li {
+  				a {
+  					padding-left: 10px;
+  					border-right: 0;
+  					display: block;
+  					width: 180px;
+  					border-bottom: 1px solid #ccc;
+
+  					&:hover,
+  					&:focus {}
+
+  					&:link {}
+  				}
+
+  				&:first-child {}
+
+  				&:last-child {
+  					a {
+  						border-bottom: 0;
+  					}
+  				}
+
+  				/*
+  				if you need to go deeper, go nuts
+  				just remember deeper menus suck
+  				for usability. k, bai.
+  				*/
+  				ul {
+  					top: 0;
+  					left: 100%;
+  				}
+  			}
+
+  			/* highlight sub-menu current page */
+  			li.current-menu-item,
+  			li.current_page_item,
+  			li.current_page_ancestor {
+  				a {}
+  			}
+  		}
+
+  		/* showing sub-menus */
+  		&:hover > ul {
+  			top: auto;
+  			visibility: visible;
+  		}
+  	}
+
+  	/* highlight current page */
+  	li.current-menu-item,
+  	li.current_page_item,
+  	li.current_page_ancestor {
+  		a {}
   	}
   }
 
@@ -88,6 +163,7 @@
 
   .header-nav__wrapper {
   	flex-direction: row;
+  	width: auto;
   }
 
   #inner-header {
@@ -95,6 +171,43 @@
   	max-width: 1440px;
   	margin-left: auto;
   	margin-right: auto;
+  	display: grid;
+  	grid-template-columns: 1fr auto 1fr;
+  	align-items: center;
+  	gap: 1em;
+  }
+
+  .header-logo {
+  	order: unset;
+  	justify-self: start;
+  }
+
+  .header-nav {
+  	order: unset;
+  	flex-basis: auto;
+  	width: auto;
+  	justify-self: center;
+  }
+
+  #mobile-nav {
+  	order: unset;
+  }
+
+  .header-widget-area {
+  	order: unset;
+  	justify-self: end;
+	margin: 0;
+
+	.widget {
+		margin: 0;
+
+		input[type=search] {
+			margin-bottom: 0;
+			@include border-radius-sm;
+			border: 0px;
+			box-shadow: 6px 6px 12px 0px rgba(0, 0, 0, 0.1);
+		}
+	}
   }
 
   	/* .menu is clearfixed inside mixins.scss */
@@ -121,16 +234,61 @@
   				*/
   				ul.sub-menu,
   				ul.children {
-  					li {
-  						a {
-  							&:hover,
-  							&:focus {}
-  							&:link {}
-  						}
-  						&:first-child {}
-  						&:last-child {}
-  					}
-  				}
+					margin-top: 0;
+					border: 1px solid #ccc;
+					border-top: 0;
+					position: absolute;
+					visibility: hidden;
+					z-index: 8999;
+	  
+					li {
+	  
+						a {
+							padding-left: 10px;
+							border-right: 0;
+							display: block;
+							width: 180px;
+							border-bottom: 1px solid #ccc;
+	  
+							&:hover,
+							&:focus {}
+	  
+							&:link {}
+						}
+	  
+						&:first-child {}
+	  
+						&:last-child {
+	  
+							a {
+								border-bottom: 0;
+							}
+						}
+	  
+						/*
+						if you need to go deeper, go nuts
+						just remember deeper menus suck
+						for usability. k, bai.
+						*/
+						ul {
+							top:0;
+							left:100%;
+						}
+					}
+	  
+					/* highlight sub-menu current page */
+					li.current-menu-item,
+					li.current_page_item,
+					li.current_page_ancestor {
+						a {}
+					}
+				}
+	  
+				/* showing sub-menus */
+				&:hover > ul {
+					top: auto;
+					visibility:visible;
+				}
   			} /* end .menu ul li */
 
   			/* highlight current page */
