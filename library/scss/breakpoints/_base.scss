@@ -342,10 +342,15 @@ BAND / SECTION WRAPPER
 
   // Renamed to c-headline-group for BEM consistency
   .c-headline-group {
+	h5 {
+		margin: 0;
+	}
 	text-align: center;
 	max-width: 600px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: $spacing-lg;
+	margin-bottom: $spacing-sm;
   }
 
 
