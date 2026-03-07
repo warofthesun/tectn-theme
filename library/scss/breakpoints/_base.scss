@@ -327,6 +327,112 @@ BAND / SECTION WRAPPER
 .c-band--py-xl   { --band-py: #{$spacing-xl}; }
 .c-band--py-xxl  { --band-py: #{$spacing-xxl}; }
 
+/************************************************
+Content Section block
+- No top or bottom curves
+- Optional background: image (with overlay choice) or solid color
+- Min height + any inner content via InnerBlocks
+************************************************/
+.c-content-section {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: var(--content-section-min-height, 400px);
+  --content-section-py: #{$spacing-xl};
+  padding-block: var(--content-section-py);
+}
+
+.c-content-section__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.c-content-section__bg-media {
+  position: absolute;
+  left: 50%;
+  top: var(--content-section-bg-anchor-y, 0%);
+  transform: translate(-50%, var(--content-section-bg-translate-y, 0%));
+  width: 100vw;
+  height: var(--content-section-bg-height, 800px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-image: none;
+}
+
+.c-content-section__bg-media--image {
+  background-image: var(--content-section-bg-image, none);
+}
+
+.c-content-section__bg-media--color {
+  background-color: var(--content-section-bg-color, transparent);
+}
+
+.c-content-section__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.c-content-section--overlay-none .c-content-section__overlay {
+  display: none;
+}
+
+.c-content-section--overlay-warm .c-content-section__overlay {
+  background: linear-gradient(
+    180deg,
+    rgba($accent-500, 0.45) 0%,
+    rgba($secondary-500, 0.6) 68%
+  );
+}
+
+.c-content-section--overlay-medium .c-content-section__overlay {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.c-content-section--overlay-dark .c-content-section__overlay {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.c-content-section__container {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.c-content-section--content-top .c-content-section__container {
+  justify-content: flex-start;
+}
+
+.c-content-section--content-middle .c-content-section__container {
+  justify-content: center;
+}
+
+.c-content-section--content-bottom .c-content-section__container {
+  justify-content: flex-end;
+}
+
+.c-content-section__inner {
+  display: block;
+}
+
+.c-content-section--py-none { --content-section-py: #{$spacing-none}; }
+.c-content-section--py-xxs  { --content-section-py: #{$spacing-xxs}; }
+.c-content-section--py-xs   { --content-section-py: #{$spacing-xs}; }
+.c-content-section--py-sm  { --content-section-py: #{$spacing-sm}; }
+.c-content-section--py-md  { --content-section-py: #{$spacing-md}; }
+.c-content-section--py-lg  { --content-section-py: #{$spacing-lg}; }
+.c-content-section--py-xl  { --content-section-py: #{$spacing-xl}; }
+.c-content-section--py-xxl { --content-section-py: #{$spacing-xxl}; }
+
 // Use the c-image-grid block name consistently across modifier rules
 .c-image-grid--two,
   .c-image-grid--three {

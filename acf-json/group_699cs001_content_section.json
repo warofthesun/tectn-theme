@@ -1,0 +1,139 @@
+{
+    "key": "group_699cs001",
+    "title": "Content Section block",
+    "fields": [
+        {
+            "key": "field_699cs001",
+            "label": "Minimum height (px)",
+            "name": "min_height",
+            "type": "number",
+            "instructions": "Minimum height of the section in pixels.",
+            "default_value": 400,
+            "min": 100,
+            "placeholder": "400",
+            "step": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_699cs010",
+            "label": "Content alignment",
+            "name": "content_align",
+            "type": "select",
+            "instructions": "Align inner content vertically within the block.",
+            "choices": { "top": "Top", "middle": "Middle", "bottom": "Bottom" },
+            "default_value": "middle",
+            "return_format": "value",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_699cs002",
+            "label": "Padding – vertical",
+            "name": "padding_y",
+            "type": "select",
+            "choices": {
+                "none": "None",
+                "xxs": "Extra extra small",
+                "xs": "Extra small",
+                "sm": "Small",
+                "md": "Medium",
+                "lg": "Large",
+                "xl": "Extra large",
+                "xxl": "Extra extra large"
+            },
+            "default_value": "xl",
+            "return_format": "value",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_699cs003",
+            "label": "Use background",
+            "name": "bg_enable",
+            "type": "true_false",
+            "default_value": 0,
+            "ui": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_699cs004",
+            "label": "Background type",
+            "name": "bg_type",
+            "type": "select",
+            "conditional_logic": [[{ "field": "field_699cs003", "operator": "==", "value": "1" }]],
+            "choices": { "image": "Image", "color": "Solid color" },
+            "default_value": "image",
+            "return_format": "value",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_699cs005",
+            "label": "Background image",
+            "name": "bg_image",
+            "type": "image",
+            "conditional_logic": [[{ "field": "field_699cs004", "operator": "==", "value": "image" }]],
+            "return_format": "array",
+            "preview_size": "medium",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_699cs006",
+            "label": "Image overlay",
+            "name": "bg_overlay",
+            "type": "select",
+            "instructions": "Semi-transparent overlay on the background image.",
+            "conditional_logic": [[{ "field": "field_699cs004", "operator": "==", "value": "image" }]],
+            "choices": {
+                "none": "None",
+                "warm": "Warm (golden\/sepia)",
+                "medium": "Medium (darker)",
+                "dark": "Dark"
+            },
+            "default_value": "warm",
+            "return_format": "value",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_699cs007",
+            "label": "Background color",
+            "name": "bg_color",
+            "type": "color_picker",
+            "conditional_logic": [[{ "field": "field_699cs004", "operator": "==", "value": "color" }]],
+            "return_format": "string",
+            "enable_opacity": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_699cs008",
+            "label": "Background height (px)",
+            "name": "bg_height",
+            "type": "number",
+            "instructions": "Height of the background image area.",
+            "conditional_logic": [[{ "field": "field_699cs003", "operator": "==", "value": "1" }]],
+            "default_value": 800,
+            "min": 200,
+            "placeholder": "800",
+            "step": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_699cs009",
+            "label": "Background vertical align",
+            "name": "bg_align_y",
+            "type": "select",
+            "conditional_logic": [[{ "field": "field_699cs003", "operator": "==", "value": "1" }]],
+            "choices": { "top": "Top", "center": "Middle", "bottom": "Bottom" },
+            "default_value": "center",
+            "return_format": "value",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        }
+    ],
+    "location": [[{ "param": "block", "operator": "==", "value": "tectn\/content-section" }]],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}
