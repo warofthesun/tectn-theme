@@ -237,7 +237,7 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
               </div>
 
               <div class="c-postCard__body">
-                <div class="c-postCard__meta"><?= esc_html($date); ?></div>
+                <h6 class="c-postCard__meta"><?= esc_html($date); ?></h6>
                 <h3 class="c-postCard__title"><?= esc_html($title); ?></h3>
 
                 <?php if (!empty($chips)): ?>
@@ -248,7 +248,7 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
                   </div>
                 <?php endif; ?>
 
-                <span class="c-postCard__cta">Learn more</span>
+                <span class="c-postCard__cta">read more</span>
               </div>
             </a>
           </article>

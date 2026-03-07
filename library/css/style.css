@@ -125,7 +125,9 @@ h3,
 h4,
 .h4,
 h5,
-.h5 {
+.h5,
+h6,
+.h6 {
   text-transform: uppercase;
 }
 h1 p,
@@ -137,7 +139,9 @@ h3 p,
 h4 p,
 .h4 p,
 h5 p,
-.h5 p {
+.h5 p,
+h6 p,
+.h6 p {
   line-height: 1em;
   margin: 0;
 }
@@ -1220,7 +1224,7 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid {
   background-color: #D4E485;
-  color: rgba(255, 255, 255, 0.9);
+  color: #505829;
   border-color: #D4E485;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline {
@@ -3764,7 +3768,7 @@ Grid (mobile)
 Card
 ========================= */
 .c-postCard {
-  border-radius: 18px;
+  border-radius: 1em;
   overflow: hidden;
   background: rgba(33, 65, 45, 0.55);
   backdrop-filter: blur(4px);
@@ -3782,6 +3786,10 @@ Card
   aspect-ratio: 4/3;
   background: rgba(0, 0, 0, 0.15);
 }
+.c-postCard__media img {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
 
 .c-postCard__img {
   width: 100%;
@@ -3796,14 +3804,13 @@ Card
 }
 
 .c-postCard__meta {
-  font-size: 12px;
   margin-bottom: 6px;
+  margin-top: 0;
   opacity: 0.9;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .c-postCard__title {
-  font-size: 16px;
   line-height: 1.2;
   margin: 0 0 10px;
   color: #fff;
@@ -3835,10 +3842,11 @@ Card
   width: 100%;
   text-align: center;
   padding: 10px 12px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.12);
-  font-weight: 600;
-  color: #fff;
+  border-radius: 0.75em;
+  background-color: #D4E485;
+  font-size: 1.1em;
+  color: #505829;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
 }
 
 .c-posts__footer {
@@ -3879,7 +3887,7 @@ a:link, a:visited:link {
 /******************************************************************
 H1, H2, H3, H4, H5 STYLES
 ******************************************************************/
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   text-rendering: optimizelegibility;
   font-weight: 400;
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
@@ -3889,7 +3897,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
   */
   /* removing text decoration from all headline links */
 }
-h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a {
+h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
   text-decoration: none;
 }
 

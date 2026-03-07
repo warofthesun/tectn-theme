@@ -48,6 +48,7 @@ I've edited it a bit, but it's a nice starting point.
 */
 
 
+
 // font stacks
 // Updated header and body fonts. Bebas Neue comes from Google Fonts; Glacial Indifference is embedded locally.
 $header-font:        "Bebas Neue", "Helvetica Neue", sans-serif;
@@ -111,7 +112,9 @@ h3,
 h4,
 .h4,
 h5,
-.h5 {
+.h5,
+h6,
+.h6 {
   text-transform: uppercase;
 
   p {

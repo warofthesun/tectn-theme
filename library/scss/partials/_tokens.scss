@@ -29,7 +29,7 @@ Stylesheet: Tokens
 }
 
 @mixin color_text__label_primary--default {
-    color: rgba($white, 0.9);
+    color: $primary-800;
 }
 
 @mixin color_text__label_secondary--default {

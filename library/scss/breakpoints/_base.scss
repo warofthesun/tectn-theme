@@ -638,7 +638,7 @@ BAND / SECTION WRAPPER
   ========================= */
   
   .c-postCard {
-	border-radius: 18px;
+	@include border-radius-lg;
 	overflow: hidden;
 	background: rgba(33, 65, 45, 0.55);
 	backdrop-filter: blur(4px);
@@ -654,6 +654,11 @@ BAND / SECTION WRAPPER
   .c-postCard__media {
 	aspect-ratio: 4 / 3;
 	background: rgba(0, 0, 0, 0.15);
+
+	img {
+		border-bottom-left-radius: 0px !important;
+		border-bottom-right-radius: 0px !important;
+	}
   }
   
   .c-postCard__img {
@@ -668,14 +673,13 @@ BAND / SECTION WRAPPER
   }
   
   .c-postCard__meta {
-	font-size: 12px;
 	margin-bottom: 6px;
+	margin-top: 0;
 	opacity: 0.9;
 	color: rgba(255, 255, 255, 0.9);
   }
   
   .c-postCard__title {
-	font-size: 16px;
 	line-height: 1.2;
 	margin: 0 0 10px;
 	color: #fff;
@@ -704,10 +708,11 @@ BAND / SECTION WRAPPER
 	width: 100%;
 	text-align: center;
 	padding: 10px 12px;
-	border-radius: 10px;
-	background: rgba(255, 255, 255, 0.12);
-	font-weight: 600;
-	color: #fff;
+	@include border-radius-md;
+	@include color_surface__button_primary--default;
+	font-size: 1.1em;
+	@include color_text__label_primary--default;
+	font-family: $header-font;
   }
   
   .c-posts__footer {
@@ -747,7 +752,7 @@ a, a:visited {
 H1, H2, H3, H4, H5 STYLES
 ******************************************************************/
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 	text-rendering: optimizelegibility;
 	font-weight: 400;
 	font-family: $header-font;
