@@ -826,6 +826,22 @@ Content Section block
 	display: flex;
 	justify-content: center;
   }
+
+/***************
+INSTAGRAM FEED
+*********************/
+
+#sb_instagram {
+	@include color_surface__dark_primary;
+	@include border-radius-md;
+	padding: $spacing-xxs $spacing-md !important;
+}
+
+#sb_instagram .sbi_item .sbi_photo img {
+	@include color_border__secondary;
+	border: 2px solid;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 /*********************
 LINK STYLES
 *********************/

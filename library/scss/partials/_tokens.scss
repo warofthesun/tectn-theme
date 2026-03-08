@@ -95,3 +95,7 @@ Stylesheet: Tokens
 @mixin color_border__primary {
     border-color: $primary-400;
 }
+
+@mixin color_border__secondary {
+    border-color: $secondary-400;
+}

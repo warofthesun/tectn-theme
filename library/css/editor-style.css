@@ -2748,6 +2748,22 @@ Card
   justify-content: center;
 }
 
+/***************
+INSTAGRAM FEED
+*********************/
+#sb_instagram {
+  background-color: #A1B152;
+  border-radius: 0.75em;
+  padding: 0.25em 1em !important;
+}
+
+#sb_instagram .sbi_item .sbi_photo img {
+  border-color: #87A564;
+  border: 2px solid;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 /*********************
 LINK STYLES
 *********************/
