@@ -299,6 +299,7 @@ add_image_size( 'tectn-thumb-600', 600, 150, true );
 add_image_size( 'tectn-thumb-300', 300, 100, true );
 add_image_size( 'gallery-image', 680, 450, true );
 add_image_size( 'hero-bg', 1920, 1080, true ); // Hero background; use instead of full for better mobile performance
+add_image_size( 'post-card', 800, 600, true ); // Post cards loop: 4:3 aspect-ratio to match .c-postCard__media
 
 /*
 to add more sizes, simply copy a line from above
@@ -328,6 +329,7 @@ function starter_custom_image_sizes( $sizes ) {
         'hero-bg' => __('Hero background (1920×1080)'),
         'tectn-thumb-600' => __('600px by 150px'),
         'tectn-thumb-300' => __('300px by 100px'),
+        'post-card' => __('Post card (800×600)'),
     ) );
 }
 

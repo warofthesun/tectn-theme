@@ -202,7 +202,7 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
             $title    = get_the_title($post_id);
             $permalink = get_permalink($post_id);
 
-            $img_url = get_the_post_thumbnail_url($post_id, 'large');
+            $img_url = get_the_post_thumbnail_url($post_id, 'post-card');
 
             // Default WP taxonomies (will be empty for CPTs that don't use them)
             $categories = get_the_category($post_id);
