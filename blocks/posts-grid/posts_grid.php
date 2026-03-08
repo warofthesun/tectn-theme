@@ -81,9 +81,22 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
 
   $posts_to_render = $q->posts;
 }
+
+// Only show "view more" button if there are more published posts than we're displaying
+$count_query = new WP_Query([
+  'post_type'      => $post_type,
+  'post_status'    => 'publish',
+  'posts_per_page' => $cap + 1,
+  'fields'         => 'ids',
+  'no_found_rows'  => true,
+]);
+$has_more_posts = count($count_query->posts) > $cap;
+
+$display_count = count($posts_to_render);
+$effective_bg_max_h = ($display_count >= 1 && $display_count <= 3) ? 600 : $bg_max_height;
 ?>
 
-<section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?>  alignfull" style="--posts-bg-max-h: <?= esc_attr($bg_max_height); ?>px;">
+<section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?>  alignfull" style="--posts-bg-max-h: <?= esc_attr($effective_bg_max_h); ?>px;">
   <!-- Background art layer (decorative only) -->
   <div class="c-posts__bg" aria-hidden="true">
   <?php if ($bg_url): ?>
@@ -193,7 +206,8 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
   <div class="c-posts__inner l-container wrap">
 
     <?php if (!empty($posts_to_render)): ?>
-      <div class="c-posts__grid">
+      <?php $grid_count = count($posts_to_render); $grid_class = ($grid_count <= 2) ? ' c-posts__grid--count-' . $grid_count : ''; ?>
+      <div class="c-posts__grid<?= esc_attr($grid_class); ?>">
         <?php foreach ($posts_to_render as $p): ?>
           <?php
             // Use explicit post IDs so we don't depend on global $post
@@ -257,7 +271,6 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
     <?php else: ?>
       <p>No posts found.</p>
     <?php endif; ?>
-    <?php $partial_path = get_theme_file_path('/partials/button_pair.php'); ?>
-        <?php include $partial_path; ?>
+    <?php if ($has_more_posts): $partial_path = get_theme_file_path('/partials/button_pair.php'); include $partial_path; endif; ?>
   </div>
 </section>

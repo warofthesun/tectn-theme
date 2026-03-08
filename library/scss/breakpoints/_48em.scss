@@ -196,6 +196,16 @@
     gap: 20px;
   }
 
+  .c-posts__grid--count-1 {
+    grid-template-columns: minmax(0, 400px);
+    justify-content: center;
+  }
+
+  .c-posts__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 400px));
+    justify-content: center;
+  }
+
   .c-posts__blob {
     width: 1000px;
     height: 480px;
