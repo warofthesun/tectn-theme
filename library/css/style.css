@@ -2980,10 +2980,7 @@ FOOTER STYLES
 *********************/
 .footer {
   clear: both;
-  background: -webkit-linear-gradient(180deg, #C9DD67, #79853E);
-  background: -webkit-gradient(linear, left top, left bottom, from(#C9DD67), to(#79853E));
-  background: -webkit-linear-gradient(top, #C9DD67, #79853E);
-  background: linear-gradient(180deg, #C9DD67, #79853E);
+  background-color: #505829;
 }
 .footer__logo {
   display: -webkit-box;
@@ -3046,6 +3043,9 @@ FOOTER STYLES
   width: 0;
 }
 
+#inner-footer {
+  padding-top: 2em;
+}
 #inner-footer .footer__right .c-button-pair {
   margin-bottom: 1.25em;
 }
@@ -3080,10 +3080,10 @@ view.
   gap: 1rem;
   list-style: none;
   margin: 0;
-  padding: 0;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  margin-top: 1em;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
 .footer__social-item {
@@ -3199,7 +3199,6 @@ img {
   -ms-flex-direction: column;
   flex-direction: column;
 }
-
 #inner-footer .nav {
   opacity: 1;
   -webkit-box-orient: horizontal;
@@ -5648,9 +5647,36 @@ IMPORTING PARTIALS
   }
   #inner-footer .footer__right {
     text-align: right;
+    -ms-flex-line-pack: end;
+    align-content: flex-end;
   }
   #inner-footer .footer__contact--left {
     text-align: left;
+  }
+  #inner-footer .footer__contact-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    gap: 0.75em;
+  }
+  #inner-footer .footer__contact-info .contact-info__item:nth-child(2)::before {
+    content: "•";
+    margin-right: 0.75em;
+  }
+  #inner-footer .footer__contact-info a.contact-info__item {
+    color: #EFF5D1;
+    text-decoration: none;
+  }
+  #inner-footer .footer__contact-info a.contact-info__item:hover, #inner-footer .footer__contact-info a.contact-info__item:focus {
+    color: #EFF5D1;
+    opacity: 0.85;
   }
   .footer__logo #tectn_logo {
     margin-top: 0em;

@@ -90,6 +90,10 @@ Stylesheet: Tokens
     background-color: $primary-600;
 }
 
+@mixin color_surface__darkest_primary {
+    background-color: $primary-800;
+}
+
 /* COLOR - BORDER */
 
 @mixin color_border__primary {

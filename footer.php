@@ -115,8 +115,12 @@
 			?>
 		<div class="footer__contact footer__contact--left">
 			<?php if ( trim( (string) $addr ) !== '' ) : ?><div class="footer__address"><?php echo wp_kses_post( $addr ); ?></div><?php endif; ?>
-			<?php if ( trim( (string) $phone ) !== '' ) : ?><div class="footer__phone"><?php echo esc_html( $phone ); ?></div><?php endif; ?>
-			<?php if ( trim( (string) $email ) !== '' ) : ?><a href="mailto:<?php echo esc_attr( $email ); ?>" class="footer__email"><?php echo esc_html( $email ); ?></a><?php endif; ?>
+			<?php if ( ($phone || $email) !== '' ) : ?>
+				<div class="footer__contact-info">
+					<?php if ( trim( (string) $phone ) !== '' ) : ?><div class="footer__phone contact-info__item"><?php echo esc_html( $phone ); ?></div><?php endif; ?>
+					<?php if ( trim( (string) $email ) !== '' ) : ?><a href="mailto:<?php echo esc_attr( $email ); ?>" class="footer__email contact-info__item"><?php echo esc_html( $email ); ?></a><?php endif; ?>
+				</div>
+			<?php endif; ?>
 		</div>
 		<?php endif; ?>
 	</div>

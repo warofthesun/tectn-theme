@@ -710,11 +710,36 @@
 
   	.footer__right {
   		text-align: right;
+		align-content: flex-end;
   	}
 
   	.footer__contact--left {
   		text-align: left;
   	}
+
+	.footer__contact-info {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: $spacing-sm;
+
+		.contact-info__item {
+			&:nth-child(2)::before {
+				content: "•";
+				margin-right: $spacing-sm;
+			}
+		}
+
+		a.contact-info__item {
+			color: $primary-100;
+			text-decoration: none;
+			&:hover,
+			&:focus {
+				color: $primary-100;
+				opacity: 0.85;
+			}
+		}
+	}
   }
 
   .footer {

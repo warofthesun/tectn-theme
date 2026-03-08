@@ -1124,7 +1124,7 @@ FOOTER STYLES
 
 .footer {
 	clear: both;
-	@include gradient(180deg, $primary-two_stops__dark);
+	@include color_surface__darkest_primary;
 
 	&__logo {
 		display: flex;
@@ -1183,6 +1183,7 @@ FOOTER STYLES
 }
 
 #inner-footer {
+	padding-top: $spacing-xxl;
 	.footer__right {
 		.c-button-pair {
 			margin-bottom: $spacing-lg;
@@ -1218,8 +1219,8 @@ FOOTER STYLES
 		gap: 1rem;
 		list-style: none;
 		margin: 0;
-		padding: 0;
-		justify-content: center;
+		margin-top: $spacing-md;
+		justify-content: flex-start;
 	}
 	.footer__social-item {
 		margin: 0;

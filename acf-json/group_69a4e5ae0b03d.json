@@ -238,10 +238,10 @@
                 {
                     "key": "field_69a4ef15a554e",
                     "label": "Buttons",
-                    "name": "buttons",
+                    "name": "",
                     "aria-label": "",
                     "type": "clone",
-                    "instructions": "",
+                    "instructions": "Same options as buttons in page content (link, style per button, and button color).",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -250,7 +250,7 @@
                         "id": ""
                     },
                     "clone": [
-                        "group_697e9a0ce752e"
+                        "group_69910166eac11"
                     ],
                     "display": "seamless",
                     "layout": "block",
