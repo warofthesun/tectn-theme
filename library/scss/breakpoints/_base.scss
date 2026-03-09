@@ -608,6 +608,153 @@ Content Section block
 	}
   }
 
+/* =========================
+   Card Block — olive green section, headline attached to top, yellow cards
+   ========================= */
+.c-card-block {
+	padding: 0 1rem 2rem;
+	border-radius: 1rem;
+	margin-bottom: $spacing-xl;
+	display:flex;
+	flex-direction: column;
+}
+
+.c-card-block__body {
+	position: relative;
+	@include color_surface__dark_primary;
+	@include border-radius-md;
+	padding: $spacing-md;
+}
+
+.c-card-block__headline {
+	font-family: $header-font;
+	font-size: clamp(1.25rem, 3vw, 1.75rem);
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: $white;
+	text-align: center;
+	margin: 0;
+	padding: 0.75rem 1.25rem;
+	padding-bottom: 0;
+	@include color_surface__dark_primary;
+	border-top-left-radius: $radius-sm;
+	border-top-right-radius: $radius-sm;
+	display: block;
+	box-sizing: border-box;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.c-card-block__grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.25rem;
+	list-style: none;
+	padding: 0;
+}
+
+.c-card-block__grid--count-1 {
+	justify-content: center;
+	grid-template-columns: minmax(0, 420px);
+}
+
+/* Two-column layouts for count-2–5 live in breakpoint files; mobile = 1 column */
+
+.c-card-block__card {
+	@include color_surface__card_primary;
+	border-radius: 0.75rem;
+	overflow: hidden;
+}
+
+.c-card-block__card-content {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	padding: 1.25rem;
+}
+
+.c-card-block__card-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 0.75rem;
+	margin-bottom: 0.75rem;
+}
+
+.c-card-block__card-title {
+	font-family: $header-font;
+	font-size: 1.1rem;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	font-weight: 700;
+	flex-shrink: 0;
+}
+
+.c-card-block__card-details {
+	font-size: 0.85rem;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	font-weight: 700;
+	text-align: right;
+	flex-shrink: 0;
+}
+
+.c-card-block__card-bottom {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 1rem;
+	@include surface_primary__content-95;
+	@include border-radius-sm;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.c-card-block__card-text {
+	flex: 1;
+	min-width: 0;
+}
+
+.c-card-block__card-headline {
+	font-size: 1rem;
+	line-height: 1.1;
+	margin: 0 0 0.5rem;
+	font-weight: 400;
+	padding: $spacing-sm;
+	padding-bottom:0;
+}
+
+.c-card-block__card-body {
+	font-size: 0.9rem;
+	line-height: 1.1;
+	margin: 0;
+	padding: $spacing-sm;
+	padding-top: 0;
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.c-card-block__card-media {
+	flex-shrink: 0;
+	width: 100%;
+	max-width: 200px;
+	align-self: flex-start;
+
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-top-right-radius: 0.35rem;
+		border-bottom-right-radius: 0.35rem;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		object-fit: cover;
+		margin-bottom: 0;
+	}
+}
+
 .c-posts {
 		--posts-bg-max-h: 800px;
 		position: relative;

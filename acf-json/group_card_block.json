@@ -1,0 +1,92 @@
+{
+  "key": "group_699cb001",
+  "title": "Card Block",
+  "fields": [
+    {
+      "key": "field_699cb001",
+      "label": "Section Headline",
+      "name": "section_headline",
+      "type": "text",
+      "instructions": "Short headline shown above the cards (e.g. Native Pollinator Seed Mixes Available).",
+      "required": 0,
+      "default_value": "",
+      "placeholder": "",
+      "maxlength": "",
+      "wrapper": { "width": "", "class": "", "id": "" }
+    },
+    {
+      "key": "field_699cb002",
+      "label": "Cards",
+      "name": "cards",
+      "type": "repeater",
+      "instructions": "Add as many cards as you like.",
+      "required": 0,
+      "min": 0,
+      "max": 0,
+      "layout": "block",
+      "button_label": "Add Card",
+      "collapsed": "field_699cb004",
+      "sub_fields": [
+        {
+          "key": "field_699cb003",
+          "label": "Image",
+          "name": "image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium",
+          "wrapper": { "width": "", "class": "", "id": "" },
+          "parent_repeater": "field_699cb002"
+        },
+        {
+          "key": "field_699cb004",
+          "label": "Title",
+          "name": "title_text",
+          "type": "text",
+          "instructions": "E.g. Curb Appeal Pollinator Mix",
+          "default_value": "",
+          "wrapper": { "width": "", "class": "", "id": "" },
+          "parent_repeater": "field_699cb002"
+        },
+        {
+          "key": "field_699cb005",
+          "label": "Details",
+          "name": "details_text",
+          "type": "text",
+          "instructions": "E.g. Height: 2.5-3 FT",
+          "default_value": "",
+          "wrapper": { "width": "", "class": "", "id": "" },
+          "parent_repeater": "field_699cb002"
+        },
+        {
+          "key": "field_699cb006",
+          "label": "Headline",
+          "name": "headline",
+          "type": "text",
+          "instructions": "Short descriptive headline for the card.",
+          "default_value": "",
+          "wrapper": { "width": "", "class": "", "id": "" },
+          "parent_repeater": "field_699cb002"
+        },
+        {
+          "key": "field_699cb007",
+          "label": "Body Text",
+          "name": "body_text",
+          "type": "textarea",
+          "default_value": "",
+          "rows": 4,
+          "new_lines": "br",
+          "wrapper": { "width": "", "class": "", "id": "" },
+          "parent_repeater": "field_699cb002"
+        }
+      ],
+      "wrapper": { "width": "", "class": "", "id": "" }
+    }
+  ],
+  "location": [[{ "param": "block", "operator": "==", "value": "tectn\/card-block" }]],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "active": true
+}

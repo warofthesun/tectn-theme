@@ -251,9 +251,10 @@ probably best not to use it. I mean, were you going to anyway? */
 /******************************************************************
 Stylesheet: Tokens
 *********************/
-/* COLOR - SURFACE */
+/* COLOR - SURFACE - PRIMARY */
+/* COLOR - SURFACE - SECONDARY */
+/* COLOR - SURFACE - ACCENT */
 /* COLOR - TEXT */
-/* COLOR - SURFACE */
 /* COLOR - BORDER */
 .container-fluid,
 .container {
@@ -3768,6 +3769,185 @@ Content Section block
   margin-bottom: 0;
 }
 
+/* =========================
+   Card Block — olive green section, headline attached to top, yellow cards
+   ========================= */
+.c-card-block {
+  padding: 0 1rem 2rem;
+  border-radius: 1rem;
+  margin-bottom: 1.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c-card-block__body {
+  position: relative;
+  background-color: #A1B152;
+  border-radius: 0.75em;
+  padding: 1em;
+}
+
+.c-card-block__headline {
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  padding-bottom: 0;
+  background-color: #A1B152;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  display: block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.c-card-block__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  list-style: none;
+  padding: 0;
+}
+
+.c-card-block__grid--count-1 {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  grid-template-columns: minmax(0, 420px);
+}
+
+/* Two-column layouts for count-2–5 live in breakpoint files; mobile = 1 column */
+.c-card-block__card {
+  background-color: #EFF5D1;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.c-card-block__card-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 0;
+  padding: 1.25rem;
+}
+
+.c-card-block__card-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.c-card-block__card-title {
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c-card-block__card-details {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 700;
+  text-align: right;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c-card-block__card-bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  gap: 1rem;
+  background-color: rgba(249, 251, 243, 0.95);
+  border-radius: 0.5em;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.c-card-block__card-text {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  min-width: 0;
+}
+
+.c-card-block__card-headline {
+  font-size: 1rem;
+  line-height: 1.1;
+  margin: 0 0 0.5rem;
+  font-weight: 400;
+  padding: 0.75em;
+  padding-bottom: 0;
+}
+
+.c-card-block__card-body {
+  font-size: 0.9rem;
+  line-height: 1.1;
+  margin: 0;
+  padding: 0.75em;
+  padding-top: 0;
+}
+.c-card-block__card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.c-card-block__card-media {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 200px;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+}
+.c-card-block__card-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-top-right-radius: 0.35rem;
+  border-bottom-right-radius: 0.35rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+  margin-bottom: 0;
+}
+
 .c-posts {
   --posts-bg-max-h: 800px;
   position: relative;
@@ -4870,6 +5050,38 @@ http://thesassway.com/advanced/modular-css-naming-conventions
 IMPORTING PARTIALS
 *********************/
 @media only screen and (min-width: 48em) {
+  .c-card-block__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-3 .c-card-block__card:nth-child(3) {
+    grid-column: 1/-1;
+    justify-self: center;
+    max-width: 420px;
+  }
+  .c-card-block__grid--count-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-5 .c-card-block__card:nth-child(5) {
+    grid-column: 1/-1;
+    justify-self: center;
+    max-width: 420px;
+  }
+  .c-card-block__card-media {
+    max-width: 200px;
+  }
   /*********************
   NAVIGATION STYLES
   *********************/
@@ -5110,6 +5322,35 @@ IMPORTING PARTIALS
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+  }
+  .c-card-block__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-3 .c-card-block__card:nth-child(3) {
+    grid-column: 1/-1;
+    justify-self: center;
+    max-width: 544px;
+  }
+  .c-card-block__grid--count-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-5 .c-card-block__card:nth-child(5) {
+    grid-column: 1/-1;
+    justify-self: center;
+    max-width: 544px;
   }
   .c-posts__blob {
     width: 1200px;
@@ -5499,6 +5740,9 @@ IMPORTING PARTIALS
   }
   .hero__post--text h1 {
     font-size: 3.5em;
+  }
+  .hero__title--initiative {
+    font-size: 6.5em;
   }
   /***************
   CONTENT BLOCKS
