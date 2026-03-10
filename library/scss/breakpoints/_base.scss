@@ -471,13 +471,20 @@ Content Section block
   overflow: visible;
 }
 
-/* BG is a backdrop, not a container */
+/* When colored background is on, break out to full viewport width so background and waves span edge-to-edge */
+.c-waveband.is-bg {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* BG is a backdrop, not a container — uses user-selected color from parent .c-waveband */
 .c-waveband__bg {
   position: absolute;
   inset: 0 0 auto 0; /* top:0, left:0, right:0 */
   height: min(var(--bg-max-h), 70vh); /* max 300px, responsive cap */
   max-height: var(--bg-max-h);
-  background: var(--waveband-bg);
+  background: var(--waveband-bg, var(--c-sage));
   z-index: 0;
 }
 
@@ -496,14 +503,14 @@ Content Section block
   margin-bottom: var(--hang);
 }
 
-/* Full-bleed waves inside the bg layer */
+/* Full-bleed waves inside the bg layer — use block background so waves match user-selected color */
 .c-waveband__bg .c-waveband__wave {
   position: absolute;
   left: 50%;
   width: 100vw;
   height: calc(var(--wave-h) + 2px); /* overscan prevents seams */
   transform: translateX(-50%);
-  @include surface_primary__content;
+  background-color: var(--waveband-bg, var(--c-sage));
   pointer-events: none;
 
   -webkit-mask: url("../images/curve.svg") no-repeat center / 100% 100%;
@@ -678,25 +685,26 @@ Content Section block
 	justify-content: space-between;
 	align-items: baseline;
 	gap: 0.75rem;
-	margin-bottom: 0.75rem;
 }
 
 .c-card-block__card-title {
 	font-family: $header-font;
-	font-size: 1.1rem;
+	font-size: 1.5rem;
 	text-transform: uppercase;
 	letter-spacing: 0.02em;
-	font-weight: 700;
+	font-weight: 400;
 	flex-shrink: 0;
+	color: $primary-600;
 }
 
 .c-card-block__card-details {
 	font-size: 0.85rem;
 	text-transform: uppercase;
 	letter-spacing: 0.03em;
-	font-weight: 700;
+	font-weight: 400;
 	text-align: right;
 	flex-shrink: 0;
+	color: $primary-800;
 }
 
 .c-card-block__card-bottom {
@@ -722,6 +730,7 @@ Content Section block
 	font-weight: 400;
 	padding: $spacing-sm;
 	padding-bottom:0;
+	color: $primary-800;
 }
 
 .c-card-block__card-body {
@@ -1516,6 +1525,7 @@ POSTS & CONTENT STYLES
 		color: $primary-10;
 		margin: 0;
 		font-size: 2.5rem;
+		text-shadow: 0 0 20px rgba($secondary-900, 0.7);
 	}
 
 	&__lower--initiative {
@@ -1524,10 +1534,13 @@ POSTS & CONTENT STYLES
 		width: 100%;
 		padding: 2rem 7%;
 		margin-top: auto;
+		margin-bottom: auto;
+		padding-top: 20vh;
 
 		&.hero__lower--gradient-contained {
 			min-height: 200px;
-			padding-bottom: 140px; // room for wave
+			margin-bottom: 0;
+			padding-top: 0;
 		}
 	}
 
@@ -1573,10 +1586,14 @@ POSTS & CONTENT STYLES
 		position: relative;
 		z-index: 2;
 		width: 96%;
-		max-width: 1440px;
+		max-width: 940px;
 		margin-left: auto;
 		margin-right: auto;
 		color: $primary-10;
+		font-size: 1.35rem;
+		line-height: 1;
+		font-weight: 700;
+		text-shadow: 0 0 10px rgba($secondary-900, 0.7);
 
 		p:last-child {
 			margin-bottom: 0;

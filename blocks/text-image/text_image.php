@@ -64,10 +64,10 @@
     $align = !empty($block['align']) ? 'align' . $block['align'] : '';
     $classes_band[] = $align;
 
-    $style = '';
+    $style_attr = '';
     if ($enable_bg) {
-        $bg_value = $bg_map[$bg_choice] ?? $bg_map['sage'];
-        $style = '--waveband-bg:' . $bg_value . ';';
+        $bg_value   = $bg_map[$bg_choice] ?? $bg_map['sage'];
+        $style_attr = ' style="--waveband-bg:' . esc_attr( $bg_value ) . ';"';
     }
 ?>
 <?php
@@ -93,11 +93,9 @@
   endif;
 ?>
 <?php if ($enable_bg): ?>
-<div class="<?php echo esc_attr(implode(' ', array_filter($classes_band))); ?>">
+<div class="<?php echo esc_attr(implode(' ', array_filter($classes_band))); ?>"<?php echo $style_attr; ?>>
 
-    <div class="c-waveband__bg"
-      <?php if ($style) echo 'style="' . esc_attr($style) . ' --waveband-max-h: 800px;"'; ?>
-    >
+    <div class="c-waveband__bg" style="--waveband-max-h: 800px;">
         <span class="c-waveband__wave c-waveband__wave--top" aria-hidden="true"></span>
         <span class="c-waveband__wave c-waveband__wave--bottom" aria-hidden="true"></span>
     </div>
