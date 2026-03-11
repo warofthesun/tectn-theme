@@ -4,8 +4,9 @@
      *
      * @param array $block The block settings and attributes.
      */
-    $enable_bg      = get_field('use_colored_background');
-    $bg_choice      = get_field('background_color') ?: 'sage';
+    $enable_bg         = get_field('use_colored_background');
+    $content_full_width = (bool) get_field('content_full_width');
+    $bg_choice        = get_field('background_color') ?: 'sage';
     $bg_map = [
         'sage'     => 'var(--c-sage)',
         'cream'    => 'var(--c-cream)',
@@ -14,31 +15,41 @@
     ];
     $bg_value = $bg_map[$bg_choice] ?? $bg_map['sage'];
 
-    $headline       = get_field('headline');
-    $headline_size  = get_field('headline_size');
-    $body           = get_field('body_copy');
+    $headline        = get_field('headline');
+    $headline_size   = get_field('headline_size');
+    $body            = get_field('body_copy');
     $content_position = get_field('content_vertical');
-    $image_position = get_field('image_horizontal');
-    $images = get_field('images');
-    $count = is_array($images) ? count($images) : 0;
-    if ($count === 1) {
-        $text_col  = 'col-xs-12 col-md-6';
-        $image_col = 'col-xs-12 col-md-6';
-        // Use BEM-friendly class names for image grids
+    $image_position  = get_field('image_horizontal');
+    $media_type      = get_field('media_type') ?: 'gallery';
+    $images          = get_field('images');
+    $video_url       = get_field('video_url', false, false); // raw URL for wp_oembed_get()
+    $count           = is_array($images) ? count($images) : 0;
+
+    $has_video = ($media_type === 'video' && ! empty($video_url) && is_string($video_url));
+    $has_gallery = ($media_type === 'gallery' && $count > 0);
+    $has_media = $has_video || $has_gallery;
+
+    if ($has_video) {
+        $text_col   = 'col-xs-12 col-md-6';
+        $image_col  = 'col-xs-12 col-md-6';
         $grid_class = 'c-image-grid c-image-grid--one';
-      } elseif ($count === 2) {
-        $text_col  = 'col-xs-12 col-md-4';
-        $image_col = 'col-xs-12 col-md-8';
+    } elseif ($count === 1) {
+        $text_col   = 'col-xs-12 col-md-6';
+        $image_col  = 'col-xs-12 col-md-6';
+        $grid_class = 'c-image-grid c-image-grid--one';
+    } elseif ($count === 2) {
+        $text_col   = 'col-xs-12 col-md-4';
+        $image_col  = 'col-xs-12 col-md-8';
         $grid_class = 'c-image-grid c-image-grid--two';
-      } elseif ($count === 3) {
-        $text_col  = 'col-xs-12 col-md-4';
-        $image_col = 'col-xs-12 col-md-8';
+    } elseif ($count === 3) {
+        $text_col   = 'col-xs-12 col-md-4';
+        $image_col  = 'col-xs-12 col-md-8';
         $grid_class = 'c-image-grid c-image-grid--three';
-      } else {
-        // Optional: fallback if no images (choose whatever makes sense)
-        $text_col  = 'col-xs-12 col-md-12';
-        $image_col = 'd-none'; // or 'col-xs-12 col-md-12' and show a placeholder
-      }
+    } else {
+        $text_col   = 'col-xs-12 col-md-12';
+        $image_col  = 'd-none';
+        $grid_class = 'c-image-grid c-image-grid--one';
+    }
     
     $buttons     = get_field('buttons');
 
@@ -59,6 +70,7 @@
     $classes_band = [
         'c-waveband',
         $enable_bg ? 'is-bg' : '',
+        ($enable_bg && $has_video) ? 'c-waveband--has-video' : '',
     ];
 
     $align = !empty($block['align']) ? 'align' . $block['align'] : '';
@@ -79,14 +91,14 @@
   // Treat WYSIWYG as empty if it's only whitespace / empty tags.
   $body_plain = is_string($body) ? trim( wp_strip_all_tags( $body ) ) : '';
 
-  // Consider the block "empty" if it has no headline, no meaningful body, and no images.
-  $is_empty = empty($headline) && empty($body_plain) && ($count === 0);
+  // Consider the block "empty" if it has no headline, no meaningful body, and no media (images or video).
+  $is_empty = empty($headline) && empty($body_plain) && ! $has_media;
 
   if ( $is_editor && $is_empty ) :
 ?>
   <div class="block-placeholder" style="border: 1px dashed #cfd3d7; padding: 1rem; border-radius: .5rem; background: rgba(255,255,255,.8);">
     <strong style="display:block; margin-bottom:.25rem;">Text + Image</strong>
-    <p style="margin:0;">Add a headline, body copy, and at least one image.</p>
+    <p style="margin:0;">Add a headline, body copy, and images or a video.</p>
   </div>
 <?php
     return;
@@ -100,19 +112,39 @@
         <span class="c-waveband__wave c-waveband__wave--bottom" aria-hidden="true"></span>
     </div>
 
-    <div class="c-waveband__content">
+    <div class="c-waveband__content<?php echo $content_full_width ? ' c-waveband__content--full' : ''; ?>">
 <?php endif; ?>
 
-  
-        <div class="<?php echo esc_attr(implode(' ', $classes_cg)); ?> row">
+<?php if ( ! $enable_bg && $content_full_width ) : ?><div class="c-text-image__content c-text-image__content--full"><?php endif; ?>
+<?php if ( ! $enable_bg && ! $content_full_width ) : ?><div class="c-text-image__content"><?php endif; ?>
+
+        <div class="<?php echo esc_attr(implode(' ', $classes_cg)); ?> row<?php echo $has_video ? ' c-content-group__row--has-video' : ''; ?>">
             <div class="<?= esc_attr($text_col); ?> c-content-group__content">
                 <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
                 <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
                     <?php $partial_path = get_theme_file_path('/partials/button_pair.php'); ?>
                     <?php include $partial_path; ?>
             </div>
-            <div class="<?= esc_attr($image_col); ?>">
-            <?php if( $images ) : ?>
+            <div class="<?= esc_attr($image_col); ?><?php echo $has_video ? ' c-content-group__media-col--video' : ''; ?>">
+            <?php if ( $has_video ) :
+                $video_embed = wp_oembed_get( $video_url );
+                if ( $video_embed ) : ?>
+                <div class="c-content-group__video">
+                    <?php echo wp_kses( $video_embed, [
+                        'iframe' => [
+                            'src'             => true,
+                            'width'           => true,
+                            'height'          => true,
+                            'frameborder'     => true,
+                            'allow'           => true,
+                            'allowfullscreen' => true,
+                            'loading'         => true,
+                            'title'           => true,
+                        ],
+                    ] ); ?>
+                </div>
+                <?php endif; ?>
+            <?php elseif ( $images ) : ?>
                 <ul class="<?= esc_attr($grid_class); ?>">
                     <?php if ($count === 3): ?>
 
@@ -151,6 +183,8 @@
                 <?php endif; ?>
             </div>
         </div>
+
+<?php if ( ! $enable_bg ) : ?></div><?php endif; ?>
 <?php if ($enable_bg): ?>
     </div>
 </div>

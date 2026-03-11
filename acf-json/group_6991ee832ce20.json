@@ -61,6 +61,27 @@
             "placeholder": "",
             "create_options": 0,
             "save_options": 0
+        },
+        {
+            "key": "field_6991ee_content_full",
+            "label": "Content full width",
+            "name": "content_full_width",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Make the content (headline, body, images) use the full width of the block instead of a centered column.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Yes",
+            "ui_off_text": "No",
+            "ui": 1
         }
     ],
     "location": [

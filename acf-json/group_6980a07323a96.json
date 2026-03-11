@@ -24,6 +24,30 @@
             "delay": 0
         },
         {
+            "key": "field_6990ba_media_type",
+            "label": "Media type",
+            "name": "media_type",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "gallery": "Image gallery",
+                "video": "Video Embed"
+            },
+            "default_value": "gallery",
+            "return_format": "value",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "layout": "horizontal"
+        },
+        {
             "key": "field_6990ba750ab46",
             "label": "Image(s)",
             "name": "images",
@@ -31,7 +55,15 @@
             "type": "gallery",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6990ba_media_type",
+                        "operator": "==",
+                        "value": "gallery"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -52,6 +84,31 @@
             "preview_size": "medium"
         },
         {
+            "key": "field_6990ba_video_url",
+            "label": "Video URL",
+            "name": "video_url",
+            "aria-label": "",
+            "type": "oembed",
+            "instructions": "Paste a YouTube, Vimeo, or other supported embed URL.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6990ba_media_type",
+                        "operator": "==",
+                        "value": "video"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "width": "",
+            "height": ""
+        },
+        {
             "key": "field_6990bac10ab48",
             "label": "Image alignment (horizontal)",
             "name": "image_horizontal",
@@ -59,7 +116,15 @@
             "type": "button_group",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6991ee_content_full",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -83,7 +148,15 @@
             "type": "button_group",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6991ee_content_full",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",

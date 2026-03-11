@@ -488,6 +488,18 @@ Content Section block
   z-index: 0;
 }
 
+/* When content is full width (stacked) or block has video, expand background to full height of block; waves and hang unchanged */
+.c-waveband:has(.c-waveband__content--full) .c-waveband__bg,
+.c-waveband.c-waveband--has-video .c-waveband__bg {
+  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  max-height: none;
+}
+
 /* Content is normal flow, above the bg */
 .c-waveband__content {
   position: relative;
@@ -501,6 +513,146 @@ Content Section block
 
   /* Make it “break out” past the bottom wave */
   margin-bottom: var(--hang);
+}
+
+/* Text-image block: Content full width = stacked column inside the same container (header, body+CTAs, image group) */
+.c-waveband__content--full .row,
+.c-text-image__content--full .row {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.c-waveband__content--full .row > *,
+.c-text-image__content--full .row > * {
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+
+.c-waveband__content--full .c-content-group__content,
+.c-text-image__content--full .c-content-group__content {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/* Image group: row of images, equal height (not equal width), full width of container; block height expands with content */
+.c-waveband__content--full .c-image-grid,
+.c-text-image__content--full .c-image-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.c-waveband__content--full .c-image-grid > li,
+.c-text-image__content--full .c-image-grid > li {
+  flex: 0 0 auto;
+  margin: 0;
+  height: 100%;
+}
+
+/* Single image: fill container width */
+.c-waveband__content--full .c-image-grid > li:only-child,
+.c-text-image__content--full .c-image-grid > li:only-child {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.c-waveband__content--full .c-image-grid > li:only-child .c-image-grid__img,
+.c-text-image__content--full .c-image-grid > li:only-child .c-image-grid__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.c-waveband__content--full .c-image-grid .c-image-grid__img,
+.c-text-image__content--full .c-image-grid .c-image-grid__img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* 3 images: flatten right column into same row so all three are equal height in one row (widths can vary) */
+.c-waveband__content--full .c-image-grid__right,
+.c-text-image__content--full .c-image-grid__right {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 auto;
+  gap: 1rem;
+  margin: 0;
+  height: 100%;
+}
+
+.c-waveband__content--full .c-image-grid__right-item,
+.c-text-image__content--full .c-image-grid__right-item {
+  flex: 0 0 auto;
+  height: 100%;
+}
+
+.c-waveband__content--full .c-image-grid__right-item .c-image-grid__img,
+.c-text-image__content--full .c-image-grid__right-item .c-image-grid__img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+
+/* When block has no colored background, content wrapper matches waveband layout */
+.c-text-image__content {
+  max-width: 1192px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* Video embed: 16:9. min-width so wrapper (and iframe) always have dimensions even when flex column doesn’t. */
+/* Only stack video below content when "Content full width" is on; otherwise video is in second column like gallery */
+.c-waveband__content--full .c-content-group__row--has-video,
+.c-text-image__content--full .c-content-group__row--has-video {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.c-waveband__content--full .c-content-group__row--has-video > *,
+.c-text-image__content--full .c-content-group__row--has-video > * {
+  max-width: 100%;
+}
+
+.c-content-group__media-col--video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 28.25%; /* 16:9 within 50% column (56.25% of column width) */
+  height: 0;
+  overflow: hidden;
+  min-width: 0;
+  align-self: flex-start;
+}
+
+.c-waveband__content--full .c-content-group__row--has-video .c-content-group__media-col--video,
+.c-text-image__content--full .c-content-group__row--has-video .c-content-group__media-col--video {
+  align-self: stretch;
+  padding-bottom: 56.25%; /* 16:9 when stacked full width */
+}
+
+.c-content-group__media-col--video .c-content-group__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.c-content-group__media-col--video .c-content-group__video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 /* Full-bleed waves inside the bg layer — use block background so waves match user-selected color */
