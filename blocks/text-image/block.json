@@ -1,21 +1,22 @@
 {
-    "name": "tectn/text-image",
-    "title": "Text + Image",
-    "description": "Header, body copy, CTAs, and 1-3 images",
-    "style": [ "file:../library/css/style.css" ],
-    "category": "tectn-blocks",
-    "icon": "screenoptions",
-    "keywords": ["image", "content", "layout"],
-    "acf": {
-        "mode": "preview",
-        "renderTemplate": "text_image.php"
-    },
-    "supports": {
-        "jsx": true,
-        "anchor": true,
-        "align": ["full", "wide"]
-    },
-    "example": {
+  "name": "tectn/text-image",
+  "title": "Text + Image",
+  "description": "Header, body copy, CTAs, and 1-3 images",
+  "style": ["file:../library/css/style.css"],
+  "category": "tectn-blocks",
+  "icon": "screenoptions",
+  "keywords": ["image", "content", "layout"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "text_image.php"
+  },
+  "usesContext": ["tectn/insideContainer"],
+  "supports": {
+    "jsx": true,
+    "anchor": true,
+    "align": ["full", "wide"]
+  },
+  "example": {
     "attributes": {
       "mode": "preview",
       "data": {

@@ -10,6 +10,15 @@
     "mode": "preview",
     "renderTemplate": "band.php"
   },
+  "attributes": {
+    "tectnInsideContainer": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "providesContext": {
+    "tectn/insideContainer": "tectnInsideContainer"
+  },
   "supports": {
     "jsx": true,
     "anchor": true

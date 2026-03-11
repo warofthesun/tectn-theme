@@ -4,7 +4,9 @@
      *
      * @param array $block The block settings and attributes.
      */
-    $enable_bg         = get_field('use_colored_background');
+    // When nested inside Content Section or Content Container, always defer background to the parent.
+    $is_inside_container = ! empty( $block['context']['tectn/insideContainer'] );
+    $enable_bg         = $is_inside_container ? false : get_field('use_colored_background');
     $content_full_width = (bool) get_field('content_full_width');
     $bg_choice        = get_field('background_color') ?: 'sage';
     $bg_map = [
