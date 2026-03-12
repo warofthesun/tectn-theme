@@ -102,6 +102,9 @@ if ( $wave_curves === null || $wave_curves === false ) {
   $wave_bottom = in_array( 'bottom', $wave_curves, true );
 }
 $has_waves = $wave_top || $wave_bottom;
+if ( ! $bg_enable ) {
+  $has_waves = false;
+}
 
 $wrap_style = '';
 if ( $has_waves && $should_render_bg && $bg_type === 'color' && !empty($bg_color) ) {
