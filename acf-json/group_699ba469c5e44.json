@@ -158,6 +158,51 @@
             "palette_colors": ""
         },
         {
+            "key": "field_699e5a0500005",
+            "label": "Background color contains content",
+            "name": "bg_color_contains",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "When on, the color background stretches with the content and height/alignment controls are hidden.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    { "field": "field_699e4c097468e", "operator": "==", "value": "color" }
+                ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_699e5a0400004",
+            "label": "Add curve to background",
+            "name": "wave_curves",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [ { "field": "field_699ba4f70a535", "operator": "==", "value": "1" } ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "top": "Top",
+                "bottom": "Bottom"
+            },
+            "default_value": ["top", "bottom"],
+            "return_format": "value",
+            "allow_custom": 0,
+            "layout": "horizontal",
+            "toggle": 0,
+            "save_custom": 0,
+            "allow_in_bindings": 0
+        },
+        {
             "key": "field_699ba5540a537",
             "label": "Background Height",
             "name": "bg_height",
@@ -167,11 +212,14 @@
             "required": 0,
             "conditional_logic": [
                 [
-                    {
-                        "field": "field_699ba4f70a535",
-                        "operator": "==",
-                        "value": "1"
-                    }
+                    { "field": "field_699ba4f70a535", "operator": "==", "value": "1" },
+                    { "field": "field_699e5a0400004", "operator": "==empty" },
+                    { "field": "field_699e5a0500005", "operator": "!=", "value": "1" }
+                ],
+                [
+                    { "field": "field_699ba4f70a535", "operator": "==", "value": "1" },
+                    { "field": "field_699e5a0400004", "operator": "==empty" },
+                    { "field": "field_699e4c097468e", "operator": "==", "value": "image" }
                 ]
             ],
             "wrapper": {
@@ -198,11 +246,14 @@
             "required": 0,
             "conditional_logic": [
                 [
-                    {
-                        "field": "field_699ba4f70a535",
-                        "operator": "==",
-                        "value": "1"
-                    }
+                    { "field": "field_699ba4f70a535", "operator": "==", "value": "1" },
+                    { "field": "field_699e5a0400004", "operator": "==empty" },
+                    { "field": "field_699e5a0500005", "operator": "!=", "value": "1" }
+                ],
+                [
+                    { "field": "field_699ba4f70a535", "operator": "==", "value": "1" },
+                    { "field": "field_699e5a0400004", "operator": "==empty" },
+                    { "field": "field_699e4c097468e", "operator": "==", "value": "image" }
                 ]
             ],
             "wrapper": {
@@ -246,5 +297,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771983404
+    "modified": 1772999999
 }

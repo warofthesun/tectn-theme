@@ -30,6 +30,9 @@ $classes = ['c-band', "c-band--py-{$py}"];
 if ( $bg_enable && $bg_type !== 'color' ) {
   $classes[] = 'c-band--grad-strong';
 }
+if ( $bg_type === 'color' && (bool) get_field( 'bg_color_contains' ) ) {
+  $classes[] = 'c-band--bg-contains';
+}
 
 $align = !empty($block['align']) ? 'align' . $block['align'] : '';
 if ($align) $classes[] = $align;
@@ -80,34 +83,93 @@ if ( $bg_enable ) {
     $should_render_bg = !empty($bg_image['url']);
   }
 }
+
+// Add curve to background: checkbox "Top" / "Bottom" (default both when not set)
+$wave_curves = get_field( 'wave_curves' );
+if ( $wave_curves === null || $wave_curves === false ) {
+  $wave_top    = get_field( 'wave_top' );
+  $wave_bottom = get_field( 'wave_bottom' );
+  if ( $wave_top === null && $wave_bottom === null ) {
+    $wave_top = true;
+    $wave_bottom = true;
+  } else {
+    $wave_top    = (bool) $wave_top;
+    $wave_bottom = (bool) $wave_bottom;
+  }
+} else {
+  $wave_curves = (array) $wave_curves;
+  $wave_top    = in_array( 'top', $wave_curves, true );
+  $wave_bottom = in_array( 'bottom', $wave_curves, true );
+}
+$has_waves = $wave_top || $wave_bottom;
+
+$wrap_style = '';
+if ( $has_waves && $should_render_bg && $bg_type === 'color' && !empty($bg_color) ) {
+  $wrap_style = ' style="--waveband-bg:' . esc_attr( $bg_color ) . ';"';
+}
 ?>
+<?php if ( $has_waves ) : ?>
+<div class="c-band__wrap"<?php echo $wrap_style; ?>>
+  <?php if ( $wave_top ) : ?><span class="c-waveband__wave c-waveband__wave--top" aria-hidden="true"></span><?php endif; ?>
+  <section class="<?php echo esc_attr(implode(' ', array_filter($classes))); ?> alignfull"
+           <?php if (!empty($styles)) echo 'style="' . esc_attr(implode('; ', $styles)) . '"'; ?>>
 
-<section class="<?php echo esc_attr(implode(' ', array_filter($classes))); ?> alignfull"
-         <?php if (!empty($styles)) echo 'style="' . esc_attr(implode('; ', $styles)) . '"'; ?>>
+    <?php if ( $should_render_bg ) : ?>
+      <div class="c-band__bg" aria-hidden="true">
+        <div class="c-band__bg-media <?php echo esc_attr($bg_media_class); ?>">
+          <?php if ( $bg_type !== 'color' ) : ?>
+            <div class="c-band__bg-gradient" aria-hidden="true"></div>
+          <?php endif; ?>
+        </div>
+      </div>
+    <?php endif; ?>
 
-  <?php if ( $should_render_bg ) : ?>
-    <div class="c-band__bg" aria-hidden="true">
-      <div class="c-band__bg-media <?php echo esc_attr($bg_media_class); ?>">
-        <?php if ( $bg_type !== 'color' ) : ?>
-          <div class="c-band__bg-gradient" aria-hidden="true"></div>
-        <?php endif; ?>
+    <div class="c-band__container wrap">
+      <div class="c-band__inner">
+        <?php
+          $band_inner_template = [
+            ['tectn/text-image', []],
+            ['tectn/text-image', []],
+          ];
+        ?>
+        <InnerBlocks
+          template="<?php echo esc_attr( wp_json_encode( $band_inner_template ) ); ?>"
+          templateLock="insert"
+        />
       </div>
     </div>
-  <?php endif; ?>
 
-  <div class="c-band__container wrap">
-    <div class="c-band__inner">
-      <?php
-        $band_inner_template = [
-          ['tectn/text-image', []],
-          ['tectn/text-image', []],
-        ];
-      ?>
-      <InnerBlocks
-        template="<?php echo esc_attr( wp_json_encode( $band_inner_template ) ); ?>"
-        templateLock="insert"
-      />
+  </section>
+  <?php if ( $wave_bottom ) : ?><span class="c-waveband__wave c-waveband__wave--bottom" aria-hidden="true"></span><?php endif; ?>
+</div>
+<?php else : ?>
+  <section class="<?php echo esc_attr(implode(' ', array_filter($classes))); ?> alignfull"
+           <?php if (!empty($styles)) echo 'style="' . esc_attr(implode('; ', $styles)) . '"'; ?>>
+
+    <?php if ( $should_render_bg ) : ?>
+      <div class="c-band__bg" aria-hidden="true">
+        <div class="c-band__bg-media <?php echo esc_attr($bg_media_class); ?>">
+          <?php if ( $bg_type !== 'color' ) : ?>
+            <div class="c-band__bg-gradient" aria-hidden="true"></div>
+          <?php endif; ?>
+        </div>
+      </div>
+    <?php endif; ?>
+
+    <div class="c-band__container wrap">
+      <div class="c-band__inner">
+        <?php
+          $band_inner_template = [
+            ['tectn/text-image', []],
+            ['tectn/text-image', []],
+          ];
+        ?>
+        <InnerBlocks
+          template="<?php echo esc_attr( wp_json_encode( $band_inner_template ) ); ?>"
+          templateLock="insert"
+        />
+      </div>
     </div>
-  </div>
 
-</section>
+  </section>
+<?php endif; ?>

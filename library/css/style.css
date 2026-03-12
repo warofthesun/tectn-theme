@@ -3170,6 +3170,7 @@ body {
   line-height: 1.5;
   color: #5c6b80;
   background-color: #F9FBF3;
+  --body-bg: #F9FBF3;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -3405,6 +3406,75 @@ BAND / SECTION WRAPPER
 
 .c-band__inner {
   display: block;
+}
+
+/* Band with top/bottom waves — DOM order Wave / Section / Wave */
+.c-band__wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 0;
+  overflow: visible;
+  width: 100vw;
+  margin-left: -webkit-calc(50% - 50vw);
+  margin-left: calc(50% - 50vw);
+  margin-right: -webkit-calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Keep section flush to waves (front end can get block/global margin; override so waves stay attached) */
+.c-band__wrap > .c-band {
+  margin: 0 !important;
+  margin-block: 0 !important;
+}
+
+/* When waves are on, ignore stored background height — background stretches with content */
+.c-band__wrap .c-band__bg-media {
+  height: 100%;
+  top: 0;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+
+/* When "Background color contains content" is on (color bg, no waves), background stretches with content */
+.c-band--bg-contains .c-band__bg-media {
+  height: 100%;
+  top: 0;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+
+.c-band__wrap > .c-waveband__wave {
+  display: block;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin: 0;
+  width: 100vw;
+  height: -webkit-calc(var(--wave-h) + 2px);
+  height: calc(var(--wave-h) + 2px);
+  background-color: var(--waveband-bg, var(--c-sage));
+  pointer-events: none;
+  -webkit-mask: url("../images/curve.svg") no-repeat center/100% 100%;
+  mask: url("../images/curve.svg") no-repeat center/100% 100%;
+}
+
+.c-band__wrap > .c-waveband__wave--top {
+  -webkit-mask-position: center bottom;
+  mask-position: center bottom;
+}
+
+.c-band__wrap > .c-waveband__wave--bottom {
+  -webkit-transform: scale(-1, -1);
+  -ms-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+  -webkit-mask-position: center top;
+  mask-position: center top;
 }
 
 /* Padding modifiers */
@@ -4964,11 +5034,11 @@ POSTS & CONTENT STYLES
   height: 120px;
   z-index: 1;
 }
-.hero__wave--lower .hero__wave-svg .hero__wave-fill {
-  fill: #F9FBF3;
+.hero .hero__wave-svg .hero__wave-fill {
+  fill: var(--body-bg, #F9FBF3);
 }
 .hero__container--landing .hero__overlay-svg .hero__wave-fill {
-  fill: #F9FBF3;
+  fill: var(--body-bg, #F9FBF3);
 }
 .hero__lower-content {
   position: relative;
@@ -5004,6 +5074,11 @@ POSTS & CONTENT STYLES
 .hero__featured-post {
   position: absolute;
   display: none;
+}
+
+/* Hero wave fill: match body background (selector targets hero__container since partial has no .hero wrapper) */
+.hero__container .hero__wave-svg .hero__wave-fill {
+  fill: var(--body-bg, #F9FBF3);
 }
 
 #inner-content {
@@ -5110,6 +5185,7 @@ POSTS & CONTENT STYLES
 .testimonials__background--gold::before {
   content: "What our clients say";
   background-color: #F9FBF3;
+  --body-bg: #F9FBF3;
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   font-size: 2em;
   line-height: 1;

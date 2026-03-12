@@ -316,6 +316,60 @@ BAND / SECTION WRAPPER
   display: block;
 }
 
+/* Band with top/bottom waves — DOM order Wave / Section / Wave */
+.c-band__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: visible;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Keep section flush to waves (front end can get block/global margin; override so waves stay attached) */
+.c-band__wrap > .c-band {
+  margin: 0 !important;
+  margin-block: 0 !important;
+}
+
+/* When waves are on, ignore stored background height — background stretches with content */
+.c-band__wrap .c-band__bg-media {
+  height: 100%;
+  top: 0;
+  transform: translate(-50%, 0);
+}
+
+/* When "Background color contains content" is on (color bg, no waves), background stretches with content */
+.c-band--bg-contains .c-band__bg-media {
+  height: 100%;
+  top: 0;
+  transform: translate(-50%, 0);
+}
+
+.c-band__wrap > .c-waveband__wave {
+  display: block;
+  flex-shrink: 0;
+  margin: 0;
+  width: 100vw;
+  height: calc(var(--wave-h) + 2px);
+  background-color: var(--waveband-bg, var(--c-sage));
+  pointer-events: none;
+  -webkit-mask: url("../images/curve.svg") no-repeat center / 100% 100%;
+  mask: url("../images/curve.svg") no-repeat center / 100% 100%;
+}
+
+.c-band__wrap > .c-waveband__wave--top {
+  -webkit-mask-position: center bottom;
+  mask-position: center bottom;
+}
+
+.c-band__wrap > .c-waveband__wave--bottom {
+  transform: scale(-1, -1);
+  -webkit-mask-position: center top;
+  mask-position: center top;
+}
+
 /* Padding modifiers */
 .c-band--py-none { --band-py: #{$spacing-none}; }
 .c-band--py-xxs  { --band-py: #{$spacing-xxs}; }
@@ -1724,14 +1778,14 @@ POSTS & CONTENT STYLES
 		z-index: 1;
 	}
 
-	// Match surface_primary__content (page background) so wave meets content with no visible seam
-	&__wave--lower .hero__wave-svg .hero__wave-fill {
-		fill: $secondary-50;
+	// All hero wave SVGs: use body background so wave meets content with no visible seam
+	.hero__wave-svg .hero__wave-fill {
+		fill: var(--body-bg, #{$secondary-50});
 	}
 
-	// Landing hero: same fill from surface_primary__content
+	// Landing hero overlay curve: same
 	&__container--landing .hero__overlay-svg .hero__wave-fill {
-		fill: $secondary-50;
+		fill: var(--body-bg, #{$secondary-50});
 	}
 
 	&__lower-content {
@@ -1769,6 +1823,11 @@ POSTS & CONTENT STYLES
 		position:absolute;
 		display: none;
 	}
+}
+
+/* Hero wave fill: match body background (selector targets hero__container since partial has no .hero wrapper) */
+.hero__container .hero__wave-svg .hero__wave-fill {
+	fill: var(--body-bg, #F9FBF3);
 }
 
 #inner-content {

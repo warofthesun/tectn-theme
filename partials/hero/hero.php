@@ -134,7 +134,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
                 <feDropShadow dx="0" dy="-1" stdDeviation="2" flood-color="#fff" flood-opacity="0.35"/>
               </filter>
             </defs>
-            <path d="M0,565 C350,460 700,690 1000,510 L1000,615 L0,615 Z" fill="#FCF7EE" filter="url(#layerShadowWave)"/>
+            <path class="hero__wave-fill" d="M0,565 C350,460 700,690 1000,510 L1000,615 L0,615 Z" filter="url(#layerShadowWave)"/>
             <path d="M0,565 C350,460 700,690 1000,510" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round" filter="url(#edgeHighlightWave)" opacity="0.55"/>
           </svg>
         </div>
