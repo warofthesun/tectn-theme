@@ -360,6 +360,7 @@ BAND / SECTION WRAPPER
 }
 
 .c-band__wrap > .c-waveband__wave--top {
+  transform: scaleX(-1);
   -webkit-mask-position: center bottom;
   mask-position: center bottom;
 }
