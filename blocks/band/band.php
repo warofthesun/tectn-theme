@@ -102,7 +102,7 @@ if ( $wave_curves === null || $wave_curves === false ) {
   $wave_bottom = in_array( 'bottom', $wave_curves, true );
 }
 $has_waves = $wave_top || $wave_bottom;
-if ( ! $bg_enable ) {
+if ( ! $bg_enable || $bg_type === 'image' ) {
   $has_waves = false;
 }
 
