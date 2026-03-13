@@ -3515,7 +3515,7 @@ BAND / SECTION WRAPPER
 
 /************************************************
 Content Section block
-- No top or bottom curves
+- Optional top/bottom curves (color bg only); optional “background contains content”
 - Optional background: image (with overlay choice) or solid color
 - Min height + any inner content via InnerBlocks
 ************************************************/
@@ -3658,6 +3658,75 @@ Content Section block
 
 .c-content-section--py-xxl {
   --content-section-py: 2em;
+}
+
+/* Content Section with waves — DOM order Wave / Section / Wave (same as Band) */
+.c-content-section__wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 0;
+  overflow: visible;
+  width: 100vw;
+  margin-left: -webkit-calc(50% - 50vw);
+  margin-left: calc(50% - 50vw);
+  margin-right: -webkit-calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.c-content-section__wrap > .c-content-section {
+  margin: 0 !important;
+  margin-block: 0 !important;
+}
+
+.c-content-section__wrap .c-content-section__bg-media {
+  height: 100%;
+  top: 0;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+
+.c-content-section--bg-contains .c-content-section__bg-media {
+  height: 100%;
+  top: 0;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+
+.c-content-section__wrap > .c-waveband__wave {
+  display: block;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin: 0;
+  width: 100vw;
+  height: -webkit-calc(var(--wave-h) + 2px);
+  height: calc(var(--wave-h) + 2px);
+  background-color: var(--waveband-bg, var(--c-sage));
+  pointer-events: none;
+  -webkit-mask: url("../images/curve.svg") no-repeat center/100% 100%;
+  mask: url("../images/curve.svg") no-repeat center/100% 100%;
+}
+
+.c-content-section__wrap > .c-waveband__wave--top {
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+  -webkit-mask-position: center bottom;
+  mask-position: center bottom;
+}
+
+.c-content-section__wrap > .c-waveband__wave--bottom {
+  -webkit-transform: scale(-1, -1);
+  -ms-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+  -webkit-mask-position: center top;
+  mask-position: center top;
 }
 
 .c-image-grid--two,

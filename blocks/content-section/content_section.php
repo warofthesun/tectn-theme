@@ -42,9 +42,41 @@ $bg_align_y = get_field('bg_align_y') ?: 'center';
 
 $classes = ['c-content-section', "c-content-section--py-{$py}", "c-content-section--content-{$content_align}"];
 $classes[] = 'c-content-section--overlay-' . $bg_overlay;
+if ($bg_type === 'color' && (bool) get_field('bg_color_contains')) {
+  $classes[] = 'c-content-section--bg-contains';
+}
 
 $align = !empty($block['align']) ? 'align' . $block['align'] : '';
 if ($align) $classes[] = $align;
+
+// Waves: only when background on and type is color (same as Content Container)
+$wave_curves = get_field('wave_curves');
+if ($wave_curves === null || $wave_curves === false) {
+  $wave_top = false;
+  $wave_bottom = false;
+} else {
+  $wave_curves = (array) $wave_curves;
+  $wave_top    = in_array('top', $wave_curves, true);
+  $wave_bottom = in_array('bottom', $wave_curves, true);
+}
+$has_waves = $wave_top || $wave_bottom;
+if (!$bg_enable || $bg_type === 'image') {
+  $has_waves = false;
+}
+
+$should_render_bg = false;
+if ($bg_enable) {
+  if ($bg_type === 'color') {
+    $should_render_bg = !empty($bg_color);
+  } else {
+    $should_render_bg = !empty($bg_image['url']);
+  }
+}
+
+$wrap_style = '';
+if ($has_waves && $should_render_bg && $bg_type === 'color' && !empty($bg_color)) {
+  $wrap_style = ' style="--waveband-bg:' . esc_attr($bg_color) . ';"';
+}
 
 $styles = [];
 $styles[] = '--content-section-min-height: ' . $min_height . 'px';
@@ -70,18 +102,34 @@ if ($bg_enable) {
     }
   }
 }
-
-$should_render_bg = false;
-if ($bg_enable) {
-  if ($bg_type === 'color') {
-    $should_render_bg = !empty($bg_color);
-  } else {
-    $should_render_bg = !empty($bg_image['url']);
-  }
-}
 ?>
+<?php if ($has_waves) : ?>
+<div class="c-content-section__wrap"<?php echo $wrap_style; ?>>
+  <?php if ($wave_top) : ?><span class="c-waveband__wave c-waveband__wave--top" aria-hidden="true"></span><?php endif; ?>
+  <section class="<?php echo esc_attr(implode(' ', array_filter($classes))); ?> alignfull"
+           <?php if (!empty($styles)) echo 'style="' . esc_attr(implode('; ', $styles)) . '"'; ?>>
 
-<section class="<?php echo esc_attr(implode(' ', array_filter($classes))); ?> alignfull"
+    <?php if ($should_render_bg) : ?>
+      <div class="c-content-section__bg" aria-hidden="true">
+        <div class="c-content-section__bg-media <?php echo esc_attr($bg_media_class); ?>">
+          <?php if ($bg_type !== 'color') : ?>
+            <div class="c-content-section__overlay" aria-hidden="true"></div>
+          <?php endif; ?>
+        </div>
+      </div>
+    <?php endif; ?>
+
+    <div class="c-content-section__container wrap">
+      <div class="c-content-section__inner">
+        <InnerBlocks />
+      </div>
+    </div>
+
+  </section>
+  <?php if ($wave_bottom) : ?><span class="c-waveband__wave c-waveband__wave--bottom" aria-hidden="true"></span><?php endif; ?>
+</div>
+<?php else : ?>
+  <section class="<?php echo esc_attr(implode(' ', array_filter($classes))); ?> alignfull"
          <?php if (!empty($styles)) echo 'style="' . esc_attr(implode('; ', $styles)) . '"'; ?>>
 
   <?php if ($should_render_bg) : ?>
@@ -101,3 +149,4 @@ if ($bg_enable) {
   </div>
 
 </section>
+<?php endif; ?>

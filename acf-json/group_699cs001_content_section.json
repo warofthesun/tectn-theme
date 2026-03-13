@@ -102,12 +102,52 @@
             "wrapper": { "width": "", "class": "", "id": "" }
         },
         {
+            "key": "field_699cs011",
+            "label": "Add curve to background",
+            "name": "wave_curves",
+            "type": "checkbox",
+            "conditional_logic": [[
+                { "field": "field_699cs003", "operator": "==", "value": "1" },
+                { "field": "field_699cs004", "operator": "==", "value": "color" }
+            ]],
+            "choices": { "top": "Top", "bottom": "Bottom" },
+            "default_value": [],
+            "return_format": "value",
+            "layout": "horizontal",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_699cs012",
+            "label": "Background color contains content",
+            "name": "bg_color_contains",
+            "type": "true_false",
+            "instructions": "When on, the color background stretches with the content and height/alignment controls are hidden.",
+            "conditional_logic": [[
+                { "field": "field_699cs004", "operator": "==", "value": "color" },
+                { "field": "field_699cs011", "operator": "==empty", "value": "" }
+            ]],
+            "default_value": 0,
+            "ui": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
             "key": "field_699cs008",
             "label": "Background height (px)",
             "name": "bg_height",
             "type": "number",
             "instructions": "Height of the background image area.",
-            "conditional_logic": [[{ "field": "field_699cs003", "operator": "==", "value": "1" }]],
+            "conditional_logic": [
+                [
+                    { "field": "field_699cs003", "operator": "==", "value": "1" },
+                    { "field": "field_699cs011", "operator": "==empty", "value": "" },
+                    { "field": "field_699cs012", "operator": "!=", "value": "1" }
+                ],
+                [
+                    { "field": "field_699cs003", "operator": "==", "value": "1" },
+                    { "field": "field_699cs011", "operator": "==empty", "value": "" },
+                    { "field": "field_699cs004", "operator": "==", "value": "image" }
+                ]
+            ],
             "default_value": 800,
             "min": 200,
             "placeholder": "800",
@@ -119,7 +159,18 @@
             "label": "Background vertical align",
             "name": "bg_align_y",
             "type": "select",
-            "conditional_logic": [[{ "field": "field_699cs003", "operator": "==", "value": "1" }]],
+            "conditional_logic": [
+                [
+                    { "field": "field_699cs003", "operator": "==", "value": "1" },
+                    { "field": "field_699cs011", "operator": "==empty", "value": "" },
+                    { "field": "field_699cs012", "operator": "!=", "value": "1" }
+                ],
+                [
+                    { "field": "field_699cs003", "operator": "==", "value": "1" },
+                    { "field": "field_699cs011", "operator": "==empty", "value": "" },
+                    { "field": "field_699cs004", "operator": "==", "value": "image" }
+                ]
+            ],
             "choices": { "top": "Top", "center": "Middle", "bottom": "Bottom" },
             "default_value": "center",
             "return_format": "value",
