@@ -760,6 +760,13 @@ Content Section block
   width: 100%;
   height: 100%;
   display: block;
+  border: $spacing-xs solid $white;
+  @include border-radius-md;
+}
+
+.wp-block-embed__wrapper iframe {
+border: $spacing-xs solid $white;
+  @include border-radius-md;
 }
 
 /* Full-bleed waves inside the bg layer — use block background so waves match user-selected color */
