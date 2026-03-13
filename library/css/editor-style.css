@@ -606,6 +606,14 @@ h6 p,
   margin-bottom: 0.5em;
 }
 
+ul.wp-block-list {
+  list-style-type: disc;
+}
+ul.wp-block-list li {
+  margin-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
 /******************************************************************
 Site Name:
 Author:

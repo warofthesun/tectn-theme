@@ -143,7 +143,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
       <div class="hero__content hero__content--text hero__content--initiative col-xs-12">
         <div class="hero__headline hero__headline--initiative">
           <?php if ( ! empty( $d['headline_type'] ) && $d['headline_type'] === 'logo' && ! empty( $d['logo_id'] ) ) : ?>
-            <?php echo wp_get_attachment_image( (int) $d['logo_id'], 'medium', false, array( 'class' => 'hero__logo' ) ); ?>
+            <?php echo wp_get_attachment_image( (int) $d['logo_id'], 'large', false, array( 'class' => 'hero__logo' ) ); ?>
           <?php elseif ( ! empty( $d['headline_text'] ) ) : ?>
             <h1 class="hero__title hero__title--initiative"><?php echo esc_html( $d['headline_text'] ); ?></h1>
           <?php endif; ?>
