@@ -79,6 +79,39 @@ function custom_post() {
 		) /* end of options */
 	); /* end of register post type */
 
+	register_post_type( 'pickup_site',
+		array(
+			'labels' => array(
+				'name'               => __( 'Pick-up Sites', 'tectn_theme' ),
+				'singular_name'      => __( 'Pick-up Site', 'tectn_theme' ),
+				'all_items'          => __( 'All Pick-up Sites', 'tectn_theme' ),
+				'add_new'            => __( 'Add New', 'tectn_theme' ),
+				'add_new_item'       => __( 'Add New Pick-up Site', 'tectn_theme' ),
+				'edit_item'          => __( 'Edit Pick-up Site', 'tectn_theme' ),
+				'new_item'           => __( 'New Pick-up Site', 'tectn_theme' ),
+				'view_item'          => __( 'View Pick-up Site', 'tectn_theme' ),
+				'search_items'       => __( 'Search Pick-up Sites', 'tectn_theme' ),
+				'not_found'          => __( 'No pick-up sites found.', 'tectn_theme' ),
+				'not_found_in_trash' => __( 'No pick-up sites found in Trash', 'tectn_theme' ),
+				'parent_item_colon'  => '',
+			),
+			'description'         => __( 'Pick-up site locations for the map block.', 'tectn_theme' ),
+			'public'              => true,
+			'publicly_queryable'  => true,
+			'exclude_from_search' => false,
+			'show_ui'             => true,
+			'show_in_rest'        => true,
+			'query_var'           => true,
+			'menu_position'       => 9,
+			'menu_icon'           => 'dashicons-location-alt',
+			'rewrite'             => array( 'slug' => 'pick-up-site', 'with_front' => false ),
+			'has_archive'         => 'pick-up-sites',
+			'capability_type'     => 'post',
+			'hierarchical'       => false,
+			'supports'            => array( 'title', 'editor' ),
+		)
+	);
+
 	/* this adds your post categories to your custom post type */
 	/* register_taxonomy_for_object_type( 'category', 'testimonials' );
 	/* this adds your post tags to your custom post type */

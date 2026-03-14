@@ -1,0 +1,31 @@
+/* Block-specific overrides and tooltip (wrapper/header/body/search bar are in theme SCSS) */
+
+.c-pickup-sites-map {
+  position: relative;
+}
+
+/* Tooltip content inside Google InfoWindow */
+.c-pickup-sites-map__tooltip {
+  padding: 0.5em 0.75em;
+  min-width: 180px;
+  max-width: 280px;
+}
+
+.c-pickup-sites-map__tooltip-name {
+  display: block;
+  margin-bottom: 0.35em;
+  font-size: 1em;
+}
+
+.c-pickup-sites-map__tooltip-address {
+  margin: 0 0 0.5em;
+  font-size: 0.875em;
+  line-height: 1.35;
+  color: #555;
+}
+
+.c-pickup-sites-map__tooltip-link {
+  display: inline-block;
+  font-size: 0.875em;
+  font-weight: 600;
+}

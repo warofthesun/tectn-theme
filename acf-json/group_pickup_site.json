@@ -1,0 +1,38 @@
+{
+    "key": "group_pickup_site",
+    "title": "Pick-up Site",
+    "fields": [
+        {
+            "key": "field_ps_location_name",
+            "label": "Location name",
+            "name": "location_name",
+            "type": "text",
+            "instructions": "Display name for this pick-up site (e.g. branch name). Shown in the map tooltip.",
+            "required": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_ps_location_map",
+            "label": "Address \/ map",
+            "name": "location_map",
+            "type": "google_map",
+            "instructions": "Search for the address. The pin position and address are used on the map.",
+            "required": 1,
+            "center_lat": "",
+            "center_lng": "",
+            "zoom": "14",
+            "height": "400",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        }
+    ],
+    "location": [[{ "param": "post_type", "operator": "==", "value": "pickup_site" }]],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Location name and map position for the Pick-up Sites map block.",
+    "show_in_rest": 0
+}

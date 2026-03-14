@@ -3056,6 +3056,122 @@ Content Section block
   margin-bottom: 0;
 }
 
+/* =========================
+   Pick-up Sites Map block — card-block-style wrapper, headline, body, search bar
+   ========================= */
+.c-pickup-sites-map {
+  padding: 0 1rem 2rem;
+  border-radius: 1rem;
+  margin-bottom: 1.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c-pickup-sites-map__headline {
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  padding-bottom: 0;
+  background-color: #A1B152;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  display: block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.c-pickup-sites-map__body {
+  position: relative;
+  background-color: #A1B152;
+  border-radius: 0.75em;
+  padding: 1em;
+  overflow: hidden;
+}
+
+.c-pickup-sites-map__body:first-child {
+  border-top-left-radius: 0.75em;
+  border-top-right-radius: 0.75em;
+}
+
+.c-pickup-sites-map__body:last-child {
+  border-bottom-left-radius: 0.75em;
+  border-bottom-right-radius: 0.75em;
+}
+
+.c-pickup-sites-map__body + .c-pickup-sites-map__search-bar {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.c-pickup-sites-map__canvas {
+  width: 100%;
+  min-height: 320px;
+  border-radius: 0.5em;
+}
+
+.c-pickup-sites-map__empty {
+  margin: 0;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  color: #5c6b80;
+  border-radius: 0.5em;
+}
+
+.c-pickup-sites-map__search-bar {
+  background-color: #A1B152;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-top: 0;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.c-pickup-sites-map__search-bar input[type=search] {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.c-pickup-sites-map__search-label {
+  display: block;
+  margin-bottom: 0.35em;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.c-pickup-sites-map__search {
+  display: block;
+  width: 100%;
+  max-width: 20em;
+  padding: 0.5em 0.75em;
+  font-size: 1rem;
+  line-height: 1.4;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  background: #fff;
+}
+
+.c-pickup-sites-map__search:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
 .c-posts {
   --posts-bg-max-h: 800px;
   position: relative;

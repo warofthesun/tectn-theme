@@ -1,0 +1,44 @@
+{
+    "key": "group_pickup_sites_map_block",
+    "title": "Pick-up Sites Map block",
+    "fields": [
+        {
+            "key": "field_psm_headline",
+            "label": "Section headline",
+            "name": "section_headline",
+            "type": "text",
+            "instructions": "Optional title above the map (e.g. \"2026 Tennessee Tree Day Pick-up Sites\"). Leave blank to hide.",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_psm_show_search",
+            "label": "Show search bar",
+            "name": "show_search",
+            "type": "true_false",
+            "instructions": "Display the search bar so users can filter by name or address.",
+            "default_value": 1,
+            "ui": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_psm_enable_clustering",
+            "label": "Enable clustering",
+            "name": "enable_clustering",
+            "type": "true_false",
+            "instructions": "Group nearby pins into clusters. Turn off to show every pin individually.",
+            "default_value": 1,
+            "ui": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        }
+    ],
+    "location": [[{ "param": "block", "operator": "==", "value": "tectn\/pickup-sites-map" }]],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

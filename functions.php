@@ -342,8 +342,12 @@ duplicate one of the lines in the array and name it according to your
 new image size.
 */
 
-// TGM Plugin Activation Class
-require_once locate_template('library/tgm-plugin-activation/class-tgm-plugin-activation.php');
+/* Google Maps API — restrict key in Google Cloud; move to constant/env for production. */
+function my_acf_init() {
+	acf_update_setting( 'google_api_key', 'AIzaSyBGnyx3-bSVQ2tKxvdyyxZ2DxYLMvApzn4' );
+}
+add_action( 'acf/init', 'my_acf_init' );
+
 
 
 /************* ACTIVE SIDEBARS ********************/
