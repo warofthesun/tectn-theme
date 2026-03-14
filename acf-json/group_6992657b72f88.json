@@ -87,6 +87,13 @@
                 "operator": "==",
                 "value": "tectn\/text-image"
             }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn\/slider"
+            }
         ]
     ],
     "menu_order": 0,

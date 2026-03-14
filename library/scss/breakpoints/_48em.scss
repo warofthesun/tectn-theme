@@ -38,15 +38,19 @@
     max-width: 200px;
   }
 
-  /* Slider: two columns (list left, image right) */
+  /* Slider: two columns (left: headline + body + list, right: image) */
   .c-slider--toc .c-slider__content {
     flex-direction: row;
     align-items: flex-start;
   }
 
-  .c-slider--toc .c-slider__list {
+  .c-slider--toc .c-slider__col-left {
     flex: 0 0 33.333%;
     max-width: 33.333%;
+  }
+
+  .c-slider--toc .c-slider__headline {
+    text-align: left;
   }
 
   .c-slider--toc .c-slider__list-inner {

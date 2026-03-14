@@ -17,10 +17,12 @@ if ( $is_preview ) {
 	return;
 }
 
-$slider_type = get_field( 'slider_type' ) ?: 'table_of_contents';
-$headline    = get_field( 'headline' );
-$body        = get_field( 'body' );
-$gallery     = get_field( 'gallery' );
+$slider_type   = get_field( 'slider_type' ) ?: 'table_of_contents';
+$headline      = get_field( 'headline' );
+$headline_size = get_field( 'headline_size' ) ?: 'h2';
+$preheader     = get_field( 'preheader' );
+$body          = get_field( 'body' );
+$gallery       = get_field( 'gallery' );
 
 $items = array();
 if ( is_array( $gallery ) && ! empty( $gallery ) ) {
@@ -70,30 +72,43 @@ if ( ! is_admin() ) {
 	 role="region"
 	 aria-label="<?php esc_attr_e( 'Image slider', 'tectn_theme' ); ?>">
 
-	<?php if ( $headline !== '' ) : ?>
-		<h2 class="c-slider__headline"><?php echo esc_html( $headline ); ?></h2>
-	<?php endif; ?>
-
-	<?php if ( $body !== '' ) : ?>
-		<div class="c-slider__body"><?php echo wp_kses_post( wpautop( $body ) ); ?></div>
-	<?php endif; ?>
-
 	<div class="c-slider__content">
-		<nav class="c-slider__list" aria-label="<?php esc_attr_e( 'Choose item', 'tectn_theme' ); ?>">
-			<ul class="c-slider__list-inner">
-				<?php foreach ( $items as $i => $item ) : ?>
-					<li>
-						<button type="button"
-								class="c-slider__list-btn<?php echo $i === 0 ? ' c-slider__list-btn--active' : ''; ?>"
-								data-index="<?php echo (int) $i; ?>"
-								aria-pressed="<?php echo $i === 0 ? 'true' : 'false'; ?>"
-								aria-label="<?php echo esc_attr( $item['title'] ); ?>">
-							<?php echo esc_html( $item['title'] ); ?>
-						</button>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		</nav>
+		<div class="c-slider__col-left">
+			<?php
+			if ( (string) $preheader !== '' ) {
+				echo '<p class="c-slider__preheader">' . esc_html( $preheader ) . '</p>';
+			}
+			if ( (string) $headline !== '' ) {
+				$tag_name = preg_replace( '/\s.*/', '', $headline_size );
+				$tag_name = in_array( $tag_name, array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true ) ? $tag_name : 'h2';
+				if ( strpos( $headline_size, 'class=' ) !== false ) {
+					$open_tag = preg_replace( '/class=(["\']?)([^"\'\s]+)\1/', 'class="$2 c-slider__headline"', $headline_size );
+				} else {
+					$open_tag = $headline_size . ' class="c-slider__headline"';
+				}
+				echo '<' . esc_attr( $open_tag ) . '>' . esc_html( $headline ) . '</' . esc_attr( $tag_name ) . '>';
+			}
+			?>
+			<?php if ( $body !== '' ) : ?>
+				<div class="c-slider__body"><?php echo wp_kses_post( $body ); ?></div>
+			<?php endif; ?>
+
+			<nav class="c-slider__list" aria-label="<?php esc_attr_e( 'Choose item', 'tectn_theme' ); ?>">
+				<ul class="c-slider__list-inner">
+					<?php foreach ( $items as $i => $item ) : ?>
+						<li>
+							<button type="button"
+									class="c-slider__list-btn<?php echo $i === 0 ? ' c-slider__list-btn--active' : ''; ?>"
+									data-index="<?php echo (int) $i; ?>"
+									aria-pressed="<?php echo $i === 0 ? 'true' : 'false'; ?>"
+									aria-label="<?php echo esc_attr( $item['title'] ); ?>">
+								<?php echo esc_html( $item['title'] ); ?>
+							</button>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</nav>
+		</div>
 
 		<div class="c-slider__panel">
 			<div class="c-slider__image-wrap">

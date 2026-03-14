@@ -16,20 +16,15 @@
             "wrapper": { "width": "", "class": "", "id": "" }
         },
         {
-            "key": "field_slider_headline",
-            "label": "Headline",
-            "name": "headline",
-            "type": "text",
-            "instructions": "Main headline above the slider (e.g. \"Tennessee Tree Day 2026 Species\").",
-            "wrapper": { "width": "", "class": "", "id": "" }
-        },
-        {
             "key": "field_slider_body",
             "label": "Body copy",
             "name": "body",
-            "type": "textarea",
+            "type": "wysiwyg",
             "instructions": "Intro text below the headline (e.g. \"Tree species this year include:\").",
-            "rows": 3,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0,
             "wrapper": { "width": "", "class": "", "id": "" }
         },
         {
