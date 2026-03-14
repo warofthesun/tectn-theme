@@ -1,0 +1,42 @@
+{
+    "key": "group_google_maps_api_key",
+    "title": "Google Maps API Key",
+    "fields": [
+        {
+            "key": "field_tectn_google_maps_api_key",
+            "label": "Google Maps API key",
+            "name": "google_maps_api_key",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Used for the pickup sites map and ACF Google Map fields. Optional: you can instead set the environment variable GOOGLE_MAPS_API_KEY, or the WordPress option tectn_google_maps_api_key (e.g. via WP-CLI). Restrict this key by HTTP referrer in Google Cloud Console.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "theme-general-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1773000000
+}

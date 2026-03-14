@@ -343,12 +343,30 @@ duplicate one of the lines in the array and name it according to your
 new image size.
 */
 
-/* Google Maps API — restrict key in Google Cloud; move to constant/env for production. */
+/* Google Maps API key: env var > ACF Theme Settings > wp option. Restrict key by HTTP referrer in Google Cloud Console. */
+function tectn_google_maps_api_key() {
+	if ( defined( 'GOOGLE_MAPS_API_KEY' ) && GOOGLE_MAPS_API_KEY !== '' ) {
+		return GOOGLE_MAPS_API_KEY;
+	}
+	$env = getenv( 'GOOGLE_MAPS_API_KEY' );
+	if ( is_string( $env ) && $env !== '' ) {
+		return $env;
+	}
+	if ( function_exists( 'get_field' ) ) {
+		$acf = get_field( 'google_maps_api_key', 'option' );
+		if ( is_string( $acf ) && $acf !== '' ) {
+			return $acf;
+		}
+	}
+	return (string) get_option( 'tectn_google_maps_api_key', '' );
+}
+
 function my_acf_init() {
-	acf_update_setting( 'google_api_key', 'AIzaSyBGnyx3-bSVQ2tKxvdyyxZ2DxYLMvApzn4' );
+	acf_update_setting( 'google_api_key', tectn_google_maps_api_key() );
 }
 add_action( 'acf/init', 'my_acf_init' );
 
+add_filter( 'should_load_remote_block_patterns', '__return_false' );
 
 
 /************* ACTIVE SIDEBARS ********************/
