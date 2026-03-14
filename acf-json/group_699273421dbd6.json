@@ -1,6 +1,6 @@
 {
     "key": "group_699273421dbd6",
-    "title": "Simple Content - TecTN Block Piece",
+    "title": "2. Simple Content - TecTN Block Piece",
     "fields": [
         {
             "key": "field_699273428bd0c",
@@ -18,9 +18,9 @@
             },
             "default_value": "",
             "allow_in_bindings": 0,
-            "tabs": "text",
-            "media_upload": 0,
+            "tabs": "all",
             "toolbar": "full",
+            "media_upload": 0,
             "delay": 0
         }
     ],
@@ -43,5 +43,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771205682
+    "modified": 1773513193
 }
