@@ -124,6 +124,42 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
       }
   }
 
+  &--accent {
+    &--solid {
+      @include color_surface__button_accent--default;
+      @include color_text__label_accent--default;
+      @include color_border__button_accent--default;
+    }
+
+    &--outline {
+      @include color_surface__button_secondary--default;
+      @include color_text__label_accent--default;
+      @include color_border__button_accent--default;
+    }
+
+    &--text {
+      color: $accent-700;
+      border: 0px;
+      display: block;
+
+      &:hover, &:focus {
+        color: $accent-800;
+        text-decoration: none;
+        outline: none;
+      }
+    }
+
+    &:hover, &:focus {
+      @include color_surface__button_accent--hover;
+      text-decoration: none;
+      outline: none;
+    }
+
+    &:active {
+      @include color_surface__button_accent--is_active;
+    }
+  }
+
 } // end .button
 
 /*

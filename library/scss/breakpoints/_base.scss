@@ -103,6 +103,78 @@ Buttons and such
 			}
 		}
 	}
+
+	&.c-button-pair--accent {
+		.c-button-pair__button {
+			@extend %btn--accent;
+
+			&.c-button-pair__button--solid {
+				@extend %btn--accent--solid;
+			}
+
+			&.c-button-pair__button--outline {
+				@extend %btn--accent--outline;
+			}
+
+			&.c-button-pair__button--text {
+				@extend %btn--accent--text;
+			}
+		}
+	}
+}
+
+/* Button Grid block: centered container, optional background + shadow, flex grid */
+.c-button-grid {
+	--button-grid-gap: 16px;
+	max-width: var(--button-grid-max-w, 600px);
+	margin-left: auto;
+	margin-right: auto;
+	padding: clamp(20px, 2.5vw, 32px);
+	@include border-radius-lg;
+	background: var(--button-grid-bg, #fcfce0);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+	&.c-button-grid--no-bg {
+		background: transparent;
+		box-shadow: none;
+	}
+}
+
+.c-button-grid__list {
+	display: grid;
+	gap: 16px;
+	width: 100%;
+
+	.c-button-pair__button {
+		margin-bottom: 0;
+		margin-left: 0;
+		text-align: center;
+		box-sizing: border-box;
+		min-width: 0;
+
+		/* Override .c-button-pair's nth-child(2) margin-left so grid gap is uniform */
+		&:nth-child(2) {
+			margin-left: 0;
+		}
+	}
+}
+
+.c-button-grid--cols-2 .c-button-grid__list {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.c-button-grid--cols-3 .c-button-grid__list {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.c-button-grid--cols-4 .c-button-grid__list {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 47.99em) {
+	.c-button-grid__list {
+		grid-template-columns: repeat(2, 1fr) !important;
+	}
 }
 
 /*********************
@@ -764,10 +836,12 @@ Content Section block
   @include border-radius-md;
 }
 
-.wp-block-embed__wrapper iframe {
+.wp-block-embed__wrapper iframe, .wp-block-video video{
 border: $spacing-xs solid $white;
   @include border-radius-md;
 }
+
+
 
 /* Full-bleed waves inside the bg layer — use block background so waves match user-selected color */
 .c-waveband__bg .c-waveband__wave {

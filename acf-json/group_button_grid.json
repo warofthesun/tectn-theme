@@ -1,0 +1,137 @@
+{
+    "key": "group_button_grid",
+    "title": "Button Grid Block",
+    "fields": [
+        {
+            "key": "field_bg_bg_style",
+            "label": "Block background",
+            "name": "background_style",
+            "type": "select",
+            "instructions": "None = no background, no shadow. Color = background + drop shadow.",
+            "required": 0,
+            "choices": {
+                "none": "None",
+                "color": "Color"
+            },
+            "default_value": "color",
+            "return_format": "value",
+            "ui": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_bg_bg_color",
+            "label": "Block background color",
+            "name": "background_color",
+            "type": "color_picker",
+            "required": 0,
+            "conditional_logic": [
+                [ { "field": "field_bg_bg_style", "operator": "==", "value": "color" } ]
+            ],
+            "default_value": "#fcfce0",
+            "return_format": "string",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_bg_buttons_per_row",
+            "label": "Buttons per row",
+            "name": "buttons_per_row",
+            "type": "radio",
+            "required": 0,
+            "choices": {
+                "2": "2",
+                "3": "3",
+                "4": "4"
+            },
+            "default_value": "3",
+            "return_format": "value",
+            "layout": "horizontal",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_bg_block_width",
+            "label": "Block width",
+            "name": "block_width",
+            "type": "select",
+            "required": 0,
+            "choices": {
+                "small": "Small (400px)",
+                "medium": "Medium (600px)",
+                "large": "Large (800px)"
+            },
+            "default_value": "medium",
+            "return_format": "value",
+            "ui": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_bg_button_color",
+            "label": "Button color",
+            "name": "button_color",
+            "type": "select",
+            "instructions": "Primary, secondary, or accent theme color.",
+            "required": 0,
+            "choices": {
+                "primary": "Primary",
+                "secondary": "Secondary",
+                "accent": "Accent"
+            },
+            "default_value": "primary",
+            "return_format": "value",
+            "ui": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_bg_buttons",
+            "label": "Buttons",
+            "name": "buttons",
+            "type": "repeater",
+            "required": 0,
+            "layout": "block",
+            "button_label": "Add button",
+            "sub_fields": [
+                {
+                    "key": "field_bg_btn_link",
+                    "label": "Link",
+                    "name": "link",
+                    "type": "link",
+                    "return_format": "array",
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "parent_repeater": "field_bg_buttons"
+                },
+                {
+                    "key": "field_bg_btn_style",
+                    "label": "Button style",
+                    "name": "button_style",
+                    "type": "select",
+                    "choices": {
+                        "solid": "Solid",
+                        "outline": "Outline",
+                        "text": "Text"
+                    },
+                    "default_value": "solid",
+                    "return_format": "value",
+                    "ui": 1,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "parent_repeater": "field_bg_buttons"
+                }
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn\/button-grid"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1773000000
+}

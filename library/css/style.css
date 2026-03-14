@@ -1300,6 +1300,34 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   text-decoration: none;
   outline: none;
 }
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid {
+  background-color: #F0C852;
+  color: #2F2508;
+  border-color: #F0C852;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #2F2508;
+  border-color: #F0C852;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text {
+  color: #8E7017;
+  border: 0px;
+  display: block;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:focus {
+  color: #5E4A10;
+  text-decoration: none;
+  outline: none;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button:focus {
+  background-color: #F4D67D;
+  text-decoration: none;
+  outline: none;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button:active {
+  background-color: #BD951F;
+}
 
 /*
 An example button.
@@ -3245,6 +3273,59 @@ Buttons and such
 .c-button-pair .c-button-pair__button:nth-child(2) {
   margin-left: 1em;
 }
+/* Button Grid block: centered container, optional background + shadow, flex grid */
+.c-button-grid {
+  --button-grid-gap: 16px;
+  max-width: var(--button-grid-max-w, 600px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: clamp(20px, 2.5vw, 32px);
+  border-radius: 1em;
+  background: var(--button-grid-bg, #fcfce0);
+  -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.c-button-grid.c-button-grid--no-bg {
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.c-button-grid__list {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+}
+.c-button-grid__list .c-button-pair__button {
+  margin-bottom: 0;
+  margin-left: 0;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  min-width: 0;
+  /* Override .c-button-pair's nth-child(2) margin-left so grid gap is uniform */
+}
+.c-button-grid__list .c-button-pair__button:nth-child(2) {
+  margin-left: 0;
+}
+
+.c-button-grid--cols-2 .c-button-grid__list {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.c-button-grid--cols-3 .c-button-grid__list {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.c-button-grid--cols-4 .c-button-grid__list {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 47.99em) {
+  .c-button-grid__list {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
 /*********************
 THE EVENTS CALENDAR
 *********************/
@@ -4011,7 +4092,7 @@ Content Section block
   border-radius: 0.75em;
 }
 
-.wp-block-embed__wrapper iframe {
+.wp-block-embed__wrapper iframe, .wp-block-video video {
   border: 0.5em solid #fff;
   border-radius: 0.75em;
 }

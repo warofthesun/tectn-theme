@@ -70,6 +70,26 @@ Stylesheet: Tokens
     background-color: $accent-600;
 }
 
+@mixin color_surface__button_accent--default {
+    background-color: $accent-400;
+}
+
+@mixin color_surface__button_accent--hover {
+    background-color: $accent-300;
+}
+
+@mixin color_surface__button_accent--is_active {
+    background-color: $accent-600;
+}
+
+@mixin color_border__button_accent--default {
+    border-color: $accent-400;
+}
+
+@mixin color_text__label_accent--default {
+    color: $accent-900;
+}
+
 /* COLOR - TEXT */
 
 @mixin color_text__nav-item_default {

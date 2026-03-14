@@ -81,7 +81,7 @@
             "name": "button_color",
             "aria-label": "",
             "type": "select",
-            "instructions": "Choose whether the button(s) are the primary or secondary color",
+            "instructions": "Choose whether the button(s) use the primary, secondary, or accent color.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -91,7 +91,8 @@
             },
             "choices": {
                 "primary": "Primary",
-                "secondary": "Secondary"
+                "secondary": "Secondary",
+                "accent": "Accent"
             },
             "default_value": "primary",
             "return_format": "value",

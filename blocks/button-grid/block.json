@@ -1,0 +1,23 @@
+{
+  "name": "tectn/button-grid",
+  "title": "Button Grid",
+  "description": "Grid of buttons with optional background, width, and buttons per row.",
+  "style": ["file:../library/css/style.css"],
+  "category": "tectn-blocks",
+  "icon": "grid-view",
+  "keywords": ["buttons", "grid", "links"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "button_grid.php"
+  },
+  "supports": {
+    "jsx": true,
+    "anchor": true
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": { "is_preview": true }
+    }
+  }
+}
