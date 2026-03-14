@@ -17,11 +17,12 @@ if ( $is_preview ) {
 	return;
 }
 
-$slider_type     = get_field( 'slider_type' ) ?: 'table_of_contents';
-$headline        = get_field( 'headline' );
-$headline_size   = get_field( 'headline_size' ) ?: 'h2';
-$preheader       = get_field( 'preheader' );
-$body            = get_field( 'body' );
+$slider_type    = get_field( 'slider_type' ) ?: 'table_of_contents';
+$headline       = get_field( 'headline' );
+$headline_size  = get_field( 'headline_size' ) ?: 'h2';
+$preheader      = get_field( 'preheader' );
+$body           = get_field( 'body' );
+$autoplay       = (bool) get_field( 'autoplay' );
 $list_item_icon = get_field( 'list_item_icon' );
 $gallery        = get_field( 'gallery' );
 
@@ -39,12 +40,25 @@ if ( is_array( $list_item_icon ) && ! empty( $list_item_icon['class'] ) ) {
 $items = array();
 if ( is_array( $gallery ) && ! empty( $gallery ) ) {
 	foreach ( $gallery as $img ) {
-		$url   = isset( $img['url'] ) ? $img['url'] : '';
-		$title = isset( $img['title'] ) ? $img['title'] : '';
+		$url     = isset( $img['url'] ) ? $img['url'] : '';
+		$title   = isset( $img['title'] ) ? $img['title'] : '';
+		$id      = isset( $img['ID'] ) ? (int) $img['ID'] : ( isset( $img['id'] ) ? (int) $img['id'] : 0 );
+		$caption = '';
+		$author  = '';
+		if ( $id ) {
+			$caption = isset( $img['caption'] ) && (string) $img['caption'] !== '' ? $img['caption'] : wp_get_attachment_caption( $id );
+			$author  = get_field( 'caption_author', $id ) ?: '';
+			$large   = wp_get_attachment_image_url( $id, 'large' );
+			if ( $large ) {
+				$url = $large;
+			}
+		}
 		if ( $url !== '' ) {
 			$items[] = array(
-				'url'   => $url,
-				'title' => $title !== '' ? $title : __( 'Untitled', 'tectn_theme' ),
+				'url'     => $url,
+				'title'   => $title !== '' ? $title : __( 'Untitled', 'tectn_theme' ),
+				'caption' => is_string( $caption ) ? $caption : '',
+				'author'  => is_string( $author ) ? $author : '',
 			);
 		}
 	}
@@ -58,8 +72,7 @@ if ( empty( $items ) ) {
 	return;
 }
 
-if ( $slider_type !== 'table_of_contents' ) {
-	// Future slider types (navigation, slideshow) will be added here.
+if ( $slider_type !== 'table_of_contents' && $slider_type !== 'horizontal' ) {
 	echo '<div class="c-slider c-slider--empty' . esc_attr( $align ) . '"><p class="c-slider__empty">' . esc_html__( 'This slider style is not yet available.', 'tectn_theme' ) . '</p></div>';
 	return;
 }
@@ -76,14 +89,17 @@ if ( ! is_admin() ) {
 		true
 	);
 }
+$has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (string) $body !== '' );
 ?>
-<div class="c-slider c-slider--toc<?php echo esc_attr( $align ); ?>"
+<div class="c-slider c-slider--<?php echo esc_attr( $slider_type ); ?><?php echo esc_attr( $align ); ?>"
 	 id="<?php echo esc_attr( $block_id ); ?>"
 	 data-slider-type="<?php echo esc_attr( $slider_type ); ?>"
 	 data-items="<?php echo esc_attr( wp_json_encode( $items ) ); ?>"
+	 data-autoplay="<?php echo $autoplay ? '1' : '0'; ?>"
 	 role="region"
 	 aria-label="<?php esc_attr_e( 'Image slider', 'tectn_theme' ); ?>">
 
+	<?php if ( $slider_type === 'table_of_contents' ) : ?>
 	<div class="c-slider__content">
 		<div class="c-slider__col-left">
 			<?php
@@ -145,4 +161,63 @@ if ( ! is_admin() ) {
 			</div>
 		</div>
 	</div>
+	<?php else : ?>
+	<?php if ( $has_header ) : ?>
+	<div class="c-slider__content c-slider__content--centered">
+		<?php
+		if ( (string) $preheader !== '' ) {
+			echo '<p class="c-slider__preheader">' . esc_html( $preheader ) . '</p>';
+		}
+		if ( (string) $headline !== '' ) {
+			$tag_name = preg_replace( '/\s.*/', '', $headline_size );
+			$tag_name = in_array( $tag_name, array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true ) ? $tag_name : 'h2';
+			if ( strpos( $headline_size, 'class=' ) !== false ) {
+				$open_tag = preg_replace( '/class=(["\']?)([^"\'\s]+)\1/', 'class="$2 c-slider__headline"', $headline_size );
+			} else {
+				$open_tag = $headline_size . ' class="c-slider__headline"';
+			}
+			echo '<' . esc_attr( $open_tag ) . '>' . esc_html( $headline ) . '</' . esc_attr( $tag_name ) . '>';
+		}
+		?>
+		<?php if ( $body !== '' ) : ?>
+			<div class="c-slider__body"><?php echo wp_kses_post( $body ); ?></div>
+		<?php endif; ?>
+	</div>
+	<?php endif; ?>
+
+	<?php $first = $items[0]; $first_has_caption = ( (string) $first['caption'] !== '' || (string) $first['author'] !== '' ); ?>
+	<div class="c-slider__panel">
+		<div class="c-slider__image-wrap c-slider__image-wrap--fixed">
+			<div class="c-slider__slide c-slider__slide--current" data-slider-slide>
+				<img src="<?php echo esc_url( $first['url'] ); ?>"
+					 alt="<?php echo esc_attr( $first['title'] ); ?>"
+					 class="c-slider__image c-slider__image--cover"
+					 data-slider-image>
+			</div>
+			<div class="c-slider__slide c-slider__slide--next" data-slider-slide>
+				<img src="<?php echo esc_url( $first['url'] ); ?>"
+					 alt=""
+					 class="c-slider__image c-slider__image--cover"
+					 data-slider-image>
+			</div>
+			<div class="c-slider__caption<?php echo $first_has_caption ? ' c-slider__caption--visible' : ''; ?>" data-slider-caption aria-live="polite">
+				<?php if ( $first_has_caption ) : ?>
+					<?php if ( (string) $first['caption'] !== '' ) : ?>
+						<p class="c-slider__caption-text"><?php echo esc_html( $first['caption'] ); ?></p>
+					<?php endif; ?>
+					<?php if ( (string) $first['author'] !== '' ) : ?>
+						<p class="c-slider__caption-author"><?php echo esc_html( $first['author'] ); ?></p>
+					<?php endif; ?>
+				<?php endif; ?>
+			</div>
+		</div>
+		<button type="button" class="c-slider__arrow c-slider__arrow--prev" data-slider-prev aria-label="<?php esc_attr_e( 'Previous slide', 'tectn_theme' ); ?>"></button>
+		<button type="button" class="c-slider__arrow c-slider__arrow--next" data-slider-next aria-label="<?php esc_attr_e( 'Next slide', 'tectn_theme' ); ?>"></button>
+		<nav class="c-slider__dots" aria-label="<?php esc_attr_e( 'Slide navigation', 'tectn_theme' ); ?>">
+			<?php foreach ( $items as $i => $item ) : ?>
+				<button type="button" class="c-slider__dot<?php echo $i === 0 ? ' c-slider__dot--active' : ''; ?>" data-index="<?php echo (int) $i; ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Go to slide %d', 'tectn_theme' ), $i + 1 ) ); ?>" aria-current="<?php echo $i === 0 ? 'true' : 'false'; ?>"></button>
+			<?php endforeach; ?>
+		</nav>
+	</div>
+	<?php endif; ?>
 </div>

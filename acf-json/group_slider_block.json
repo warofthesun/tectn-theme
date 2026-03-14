@@ -7,12 +7,23 @@
             "label": "Slider style",
             "name": "slider_type",
             "type": "select",
-            "instructions": "How the slider is displayed. More options (e.g. navigation slider, timed slideshow) will be added later.",
+            "instructions": "Table of contents: list left, image right. Horizontal: arrows and dots, optional caption overlay.",
             "choices": {
-                "table_of_contents": "Table of contents (list left, image right)"
+                "table_of_contents": "Table of contents (list left, image right)",
+                "horizontal": "Horizontal"
             },
             "default_value": "table_of_contents",
             "return_format": "value",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_slider_autoplay",
+            "label": "Autoplay",
+            "name": "autoplay",
+            "type": "true_false",
+            "instructions": "Automatically advance slides. Default is off for Table of contents and Horizontal; Slideshow will default to on.",
+            "default_value": 0,
+            "ui": 1,
             "wrapper": { "width": "", "class": "", "id": "" }
         },
         {
@@ -32,6 +43,7 @@
             "allow_in_bindings": 0,
             "fa_live_preview": "",
             "choices": [],
+            "conditional_logic": [[{ "field": "field_slider_type", "operator": "==", "value": "table_of_contents" }]],
             "wrapper": { "width": "", "class": "", "id": "" }
         },
         {

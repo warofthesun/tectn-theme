@@ -39,21 +39,21 @@
   }
 
   /* Slider: two columns (left: headline + body + list, right: image) */
-  .c-slider--toc .c-slider__content {
+  .c-slider--table_of_contents .c-slider__content {
     flex-direction: row;
     align-items: flex-start;
   }
 
-  .c-slider--toc .c-slider__col-left {
+  .c-slider--table_of_contents .c-slider__col-left {
     flex: 0 0 33.333%;
     max-width: 33.333%;
   }
 
-  .c-slider--toc .c-slider__headline {
+  .c-slider--table_of_contents .c-slider__headline {
     text-align: left;
   }
 
-  .c-slider--toc .c-slider__list-inner {
+  .c-slider--table_of_contents .c-slider__list-inner {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -66,10 +66,19 @@
     }
   }
 
-  .c-slider--toc .c-slider__panel {
+  .c-slider--table_of_contents .c-slider__panel {
     flex: 1;
     min-width: 0;
   }
+
+  /* Horizontal slider: show arrows on desktop */
+  .c-slider--horizontal .c-slider__arrow {
+    display: flex;
+  }
+
+  .c-slider--horizontal .c-slider__panel {
+	padding: 0 3.5rem 2.5rem;
+}
 
   /*********************
   NAVIGATION STYLES
