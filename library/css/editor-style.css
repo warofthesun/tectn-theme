@@ -598,6 +598,10 @@ h6 p,
   margin: 0;
 }
 
+h3.wp-block-heading {
+  margin-bottom: 0;
+}
+
 .c-content-group__content ul, .wp-block-list ul {
   list-style-type: disc;
 }
@@ -4001,6 +4005,198 @@ Card
   justify-content: center;
 }
 
+/* =========================
+   SPONSORSHIPS BLOCK
+========================= */
+.c-sponsorships__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.c-sponsorships__header {
+  text-align: center;
+  margin-bottom: clamp(32px, 4vw, 48px);
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+.c-sponsorships__preheader {
+  margin: 0;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #505829;
+  opacity: 0.95;
+}
+
+.c-sponsorships__title {
+  margin: 0;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.c-sponsorships__tiers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
+}
+
+.c-sponsorships__tier {
+  border-radius: 1em;
+  background: var(--tier-bg, #F9FBF3);
+  padding: clamp(24px, 3vw, 40px);
+  -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.c-sponsorships__tier--hidden {
+  display: none !important;
+}
+
+.c-sponsorships__tier--no-bg {
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.c-sponsorships__tier-title {
+  margin: 0 0 1.25em;
+  text-align: center;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #A1B152;
+  font-weight: 700;
+}
+
+.c-sponsorships__grid {
+  --sponsors-gap: clamp(20px, 2.5vw, 32px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: var(--sponsors-gap);
+}
+
+.c-sponsorships__sponsor {
+  /* Width so each item is 1/n of row (minus gaps); incomplete rows center via justify-content on grid */
+  width: -webkit-calc((100% - (var(--sponsors-cols, 4) - 1) * var(--sponsors-gap, 24px)) / var(--sponsors-cols, 4));
+  width: calc((100% - (var(--sponsors-cols, 4) - 1) * var(--sponsors-gap, 24px)) / var(--sponsors-cols, 4));
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.c-sponsorships__sponsor-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.c-sponsorships__sponsor-block {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 1em;
+  overflow: hidden;
+  -webkit-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+.c-sponsorships__logo-wrap {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 12px;
+  padding-bottom: 44px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* No link or no "Visit Site" text: remove bottom band space so logo fills the card (class for broad support; :has() not required) */
+.c-sponsorships__sponsor-block--no-visit .c-sponsorships__logo-wrap {
+  padding-bottom: 12px;
+}
+
+.c-sponsorships__sponsor-block--no-visit .c-sponsorships__visit--placeholder {
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  min-height: 0;
+}
+
+.c-sponsorships__logo {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  display: block;
+}
+
+.c-sponsorships__visit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 10px 12px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #79853E;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.c-sponsorships__visit--placeholder {
+  background: #fff;
+}
+
+@media (max-width: 47.99em) {
+  .c-sponsorships__sponsor {
+    width: -webkit-calc((100% - var(--sponsors-gap, 24px)) / 2);
+    width: calc((100% - var(--sponsors-gap, 24px)) / 2);
+  }
+}
 /***************
 INSTAGRAM FEED
 *********************/

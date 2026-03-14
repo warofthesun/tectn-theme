@@ -88,6 +88,13 @@
                 "operator": "==",
                 "value": "tectn\/posts-grid"
             }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn\/sponsorships"
+            }
         ]
     ],
     "menu_order": 1,

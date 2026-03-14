@@ -8,7 +8,7 @@ $block_id = !empty($block['anchor']) ? $block['anchor'] : 'posts-grid-' . $block
 $classes = ['c-posts'];
 if (!empty($block['className'])) $classes[] = $block['className'];
 
-$theme_variant = get_field('color_pallete') ?: 'green-gold';
+$theme_variant = get_field('color_palette') ?: 'green-gold';
 $classes[] = 'c-posts--' . sanitize_html_class($theme_variant);
 
 $post_type     = get_field('post_type') ?: 'post';

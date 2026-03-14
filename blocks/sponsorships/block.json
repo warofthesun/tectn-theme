@@ -1,0 +1,24 @@
+{
+  "name": "tectn/sponsorships",
+  "title": "Sponsorships",
+  "description": "Thank-you section with headline and multiple sponsor tiers (logos and links) on gradient background.",
+  "style": ["file:../library/css/style.css"],
+  "category": "tectn-blocks",
+  "icon": "awards",
+  "keywords": ["sponsors", "logos", "tiers"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "sponsorships.php"
+  },
+  "supports": {
+    "jsx": true,
+    "anchor": true,
+    "align": ["full", "wide"]
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": { "is_preview": true }
+    }
+  }
+}

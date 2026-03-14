@@ -88,6 +88,13 @@
                 "value": "tectn\/text-image"
             }
         ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn\/sponsorships"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",

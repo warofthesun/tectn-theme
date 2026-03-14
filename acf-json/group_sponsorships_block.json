@@ -1,0 +1,226 @@
+{
+    "key": "group_sponsorships_block",
+    "title": "1. Sponsorship Tiers - TecTN Block",
+    "fields": [
+        {
+            "key": "field_69sp_tiers",
+            "label": "Sponsorship tiers",
+            "name": "tiers",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add tiers (e.g. Presenting Sponsors, Steward & Patron). Each tier has a title, background color, logos per row, and a list of sponsors.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_69sp_tier_title",
+            "button_label": "Add tier",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_69sp_tier_title",
+                    "label": "Tier title",
+                    "name": "tier_title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. \"PRESENTING SPONSORS\"",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_69sp_tiers"
+                },
+                {
+                    "key": "field_69sp_tier_bg_style",
+                    "label": "Tier background",
+                    "name": "tier_background_style",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "None = transparent with no shadow.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "choices": {
+                        "none": "None",
+                        "color": "Color"
+                    },
+                    "default_value": "color",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_69sp_tiers"
+                },
+                {
+                    "key": "field_69sp_tier_bg",
+                    "label": "Tier background color",
+                    "name": "tier_background_color",
+                    "aria-label": "",
+                    "type": "color_picker",
+                    "instructions": "Background of this tier card.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_69sp_tier_bg_style",
+                                "operator": "==",
+                                "value": "color"
+                            }
+                        ]
+                    ],
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "#F9FBF3",
+                    "enable_opacity": 0,
+                    "return_format": "string",
+                    "parent_repeater": "field_69sp_tiers"
+                },
+                {
+                    "key": "field_69sp_logos_row",
+                    "label": "Logos per row",
+                    "name": "logos_per_row",
+                    "aria-label": "",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "choices": {
+                        "1": "1",
+                        "2": "2",
+                        "3": "3",
+                        "4": "4",
+                        "5": "5",
+                        "6": "6"
+                    },
+                    "default_value": "4",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "save_other_choice": 0,
+                    "layout": "horizontal",
+                    "parent_repeater": "field_69sp_tiers"
+                },
+                {
+                    "key": "field_69sp_sponsors",
+                    "label": "Sponsors",
+                    "name": "sponsors",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "Add logo and optional website link. If no link is set, the logo is not clickable and no \"Visit Site\" text is shown.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "layout": "block",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "field_69sp_logo",
+                    "button_label": "Add sponsor",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_69sp_logo",
+                            "label": "Logo",
+                            "name": "logo",
+                            "aria-label": "",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "return_format": "array",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "preview_size": "medium",
+                            "parent_repeater": "field_69sp_sponsors"
+                        },
+                        {
+                            "key": "field_69sp_url",
+                            "label": "Sponsor website URL",
+                            "name": "url",
+                            "aria-label": "",
+                            "type": "url",
+                            "instructions": "Optional. If set, the whole logo area becomes clickable.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": { "width": "50", "class": "", "id": "" },
+                            "default_value": "",
+                            "placeholder": "https://",
+                            "parent_repeater": "field_69sp_sponsors"
+                        },
+                        {
+                            "key": "field_69sp_visit",
+                            "label": "Visit site text",
+                            "name": "visit_site_text",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Shown under the logo when a URL is set. Leave empty to show no text (logo still clickable).",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": { "width": "50", "class": "", "id": "" },
+                            "default_value": "Visit Site",
+                            "maxlength": "",
+                            "placeholder": "Visit Site",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_69sp_sponsors"
+                        }
+                    ],
+                    "parent_repeater": "field_69sp_tiers"
+                },
+                {
+                    "key": "field_69sp_hide",
+                    "label": "Hide tier",
+                    "name": "hide_tier",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "When on, this tier is not shown on the front (e.g. while you work on it).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "Hidden",
+                    "ui_off_text": "Visible",
+                    "parent_repeater": "field_69sp_tiers"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn\/sponsorships"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1772900000
+}
