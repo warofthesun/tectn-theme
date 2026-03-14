@@ -4621,8 +4621,12 @@ Content Section block
   width: 100%;
   overflow: hidden;
   border-radius: 0.5em;
-  aspect-ratio: 4/3;
+  aspect-ratio: var(--slider-aspect-ratio, 4/3);
+  -webkit-transition: aspect-ratio 0.35s ease-out;
+  transition: aspect-ratio 0.35s ease-out;
   isolation: isolate;
+  -webkit-box-shadow: 4px 4px 0 rgba(201, 221, 103, 0.5);
+  box-shadow: 4px 4px 0 rgba(201, 221, 103, 0.5);
 }
 
 .c-slider__slide {

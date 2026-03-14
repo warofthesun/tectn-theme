@@ -1296,8 +1296,10 @@ border: $spacing-xs solid $white;
 	width: 100%;
 	overflow: hidden;
 	border-radius: $radius-sm;
-	aspect-ratio: 4 / 3;
+	aspect-ratio: var(--slider-aspect-ratio, 4 / 3);
+	transition: aspect-ratio 0.35s ease-out;
 	isolation: isolate;
+	box-shadow: 4px 4px 0 rgba($primary-500, 0.5);
 }
 
 .c-slider__slide {
