@@ -22,7 +22,11 @@ $headline       = get_field( 'headline' );
 $headline_size  = get_field( 'headline_size' ) ?: 'h2';
 $preheader      = get_field( 'preheader' );
 $body           = get_field( 'body' );
-$autoplay       = (bool) get_field( 'autoplay' );
+$autoplay      = (bool) get_field( 'autoplay' );
+if ( $slider_type === 'slideshow' ) {
+	$autoplay = true;
+}
+$show_captions = (bool) get_field( 'show_captions' );
 $list_item_icon = get_field( 'list_item_icon' );
 $gallery        = get_field( 'gallery' );
 
@@ -48,9 +52,10 @@ if ( is_array( $gallery ) && ! empty( $gallery ) ) {
 		if ( $id ) {
 			$caption = isset( $img['caption'] ) && (string) $img['caption'] !== '' ? $img['caption'] : wp_get_attachment_caption( $id );
 			$author  = get_field( 'caption_author', $id ) ?: '';
-			$large   = wp_get_attachment_image_url( $id, 'large' );
-			if ( $large ) {
-				$url = $large;
+			$size    = ( $slider_type === 'slideshow' ) ? 'tectn_slider_square' : 'large';
+			$src     = wp_get_attachment_image_url( $id, $size );
+			if ( $src ) {
+				$url = $src;
 			}
 		}
 		if ( $url !== '' ) {
@@ -72,7 +77,7 @@ if ( empty( $items ) ) {
 	return;
 }
 
-if ( $slider_type !== 'table_of_contents' && $slider_type !== 'horizontal' ) {
+if ( $slider_type !== 'table_of_contents' && $slider_type !== 'horizontal' && $slider_type !== 'slideshow' ) {
 	echo '<div class="c-slider c-slider--empty' . esc_attr( $align ) . '"><p class="c-slider__empty">' . esc_html__( 'This slider style is not yet available.', 'tectn_theme' ) . '</p></div>';
 	return;
 }
@@ -96,6 +101,7 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 	 data-slider-type="<?php echo esc_attr( $slider_type ); ?>"
 	 data-items="<?php echo esc_attr( wp_json_encode( $items ) ); ?>"
 	 data-autoplay="<?php echo $autoplay ? '1' : '0'; ?>"
+	 data-show-captions="<?php echo $show_captions ? '1' : '0'; ?>"
 	 role="region"
 	 aria-label="<?php esc_attr_e( 'Image slider', 'tectn_theme' ); ?>">
 
@@ -161,7 +167,7 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 			</div>
 		</div>
 	</div>
-	<?php else : ?>
+	<?php elseif ( $slider_type === 'horizontal' ) : ?>
 	<?php if ( $has_header ) : ?>
 	<div class="c-slider__content c-slider__content--centered">
 		<?php
@@ -185,7 +191,7 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 	</div>
 	<?php endif; ?>
 
-	<?php $first = $items[0]; $first_has_caption = ( (string) $first['caption'] !== '' || (string) $first['author'] !== '' ); ?>
+	<?php $first = $items[0]; $first_has_caption = $show_captions && ( (string) $first['caption'] !== '' || (string) $first['author'] !== '' ); ?>
 	<div class="c-slider__panel">
 		<div class="c-slider__image-wrap c-slider__image-wrap--fixed">
 			<div class="c-slider__slide c-slider__slide--current" data-slider-slide>
@@ -200,6 +206,7 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 					 class="c-slider__image c-slider__image--cover"
 					 data-slider-image>
 			</div>
+			<?php if ( $show_captions ) : ?>
 			<div class="c-slider__caption<?php echo $first_has_caption ? ' c-slider__caption--visible' : ''; ?>" data-slider-caption aria-live="polite">
 				<?php if ( $first_has_caption ) : ?>
 					<?php if ( (string) $first['caption'] !== '' ) : ?>
@@ -210,6 +217,7 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 					<?php endif; ?>
 				<?php endif; ?>
 			</div>
+			<?php endif; ?>
 		</div>
 		<button type="button" class="c-slider__arrow c-slider__arrow--prev" data-slider-prev aria-label="<?php esc_attr_e( 'Previous slide', 'tectn_theme' ); ?>"></button>
 		<button type="button" class="c-slider__arrow c-slider__arrow--next" data-slider-next aria-label="<?php esc_attr_e( 'Next slide', 'tectn_theme' ); ?>"></button>
@@ -218,6 +226,70 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 				<button type="button" class="c-slider__dot<?php echo $i === 0 ? ' c-slider__dot--active' : ''; ?>" data-index="<?php echo (int) $i; ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Go to slide %d', 'tectn_theme' ), $i + 1 ) ); ?>" aria-current="<?php echo $i === 0 ? 'true' : 'false'; ?>"></button>
 			<?php endforeach; ?>
 		</nav>
+	</div>
+
+	<?php elseif ( $slider_type === 'slideshow' ) : ?>
+	<?php if ( $has_header ) : ?>
+	<div class="c-slider__content c-slider__content--centered">
+		<?php
+		if ( (string) $preheader !== '' ) {
+			echo '<p class="c-slider__preheader">' . esc_html( $preheader ) . '</p>';
+		}
+		if ( (string) $headline !== '' ) {
+			$tag_name = preg_replace( '/\s.*/', '', $headline_size );
+			$tag_name = in_array( $tag_name, array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true ) ? $tag_name : 'h2';
+			if ( strpos( $headline_size, 'class=' ) !== false ) {
+				$open_tag = preg_replace( '/class=(["\']?)([^"\'\s]+)\1/', 'class="$2 c-slider__headline"', $headline_size );
+			} else {
+				$open_tag = $headline_size . ' class="c-slider__headline"';
+			}
+			echo '<' . esc_attr( $open_tag ) . '>' . esc_html( $headline ) . '</' . esc_attr( $tag_name ) . '>';
+		}
+		?>
+		<?php if ( $body !== '' ) : ?>
+			<div class="c-slider__body"><?php echo wp_kses_post( $body ); ?></div>
+		<?php endif; ?>
+	</div>
+	<?php endif; ?>
+
+	<?php
+	$first = $items[0];
+	$first_has_caption = $show_captions && ( (string) $first['caption'] !== '' || (string) $first['author'] !== '' );
+	?>
+	<div class="c-slider__panel">
+		<div class="c-slider__image-wrap c-slider__image-wrap--square">
+			<div class="c-slider__slide c-slider__slide--current" data-slider-slide>
+				<img src="<?php echo esc_url( $first['url'] ); ?>"
+					 alt="<?php echo esc_attr( $first['title'] ); ?>"
+					 class="c-slider__image c-slider__image--cover"
+					 data-slider-image>
+			</div>
+			<div class="c-slider__slide c-slider__slide--next" data-slider-slide>
+				<img src="<?php echo esc_url( $first['url'] ); ?>"
+					 alt=""
+					 class="c-slider__image c-slider__image--cover"
+					 data-slider-image>
+			</div>
+			<?php if ( $show_captions ) : ?>
+			<div class="c-slider__caption<?php echo $first_has_caption ? ' c-slider__caption--visible' : ''; ?>" data-slider-caption aria-live="polite">
+				<?php if ( $first_has_caption ) : ?>
+					<?php if ( (string) $first['caption'] !== '' ) : ?>
+						<p class="c-slider__caption-text"><?php echo esc_html( $first['caption'] ); ?></p>
+					<?php endif; ?>
+					<?php if ( (string) $first['author'] !== '' ) : ?>
+						<p class="c-slider__caption-author"><?php echo esc_html( $first['author'] ); ?></p>
+					<?php endif; ?>
+				<?php endif; ?>
+			</div>
+			<?php endif; ?>
+			<button type="button" class="c-slider__arrow c-slider__arrow--prev" data-slider-prev aria-label="<?php esc_attr_e( 'Previous slide', 'tectn_theme' ); ?>"></button>
+			<button type="button" class="c-slider__arrow c-slider__arrow--next" data-slider-next aria-label="<?php esc_attr_e( 'Next slide', 'tectn_theme' ); ?>"></button>
+			<nav class="c-slider__dots" aria-label="<?php esc_attr_e( 'Slide navigation', 'tectn_theme' ); ?>">
+				<?php foreach ( $items as $i => $item ) : ?>
+					<button type="button" class="c-slider__dot<?php echo $i === 0 ? ' c-slider__dot--active' : ''; ?>" data-index="<?php echo (int) $i; ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Go to slide %d', 'tectn_theme' ), $i + 1 ) ); ?>" aria-current="<?php echo $i === 0 ? 'true' : 'false'; ?>"></button>
+				<?php endforeach; ?>
+			</nav>
+		</div>
 	</div>
 	<?php endif; ?>
 </div>

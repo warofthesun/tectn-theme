@@ -10,7 +10,8 @@
             "instructions": "Table of contents: list left, image right. Horizontal: arrows and dots, optional caption overlay.",
             "choices": {
                 "table_of_contents": "Table of contents (list left, image right)",
-                "horizontal": "Horizontal"
+                "horizontal": "Horizontal",
+                "slideshow": "Slideshow"
             },
             "default_value": "table_of_contents",
             "return_format": "value",
@@ -21,7 +22,17 @@
             "label": "Autoplay",
             "name": "autoplay",
             "type": "true_false",
-            "instructions": "Automatically advance slides. Default is off for Table of contents and Horizontal; Slideshow will default to on.",
+            "instructions": "Automatically advance slides. Default: No for Table of contents and Horizontal; Yes for Slideshow.",
+            "default_value": 0,
+            "ui": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_slider_show_captions",
+            "label": "Show captions",
+            "name": "show_captions",
+            "type": "true_false",
+            "instructions": "Show caption and author overlay when the image has them. Off by default for all styles.",
             "default_value": 0,
             "ui": 1,
             "wrapper": { "width": "", "class": "", "id": "" }
