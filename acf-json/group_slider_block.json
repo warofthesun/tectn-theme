@@ -16,6 +16,25 @@
             "wrapper": { "width": "", "class": "", "id": "" }
         },
         {
+            "key": "field_slider_list_icon",
+            "label": "List item icon",
+            "name": "list_item_icon",
+            "type": "font-awesome",
+            "instructions": "Optional icon shown next to each list item (e.g. a tree icon). Leave empty for text only.",
+            "icon_sets": ["solid", "regular", "brands"],
+            "custom_icon_set": "",
+            "default_label": "",
+            "default_value": "",
+            "save_format": "element",
+            "allow_null": 1,
+            "show_preview": 1,
+            "enqueue_fa": 0,
+            "allow_in_bindings": 0,
+            "fa_live_preview": "",
+            "choices": [],
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
             "key": "field_slider_body",
             "label": "Body copy",
             "name": "body",

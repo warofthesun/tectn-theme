@@ -17,12 +17,24 @@ if ( $is_preview ) {
 	return;
 }
 
-$slider_type   = get_field( 'slider_type' ) ?: 'table_of_contents';
-$headline      = get_field( 'headline' );
-$headline_size = get_field( 'headline_size' ) ?: 'h2';
-$preheader     = get_field( 'preheader' );
-$body          = get_field( 'body' );
-$gallery       = get_field( 'gallery' );
+$slider_type     = get_field( 'slider_type' ) ?: 'table_of_contents';
+$headline        = get_field( 'headline' );
+$headline_size   = get_field( 'headline_size' ) ?: 'h2';
+$preheader       = get_field( 'preheader' );
+$body            = get_field( 'body' );
+$list_item_icon = get_field( 'list_item_icon' );
+$gallery        = get_field( 'gallery' );
+
+$list_icon_html = '';
+if ( is_array( $list_item_icon ) && ! empty( $list_item_icon['class'] ) ) {
+	$list_icon_html = '<i class="' . esc_attr( $list_item_icon['class'] ) . '" aria-hidden="true"></i>';
+} elseif ( is_string( $list_item_icon ) && $list_item_icon !== '' ) {
+	if ( strpos( $list_item_icon, '<' ) !== false ) {
+		$list_icon_html = $list_item_icon;
+	} else {
+		$list_icon_html = '<i class="' . esc_attr( $list_item_icon ) . '" aria-hidden="true"></i>';
+	}
+}
 
 $items = array();
 if ( is_array( $gallery ) && ! empty( $gallery ) ) {
@@ -98,11 +110,16 @@ if ( ! is_admin() ) {
 					<?php foreach ( $items as $i => $item ) : ?>
 						<li>
 							<button type="button"
-									class="c-slider__list-btn<?php echo $i === 0 ? ' c-slider__list-btn--active' : ''; ?>"
+									class="c-slider__list-btn<?php echo $i === 0 ? ' c-slider__list-btn--active' : ''; ?><?php echo $list_icon_html !== '' ? ' c-slider__list-btn--has-icon' : ''; ?>"
 									data-index="<?php echo (int) $i; ?>"
 									aria-pressed="<?php echo $i === 0 ? 'true' : 'false'; ?>"
 									aria-label="<?php echo esc_attr( $item['title'] ); ?>">
-								<?php echo esc_html( $item['title'] ); ?>
+								<?php if ( $list_icon_html !== '' ) : ?>
+									<span class="c-slider__list-icon" aria-hidden="true">
+										<?php echo wp_kses_post( $list_icon_html ); ?>
+									</span>
+								<?php endif; ?>
+								<span class="c-slider__list-label"><?php echo esc_html( $item['title'] ); ?></span>
 							</button>
 						</li>
 					<?php endforeach; ?>
@@ -113,10 +130,18 @@ if ( ! is_admin() ) {
 		<div class="c-slider__panel">
 			<div class="c-slider__image-wrap">
 				<?php $first = $items[0]; ?>
-				<img src="<?php echo esc_url( $first['url'] ); ?>"
-					 alt="<?php echo esc_attr( $first['title'] ); ?>"
-					 class="c-slider__image"
-					 data-slider-image>
+				<div class="c-slider__slide c-slider__slide--current" data-slider-slide>
+					<img src="<?php echo esc_url( $first['url'] ); ?>"
+						 alt="<?php echo esc_attr( $first['title'] ); ?>"
+						 class="c-slider__image"
+						 data-slider-image>
+				</div>
+				<div class="c-slider__slide c-slider__slide--next" data-slider-slide>
+					<img src="<?php echo esc_url( $first['url'] ); ?>"
+						 alt=""
+						 class="c-slider__image"
+						 data-slider-image>
+				</div>
 			</div>
 		</div>
 	</div>

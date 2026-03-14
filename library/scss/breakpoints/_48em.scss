@@ -54,8 +54,16 @@
   }
 
   .c-slider--toc .c-slider__list-inner {
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    column-count: unset;
+    column-gap: unset;
+    gap: 0.5rem;
+
+    > li {
+      margin-bottom: 0;
+    }
   }
 
   .c-slider--toc .c-slider__panel {
