@@ -1,0 +1,19 @@
+{
+  "name": "tectn/slider",
+  "title": "Image Slider",
+  "description": "Table-of-contents style slider (list + image). More slider types (navigation, slideshow) can be added later.",
+  "style": ["file:../library/css/style.css", "file:./style.css"],
+  "viewScript": ["file:./view.js"],
+  "category": "tectn-blocks",
+  "icon": "slides",
+  "keywords": ["slider", "gallery", "table of contents", "toc"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "slider.php"
+  },
+  "supports": {
+    "jsx": true,
+    "anchor": true,
+    "align": ["full", "wide"]
+  }
+}

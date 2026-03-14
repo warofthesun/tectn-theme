@@ -1,0 +1,5 @@
+/* Image Slider block — overrides if needed (main styles in theme SCSS) */
+
+.c-slider {
+  position: relative;
+}

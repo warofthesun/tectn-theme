@@ -1,0 +1,58 @@
+{
+    "key": "group_slider_block",
+    "title": "Image Slider block",
+    "fields": [
+        {
+            "key": "field_slider_type",
+            "label": "Slider style",
+            "name": "slider_type",
+            "type": "select",
+            "instructions": "How the slider is displayed. More options (e.g. navigation slider, timed slideshow) will be added later.",
+            "choices": {
+                "table_of_contents": "Table of contents (list left, image right)"
+            },
+            "default_value": "table_of_contents",
+            "return_format": "value",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_slider_headline",
+            "label": "Headline",
+            "name": "headline",
+            "type": "text",
+            "instructions": "Main headline above the slider (e.g. \"Tennessee Tree Day 2026 Species\").",
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_slider_body",
+            "label": "Body copy",
+            "name": "body",
+            "type": "textarea",
+            "instructions": "Intro text below the headline (e.g. \"Tree species this year include:\").",
+            "rows": 3,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_slider_gallery",
+            "label": "Gallery",
+            "name": "gallery",
+            "type": "gallery",
+            "instructions": "Add images. Each image's title becomes a clickable list item; clicking shows that image. Order determines list order.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        }
+    ],
+    "location": [[{ "param": "block", "operator": "==", "value": "tectn\/slider" }]],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

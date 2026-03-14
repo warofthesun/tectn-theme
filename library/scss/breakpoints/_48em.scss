@@ -38,6 +38,27 @@
     max-width: 200px;
   }
 
+  /* Slider: two columns (list left, image right) */
+  .c-slider--toc .c-slider__content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .c-slider--toc .c-slider__list {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  .c-slider--toc .c-slider__list-inner {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .c-slider--toc .c-slider__panel {
+    flex: 1;
+    min-width: 0;
+  }
+
   /*********************
   NAVIGATION STYLES
   *********************/
