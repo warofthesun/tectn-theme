@@ -16,12 +16,11 @@ $classes[] = 'c-posts--' . sanitize_html_class($theme_variant);
 $bg_image      = get_field('background_image');
 $bg_max_height = (int) (get_field('max_bg_height') ?: 800);
 
-$preheader     = get_field('preheader');
-$headline      = get_field('headline');
-$headline_size = get_field('headline_size') ?: 'h2';
-$headline_tag  = preg_replace('/\s.*/', '', $headline_size);
-$headline_attr = trim(str_replace($headline_tag, '', $headline_size));
-$headline_class = ($headline_attr !== '') ? ' class="' . esc_attr($headline_attr) . '"' : '';
+$preheader        = get_field('preheader');
+$headline         = get_field('headline');
+$headline_size    = get_field('headline_size') ?: 'h2';
+$on_dark          = (bool) get_field('on_dark_background');
+$headline_parsed  = function_exists( 'tectn_headline_tag_and_class' ) ? tectn_headline_tag_and_class( $headline_size, 'c-sponsorships__title' ) : array( 'tag' => 'h2', 'class' => 'c-sponsorships__title' );
 
 $bg_url = '';
 if (!empty($bg_image) && is_array($bg_image)) {
@@ -97,13 +96,13 @@ if (!is_array($tiers)) $tiers = [];
   <!-- Foreground content -->
   <div class="c-posts__inner c-sponsorships__inner l-container wrap">
 
-    <?php if ($preheader || $headline): ?>
+    <?php if ( $preheader || $headline ) : ?>
       <header class="c-sponsorships__header">
-        <?php if ($preheader): ?>
-          <h5 class="c-sponsorships__preheader"><?= esc_html($preheader); ?></h5>
+        <?php if ( $preheader ) : ?>
+          <h5 class="c-headline-group__preheader<?php echo $on_dark ? ' light' : ''; ?>"><?php echo esc_html( $preheader ); ?></h5>
         <?php endif; ?>
-        <?php if ($headline): ?>
-          <<?= esc_attr($headline_tag); ?><?= $headline_class; ?> class="c-sponsorships__title"><?= esc_html($headline); ?></<?= esc_attr($headline_tag); ?>>
+        <?php if ( $headline ) : ?>
+          <<?= esc_attr( $headline_parsed['tag'] ); ?> class="<?= esc_attr( trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) ) ); ?>"><?= esc_html( $headline ); ?></<?= esc_attr( $headline_parsed['tag'] ); ?>>
         <?php endif; ?>
       </header>
     <?php endif; ?>

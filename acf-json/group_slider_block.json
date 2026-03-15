@@ -28,42 +28,6 @@
             "wrapper": { "width": "50", "class": "", "id": "" }
         },
         {
-            "key": "field_slider_preheader",
-            "label": "Preheader (Optional)",
-            "name": "preheader",
-            "type": "text",
-            "instructions": "",
-            "wrapper": { "width": "", "class": "", "id": "" }
-        },
-        {
-            "key": "field_slider_headline",
-            "label": "Headline",
-            "name": "headline",
-            "type": "text",
-            "instructions": "Your headline goes here",
-            "wrapper": { "width": "", "class": "", "id": "" }
-        },
-        {
-            "key": "field_slider_headline_size",
-            "label": "Headline size",
-            "name": "headline_size",
-            "type": "button_group",
-            "instructions": "",
-            "wrapper": { "width": "", "class": "", "id": "" },
-            "choices": {
-                "h2 class=hero": "Hero",
-                "h1": "H1",
-                "h2": "H2",
-                "h3": "H3",
-                "h4": "H4",
-                "h5": "H5"
-            },
-            "default_value": "h2",
-            "return_format": "value",
-            "allow_null": 0,
-            "layout": "horizontal"
-        },
-        {
             "key": "field_slider_body",
             "label": "Body copy",
             "name": "body",

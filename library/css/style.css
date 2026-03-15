@@ -166,6 +166,10 @@ ul.wp-block-list li {
   margin-bottom: 0.5em;
 }
 
+h2.hero {
+  font-size: 4.5em;
+}
+
 /******************************************************************
 Site Name:
 Author:
@@ -3491,9 +3495,9 @@ BAND / SECTION WRAPPER
 }
 
 .c-band--grad-strong .c-band__bg-gradient {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(236, 186, 39, 0.55)), color-stop(68%, rgba(105, 143, 61, 0.7)));
-  background: -webkit-linear-gradient(top, rgba(236, 186, 39, 0.55) 0%, rgba(105, 143, 61, 0.7) 68%);
-  background: linear-gradient(180deg, rgba(236, 186, 39, 0.55) 0%, rgba(105, 143, 61, 0.7) 68%);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(236, 186, 39, 0.75)), color-stop(68%, rgba(105, 143, 61, 0.8)));
+  background: -webkit-linear-gradient(top, rgba(236, 186, 39, 0.75) 0%, rgba(105, 143, 61, 0.8) 68%);
+  background: linear-gradient(180deg, rgba(236, 186, 39, 0.75) 0%, rgba(105, 143, 61, 0.8) 68%);
 }
 
 .c-band--grad-none .c-band__bg-gradient {
@@ -4138,6 +4142,15 @@ Content Section block
   position: relative;
 }
 
+/* Preheader: shared pattern (headline-group, text-image, sponsorships, slider). Markup: <h5 class="c-headline-group__preheader"> */
+.c-headline-group__preheader {
+  margin: 0;
+  font-size: 1.2em;
+  line-height: 1.6em;
+  text-transform: normal;
+  color: #79853E;
+}
+
 /* With colored background: slideshow overlaps the bottom wave (same idea as gallery hang) */
 .c-waveband--has-slideshow .c-content-group__slideshow--overlap-wave {
   margin-bottom: -webkit-calc(-1 * var(--hang, 120px));
@@ -4604,13 +4617,6 @@ Content Section block
   min-width: 0;
 }
 
-.c-slider__preheader {
-  color: #79853E;
-  font-size: 0.9rem;
-  margin: 0 0 0.25rem;
-  padding: 0;
-}
-
 .c-slider__headline {
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
@@ -4828,7 +4834,7 @@ Content Section block
   text-align: center;
 }
 
-.c-slider__content--centered .c-slider__preheader,
+.c-slider__content--centered .c-headline-group__preheader,
 .c-slider__content--centered .c-slider__headline,
 .c-slider__content--centered .c-slider__body {
   text-align: center;
@@ -5438,15 +5444,6 @@ Card
   margin-top: clamp(32px, 4vw, 48px);
 }
 
-.c-sponsorships__preheader {
-  margin: 0;
-  font-size: 1.3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #505829;
-  opacity: 0.95;
-}
-
 .c-sponsorships__title {
   margin: 0;
   color: #fff;
@@ -5688,7 +5685,10 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
 h1, .h1 {
   font-size: 3.5em;
   line-height: 0.9em;
-  color: #D4E485;
+  color: #C9DD67;
+}
+h1.light, .h1.light {
+  color: #DFEBA4;
 }
 
 h2, .h2 {
@@ -5696,25 +5696,37 @@ h2, .h2 {
   line-height: 1em;
   margin-top: 0;
   margin-bottom: 0.375em;
-  color: #C9DD67;
+  color: #A1B152;
+}
+h2.light, .h2.light {
+  color: #D4E485;
 }
 
 h3, .h3 {
   font-size: 2em;
   line-height: 1.1;
-  color: #A1B152;
+  color: #79853E;
+}
+h3.light, .h3.light {
+  color: #C9DD67;
 }
 
 h4, .h4 {
   font-size: 1.5em;
-  color: #A1B152;
+  color: #79853E;
+}
+h4.light, .h4.light {
+  color: #C9DD67;
 }
 
 h5, .h5 {
   font-size: 1.2em;
   line-height: 1.6em;
   text-transform: normal;
-  color: #79853E;
+  color: #505829;
+}
+h5.light, .h5.light {
+  color: #A1B152;
 }
 
 /*********************

@@ -21,6 +21,34 @@ function tectn_register_acf_blocks() {
 add_action( 'init', 'tectn_register_acf_blocks' );
 
 /**
+ * Parse headline_size (from ACF field_6992657b77c7f) into tag and class for output.
+ * When "Hero" is selected (value contains "hero"), returns h2 with class "hero" plus any block class.
+ *
+ * @param string $headline_size Value from get_field('headline_size').
+ * @param string $block_class   Optional block-specific class to append (e.g. c-slider__headline).
+ * @return array{ tag: string, class: string } Safe tag (h1-h6) and combined class string.
+ */
+function tectn_headline_tag_and_class( $headline_size, $block_class = '' ) {
+	$headline_size = (string) $headline_size;
+	$tag           = preg_replace( '/\s.*/', '', $headline_size );
+	$tag           = in_array( $tag, array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true ) ? $tag : 'h2';
+	$is_hero       = ( strpos( $headline_size, 'hero' ) !== false );
+	if ( $is_hero ) {
+		$tag   = 'h2';
+		$class = 'hero';
+	} else {
+		$class = '';
+		if ( preg_match( '/class\s*=\s*["\']?([^"\']*)["\']?/', $headline_size, $m ) ) {
+			$class = trim( $m[1] );
+		}
+	}
+	if ( $block_class !== '' ) {
+		$class = trim( $class . ' ' . $block_class );
+	}
+	return array( 'tag' => $tag, 'class' => $class );
+}
+
+/**
  * Shared BEM class list for content-group block (text + image layout).
  * Use in blocks/partials that output c-content-group to avoid duplication.
  *

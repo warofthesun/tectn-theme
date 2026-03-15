@@ -369,8 +369,8 @@ BAND / SECTION WRAPPER
 .c-band--grad-strong .c-band__bg-gradient {
   background: linear-gradient(
     180deg,
-    rgba($accent-500, 0.55) 0%,
-    rgba($secondary-500, 0.7) 68%
+    rgba($accent-500, 0.75) 0%,
+    rgba($secondary-500, 0.8) 68%
   );
 }
 
@@ -881,6 +881,15 @@ border: $spacing-xs solid $white;
   position: relative;
 }
 
+/* Preheader: shared pattern (headline-group, text-image, sponsorships, slider). Markup: <h5 class="c-headline-group__preheader"> */
+.c-headline-group__preheader {
+  margin: 0;
+  font-size: 1.2em;
+  line-height: 1.6em;
+  text-transform: normal;
+  color: $primary-700;
+}
+
 /* With colored background: slideshow overlaps the bottom wave (same idea as gallery hang) */
 .c-waveband--has-slideshow .c-content-group__slideshow--overlap-wave {
   margin-bottom: calc(-1 * var(--hang, 120px));
@@ -1285,12 +1294,6 @@ border: $spacing-xs solid $white;
 	min-width: 0;
 }
 
-.c-slider__preheader {
-	color: $primary-700;
-	font-size: 0.9rem;
-	margin: 0 0 0.25rem;
-	padding: 0;
-}
 
 .c-slider__headline {
 	font-family: $header-font;
@@ -1473,7 +1476,7 @@ border: $spacing-xs solid $white;
 	text-align: center;
 }
 
-.c-slider__content--centered .c-slider__preheader,
+.c-slider__content--centered .c-headline-group__preheader,
 .c-slider__content--centered .c-slider__headline,
 .c-slider__content--centered .c-slider__body {
 	text-align: center;
@@ -1993,14 +1996,6 @@ border: $spacing-xs solid $white;
 	margin-top: clamp(32px, 4vw, 48px);
 }
 
-.c-sponsorships__preheader {
-	margin: 0;
-	font-size: 1.3rem;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	color: $primary-800;
-	opacity: 0.95;
-}
 
 .c-sponsorships__title {
 	margin: 0;
@@ -2210,7 +2205,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 h1, .h1 {
 	font-size: 3.5em;
 	line-height: .9em;
-	color: $primary-400;
+	color: $primary-500;
+
+	&.light {
+		color: $primary-300;
+	}
 }
 
 h2, .h2 {
@@ -2218,25 +2217,37 @@ h2, .h2 {
 	line-height: 1em;
 	margin-top: 0;
 	margin-bottom: 0.375em;
-	color: $primary-500;
+	color: $primary-600;
+	&.light {
+		color: $primary-400;
+	}
 }
 
 h3, .h3 {
 	font-size: 2em;
 	line-height: 1.1;
-	color: $primary-600;
+	color: $primary-700;
+	&.light {
+		color: $primary-500;
+	}
 }
 
 h4, .h4 {
 	font-size: 1.5em;
-	color: $primary-600;
+	color: $primary-700;
+	&.light {
+		color: $primary-500;
+	}
 }
 
 h5, .h5 {
 	font-size: 1.2em;
 	line-height: 1.6em;
 	text-transform: normal;
-	color: $primary-700;
+	color: $primary-800;
+	&.light {
+		color: $primary-600;
+	}
 }
 
 

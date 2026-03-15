@@ -59,7 +59,7 @@
                 "id": ""
             },
             "choices": {
-                "h2 class=hero": "Hero",
+                "hero": "Hero",
                 "h1": "H1",
                 "h2": "H2",
                 "h3": "H3",
@@ -71,6 +71,23 @@
             "allow_null": 0,
             "allow_in_bindings": 0,
             "layout": "horizontal"
+        },
+        {
+            "key": "field_6992657b_on_dark_bg",
+            "label": "On a dark background",
+            "name": "on_dark_background",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "When checked, adds the class \"light\" to the preheader and headline for use on dark backgrounds.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -92,7 +109,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "tectn\/sponsorships"
+                "value": "tectn\/slider"
             }
         ]
     ],
@@ -106,5 +123,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772900856
+    "modified": 1773609200
 }

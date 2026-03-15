@@ -20,7 +20,8 @@ if ( $is_preview ) {
 $slider_type    = get_field( 'slider_type' ) ?: 'table_of_contents';
 $headline       = get_field( 'headline' );
 $headline_size  = get_field( 'headline_size' ) ?: 'h2';
-$preheader      = get_field( 'preheader' );
+$preheader      = get_field( 'preheader' ); // Same preheader pattern as headline-group: output as <h5 class="c-headline-group__preheader">
+$on_dark        = (bool) get_field( 'on_dark_background' );
 $body           = get_field( 'body' );
 $autoplay      = (bool) get_field( 'autoplay' );
 if ( $slider_type === 'slideshow' ) {
@@ -109,18 +110,13 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 	<div class="c-slider__content">
 		<div class="c-slider__col-left">
 			<?php
-			if ( (string) $preheader !== '' ) {
-				echo '<p class="c-slider__preheader">' . esc_html( $preheader ) . '</p>';
+			if ( $preheader ) {
+				echo '<h5 class="c-headline-group__preheader' . ( $on_dark ? ' light' : '' ) . '">' . esc_html( $preheader ) . '</h5>';
 			}
 			if ( (string) $headline !== '' ) {
-				$tag_name = preg_replace( '/\s.*/', '', $headline_size );
-				$tag_name = in_array( $tag_name, array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true ) ? $tag_name : 'h2';
-				if ( strpos( $headline_size, 'class=' ) !== false ) {
-					$open_tag = preg_replace( '/class=(["\']?)([^"\'\s]+)\1/', 'class="$2 c-slider__headline"', $headline_size );
-				} else {
-					$open_tag = $headline_size . ' class="c-slider__headline"';
-				}
-				echo '<' . esc_attr( $open_tag ) . '>' . esc_html( $headline ) . '</' . esc_attr( $tag_name ) . '>';
+				$headline_parsed = function_exists( 'tectn_headline_tag_and_class' ) ? tectn_headline_tag_and_class( $headline_size, 'c-slider__headline' ) : array( 'tag' => 'h2', 'class' => 'c-slider__headline' );
+				$headline_class   = trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) );
+				echo '<' . esc_attr( $headline_parsed['tag'] ) . ' class="' . esc_attr( $headline_class ) . '">' . esc_html( $headline ) . '</' . esc_attr( $headline_parsed['tag'] ) . '>';
 			}
 			?>
 			<?php if ( $body !== '' ) : ?>
@@ -171,18 +167,13 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 	<?php if ( $has_header ) : ?>
 	<div class="c-slider__content c-slider__content--centered">
 		<?php
-		if ( (string) $preheader !== '' ) {
-			echo '<p class="c-slider__preheader">' . esc_html( $preheader ) . '</p>';
-		}
+if ( $preheader ) {
+		echo '<h5 class="c-headline-group__preheader' . ( $on_dark ? ' light' : '' ) . '">' . esc_html( $preheader ) . '</h5>';
+	}
 		if ( (string) $headline !== '' ) {
-			$tag_name = preg_replace( '/\s.*/', '', $headline_size );
-			$tag_name = in_array( $tag_name, array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true ) ? $tag_name : 'h2';
-			if ( strpos( $headline_size, 'class=' ) !== false ) {
-				$open_tag = preg_replace( '/class=(["\']?)([^"\'\s]+)\1/', 'class="$2 c-slider__headline"', $headline_size );
-			} else {
-				$open_tag = $headline_size . ' class="c-slider__headline"';
-			}
-			echo '<' . esc_attr( $open_tag ) . '>' . esc_html( $headline ) . '</' . esc_attr( $tag_name ) . '>';
+			$headline_parsed = function_exists( 'tectn_headline_tag_and_class' ) ? tectn_headline_tag_and_class( $headline_size, 'c-slider__headline' ) : array( 'tag' => 'h2', 'class' => 'c-slider__headline' );
+			$headline_class   = trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) );
+			echo '<' . esc_attr( $headline_parsed['tag'] ) . ' class="' . esc_attr( $headline_class ) . '">' . esc_html( $headline ) . '</' . esc_attr( $headline_parsed['tag'] ) . '>';
 		}
 		?>
 		<?php if ( $body !== '' ) : ?>
@@ -232,18 +223,13 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 	<?php if ( $has_header ) : ?>
 	<div class="c-slider__content c-slider__content--centered">
 		<?php
-		if ( (string) $preheader !== '' ) {
-			echo '<p class="c-slider__preheader">' . esc_html( $preheader ) . '</p>';
-		}
+if ( $preheader ) {
+		echo '<h5 class="c-headline-group__preheader' . ( $on_dark ? ' light' : '' ) . '">' . esc_html( $preheader ) . '</h5>';
+	}
 		if ( (string) $headline !== '' ) {
-			$tag_name = preg_replace( '/\s.*/', '', $headline_size );
-			$tag_name = in_array( $tag_name, array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true ) ? $tag_name : 'h2';
-			if ( strpos( $headline_size, 'class=' ) !== false ) {
-				$open_tag = preg_replace( '/class=(["\']?)([^"\'\s]+)\1/', 'class="$2 c-slider__headline"', $headline_size );
-			} else {
-				$open_tag = $headline_size . ' class="c-slider__headline"';
-			}
-			echo '<' . esc_attr( $open_tag ) . '>' . esc_html( $headline ) . '</' . esc_attr( $tag_name ) . '>';
+			$headline_parsed = function_exists( 'tectn_headline_tag_and_class' ) ? tectn_headline_tag_and_class( $headline_size, 'c-slider__headline' ) : array( 'tag' => 'h2', 'class' => 'c-slider__headline' );
+			$headline_class   = trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) );
+			echo '<' . esc_attr( $headline_parsed['tag'] ) . ' class="' . esc_attr( $headline_class ) . '">' . esc_html( $headline ) . '</' . esc_attr( $headline_parsed['tag'] ) . '>';
 		}
 		?>
 		<?php if ( $body !== '' ) : ?>
