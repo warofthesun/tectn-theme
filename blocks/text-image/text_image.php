@@ -22,16 +22,20 @@
     $body            = get_field('body_copy');
     $content_position = get_field('content_vertical');
     $image_position  = get_field('image_horizontal');
-    $media_type      = get_field('media_type') ?: 'gallery';
-    $images          = get_field('images');
-    $video_url       = get_field('video_url', false, false); // raw URL for wp_oembed_get()
-    $count           = is_array($images) ? count($images) : 0;
+    $media_type       = get_field('media_type') ?: 'gallery';
+    $images           = get_field('images');
+    $slideshow_gallery = get_field('slideshow_gallery');
+    $show_captions    = (bool) get_field('show_captions');
+    $video_url        = get_field('video_url', false, false); // raw URL for wp_oembed_get()
+    $count            = is_array($images) ? count($images) : 0;
+    $slideshow_count  = is_array($slideshow_gallery) ? count($slideshow_gallery) : 0;
 
     $has_video = ($media_type === 'video' && ! empty($video_url) && is_string($video_url));
     $has_gallery = ($media_type === 'gallery' && $count > 0);
-    $has_media = $has_video || $has_gallery;
+    $has_slideshow = ($media_type === 'slideshow' && $slideshow_count > 0);
+    $has_media = $has_video || $has_gallery || $has_slideshow;
 
-    if ($has_video) {
+    if ($has_video || $has_slideshow || $media_type === 'slideshow') {
         $text_col   = 'col-xs-12 col-md-6';
         $image_col  = 'col-xs-12 col-md-6';
         $grid_class = 'c-image-grid c-image-grid--one';
@@ -73,10 +77,39 @@
         'c-waveband',
         $enable_bg ? 'is-bg' : '',
         ($enable_bg && $has_video) ? 'c-waveband--has-video' : '',
+        ($enable_bg && ($has_slideshow || $media_type === 'slideshow')) ? 'c-waveband--has-slideshow' : '',
     ];
 
     $align = !empty($block['align']) ? 'align' . $block['align'] : '';
     $classes_band[] = $align;
+
+    // Build slideshow items (same structure as Slider block) when media type is slideshow
+    $slideshow_items = array();
+    if ( $has_slideshow && is_array( $slideshow_gallery ) ) {
+        foreach ( $slideshow_gallery as $img ) {
+            $url     = isset( $img['url'] ) ? $img['url'] : '';
+            $title   = isset( $img['title'] ) ? $img['title'] : '';
+            $id      = isset( $img['ID'] ) ? (int) $img['ID'] : ( isset( $img['id'] ) ? (int) $img['id'] : 0 );
+            $caption = '';
+            $author  = '';
+            if ( $id ) {
+                $caption = isset( $img['caption'] ) && (string) $img['caption'] !== '' ? $img['caption'] : wp_get_attachment_caption( $id );
+                $author  = function_exists( 'get_field' ) ? ( get_field( 'caption_author', $id ) ?: '' ) : '';
+                $src     = wp_get_attachment_image_url( $id, 'tectn_slider_square' );
+                if ( $src ) {
+                    $url = $src;
+                }
+            }
+            if ( $url !== '' ) {
+                $slideshow_items[] = array(
+                    'url'     => $url,
+                    'title'   => $title !== '' ? $title : __( 'Untitled', 'tectn_theme' ),
+                    'caption' => is_string( $caption ) ? $caption : '',
+                    'author'  => is_string( $author ) ? $author : '',
+                );
+            }
+        }
+    }
 
     $style_attr = '';
     if ($enable_bg) {
@@ -120,7 +153,7 @@
 <?php if ( ! $enable_bg && $content_full_width ) : ?><div class="c-text-image__content c-text-image__content--full"><?php endif; ?>
 <?php if ( ! $enable_bg && ! $content_full_width ) : ?><div class="c-text-image__content"><?php endif; ?>
 
-        <div class="<?php echo esc_attr(implode(' ', $classes_cg)); ?> row<?php echo $has_video ? ' c-content-group__row--has-video' : ''; ?>">
+        <div class="<?php echo esc_attr(implode(' ', $classes_cg)); ?> row<?php echo $has_video ? ' c-content-group__row--has-video' : ''; ?><?php echo ($has_slideshow || $media_type === 'slideshow') ? ' c-content-group__row--has-slideshow' : ''; ?>">
             <div class="<?= esc_attr($text_col); ?> c-content-group__content">
                 <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
                 <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
@@ -146,6 +179,75 @@
                     ] ); ?>
                 </div>
                 <?php endif; ?>
+            <?php elseif ( $has_slideshow && ! empty( $slideshow_items ) ) :
+                $slideshow_id = isset( $block['id'] ) ? 'text-image-slider-' . $block['id'] : 'text-image-slider-' . wp_rand( 1000, 9999 );
+                if ( ! is_admin() ) {
+                    $block_path = get_template_directory() . '/blocks/slider';
+                    $block_uri  = get_template_directory_uri() . '/blocks/slider';
+                    wp_enqueue_script(
+                        'tectn-slider-view',
+                        $block_uri . '/view.js',
+                        array(),
+                        file_exists( $block_path . '/view.js' ) ? filemtime( $block_path . '/view.js' ) : null,
+                        true
+                    );
+                }
+                $first = $slideshow_items[0];
+                $first_has_caption = $show_captions && ( (string) $first['caption'] !== '' || (string) $first['author'] !== '' );
+                $slideshow_overlap = $enable_bg;
+                ?>
+                <div class="c-content-group__slideshow c-content-group__slideshow--square<?php echo $slideshow_overlap ? ' c-content-group__slideshow--overlap-wave' : ''; ?>">
+                <div class="c-slider c-slider--slideshow"
+                    id="<?php echo esc_attr( $slideshow_id ); ?>"
+                    data-slider-type="slideshow"
+                    data-items="<?php echo esc_attr( wp_json_encode( $slideshow_items ) ); ?>"
+                    data-autoplay="1"
+                    data-show-captions="<?php echo $show_captions ? '1' : '0'; ?>"
+                    role="region"
+                    aria-label="<?php esc_attr_e( 'Image slideshow', 'tectn_theme' ); ?>">
+                    <div class="c-slider__panel">
+                        <div class="c-slider__image-wrap c-slider__image-wrap--square">
+                            <div class="c-slider__slide c-slider__slide--current" data-slider-slide>
+                                <img src="<?php echo esc_url( $first['url'] ); ?>"
+                                    alt="<?php echo esc_attr( $first['title'] ); ?>"
+                                    class="c-slider__image c-slider__image--cover"
+                                    data-slider-image>
+                            </div>
+                            <div class="c-slider__slide c-slider__slide--next" data-slider-slide>
+                                <img src="<?php echo esc_url( $first['url'] ); ?>"
+                                    alt=""
+                                    class="c-slider__image c-slider__image--cover"
+                                    data-slider-image>
+                            </div>
+                            <?php if ( $show_captions ) : ?>
+                            <div class="c-slider__caption<?php echo $first_has_caption ? ' c-slider__caption--visible' : ''; ?>" data-slider-caption aria-live="polite">
+                                <?php if ( $first_has_caption ) : ?>
+                                    <?php if ( (string) $first['caption'] !== '' ) : ?>
+                                        <p class="c-slider__caption-text"><?php echo esc_html( $first['caption'] ); ?></p>
+                                    <?php endif; ?>
+                                    <?php if ( (string) $first['author'] !== '' ) : ?>
+                                        <p class="c-slider__caption-author"><?php echo esc_html( $first['author'] ); ?></p>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                            <?php endif; ?>
+                            <button type="button" class="c-slider__arrow c-slider__arrow--prev" data-slider-prev aria-label="<?php esc_attr_e( 'Previous slide', 'tectn_theme' ); ?>"></button>
+                            <button type="button" class="c-slider__arrow c-slider__arrow--next" data-slider-next aria-label="<?php esc_attr_e( 'Next slide', 'tectn_theme' ); ?>"></button>
+                            <nav class="c-slider__dots" aria-label="<?php esc_attr_e( 'Slide navigation', 'tectn_theme' ); ?>">
+                                <?php foreach ( $slideshow_items as $i => $item ) : ?>
+                                    <button type="button" class="c-slider__dot<?php echo $i === 0 ? ' c-slider__dot--active' : ''; ?>" data-index="<?php echo (int) $i; ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Go to slide %d', 'tectn_theme' ), $i + 1 ) ); ?>" aria-current="<?php echo $i === 0 ? 'true' : 'false'; ?>"></button>
+                                <?php endforeach; ?>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <?php elseif ( $media_type === 'slideshow' ) : ?>
+                <div class="c-content-group__slideshow c-content-group__slideshow--square">
+                    <div class="block-placeholder" style="border: 1px dashed #cfd3d7; padding: 2rem; border-radius: .5rem; background: rgba(255,255,255,.8); min-height: 200px; display: flex; align-items: center; justify-content: center;">
+                        <p style="margin: 0; color: #666;">Add images to the slideshow gallery above.</p>
+                    </div>
+                </div>
             <?php elseif ( $images ) : ?>
                 <ul class="<?= esc_attr($grid_class); ?>">
                     <?php if ($count === 3): ?>

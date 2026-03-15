@@ -8,7 +8,7 @@
             "name": "caption_author",
             "aria-label": "",
             "type": "text",
-            "instructions": "Optional. Shown with the attachment caption in sliders (e.g. photo credit).",
+            "instructions": "Optional. Shown with the attachment caption in Slider and Text + Image slideshow blocks (e.g. photo credit).",
             "required": false,
             "conditional_logic": false,
             "wrapper": {
@@ -39,7 +39,7 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Author\/credit for use with image caption in slider blocks.",
+    "description": "Author\/credit for use with image caption in Slider and Text + Image slideshow blocks.",
     "show_in_rest": 0,
     "display_title": "",
     "modified": 1773505354

@@ -856,7 +856,37 @@ border: $spacing-xs solid $white;
   @include border-radius-md;
 }
 
+/* Text + Image block: slideshow in its own wrapper so square ratio is retained */
+.c-content-group__slideshow--square {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 100%;
+  min-width: 0;
 
+  .c-slider {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .c-slider__panel {
+    height: 100%;
+  }
+  .c-slider__image-wrap {
+    height: 100%;
+  }
+}
+
+.c-content-group__slideshow {
+  position: relative;
+}
+
+/* With colored background: slideshow overlaps the bottom wave (same idea as gallery hang) */
+.c-waveband--has-slideshow .c-content-group__slideshow--overlap-wave {
+  margin-bottom: calc(-1 * var(--hang, 120px));
+  z-index: 2;
+  position: relative;
+}
 
 /* Full-bleed waves inside the bg layer — use block background so waves match user-selected color */
 .c-waveband__bg .c-waveband__wave {
@@ -2068,11 +2098,21 @@ border: $spacing-xs solid $white;
 	min-height: 0;
 }
 
-.c-sponsorships__logo {
+img.c-sponsorships__logo {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
 	display: block;
+	margin-bottom: 0;
+}
+
+/* Cap logo height by column count */
+.c-sponsorships__tier--cols-4 .c-sponsorships__logo,
+.c-sponsorships__tier--cols-5 .c-sponsorships__logo {
+	max-height: 200px;
+}
+.c-sponsorships__tier--cols-6 .c-sponsorships__logo {
+	max-height: 100px;
 }
 
 .c-sponsorships__visit {

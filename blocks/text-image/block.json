@@ -1,7 +1,7 @@
 {
   "name": "tectn/text-image",
   "title": "Text + Image",
-  "description": "Header, body copy, CTAs, and 1-3 images",
+  "description": "Header, body copy, CTAs, and image gallery, slideshow, or video",
   "style": ["file:../library/css/style.css"],
   "category": "tectn-blocks",
   "icon": "screenoptions",

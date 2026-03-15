@@ -28,7 +28,7 @@
             "label": "Media type",
             "name": "media_type",
             "aria-label": "",
-            "type": "button_group",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -39,13 +39,17 @@
             },
             "choices": {
                 "gallery": "Image gallery",
+                "slideshow": "Slideshow",
                 "video": "Video Embed"
             },
             "default_value": "gallery",
             "return_format": "value",
             "allow_null": 0,
-            "allow_in_bindings": 0,
-            "layout": "horizontal"
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "allow_in_bindings": 0
         },
         {
             "key": "field_6990ba750ab46",
@@ -107,6 +111,50 @@
             },
             "width": "",
             "height": ""
+        },
+        {
+            "key": "field_6990ba_slideshow_gallery",
+            "label": "Slideshow gallery",
+            "name": "slideshow_gallery",
+            "aria-label": "",
+            "type": "gallery",
+            "instructions": "Add images. Same behavior as the Slider block Slideshow: square crop, arrows, dots, optional captions.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6990ba_media_type",
+                        "operator": "==",
+                        "value": "slideshow"
+                    }
+                ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "return_format": "array",
+            "library": "all",
+            "min": 1,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_6990ba_show_captions",
+            "label": "Show captions",
+            "name": "show_captions",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Show caption and author overlay when the image has them.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6990ba_media_type",
+                        "operator": "==",
+                        "value": "slideshow"
+                    }
+                ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": 0,
+            "ui": 1
         },
         {
             "key": "field_6990bac10ab48",

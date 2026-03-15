@@ -121,7 +121,7 @@ if (!is_array($tiers)) $tiers = [];
           $sponsors = $tier['sponsors'] ?? [];
           if (!is_array($sponsors)) $sponsors = [];
         ?>
-          <div class="c-sponsorships__tier<?= $hide_tier ? ' c-sponsorships__tier--hidden' : ''; ?><?= $tier_no_bg ? ' c-sponsorships__tier--no-bg' : ''; ?>" style="<?= $tier_no_bg ? '' : '--tier-bg: ' . $tier_bg . ';'; ?> --sponsors-cols: <?= $logos_per_row; ?>;"<?= $hide_tier ? ' hidden' : ''; ?>>
+          <div class="c-sponsorships__tier<?= $hide_tier ? ' c-sponsorships__tier--hidden' : ''; ?><?= $tier_no_bg ? ' c-sponsorships__tier--no-bg' : ''; ?> c-sponsorships__tier--cols-<?= $logos_per_row; ?>" style="<?= $tier_no_bg ? '' : '--tier-bg: ' . $tier_bg . ';'; ?> --sponsors-cols: <?= $logos_per_row; ?>;"<?= $hide_tier ? ' hidden' : ''; ?>>
             <?php if ($tier_title): ?>
               <h3 class="c-sponsorships__tier-title"><?= esc_html($tier_title); ?></h3>
             <?php endif; ?>
