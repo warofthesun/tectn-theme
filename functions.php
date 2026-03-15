@@ -179,18 +179,26 @@ function tectn_get_hero_config() {
       if ( ! empty( $init['logo'] ) ) {
         $logo_id = is_array( $init['logo'] ) && ! empty( $init['logo']['ID'] ) ? (int) $init['logo']['ID'] : (int) $init['logo'];
       }
+      $headline_text = isset( $init['headline_text'] ) ? $init['headline_text'] : '';
+      if ( is_array( $headline_text ) ) {
+        // Clone with display "group" returns array; WYSIWYG is under cloned field key or name
+        $headline_text = isset( $headline_text['field_68225159eee20'] ) ? $headline_text['field_68225159eee20'] : ( isset( $headline_text['hero_headline'] ) ? $headline_text['hero_headline'] : '' );
+        if ( is_array( $headline_text ) ) {
+          $headline_text = trim( implode( ' ', array_filter( $headline_text, 'is_string' ) ) );
+        }
+      }
+      $headline_text = is_string( $headline_text ) ? $headline_text : '';
       $config = array(
         'show' => true,
         'type' => 'initiative',
         'data' => array(
-          'background_type'  => $use_solid_color ? 'color' : 'image',
-          'background_image' => $use_solid_color ? 0 : $image_id,
-          'background_color' => isset( $init['background_color'] ) ? $init['background_color'] : '#238c55',
-          'headline_type'    => isset( $init['headline_type'] ) ? $init['headline_type'] : 'text',
-          'logo_id'          => $logo_id,
-          'headline_text'    => isset( $init['headline_text'] ) ? $init['headline_text'] : '',
-          'gradient_style'   => isset( $init['gradient_style'] ) ? $init['gradient_style'] : 'full',
-          'lower_content'    => isset( $init['lower_content'] ) ? $init['lower_content'] : '',
+          'background_type'   => $use_solid_color ? 'color' : 'image',
+          'background_image'   => $use_solid_color ? 0 : $image_id,
+          'background_color'  => isset( $init['background_color'] ) ? $init['background_color'] : '#238c55',
+          'headline_type'      => isset( $init['headline_type'] ) ? $init['headline_type'] : 'text',
+          'logo_id'            => $logo_id,
+          'headline_text'      => $headline_text,
+          'gradient_overlay'   => isset( $init['gradient_overlay'] ) ? (bool) $init['gradient_overlay'] : true,
         ),
       );
       return $config;

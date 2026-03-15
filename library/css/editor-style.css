@@ -2356,6 +2356,12 @@ BAND / SECTION WRAPPER
   --band-py: 2em;
 }
 
+.c-band--no-mb {
+  margin-bottom: 0;
+  -webkit-margin-after: 0;
+  margin-block-end: 0;
+}
+
 /************************************************
 Content Section block
 - Optional top/bottom curves (color bg only); optional “background contains content”
@@ -2501,6 +2507,12 @@ Content Section block
 
 .c-content-section--py-xxl {
   --content-section-py: 2em;
+}
+
+.c-content-section--no-mb {
+  margin-bottom: 0;
+  -webkit-margin-after: 0;
+  margin-block-end: 0;
 }
 
 /* Content Section with waves — DOM order Wave / Section / Wave (same as Band) */
@@ -2831,10 +2843,15 @@ Content Section block
   height: 100%;
   display: block;
   border: 0.5em solid #fff;
-  border-radius: 0.75em;
+  border-radius: 1em;
 }
 
-.wp-block-embed__wrapper iframe, .wp-block-video video {
+.wp-block-embed__wrapper iframe {
+  border: 0.5em solid #fff;
+  border-radius: 1em;
+}
+
+.wp-block-video video {
   border: 0.5em solid #fff;
   border-radius: 0.75em;
 }
@@ -3850,6 +3867,12 @@ Content Section block
   justify-content: center;
 }
 
+.c-posts--no-mb {
+  margin-bottom: 0;
+  -webkit-margin-after: 0;
+  margin-block-end: 0;
+}
+
 /* =========================
    BG layer + image
 ========================= */
@@ -4001,17 +4024,27 @@ Card
   backdrop-filter: blur(4px);
   -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  height: 100%;
 }
 
 .c-postCard__link {
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
   text-decoration: none;
   color: inherit;
 }
 
 .c-postCard__media {
+  position: relative;
   aspect-ratio: 4/3;
   background: rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 }
 .c-postCard__media img {
   border-bottom-left-radius: 0px !important;
@@ -4019,6 +4052,8 @@ Card
 }
 
 .c-postCard__img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -4027,6 +4062,16 @@ Card
 }
 
 .c-postCard__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
   padding: 16px;
 }
 
@@ -4053,6 +4098,8 @@ Card
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 12px;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c-chip {
@@ -4069,6 +4116,7 @@ Card
   width: 100%;
   text-align: center;
   padding: 10px 12px;
+  margin-top: auto;
   border-radius: 0.75em;
   background-color: #D4E485;
   font-size: 1.1em;
@@ -4800,47 +4848,6 @@ POSTS & CONTENT STYLES
   margin: 0;
   font-size: 2.5rem;
   text-shadow: 0 0 20px rgba(21, 29, 12, 0.7);
-}
-.hero__lower--initiative {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  padding: 2rem 7%;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-top: 20vh;
-}
-.hero__lower--initiative.hero__lower--gradient-contained {
-  min-height: 200px;
-  margin-bottom: 0;
-  padding-top: 0;
-}
-.hero__lower-gradient {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-.hero__lower-gradient.hero__overlay--full-width {
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 100vw;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-  height: 100%;
-}
-.hero__wave--lower {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 100vw;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-  height: 120px;
-  z-index: 1;
 }
 .hero .hero__wave-svg .hero__wave-fill {
   fill: var(--body-bg, #F9FBF3);

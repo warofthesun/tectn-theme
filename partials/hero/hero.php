@@ -110,20 +110,20 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
       $init_bg_style = 'background-image: url(' . esc_url( $img[0] ) . ');';
     }
   }
-  $gradient_class = ( isset( $d['gradient_style'] ) && $d['gradient_style'] === 'contained' ) ? 'hero__container--gradient-contained' : 'hero__container--gradient-full';
+  $gradient_overlay = ! empty( $d['gradient_overlay'] );
+  $has_image = ! empty( $init_bg_style ) && strpos( $init_bg_style, 'background-image' ) !== false;
   ?>
-  <div class="hero__container hero__container--initiative <?php echo esc_attr( $gradient_class ); ?>">
+  <div class="hero__container hero__container--initiative<?php echo $gradient_overlay ? ' hero__container--gradient-overlay' : ''; ?>">
     <div class="hero__container--inner">
       <?php if ( $init_bg_style ) : ?>
         <div class="hero__content hero__content--bg col-xs-12" style="<?php echo $init_bg_style; ?>"></div>
       <?php endif; ?>
 
-      <?php if ( $gradient_class === 'hero__container--gradient-full' ) : ?>
+      <?php if ( $gradient_overlay && $has_image ) : ?>
         <div class="hero__overlay hero__overlay--initiative hero__overlay--full-width" aria-hidden="true"></div>
       <?php endif; ?>
 
-      <?php if ( $gradient_class === 'hero__container--gradient-full' ) : ?>
-        <div class="hero__wave hero__wave--initiative" aria-hidden="true">
+      <div class="hero__wave hero__wave--initiative" aria-hidden="true">
           <svg class="hero__wave-svg" viewBox="0 455 1000 160" preserveAspectRatio="none">
             <defs>
               <filter id="layerShadowWave" x="-35%" y="-35%" width="170%" height="170%">
@@ -138,45 +138,26 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
             <path d="M0,565 C350,460 700,690 1000,510" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round" filter="url(#edgeHighlightWave)" opacity="0.55"/>
           </svg>
         </div>
-      <?php endif; ?>
 
       <div class="hero__content hero__content--text hero__content--initiative col-xs-12">
         <div class="hero__headline hero__headline--initiative">
           <?php if ( ! empty( $d['headline_type'] ) && $d['headline_type'] === 'logo' && ! empty( $d['logo_id'] ) ) : ?>
             <?php echo wp_get_attachment_image( (int) $d['logo_id'], 'large', false, array( 'class' => 'hero__logo' ) ); ?>
-          <?php elseif ( ! empty( $d['headline_text'] ) ) : ?>
-            <h1 class="hero__title hero__title--initiative"><?php echo esc_html( $d['headline_text'] ); ?></h1>
+          <?php else : ?>
+            <?php
+            $ht = isset( $d['headline_text'] ) ? $d['headline_text'] : '';
+            if ( is_array( $ht ) ) {
+              $ht = isset( $ht['field_68225159eee20'] ) ? $ht['field_68225159eee20'] : ( isset( $ht['hero_headline'] ) ? $ht['hero_headline'] : '' );
+            }
+            $ht = is_string( $ht ) ? trim( $ht ) : '';
+            if ( $ht === '' ) {
+              $ht = get_the_title();
+            }
+            ?>
+            <h1 class="hero__title hero__title--initiative"><?php echo wp_kses_post( $ht ); ?></h1>
           <?php endif; ?>
         </div>
       </div>
-
-      <?php if ( ! empty( $d['lower_content'] ) || $gradient_class === 'hero__container--gradient-contained' ) : ?>
-        <div class="hero__lower hero__lower--initiative <?php echo $gradient_class === 'hero__container--gradient-contained' ? 'hero__lower--gradient-contained' : ''; ?>">
-          <?php if ( $gradient_class === 'hero__container--gradient-contained' ) : ?>
-            <div class="hero__lower-gradient hero__overlay hero__overlay--initiative hero__overlay--full-width" aria-hidden="true"></div>
-            <div class="hero__wave hero__wave--initiative hero__wave--lower" aria-hidden="true">
-              <svg class="hero__wave-svg" viewBox="0 455 1000 160" preserveAspectRatio="none">
-                <defs>
-                  <filter id="layerShadowWaveLower" x="-35%" y="-35%" width="170%" height="170%">
-                    <feDropShadow dx="0" dy="-6" stdDeviation="14" flood-color="#000" flood-opacity="0.14"/>
-                    <feDropShadow dx="0" dy="-2" stdDeviation="5" flood-color="#000" flood-opacity="0.18"/>
-                  </filter>
-                  <filter id="edgeHighlightWaveLower" x="-35%" y="-35%" width="170%" height="170%">
-                    <feDropShadow dx="0" dy="-1" stdDeviation="2" flood-color="#fff" flood-opacity="0.35"/>
-                  </filter>
-                </defs>
-                <path class="hero__wave-fill" d="M0,565 C350,460 700,690 1000,510 L1000,615 L0,615 Z" filter="url(#layerShadowWaveLower)"/>
-                <path d="M0,565 C350,460 700,690 1000,510" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round" filter="url(#edgeHighlightWaveLower)" opacity="0.55"/>
-              </svg>
-            </div>
-          <?php endif; ?>
-          <?php if ( ! empty( $d['lower_content'] ) ) : ?>
-            <div class="hero__lower-content">
-              <?php echo $d['lower_content']; ?>
-            </div>
-          <?php endif; ?>
-        </div>
-      <?php endif; ?>
     </div>
   </div>
 
@@ -225,21 +206,29 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
 
       <div class="hero__content hero__content--text col-xs-12 col-md-7">
 
-        <?php if ( ! empty( $d['headline'] ) ) : ?>
-          <div class="hero__text-block" style="margin-top:auto; margin-bottom:20vh;">
-            <h1 class="curve curve--back"><?php echo $d['headline']; ?></h1>
-            <?php if ( ! empty( $d['paragraph'] ) ) : ?>
-              <p class="hero__paragraph"><?php echo esc_html( $d['paragraph'] ); ?></p>
-            <?php endif; ?>
-            <?php if ( ! empty( $d['ctas'] ) ) : ?>
-              <div class="c-button-pair">
-                <?php foreach ( $d['ctas'] as $cta ) : ?>
-                  <a class="c-button-pair__button" href="<?php echo esc_url( $cta['url'] ); ?>" target="<?php echo esc_attr( $cta['target'] ); ?>"><?php echo esc_html( $cta['title'] ); ?></a>
-                <?php endforeach; ?>
-              </div>
-            <?php endif; ?>
-          </div>
-        <?php endif; ?>
+        <?php
+        $landing_headline = isset( $d['headline'] ) ? $d['headline'] : '';
+        if ( is_array( $landing_headline ) ) {
+          $landing_headline = isset( $landing_headline['field_68225159eee20'] ) ? $landing_headline['field_68225159eee20'] : ( isset( $landing_headline['hero_headline'] ) ? $landing_headline['hero_headline'] : '' );
+        }
+        $landing_headline = is_string( $landing_headline ) ? trim( $landing_headline ) : '';
+        if ( $landing_headline === '' ) {
+          $landing_headline = get_the_title();
+        }
+        ?>
+        <div class="hero__text-block" style="margin-top:auto; margin-bottom:20vh;">
+          <h1 class="curve curve--back"><?php echo wp_kses_post( $landing_headline ); ?></h1>
+          <?php if ( ! empty( $d['paragraph'] ) ) : ?>
+            <p class="hero__paragraph"><?php echo esc_html( $d['paragraph'] ); ?></p>
+          <?php endif; ?>
+          <?php if ( ! empty( $d['ctas'] ) ) : ?>
+            <div class="c-button-pair">
+              <?php foreach ( $d['ctas'] as $cta ) : ?>
+                <a class="c-button-pair__button" href="<?php echo esc_url( $cta['url'] ); ?>" target="<?php echo esc_attr( $cta['target'] ); ?>"><?php echo esc_html( $cta['title'] ); ?></a>
+              <?php endforeach; ?>
+            </div>
+          <?php endif; ?>
+        </div>
 
       </div>
     </div>

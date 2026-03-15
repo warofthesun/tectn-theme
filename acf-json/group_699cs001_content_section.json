@@ -155,6 +155,16 @@
             "wrapper": { "width": "", "class": "", "id": "" }
         },
         {
+            "key": "field_699cs013",
+            "label": "Remove bottom margin",
+            "name": "remove_bottom_margin",
+            "type": "true_false",
+            "instructions": "Remove the block's bottom margin (e.g. when followed by another full-width section).",
+            "default_value": 0,
+            "ui": 1,
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
             "key": "field_699cs009",
             "label": "Background vertical align",
             "name": "bg_align_y",

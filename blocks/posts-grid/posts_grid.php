@@ -5,8 +5,10 @@
 
 $block_id = !empty($block['anchor']) ? $block['anchor'] : 'posts-grid-' . $block['id'];
 
+$remove_bottom_margin = (bool) get_field('remove_bottom_margin');
 $classes = ['c-posts'];
 if (!empty($block['className'])) $classes[] = $block['className'];
+if ($remove_bottom_margin) $classes[] = 'c-posts--no-mb';
 
 $theme_variant = get_field('color_palette') ?: 'green-gold';
 $classes[] = 'c-posts--' . sanitize_html_class($theme_variant);
@@ -212,7 +214,9 @@ $effective_bg_max_h = ($display_count >= 1 && $display_count <= 3) ? 600 : $bg_m
           <?php
             // Use explicit post IDs so we don't depend on global $post
             $post_id  = $p->ID;
-            $date     = get_the_date('m/d/y', $post_id);
+            $date     = ( $p->post_type === 'tribe_events' && function_exists( 'tribe_get_start_date' ) )
+              ? ( tribe_get_start_date( $post_id, false, 'm/d/y' ) ?: get_the_date( 'm/d/y', $post_id ) )
+              : get_the_date( 'm/d/y', $post_id );
             $title    = get_the_title($post_id);
             $permalink = get_permalink($post_id);
 
@@ -251,17 +255,15 @@ $effective_bg_max_h = ($display_count >= 1 && $display_count <= 3) ? 600 : $bg_m
               </div>
 
               <div class="c-postCard__body">
-                <h6 class="c-postCard__meta"><?= esc_html($date); ?></h6>
-                <h3 class="c-postCard__title"><?= esc_html($title); ?></h3>
-
-                <?php if (!empty($chips)): ?>
+                <h6 class="c-postCard__meta"><?= esc_html( $date ); ?></h6>
+                <h3 class="c-postCard__title"><?= esc_html( $title ); ?></h3>
+                <?php if ( ! empty( $chips ) ) : ?>
                   <div class="c-postCard__chips">
-                    <?php foreach ($chips as $chip): ?>
-                      <span class="c-chip"><?= esc_html($chip); ?></span>
+                    <?php foreach ( $chips as $chip ) : ?>
+                      <span class="c-chip"><?= esc_html( $chip ); ?></span>
                     <?php endforeach; ?>
                   </div>
                 <?php endif; ?>
-
                 <span class="c-postCard__cta">read more</span>
               </div>
             </a>

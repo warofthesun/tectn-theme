@@ -8,9 +8,17 @@
             "name": "hero_headline",
             "aria-label": "",
             "type": "wysiwyg",
-            "instructions": "Leave blank to use page title",
+            "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_697fe85af2201",
+                        "operator": "==",
+                        "value": "headline"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -118,7 +126,7 @@
     ],
     "menu_order": 0,
     "position": "side",
-    "style": "seamless",
+    "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": [
@@ -128,5 +136,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773590442
+    "modified": 1773586025
 }

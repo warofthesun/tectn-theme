@@ -1,14 +1,14 @@
 {
-  "name": "tectn/band",
+  "name": "tectn/content-container",
   "title": "Content Container",
   "description": "Container holding two stacked Text + Image blocks with optional background",
   "style": ["file:../library/css/style.css"],
   "category": "tectn-blocks",
   "icon": "admin-comments",
-  "keywords": ["card", "text", "steps"],
+  "keywords": ["card", "text", "steps", "container"],
   "acf": {
     "mode": "preview",
-    "renderTemplate": "band.php"
+    "renderTemplate": "content_container.php"
   },
   "attributes": {
     "tectnInsideContainer": {

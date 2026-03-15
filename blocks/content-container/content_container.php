@@ -1,6 +1,6 @@
 <?php
 /**
- * Band wrapper block
+ * Content Container block (formerly Band)
  *
  * @param array $block The block settings and attributes.
  */
@@ -8,7 +8,7 @@
 $is_preview = !empty($block['data']['is_preview']);
 
 if ($is_preview) {
-  $preview = get_template_directory_uri() . '/blocks/band/preview.png';
+  $preview = get_template_directory_uri() . '/blocks/content-container/preview.png';
   echo '<img src="' . esc_url($preview) . '" style="width:100%;height:auto;display:block;" alt="">';
   return;
 }
@@ -26,7 +26,9 @@ $bg_height = (int) (get_field('bg_height') ?: 800);
 // Solid color background fields
 $bg_color  = get_field('bg_color'); // hex from ACF color picker
 
+$remove_bottom_margin = (bool) get_field('remove_bottom_margin');
 $classes = ['c-band', "c-band--py-{$py}"];
+if ($remove_bottom_margin) $classes[] = 'c-band--no-mb';
 if ( $bg_enable && $bg_type !== 'color' ) {
   $classes[] = 'c-band--grad-strong';
 }

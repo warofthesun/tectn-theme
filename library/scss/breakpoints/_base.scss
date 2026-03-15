@@ -453,6 +453,11 @@ BAND / SECTION WRAPPER
 .c-band--py-xl   { --band-py: #{$spacing-xl}; }
 .c-band--py-xxl  { --band-py: #{$spacing-xxl}; }
 
+.c-band--no-mb {
+  margin-bottom: 0;
+  margin-block-end: 0;
+}
+
 /************************************************
 Content Section block
 - Optional top/bottom curves (color bg only); optional “background contains content”
@@ -558,6 +563,11 @@ Content Section block
 .c-content-section--py-lg  { --content-section-py: #{$spacing-lg}; }
 .c-content-section--py-xl  { --content-section-py: #{$spacing-xl}; }
 .c-content-section--py-xxl { --content-section-py: #{$spacing-xxl}; }
+
+.c-content-section--no-mb {
+  margin-bottom: 0;
+  margin-block-end: 0;
+}
 
 /* Content Section with waves — DOM order Wave / Section / Wave (same as Band) */
 .c-content-section__wrap {
@@ -833,10 +843,15 @@ Content Section block
   height: 100%;
   display: block;
   border: $spacing-xs solid $white;
-  @include border-radius-md;
+  @include border-radius-lg;
 }
 
-.wp-block-embed__wrapper iframe, .wp-block-video video{
+.wp-block-embed__wrapper iframe{
+	border: $spacing-xs solid $white;
+	  @include border-radius-lg;
+	}
+
+.wp-block-video video{
 border: $spacing-xs solid $white;
   @include border-radius-md;
 }
@@ -1700,6 +1715,11 @@ border: $spacing-xs solid $white;
 			justify-content: center;
 		}
   }
+
+.c-posts--no-mb {
+  margin-bottom: 0;
+  margin-block-end: 0;
+}
   
   /* =========================
    BG layer + image
@@ -1839,17 +1859,22 @@ border: $spacing-xs solid $white;
 	background: rgba(33, 65, 45, 0.55);
 	backdrop-filter: blur(4px);
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+	height: 100%;
   }
   
   .c-postCard__link {
-	display: block;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 	text-decoration: none;
 	color: inherit;
   }
   
   .c-postCard__media {
+	position: relative;
 	aspect-ratio: 4 / 3;
 	background: rgba(0, 0, 0, 0.15);
+	overflow: hidden;
 
 	img {
 		border-bottom-left-radius: 0px !important;
@@ -1858,6 +1883,8 @@ border: $spacing-xs solid $white;
   }
   
   .c-postCard__img {
+	position: absolute;
+	inset: 0;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -1865,6 +1892,9 @@ border: $spacing-xs solid $white;
   }
   
   .c-postCard__body {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
 	padding: 16px;
   }
   
@@ -1888,6 +1918,7 @@ border: $spacing-xs solid $white;
 	flex-wrap: wrap;
 	gap: 8px;
 	margin-bottom: 12px;
+	flex-shrink: 0;
   }
   
   .c-chip {
@@ -1904,6 +1935,7 @@ border: $spacing-xs solid $white;
 	width: 100%;
 	text-align: center;
 	padding: 10px 12px;
+	margin-top: auto;
 	@include border-radius-md;
 	@include color_surface__button_primary--default;
 	font-size: 1.1em;
@@ -2561,7 +2593,7 @@ POSTS & CONTENT STYLES
 		z-index: 2;
 	}
 
-	// Initiative hero variant
+	// Initiative hero variant (wave always shown; negative margin so wave meets content)
 	&__container--initiative {
 		.hero__container--inner {
 			display: flex;
@@ -2607,50 +2639,6 @@ POSTS & CONTENT STYLES
 		margin: 0;
 		font-size: 2.5rem;
 		text-shadow: 0 0 20px rgba($secondary-900, 0.7);
-	}
-
-	&__lower--initiative {
-		position: relative;
-		z-index: 2;
-		width: 100%;
-		padding: 2rem 7%;
-		margin-top: auto;
-		margin-bottom: auto;
-		padding-top: 20vh;
-
-		&.hero__lower--gradient-contained {
-			min-height: 200px;
-			margin-bottom: 0;
-			padding-top: 0;
-		}
-	}
-
-	// Contained variant: full-width straight gradient (same as initiative full)
-	&__lower-gradient {
-		position: absolute;
-		inset: 0;
-		z-index: 0;
-		pointer-events: none;
-
-		&.hero__overlay--full-width {
-			top: 0;
-			bottom: 0;
-			left: 50%;
-			width: 100vw;
-			transform: translateX(-50%);
-			height: 100%;
-		}
-	}
-
-	// Wave at bottom of lower section (contained variant)
-	&__wave--lower {
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		width: 100vw;
-		transform: translateX(-50%);
-		height: 120px;
-		z-index: 1;
 	}
 
 	// All hero wave SVGs: use body background so wave meets content with no visible seam

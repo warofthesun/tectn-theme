@@ -3,6 +3,23 @@
     "title": "0. Band - TecTN Content Container",
     "fields": [
         {
+            "key": "field_699ba470_rmb",
+            "label": "Remove bottom margin",
+            "name": "remove_bottom_margin",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Remove the block's bottom margin (e.g. when followed by another full-width section).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_699ba4690a534",
             "label": "Padding - Vertical",
             "name": "padding_y",
@@ -287,7 +304,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "tectn\/band"
+                "value": "tectn\/content-container"
             }
         ]
     ],

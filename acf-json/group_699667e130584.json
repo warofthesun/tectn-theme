@@ -58,6 +58,23 @@
             "save_options": 0
         },
         {
+            "key": "field_699667e2_rmb",
+            "label": "Remove bottom margin",
+            "name": "remove_bottom_margin",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Remove the block's bottom margin (e.g. when followed by another full-width section).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_69966855df97a",
             "label": "Max background height",
             "name": "max_bg_height",

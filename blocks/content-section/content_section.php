@@ -40,8 +40,10 @@ $bg_color   = get_field('bg_color');
 $bg_height  = (int) (get_field('bg_height') ?: 800);
 $bg_align_y = get_field('bg_align_y') ?: 'center';
 
+$remove_bottom_margin = (bool) get_field('remove_bottom_margin');
 $classes = ['c-content-section', "c-content-section--py-{$py}", "c-content-section--content-{$content_align}"];
 $classes[] = 'c-content-section--overlay-' . $bg_overlay;
+if ($remove_bottom_margin) $classes[] = 'c-content-section--no-mb';
 if ($bg_type === 'color' && (bool) get_field('bg_color_contains')) {
   $classes[] = 'c-content-section--bg-contains';
 }
