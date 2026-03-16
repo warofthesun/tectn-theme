@@ -607,3 +607,16 @@
 .tribe-events-view--month .tribe-events-calendar-month__more-events-link:focus {
   color: #547231 !important;
 }
+
+/* ========== Single event: hide duplicate title and featured image (shown in hero) ========== */
+.single-tribe_events .tribe-events-event-image,
+.single-tribe_events .tribe-events-single-event-description .tribe-events-event-image,
+.single-tribe_events .entry-content .wp-block-post-featured-image,
+.single-tribe_events .entry-content .post-thumbnail {
+  display: none !important;
+}
+
+.single-tribe_events .entry-content > h1.entry-title:first-child,
+.single-tribe_events .tribe-events-single-event-title {
+  display: none !important;
+}
