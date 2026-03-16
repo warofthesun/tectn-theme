@@ -125,24 +125,54 @@ function tectn_get_hero_config() {
     return $config;
   }
 
-  // Single post: automatic hero with title, meta, featured image
-  if ( is_singular( 'post' ) ) {
+  // Singular post/CPT only (not pages): hero type "single" for single.php; pages use landing/initiative below
+  if ( is_singular() && ! is_page() ) {
     $post = get_queried_object();
-    if ( ! $post ) {
+    if ( ! $post || ! isset( $post->ID ) ) {
       $config = $default;
       return $config;
     }
+    $post_id   = $post->ID;
+    $post_type = $post->post_type;
+    $image_id  = get_post_thumbnail_id( $post_id );
+    $has_image = (int) $image_id > 0;
+
+    $author_link = '';
+    if ( post_type_supports( $post_type, 'author' ) ) {
+      $author_id   = (int) $post->post_author;
+      $author_name = get_the_author_meta( 'display_name', $author_id );
+      $count       = count_user_posts( $author_id, $post_type );
+      if ( $count > 1 ) {
+        $author_link = '<a class="url fn n" href="' . esc_url( get_author_posts_url( $author_id ) ) . '" rel="author" itemprop="author">' . esc_html( $author_name ) . '</a>';
+      } else {
+        $author_link = '<span class="author" itemprop="author">' . esc_html( $author_name ) . '</span>';
+      }
+    }
+
+    $category_terms = array();
+    $taxonomies     = get_object_taxonomies( $post_type, 'objects' );
+    foreach ( $taxonomies as $tax ) {
+      if ( ! $tax->hierarchical ) {
+        continue;
+      }
+      $terms = get_the_terms( $post_id, $tax->name );
+      if ( $terms && ! is_wp_error( $terms ) ) {
+        $category_terms = $terms;
+        break;
+      }
+    }
+
     $config = array(
       'show' => true,
-      'type' => 'post',
+      'type' => 'single',
       'data' => array(
-        'title'        => get_the_title( $post ),
-        'permalink'    => get_permalink( $post ),
-        'date'         => get_the_date( '', $post ),
-        'date_iso'     => get_the_date( 'c', $post ),
-        'author_link'  => get_the_author_posts_link( $post->post_author ),
-        'categories'   => get_the_category_list( ', ', '', $post->ID ),
-        'image_id'     => get_post_thumbnail_id( $post->ID ),
+        'title'          => get_the_title( $post ),
+        'date'           => get_the_date( '', $post ),
+        'date_iso'       => get_the_date( 'c', $post ),
+        'author_link'    => $author_link,
+        'category_terms' => $category_terms,
+        'image_id'       => $image_id,
+        'has_image'      => $has_image,
       ),
     );
     return $config;

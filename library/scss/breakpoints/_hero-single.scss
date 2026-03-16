@@ -1,0 +1,169 @@
+/**
+ * Single post/singular hero only.
+ * This file is the only place for .hero__container--single styles.
+ * Do not add landing or initiative hero styles here.
+ * _base.scss is not modified for this hero.
+ */
+@use "../partials/tokens" as *;
+
+/* ==========================================================================
+   Single post/singular hero — .hero__container--single and descendants only
+   ========================================================================== */
+.hero__container--single {
+	position: relative;
+
+	.hero__container--single-inner {
+		display: flex;
+		flex-direction: column;
+		min-height: 70vh;
+		margin-bottom: -120px;
+	}
+
+	.hero__content--single-bg {
+		position: absolute;
+		inset: 0;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	.hero__overlay--single {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		width: 100vw;
+		transform: translateX(-50%);
+		z-index: 1;
+		pointer-events: none;
+		background: linear-gradient(
+			to bottom left,
+			rgba(35, 140, 85, 0.7) 0%,
+			rgba(60, 170, 110, 0.7) 55%,
+			rgba(245, 176, 73, 0.9) 100%
+		);
+	}
+
+	.hero__wave--single {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		width: 100vw;
+		transform: translateX(-50%);
+		height: 120px;
+		z-index: 2;
+		pointer-events: none;
+		line-height: 0;
+
+		.hero__wave-svg--single {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.hero__wave-fill--single {
+			fill: var(--body-bg, #F9FBF3);
+		}
+	}
+
+	.hero__content--single {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: flex-start;
+		text-align: left;
+		z-index: 2;
+		padding: 2rem 7% 3rem;
+	}
+
+	.hero__headline--single {
+		max-width: 100%;
+		text-align: left;
+	}
+
+	.hero__title--single {
+		color: $primary-10;
+		margin: 0;
+		font-size: 2.5rem;
+		text-transform: uppercase;
+		text-shadow: 0 0 20px rgba($secondary-900, 0.7);
+	}
+
+	.hero__meta--single {
+		color: $primary-10;
+		margin: 0.5em 0 0;
+		font-size: 1rem;
+		text-shadow: 0 0 10px rgba($secondary-900, 0.5);
+
+		a {
+			color: $primary-10;
+		}
+	}
+
+	.hero__meta-sep {
+		opacity: 0.9;
+	}
+
+	.hero__chips--single {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		gap: 0.5em;
+		margin-top: 0.75em;
+	}
+
+	.hero__chip--single {
+		border: 1px solid $primary-10;
+		color: $primary-10;
+		background: transparent;
+		padding: 0.25em 0.6em;
+		border-radius: 4px;
+		font-size: 0.85em;
+	}
+
+	&.hero__container--single-no-image {
+		.hero__container--single-inner {
+			min-height: 35vh;
+		}
+
+		.hero__content--single-bg {
+			background-color: $primary-600 !important;
+		}
+	}
+}
+
+/* Header when single hero is shown (transparent, no shadow, light nav) */
+.header.header--hero-transparent {
+	background: transparent;
+	box-shadow: none;
+	color: $primary-10;
+	.nav a,
+	.header-nav a {
+		color: $primary-10;
+	}
+	#mobile-nav {
+		color: $primary-10;
+	}
+}
+
+/* Related posts section on single template */
+.c-posts--related .c-posts__heading--related {
+	margin: 0 0 1.5rem;
+	text-align: center;
+}
+
+.c-posts--related .c-posts__bg--related {
+	position: relative;
+	min-height: calc(var(--wave-h, 130px) + 2px);
+	background: var(--body-bg, #F9FBF3);
+	pointer-events: none;
+}
+
+.c-posts--related .c-posts__bg--related .c-posts__wave--bottom {
+	bottom: 0;
+	transform: translateX(-50%) translateY(100%) scale(1, 1);
+}

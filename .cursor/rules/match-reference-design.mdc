@@ -1,0 +1,14 @@
+---
+description: Match reference images and designs exactly; do not substitute variants
+alwaysApply: true
+---
+
+# Match Reference Design Exactly
+
+When the user provides a reference image, mockup, or design:
+
+1. **Implement to match it exactly.** Do not substitute different variants (e.g. solid vs regular icons, filled vs outline shapes, different icon sets) unless the user explicitly asks for a change.
+
+2. **Re-check the reference** when implementing details: icon style (regular/outline vs solid), colors, alignment, spacing, typography (weight, case, size). If the reference specifies "regular" or "outline," use that; do not default to solid or filled.
+
+3. **When in doubt, ask** rather than guessing. If the reference is ambiguous, confirm before implementing.
