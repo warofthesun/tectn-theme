@@ -2261,6 +2261,16 @@ HEADER STYLES
 	@include box-shadow($bottom-diffused);
 	position: relative;
 	z-index: 99;
+
+	&.header--hero-transparent {
+		background-color: transparent;
+		box-shadow: none;
+
+		/* Logo uses secondary logo image as-is; only nav links forced light for contrast on hero */
+		.nav.top-nav a {
+			filter: brightness(0) invert(1);
+		}
+	}
 }
 
 .header-logo {
@@ -2742,6 +2752,182 @@ POSTS & CONTENT STYLES
 /* Hero wave fill: match body background (selector targets hero__container since partial has no .hero wrapper) */
 .hero__container .hero__wave-svg .hero__wave-fill {
 	fill: var(--body-bg, #F9FBF3);
+}
+
+/* Initiative hero: ensure background image displays when no .hero wrapper (partial outputs container only) */
+.hero__container--initiative .hero__content--bg {
+	position: absolute;
+	inset: 0;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* Single post hero: all rules namespaced under .hero__container--single */
+.hero__container--single {
+	position: relative;
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+	min-height: 70vh;
+	overflow: hidden;
+
+	.hero__container--single-inner {
+		position: relative;
+		width: 100%;
+		min-height: inherit;
+	}
+
+	.hero__content--single-bg {
+		position: absolute;
+		inset: 0;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	.hero__overlay--single {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		width: 100vw;
+		transform: translateX(-50%);
+		background: linear-gradient(
+			to right,
+			rgba($accent-600, 0.72) 0%,
+			rgba($primary-600, 0.78) 45%,
+			rgba($secondary-700, 0.85) 100%
+		);
+		pointer-events: none;
+	}
+
+	.hero__wave--single {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 140px;
+		pointer-events: none;
+		z-index: 2;
+	}
+
+	.hero__wave-svg--single {
+		display: block;
+		width: 100%;
+		height: 100%;
+		vertical-align: middle;
+	}
+
+	.hero__wave-fill--single {
+		fill: var(--body-bg, #F9FBF3);
+	}
+
+	.hero__content--single {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: flex-end;
+		min-height: 70vh;
+		width: 96%;
+		max-width: 1240px;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0 0 170px;
+		box-sizing: border-box;
+	}
+
+	.hero__headline--single {
+		max-width: 940px;
+		margin: 0;
+	}
+
+	.hero__title--single {
+		color: $primary-10;
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-weight: 700;
+		line-height: 1.1;
+		margin: 0 0 0.5rem;
+		text-transform: uppercase;
+		text-shadow: 0 0 20px rgba($secondary-900, 0.5);
+	}
+
+	.hero__meta--single {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0 1rem;
+		color: $primary-10;
+		font-size: 1rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		margin: 0 0 0.75rem;
+		text-shadow: 0 0 10px rgba($secondary-900, 0.5);
+
+		a {
+			color: $primary-10;
+			text-decoration: none;
+			font-weight: 700;
+		}
+	}
+
+	.hero__meta-item {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.hero__meta-icon {
+		color: $primary-10;
+		font-size: 1.1em;
+		line-height: 1;
+		flex-shrink: 0;
+	}
+
+	.hero__meta-gap {
+		display: inline-block;
+		width: 1rem;
+		flex-shrink: 0;
+	}
+
+	.hero__chips--single {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin: 0;
+	}
+
+	.hero__chip--single {
+		display: inline-block;
+		padding: 0.35em 0.85em;
+		border: 2px solid $primary-10;
+		border-radius: 999px;
+		color: $primary-10;
+		font-size: 0.85rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		background: transparent;
+	}
+
+	&.hero__container--single-no-image {
+		min-height: 60vh;
+
+		.hero__content--single {
+			min-height: 40vh;
+		}
+	}
+}
+
+@media only screen and (min-width: 75em) {
+	.hero__container--single .hero__content--single {
+		max-width: 1040px;
+	}
+}
+
+@media only screen and (min-width: 1240px) {
+	.hero__container--single .hero__content--single {
+		max-width: 1240px;
+	}
 }
 
 #inner-content {

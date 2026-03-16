@@ -44,6 +44,9 @@ BASE (MOBILE) SIZE
 // styles in base.scss
 @use "breakpoints/base";
 
+// single post hero + related posts section
+@use "breakpoints/hero-single" as *;
+
 /*********************
 LARGER MOBILE DEVICES
 *********************/

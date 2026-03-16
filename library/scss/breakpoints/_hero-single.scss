@@ -1,0 +1,58 @@
+/**
+ * Single post hero: visual styles live in _base.scss (title size, chips, content padding, wave).
+ * This file only adds: header transparent over hero, and related-posts section styles.
+ */
+@use "../partials/variables" as *;
+
+/* Header when single hero is shown (transparent, no shadow, light nav) */
+.header.header--hero-transparent {
+	background: transparent;
+	box-shadow: none;
+	color: $primary-10;
+	.nav a,
+	.header-nav a {
+		color: $primary-10;
+	}
+	#mobile-nav {
+		color: $primary-10;
+	}
+}
+
+/* Related posts section: heading is above bg in DOM — keep it on top and centered */
+.c-posts--related {
+	position: relative;
+}
+.c-posts--related .c-posts__heading--related {
+	position: relative;
+	z-index: 1;
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto 1.5rem;
+	padding-top: 2rem;
+	padding-bottom: 0.5rem;
+	text-align: center !important;
+	box-sizing: border-box;
+	color: $primary-100;
+}
+
+/* Related posts: background fills full section height (no gap at bottom) */
+.c-posts--related .c-posts__bg {
+	height: 100%;
+	min-height: 100%;
+	max-height: none;
+}
+
+/* Related posts: no bottom wave — background sits flat against footer */
+.c-posts--related .c-posts__bg .c-posts__wave--bottom {
+	display: none !important;
+}
+
+/* When no background image is set in Post Settings: solid $primary-500 behind gradient overlay */
+.c-posts--related .c-posts__bgSolid--related {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	background-color: $primary-500;
+	pointer-events: none;
+}

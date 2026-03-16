@@ -25,6 +25,14 @@
 
               </article> <?php // end article ?>
 
+						<?php
+						$current_post_type = get_post_type();
+						if ( in_array( $current_post_type, array( 'post', 'tribe_events' ), true ) ) {
+							// Heading and background from Site Settings > Post Settings (per post type).
+							get_template_part( 'template-parts/related-posts' );
+						}
+						?>
+
 						<?php endwhile; ?>
 
 						<?php else : ?>

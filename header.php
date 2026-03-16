@@ -32,22 +32,34 @@
 
 		<div id="container">
 
-			<header class="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
+			<?php
+			$hero_cfg = function_exists( 'tectn_get_hero_config' ) ? tectn_get_hero_config() : array();
+			$hero_single = isset( $hero_cfg['type'] ) && $hero_cfg['type'] === 'single';
+			$header_classes = 'header';
+			if ( $hero_single ) {
+				$header_classes .= ' header--hero-transparent';
+			}
+			$logo = null;
+			if ( function_exists( 'get_field' ) ) {
+				$site_settings = get_field( 'site_settings', 'site-settings' );
+				if ( ! is_array( $site_settings ) || ! isset( $site_settings['primary_logo'] ) ) {
+					$site_settings = get_field( 'site_settings', 'option' );
+				}
+				if ( is_array( $site_settings ) ) {
+					if ( $hero_single && ! empty( $site_settings['secondary_logo'] ) && is_array( $site_settings['secondary_logo'] ) && ! empty( $site_settings['secondary_logo']['url'] ) ) {
+						$logo = $site_settings['secondary_logo'];
+					} elseif ( isset( $site_settings['primary_logo'] ) ) {
+						$logo = $site_settings['primary_logo'];
+					}
+				}
+			}
+		?>
+		<header class="<?php echo esc_attr( $header_classes ); ?>" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 
 				<div id="inner-header" class="row">
 					<a href="<?php echo home_url(); ?>" class="header-logo" rel="nofollow">
 						<div id="logo" class="h1" itemscope itemtype="http://schema.org/Organization" aria-label="<?php bloginfo('name'); ?>">
 							<?php
-							$logo = null;
-							if ( function_exists( 'get_field' ) ) {
-								$site_settings = get_field( 'site_settings', 'site-settings' );
-								if ( ! is_array( $site_settings ) || ! isset( $site_settings['primary_logo'] ) ) {
-									$site_settings = get_field( 'site_settings', 'option' );
-								}
-								if ( is_array( $site_settings ) && isset( $site_settings['primary_logo'] ) ) {
-									$logo = $site_settings['primary_logo'];
-								}
-							}
 							if ( $logo && is_array( $logo ) && ! empty( $logo['url'] ) ) {
 								$alt = ! empty( $logo['alt'] ) ? $logo['alt'] : get_bloginfo( 'name' );
 								echo '<img src="' . esc_url( $logo['url'] ) . '" alt="' . esc_attr( $alt ) . '">';

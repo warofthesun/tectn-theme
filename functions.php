@@ -125,24 +125,67 @@ function tectn_get_hero_config() {
     return $config;
   }
 
-  // Single post: automatic hero with title, meta, featured image
-  if ( is_singular( 'post' ) ) {
+  // Singular post/CPT only (not pages): hero type "single" for single.php; pages use landing/initiative below
+  if ( is_singular() && ! is_page() ) {
     $post = get_queried_object();
-    if ( ! $post ) {
+    if ( ! $post || ! isset( $post->ID ) ) {
       $config = $default;
       return $config;
     }
+    $post_id   = $post->ID;
+    $post_type = $post->post_type;
+    $image_id  = get_post_thumbnail_id( $post_id );
+    $has_image = (int) $image_id > 0;
+
+    $author_link = '';
+    if ( $post_type !== 'tribe_events' && post_type_supports( $post_type, 'author' ) ) {
+      $author_id   = (int) $post->post_author;
+      $author_name = get_the_author_meta( 'display_name', $author_id );
+      $count       = count_user_posts( $author_id, $post_type );
+      if ( $count > 1 ) {
+        $author_link = '<a class="url fn n" href="' . esc_url( get_author_posts_url( $author_id ) ) . '" rel="author" itemprop="author">' . esc_html( $author_name ) . '</a>';
+      } else {
+        $author_link = '<span class="author" itemprop="author">' . esc_html( $author_name ) . '</span>';
+      }
+    }
+
+    $date_display = get_the_date( '', $post );
+    $date_iso     = get_the_date( 'c', $post );
+    if ( $post_type === 'tribe_events' && function_exists( 'tribe_get_start_date' ) ) {
+      $event_date = tribe_get_start_date( $post_id, false, get_option( 'date_format' ) );
+      $event_iso  = tribe_get_start_date( $post_id, false, 'c' );
+      if ( $event_date !== false && $event_date !== '' ) {
+        $date_display = $event_date;
+      }
+      if ( $event_iso !== false && $event_iso !== '' ) {
+        $date_iso = $event_iso;
+      }
+    }
+
+    $category_terms = array();
+    $taxonomies     = get_object_taxonomies( $post_type, 'objects' );
+    foreach ( $taxonomies as $tax ) {
+      if ( ! $tax->hierarchical ) {
+        continue;
+      }
+      $terms = get_the_terms( $post_id, $tax->name );
+      if ( $terms && ! is_wp_error( $terms ) ) {
+        $category_terms = $terms;
+        break;
+      }
+    }
+
     $config = array(
       'show' => true,
-      'type' => 'post',
+      'type' => 'single',
       'data' => array(
-        'title'        => get_the_title( $post ),
-        'permalink'    => get_permalink( $post ),
-        'date'         => get_the_date( '', $post ),
-        'date_iso'     => get_the_date( 'c', $post ),
-        'author_link'  => get_the_author_posts_link( $post->post_author ),
-        'categories'   => get_the_category_list( ', ', '', $post->ID ),
-        'image_id'     => get_post_thumbnail_id( $post->ID ),
+        'title'          => get_the_title( $post ),
+        'date'           => $date_display,
+        'date_iso'       => $date_iso,
+        'author_link'    => $author_link,
+        'category_terms' => $category_terms,
+        'image_id'       => $image_id,
+        'has_image'      => $has_image,
       ),
     );
     return $config;
@@ -262,6 +305,167 @@ function tectn_get_hero_config() {
 
   $config = $default;
   return $config;
+}
+
+/**
+ * Get related posts: up to $limit posts by category first, then tag, then recency.
+ * Excludes $post_id. Only returns published posts of the same $post_type.
+ *
+ * @param int    $post_id   Current post ID.
+ * @param string $post_type Post type (e.g. 'post', 'tribe_events').
+ * @param int    $limit     Max number of posts (default 3).
+ * @return WP_Post[] Array of post objects.
+ */
+function tectn_get_related_posts( $post_id, $post_type, $limit = 3 ) {
+  $post_id   = (int) $post_id;
+  $limit     = max( 1, min( 10, (int) $limit ) );
+  $post_type = $post_type ? $post_type : 'post';
+  $found    = array();
+
+  $tax_query = array();
+  $cat_ids   = array();
+  $tag_ids   = array();
+
+  if ( $post_type === 'post' ) {
+    $categories = get_the_category( $post_id );
+    if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) {
+      $cat_ids = array_map( 'intval', wp_list_pluck( $categories, 'term_id' ) );
+    }
+    $tags = get_the_tags( $post_id );
+    if ( ! empty( $tags ) && ! is_wp_error( $tags ) ) {
+      $tag_ids = array_map( 'intval', wp_list_pluck( $tags, 'term_id' ) );
+    }
+  }
+
+  // 1) By category (same post type only)
+  if ( ! empty( $cat_ids ) ) {
+    $q = new WP_Query( array(
+      'post_type'      => $post_type,
+      'post_status'    => 'publish',
+      'post__not_in'   => array( $post_id ),
+      'posts_per_page' => $limit,
+      'orderby'        => 'date',
+      'order'          => 'DESC',
+      'fields'         => 'ids',
+      'no_found_rows'  => true,
+      'tax_query'      => array(
+        array(
+          'taxonomy' => 'category',
+          'field'    => 'term_id',
+          'terms'    => $cat_ids,
+        ),
+      ),
+    ) );
+    $found = array_merge( $found, $q->posts );
+  }
+
+  // 2) By tag if we need more (exclude already found)
+  if ( count( $found ) < $limit && ! empty( $tag_ids ) ) {
+    $exclude = array_merge( array( $post_id ), $found );
+    $q = new WP_Query( array(
+      'post_type'      => $post_type,
+      'post_status'    => 'publish',
+      'post__not_in'   => $exclude,
+      'posts_per_page' => $limit - count( $found ),
+      'orderby'        => 'date',
+      'order'          => 'DESC',
+      'fields'         => 'ids',
+      'no_found_rows'  => true,
+      'tax_query'      => array(
+        array(
+          'taxonomy' => 'post_tag',
+          'field'    => 'term_id',
+          'terms'    => $tag_ids,
+        ),
+      ),
+    ) );
+    $found = array_merge( $found, $q->posts );
+  }
+
+  // 3) By recency to fill remaining
+  if ( count( $found ) < $limit ) {
+    $exclude = array_merge( array( $post_id ), $found );
+    $q = new WP_Query( array(
+      'post_type'      => $post_type,
+      'post_status'    => 'publish',
+      'post__not_in'   => $exclude,
+      'posts_per_page' => $limit - count( $found ),
+      'orderby'        => 'date',
+      'order'          => 'DESC',
+      'no_found_rows'  => true,
+    ) );
+    $found = array_merge( $found, $q->posts );
+  }
+
+  $found = array_slice( array_unique( array_filter( array_map( 'intval', $found ) ) ), 0, $limit );
+  if ( empty( $found ) ) {
+    return array();
+  }
+
+  $posts = get_posts( array(
+    'post_type'      => $post_type,
+    'post_status'    => 'publish',
+    'post__in'       => $found,
+    'orderby'        => 'post__in',
+    'posts_per_page' => $limit,
+  ) );
+
+  return is_array( $posts ) ? $posts : array();
+}
+
+/**
+ * Get Related Posts section settings from Post Settings (Site Settings > Post Settings).
+ * Returns heading and background image for the given post type. Reads from the Post Settings options page.
+ *
+ * @param string $post_type Post type (e.g. 'post', 'tribe_events', 'pickup_site').
+ * @return array{ heading: string, background_image_id: int, background_image_url: string }
+ */
+function tectn_get_related_posts_settings( $post_type = 'post' ) {
+  $post_type = $post_type ? $post_type : 'post';
+  $key       = sanitize_key( $post_type );
+  $defaults   = array(
+    'post'          => __( 'Related Posts', 'tectn_theme' ),
+    'tribe_events'  => __( 'Related Events', 'tectn_theme' ),
+    'pickup_site'   => __( 'Related Pick Up Locations', 'tectn_theme' ),
+  );
+  $heading = isset( $defaults[ $key ] ) ? $defaults[ $key ] : __( 'Related Posts', 'tectn_theme' );
+  $bg_id   = 0;
+  $bg_url  = '';
+
+  if ( ! function_exists( 'get_field' ) ) {
+    return array(
+      'heading'              => $heading,
+      'background_image_id'  => 0,
+      'background_image_url' => '',
+    );
+  }
+
+  $options_page = 'post-settings';
+  $heading_field = 'related_posts_heading_' . $key;
+  $bg_field      = 'background_image_' . $key;
+
+  $saved_heading = get_field( $heading_field, $options_page );
+  if ( is_string( $saved_heading ) && trim( $saved_heading ) !== '' ) {
+    $heading = trim( $saved_heading );
+  }
+
+  $img = get_field( $bg_field, $options_page );
+  if ( is_array( $img ) && ! empty( $img['ID'] ) ) {
+    $bg_id = (int) $img['ID'];
+  } elseif ( is_numeric( $img ) ) {
+    $bg_id = (int) $img;
+  }
+
+  if ( $bg_id > 0 ) {
+    $src   = wp_get_attachment_image_src( $bg_id, 'large' );
+    $bg_url = $src ? $src[0] : '';
+  }
+
+  return array(
+    'heading'              => $heading,
+    'background_image_id'  => $bg_id,
+    'background_image_url' => $bg_url,
+  );
 }
 
 /*********************
@@ -809,6 +1013,31 @@ if( function_exists('acf_add_options_page') ) {
 	));
 
 }
+
+/**
+ * Register Post Settings as a sub-page of Site Settings.
+ * Must run after ACF registers UI options pages (acf/init priority 6) so parent "site-settings" exists.
+ */
+function tectn_register_post_settings_options_page() {
+	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
+		return;
+	}
+	$parent = 'site-settings';
+	// Only add if parent exists (Site Settings from ACF UI).
+	$pages = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
+	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
+		return;
+	}
+	acf_add_options_sub_page( array(
+		'page_title'   => 'Post Settings',
+		'menu_title'   => 'Post Settings',
+		'menu_slug'    => 'post-settings',
+		'parent_slug'  => $parent,
+		'capability'   => 'edit_posts',
+		'post_id'      => 'post-settings', // Store/load fields under this key so get_field( $field, 'post-settings' ) works.
+	) );
+}
+add_action( 'acf/init', 'tectn_register_post_settings_options_page', 10 );
 
 /**
  * Register ACF field group for Events page (hero + intro) in Theme Settings > Events.
