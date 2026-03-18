@@ -1,0 +1,46 @@
+{
+  "key": "group_tectn_people_block",
+  "title": "People List Block",
+  "fields": [
+    {
+      "key": "field_tectn_people_block_people",
+      "label": "People",
+      "name": "people",
+      "aria-label": "",
+      "type": "relationship",
+      "instructions": "Select one or more People (Person post type) to display in this list.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": { "width": "", "class": "", "id": "" },
+      "post_type": [ "people" ],
+      "taxonomy": [],
+      "filters": [ "search", "taxonomy" ],
+      "elements": [ "featured_image" ],
+      "min": 0,
+      "max": 0,
+      "return_format": "object",
+      "allow_in_bindings": 0
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "tectn/people-list"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "seamless",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Block for selecting and displaying People posts.",
+  "show_in_rest": 0,
+  "display_title": "",
+  "modified": 1773710000
+}
+
