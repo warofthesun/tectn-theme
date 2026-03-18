@@ -3216,6 +3216,190 @@ POSTS & CONTENT STYLES
 	}
 }
 
+/* People List block – Person bio layout */
+.c-peopleList {
+	margin: $spacing-xxl 0;
+}
+
+.c-peopleList__items {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: $spacing-xl;
+}
+
+.c-personCard {
+	display: flex;
+	flex-direction: column;
+	gap: $spacing-xl;
+	align-items: stretch;
+	background-color: $secondary-50;
+	border-radius: $radius-lg;
+	padding: $spacing-xl;
+	color: $secondary-900;
+}
+
+.c-personCard__media {
+	position: relative;
+	max-width: 420px;
+	margin: 0 auto;
+}
+
+.c-personCard__photo {
+	position: relative;
+	overflow: hidden;
+	border-radius: $radius-lg;
+	aspect-ratio: 1 / 1;
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
+.c-personCard__wave {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -1px;
+	pointer-events: none;
+	img {
+		display: block;
+		width: 120%;
+		max-width: none;
+		margin-left: -10%;
+	}
+}
+
+.c-personCard__social {
+	margin-top: $spacing-lg;
+	text-align: center;
+	font-family: $header-font;
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: $secondary-700;
+}
+
+.c-personCard__socialLabel {
+	display: block;
+	margin-bottom: $spacing-sm;
+}
+
+.c-personCard__socialList {
+	display: inline-flex;
+	gap: $spacing-md;
+	align-items: center;
+	justify-content: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.c-personCard__socialLink {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 999px;
+	background-color: $secondary-50;
+	color: $accent-500;
+	text-decoration: none;
+	transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+
+	i {
+		font-size: 1rem;
+	}
+
+	&:hover,
+	&:focus-visible {
+		background-color: $accent-500;
+		color: $secondary-50;
+		transform: translateY(-1px);
+	}
+}
+
+.c-personCard__content {
+	max-width: 720px;
+	margin: 0 auto;
+}
+
+.c-personCard__name {
+	// size comes from .hero; we only tweak color/spacing
+	color: $primary-700;
+	margin: 0 0 $spacing-sm;
+}
+
+.c-personCard__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $spacing-sm;
+	align-items: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-family: $header-font;
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: $secondary-700;
+}
+
+.c-personCard__metaItem {
+	position: relative;
+	padding-right: $spacing-md;
+
+	&::after {
+		content: "•";
+		position: absolute;
+		right: 0;
+		color: $secondary-500;
+	}
+
+	&:last-child::after {
+		content: "";
+	}
+}
+
+.c-personCard__email {
+	color: $accent-500;
+}
+
+.c-personCard__bio {
+	font-size: 1rem;
+	line-height: 1.7;
+	color: $secondary-900;
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
+
+@media (min-width: 768px) {
+	.c-personCard {
+		flex-direction: row;
+		align-items: stretch;
+		padding: $spacing-xxl;
+	}
+
+	.c-personCard__media {
+		flex: 0 0 360px;
+		margin: 0;
+	}
+
+	.c-personCard__content {
+		flex: 1 1 auto;
+		padding-left: $spacing-xxl;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+
 /* People List block — bio cards */
 .c-peopleList {
 	margin: $spacing-xxl 0;
@@ -3253,13 +3437,12 @@ POSTS & CONTENT STYLES
 
 .c-peopleCard__photo {
 	position: relative;
-	overflow: hidden;
-	border-radius: $radius-lg;
+	overflow: hidden; // clip wave and image to rounded square
 	aspect-ratio: 1 / 1;
 	img {
 		display: block;
 		width: 100%;
-		height: auto;
+		height: 100%;
 		object-fit: cover;
 	}
 }
@@ -3268,7 +3451,7 @@ POSTS & CONTENT STYLES
 	position: absolute;
 	left: 0;
 	right: 0;
-	bottom: -1px;
+	bottom: -10%; // pull curve up into the image
 	pointer-events: none;
 	img {
 		display: block;

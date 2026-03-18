@@ -46,9 +46,9 @@ if ( ! is_array( $people ) ) {
             <div class="c-peopleCard__media">
               <?php if ( has_post_thumbnail( $person_id ) ) : ?>
                 <div class="c-peopleCard__photo">
-                  <?php echo get_the_post_thumbnail( $person_id, 'square-large' ); ?>
+                  <?php echo get_the_post_thumbnail( $person_id, 'tectn_slider_square' ); ?>
                   <div class="c-peopleCard__wave">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/images/bio-wave.svg' ); ?>" alt="" loading="lazy" />
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/library/images/bio-wave.svg' ); ?>" alt="" loading="lazy" />
                   </div>
                 </div>
               <?php endif; ?>

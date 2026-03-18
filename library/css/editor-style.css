@@ -5439,6 +5439,231 @@ POSTS & CONTENT STYLES
   margin-bottom: 2em;
 }
 
+/* People List block – Person bio layout */
+.c-peopleList {
+  margin: 2em 0;
+}
+
+.c-peopleList__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.c-personCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.5em;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  background-color: #F9FBF3;
+  border-radius: 1em;
+  padding: 1.5em;
+  color: #151D0C;
+}
+
+.c-personCard__media {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.c-personCard__photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1em;
+  aspect-ratio: 1/1;
+}
+.c-personCard__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.c-personCard__wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  pointer-events: none;
+}
+.c-personCard__wave img {
+  display: block;
+  width: 120%;
+  max-width: none;
+  margin-left: -10%;
+}
+
+.c-personCard__social {
+  margin-top: 1.25em;
+  text-align: center;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #3F5625;
+}
+
+.c-personCard__socialLabel {
+  display: block;
+  margin-bottom: 0.75em;
+}
+
+.c-personCard__socialList {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  gap: 1em;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c-personCard__socialLink {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background-color: #F9FBF3;
+  color: #ECBA27;
+  text-decoration: none;
+  -webkit-transition: background-color 0.2s ease, color 0.2s ease, -webkit-transform 0.15s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, -webkit-transform 0.15s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, -webkit-transform 0.15s ease;
+}
+.c-personCard__socialLink i {
+  font-size: 1rem;
+}
+.c-personCard__socialLink:hover, .c-personCard__socialLink:focus-visible {
+  background-color: #ECBA27;
+  color: #F9FBF3;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px);
+}
+
+.c-personCard__content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.c-personCard__name {
+  color: #79853E;
+  margin: 0 0 0.75em;
+}
+
+.c-personCard__meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #3F5625;
+}
+
+.c-personCard__metaItem {
+  position: relative;
+  padding-right: 1em;
+}
+.c-personCard__metaItem::after {
+  content: "•";
+  position: absolute;
+  right: 0;
+  color: #698f3d;
+}
+.c-personCard__metaItem:last-child::after {
+  content: "";
+}
+
+.c-personCard__email {
+  color: #ECBA27;
+}
+
+.c-personCard__bio {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #151D0C;
+}
+.c-personCard__bio p:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .c-personCard {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    padding: 2em;
+  }
+  .c-personCard__media {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 360px;
+    flex: 0 0 360px;
+    margin: 0;
+  }
+  .c-personCard__content {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding-left: 2em;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+}
 /* People List block — bio cards */
 .c-peopleList {
   margin: 2em 0;
@@ -5489,13 +5714,12 @@ POSTS & CONTENT STYLES
 .c-peopleCard__photo {
   position: relative;
   overflow: hidden;
-  border-radius: 1em;
   aspect-ratio: 1/1;
 }
 .c-peopleCard__photo img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
 }
@@ -5504,7 +5728,7 @@ POSTS & CONTENT STYLES
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -1px;
+  bottom: -10%;
   pointer-events: none;
 }
 .c-peopleCard__wave img {
