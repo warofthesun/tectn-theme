@@ -36,7 +36,30 @@ $sticky_ids = is_array($sticky_ids) ? array_values(array_filter(array_map('intva
 
 $posts_to_render = [];
 
-if ($post_type === 'post' && !empty($sticky_ids)) {
+// Special handling for Events: only upcoming or ongoing events.
+if ($post_type === 'tribe_events') {
+  $now = current_time('Y-m-d H:i:s');
+  $q = new WP_Query([
+    'post_type'      => 'tribe_events',
+    'post_status'    => 'publish',
+    'posts_per_page' => $cap,
+    // Order by start date, but include events whose end date is in the future
+    'meta_key'       => '_EventStartDate',
+    'orderby'        => 'meta_value',
+    'order'          => 'ASC',
+    'meta_query'     => [
+      [
+        'key'     => '_EventEndDate',
+        'value'   => $now,
+        'compare' => '>=',
+        'type'    => 'DATETIME',
+      ],
+    ],
+    'no_found_rows'  => true,
+  ]);
+
+  $posts_to_render = $q->posts;
+} elseif ($post_type === 'post' && !empty($sticky_ids)) {
   // 1) Pull sticky posts first (counting toward the cap)
   $sticky_query = new WP_Query([
     'post_type'           => 'post',
@@ -84,21 +107,53 @@ if ($post_type === 'post' && !empty($sticky_ids)) {
   $posts_to_render = $q->posts;
 }
 
-// Only show "view more" button if there are more published posts than we're displaying
-$count_query = new WP_Query([
-  'post_type'      => $post_type,
-  'post_status'    => 'publish',
-  'posts_per_page' => $cap + 1,
-  'fields'         => 'ids',
-  'no_found_rows'  => true,
-]);
+// Only show "view more" button if there are more items than we're displaying.
+if ( $post_type === 'tribe_events' ) {
+  $now_for_count = current_time('Y-m-d H:i:s');
+  $count_query = new WP_Query([
+    'post_type'      => 'tribe_events',
+    'post_status'    => 'publish',
+    'posts_per_page' => $cap + 1,
+    'fields'         => 'ids',
+    'meta_key'       => '_EventStartDate',
+    'orderby'        => 'meta_value',
+    'order'          => 'ASC',
+    'meta_query'     => [
+      [
+        'key'     => '_EventEndDate',
+        'value'   => $now_for_count,
+        'compare' => '>=',
+        'type'    => 'DATETIME',
+      ],
+    ],
+    'no_found_rows'  => true,
+  ]);
+} else {
+  $count_query = new WP_Query([
+    'post_type'      => $post_type,
+    'post_status'    => 'publish',
+    'posts_per_page' => $cap + 1,
+    'fields'         => 'ids',
+    'no_found_rows'  => true,
+  ]);
+}
 $has_more_posts = count($count_query->posts) > $cap;
 
 $display_count = count($posts_to_render);
 $effective_bg_max_h = ($display_count >= 1 && $display_count <= 3) ? 600 : $bg_max_height;
+
+$no_events_message = '';
+if ( $post_type === 'tribe_events' && empty( $posts_to_render ) && function_exists( 'get_field' ) ) {
+  $no_events_message = get_field( 'no_upcoming_events_message', 'post-settings' );
+}
+$show_no_events = ( $post_type === 'tribe_events' && empty( $posts_to_render ) && $no_events_message !== '' && $no_events_message !== false );
+if ( $show_no_events ) {
+  $classes[] = 'c-posts--no-events';
+}
 ?>
 
 <section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?>  alignfull" style="--posts-bg-max-h: <?= esc_attr($effective_bg_max_h); ?>px;">
+  <?php if ( ! $show_no_events ) : ?>
   <!-- Background art layer (decorative only) -->
   <div class="c-posts__bg" aria-hidden="true">
   <?php if ($bg_url): ?>
@@ -203,6 +258,7 @@ $effective_bg_max_h = ($display_count >= 1 && $display_count <= 3) ? 600 : $bg_m
   <span class="c-posts__wave c-posts__wave--top" aria-hidden="true"></span>
   <span class="c-posts__wave c-posts__wave--bottom" aria-hidden="true"></span>
 </div>
+  <?php endif; ?>
 
   <!-- Foreground content -->
   <div class="c-posts__inner l-container wrap">
@@ -218,7 +274,15 @@ $effective_bg_max_h = ($display_count >= 1 && $display_count <= 3) ? 600 : $bg_m
               ? ( tribe_get_start_date( $post_id, false, 'm/d/y' ) ?: get_the_date( 'm/d/y', $post_id ) )
               : get_the_date( 'm/d/y', $post_id );
             $title    = get_the_title($post_id);
-            $permalink = get_permalink($post_id);
+            // For events, allow external override URL; otherwise use the normal permalink.
+            if ( $p->post_type === 'tribe_events' && function_exists( 'tectn_get_event_external_url' ) ) {
+              $permalink = tectn_get_event_external_url( $post_id );
+              if ( ! $permalink ) {
+                $permalink = get_permalink( $post_id );
+              }
+            } else {
+              $permalink = get_permalink( $post_id );
+            }
 
             $img_url = get_the_post_thumbnail_url($post_id, 'post-card');
 
@@ -247,7 +311,7 @@ $effective_bg_max_h = ($display_count >= 1 && $display_count <= 3) ? 600 : $bg_m
           ?>
 
           <article class="c-postCard">
-            <a class="c-postCard__link" href="<?= esc_url($permalink); ?>">
+            <a class="c-postCard__link" href="<?= esc_url($permalink); ?>"<?php if ( $p->post_type === 'tribe_events' ) : ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>>
               <div class="c-postCard__media">
                 <?php if ($img_url): ?>
                   <img class="c-postCard__img" src="<?= esc_url($img_url); ?>" alt="" loading="lazy" />
@@ -271,7 +335,13 @@ $effective_bg_max_h = ($display_count >= 1 && $display_count <= 3) ? 600 : $bg_m
         <?php endforeach; ?>
       </div>
     <?php else: ?>
-      <p>No posts found.</p>
+      <?php if ( $show_no_events && $no_events_message ) : ?>
+        <div class="c-posts__no-events">
+          <div class="c-posts__no-events-inner"><h4 class="c-posts__no-events-title"><?php echo wp_kses_post( $no_events_message ); ?></h4></div>
+        </div>
+      <?php else : ?>
+        <p>No posts found.</p>
+      <?php endif; ?>
     <?php endif; ?>
     <?php if ($has_more_posts): $partial_path = get_theme_file_path('/partials/button_pair.php'); include $partial_path; endif; ?>
   </div>

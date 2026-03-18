@@ -468,6 +468,76 @@ function tectn_get_related_posts_settings( $post_type = 'post' ) {
   );
 }
 
+/**
+ * Get the external URL for an event, if set, normalized with https://.
+ *
+ * @param int $event_id Event post ID.
+ * @return string External URL or empty string.
+ */
+function tectn_get_event_external_url( $event_id ) {
+  $event_id = (int) $event_id;
+  if ( $event_id <= 0 || get_post_type( $event_id ) !== 'tribe_events' ) {
+    return '';
+  }
+  if ( ! function_exists( 'get_field' ) ) {
+    return '';
+  }
+  $raw = get_field( 'external_event_url', $event_id );
+  if ( ! is_string( $raw ) ) {
+    return '';
+  }
+  $raw = trim( $raw );
+  if ( $raw === '' ) {
+    return '';
+  }
+  // Auto-add https:// when the scheme is missing.
+  if ( ! preg_match( '#^https?://#i', $raw ) ) {
+    $raw = 'https://' . ltrim( $raw, '/' );
+  }
+  $url = esc_url_raw( $raw );
+  return $url ? $url : '';
+}
+
+/**
+ * Whether events should require an external URL (from Post Settings > Events).
+ *
+ * @return bool
+ */
+function tectn_events_require_external_url() {
+  if ( ! function_exists( 'get_field' ) ) {
+    return false;
+  }
+  $required = get_field( 'events_require_external_url', 'post-settings' );
+  return (bool) $required;
+}
+
+/**
+ * Override tribe_events event links globally with the external URL when present.
+ */
+function tectn_filter_tribe_event_links( $url, $post, $leavename, $sample ) {
+  if ( ! $post || $post->post_type !== 'tribe_events' ) {
+    return $url;
+  }
+  $external = tectn_get_event_external_url( $post->ID );
+  return $external ? $external : $url;
+}
+add_filter( 'post_type_link', 'tectn_filter_tribe_event_links', 10, 4 );
+
+if ( function_exists( 'tribe_get_event_link' ) ) {
+  /**
+   * Mirror override for TEC helper links, when used.
+   *
+   * @param string $link
+   * @param int    $event_id
+   * @return string
+   */
+  function tectn_filter_tribe_get_event_link( $link, $event_id ) {
+    $external = tectn_get_event_external_url( $event_id );
+    return $external ? $external : $link;
+  }
+  add_filter( 'tribe_get_event_link', 'tectn_filter_tribe_get_event_link', 10, 2 );
+}
+
 /*********************
 LAUNCH starter
 Let's get everything up and running.

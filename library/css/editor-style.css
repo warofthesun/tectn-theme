@@ -4052,6 +4052,41 @@ Grid (mobile)
   grid-template-columns: repeat(2, minmax(0, 400px));
 }
 
+/* No upcoming events message (posts-grid Events loop): full-width bar, gradient hidden via no .c-posts__bg */
+.c-posts--no-events {
+  padding-top: 0;
+}
+
+.c-posts--no-events .c-posts__no-events {
+  width: 100vw;
+  max-width: 100vw;
+  min-height: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #DFEBA4;
+  text-align: center;
+  margin-left: -webkit-calc(-50vw + 50%);
+  margin-left: calc(-50vw + 50%);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.c-posts__no-events-inner {
+  max-width: 100%;
+  padding: 1rem;
+}
+
+.c-posts__no-events-title {
+  margin: 0;
+}
+
 /* =========================
 Card
 ========================= */
@@ -5397,6 +5432,9 @@ POSTS & CONTENT STYLES
   .c-posts {
     padding: 96px 0;
     padding-bottom: 1.25em;
+  }
+  .c-posts--no-events {
+    padding-top: 0;
   }
   .c-posts__header {
     margin-bottom: 32px;

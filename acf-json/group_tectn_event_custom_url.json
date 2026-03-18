@@ -1,0 +1,42 @@
+{
+    "key": "group_tectn_event_custom_url",
+    "title": "Event External URL",
+    "fields": [
+        {
+            "key": "field_tectn_event_external_url",
+            "label": "External event URL",
+            "name": "external_event_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Optional URL to an external event page (for example, in your CRM). When set, this URL will be used instead of the default event permalink.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "https://example.com/event"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "tribe_events"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Optional external URL for events; used instead of the default permalink when provided.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1773700000
+}
+
