@@ -47,8 +47,10 @@ if ( ! is_array( $people ) ) {
               <?php if ( has_post_thumbnail( $person_id ) ) : ?>
                 <div class="c-peopleCard__photo">
                   <?php echo get_the_post_thumbnail( $person_id, 'tectn_slider_square' ); ?>
-                  <div class="c-peopleCard__wave">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/library/images/bio-wave.svg' ); ?>" alt="" loading="lazy" />
+                  <div class="c-peopleCard__wave" aria-hidden="true">
+                    <svg width="826" height="83" viewBox="0 0 826 83" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                      <path d="M-2.48068e-07 58.729C-2.48068e-07 58.729 146.713 -34.3864 406.976 17.9052C667.24 70.1969 825.186 -6.41376e-05 825.186 -6.41376e-05L825.886 82.2562L0.123291 73.2086L-2.48068e-07 58.729Z" fill="currentColor"/>
+                    </svg>
                   </div>
                 </div>
               <?php endif; ?>

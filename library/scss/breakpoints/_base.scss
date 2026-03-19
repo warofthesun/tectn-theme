@@ -3453,7 +3453,8 @@ POSTS & CONTENT STYLES
 	right: 0;
 	bottom: -10%; // pull curve up into the image
 	pointer-events: none;
-	img {
+	color: $primary-50; // inlined SVG path uses currentColor
+	svg {
 		display: block;
 		width: 120%;
 		max-width: none;
@@ -3516,7 +3517,7 @@ POSTS & CONTENT STYLES
 .c-peopleCard__name {
 	// Uses .hero heading styles for size; only adjust spacing/color here.
 	color: $primary-700;
-	margin: 0 0 $spacing-sm;
+	margin-bottom:0;
 }
 
 .c-peopleCard__meta {
@@ -3566,7 +3567,7 @@ POSTS & CONTENT STYLES
 	}
 }
 
-.c-peopleCard__email {
+a.c-peopleCard__email {
 	color: $accent-500;
 }
 

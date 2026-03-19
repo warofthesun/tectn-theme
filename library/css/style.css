@@ -6988,8 +6988,9 @@ POSTS & CONTENT STYLES
   right: 0;
   bottom: -10%;
   pointer-events: none;
+  color: #EFF1E5;
 }
-.c-peopleCard__wave img {
+.c-peopleCard__wave svg {
   display: block;
   width: 120%;
   max-width: none;
@@ -7066,7 +7067,7 @@ POSTS & CONTENT STYLES
 
 .c-peopleCard__name {
   color: #79853E;
-  margin: 0 0 0.75em;
+  margin-bottom: 0;
 }
 
 .c-peopleCard__meta {
@@ -7120,7 +7121,7 @@ POSTS & CONTENT STYLES
   margin-bottom: 0;
 }
 
-.c-peopleCard__email {
+a.c-peopleCard__email {
   color: #ECBA27;
 }
 
