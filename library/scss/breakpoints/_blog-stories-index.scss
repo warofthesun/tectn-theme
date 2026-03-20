@@ -413,6 +413,26 @@ body.tectn-stories-index .hero__container--blog .hero__container--inner {
 	}
 }
 
+/* Sidebar sits beside the grid only (below featured); top-align with first row of cards. */
+.c-storiesIndexLayout--with-sidebar {
+	align-items: flex-start;
+
+	@media only screen and (min-width: 64em) {
+		&.c-storiesIndexLayout--sidebar-left {
+			flex-direction: row-reverse;
+		}
+	}
+}
+
+/* Sidebar on blog index: keep 2-up grid at large breakpoints (sidebar replaces third column). */
+.c-storiesIndex--with-sidebar {
+	@media only screen and (min-width: 64em) {
+		.c-posts__grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+}
+
 .c-storiesIndex__empty {
 	margin: 1rem 0 2rem;
 	color: $stories-olive;

@@ -164,8 +164,8 @@ function tectn_blog_index_pre_get_posts( $query ) {
 	}
 
 	/*
-	 * Stories grid is 3 columns at desktop; “posts per page” defaults (e.g. 10) or +1 fixes leave a
-	 * hole in the last row (10→3+3+3+1, 11→3+3+3+2). Round up to a multiple of 3.
+	 * Stories grid: 3 columns at desktop without sidebar; 2 when sidebar replaces a column.
+	 * Round posts_per_page to a multiple of that column count to avoid a short last row.
 	 */
 	$base_ppp = (int) $query->get( 'posts_per_page' );
 	if ( $base_ppp < 1 ) {
@@ -174,13 +174,39 @@ function tectn_blog_index_pre_get_posts( $query ) {
 	if ( $base_ppp < 1 ) {
 		$base_ppp = 10;
 	}
-	$grid_cols   = 3;
+	$sb_cfg    = tectn_get_blog_index_sidebar_config();
+	$grid_cols = ! empty( $sb_cfg['active'] ) ? 2 : 3;
 	$rounded_ppp = (int) ceil( $base_ppp / $grid_cols ) * $grid_cols;
 	$query->set( 'posts_per_page', max( $grid_cols, $rounded_ppp ) );
 
 	$query->set( 'ignore_sticky_posts', true );
 }
 add_action( 'pre_get_posts', 'tectn_blog_index_pre_get_posts', 5 );
+
+/**
+ * Blog index sidebar: Post Settings (Blog Posts tab), with legacy fallback to Theme General Settings.
+ *
+ * @return array{ active: bool, position: string } position is 'left' or 'right'.
+ */
+function tectn_get_blog_index_sidebar_config() {
+	static $cached = null;
+	if ( null !== $cached ) {
+		return $cached;
+	}
+	$cached = array(
+		'active'   => false,
+		'position' => 'right',
+	);
+	if ( ! function_exists( 'get_field' ) ) {
+		return $cached;
+	}
+	$from_ps = (bool) get_field( 'blog_index_show_sidebar', 'post-settings' );
+	$legacy  = (bool) get_field( 'include_sidebar_on_blog_page', 'option' );
+	$cached['active']   = $from_ps || $legacy;
+	$pos                = (string) get_field( 'blog_index_sidebar_position', 'post-settings' );
+	$cached['position'] = ( $pos === 'left' ) ? 'left' : 'right';
+	return $cached;
+}
 
 /**
  * Body class for the posts index template (stories layout + scoped CSS).
@@ -191,9 +217,15 @@ add_action( 'pre_get_posts', 'tectn_blog_index_pre_get_posts', 5 );
 function tectn_body_class_stories_index( $classes ) {
 	if ( is_home() && ! is_front_page() ) {
 		$classes[] = 'tectn-stories-index';
+		$sb        = tectn_get_blog_index_sidebar_config();
+		if ( ! empty( $sb['active'] ) ) {
+			$classes[] = 'tectn-blog-index-has-sidebar';
+			$classes[] = 'tectn-blog-index-sidebar-' . sanitize_html_class( $sb['position'] );
+		}
 	}
 	return $classes;
 }
+
 add_filter( 'body_class', 'tectn_body_class_stories_index' );
 
 /**

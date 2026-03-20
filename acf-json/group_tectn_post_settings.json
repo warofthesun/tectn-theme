@@ -11,7 +11,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "placement": "top",
             "endpoint": 0,
             "selected": 1
@@ -25,7 +29,11 @@
             "instructions": "Heading above the related posts section on single blog posts. Default: Related Posts",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "Related Posts",
             "maxlength": "",
             "placeholder": "",
@@ -42,7 +50,11 @@
             "instructions": "Background for the Related Posts section on single blog posts. Leave empty for the default solid color and gradient.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "return_format": "array",
             "library": "all",
             "min_width": "",
@@ -56,6 +68,64 @@
             "preview_size": "medium"
         },
         {
+            "key": "field_tectn_ps_blog_index_sidebar",
+            "label": "Show sidebar on blog index",
+            "name": "blog_index_show_sidebar",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "When enabled, the stories grid shares the row with the primary widget sidebar (one fewer column of cards).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Show",
+            "ui_off_text": "Hide",
+            "ui": 1
+        },
+        {
+            "key": "field_tectn_ps_blog_index_sidebar_position",
+            "label": "Blog index sidebar position",
+            "name": "blog_index_sidebar_position",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Whether the sidebar column appears to the left or right of the stories content.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_tectn_ps_blog_index_sidebar",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "right": "Right",
+                "left": "Left"
+            },
+            "default_value": "right",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_tectn_ps_tab_events",
             "label": "Events",
             "name": "",
@@ -64,7 +134,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "placement": "top",
             "endpoint": 0,
             "selected": 0
@@ -78,7 +152,11 @@
             "instructions": "Heading above the related section on single events. Default: Related Events",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "Related Events",
             "maxlength": "",
             "placeholder": "",
@@ -95,7 +173,11 @@
             "instructions": "Background for the Related section on single events. Leave empty for the default solid color and gradient.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "return_format": "array",
             "library": "all",
             "min_width": "",
@@ -117,7 +199,11 @@
             "instructions": "Shown in place of the events grid when there are no upcoming events.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "There are currently no upcoming events. Please check back soon.",
             "maxlength": "",
             "allow_in_bindings": 0,
@@ -134,7 +220,11 @@
             "instructions": "When enabled, events should have a custom external URL set before publishing.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "message": "Events must have a custom external URL",
             "default_value": 0,
             "ui": 1,
@@ -151,7 +241,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "placement": "top",
             "endpoint": 0,
             "selected": 0
@@ -165,7 +259,11 @@
             "instructions": "Heading above the related section on single pick-up locations. Default: Related Pick Up Locations",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "Related Pick Up Locations",
             "maxlength": "",
             "placeholder": "",
@@ -182,7 +280,11 @@
             "instructions": "Background for the Related section on single pick-up locations. Leave empty for the default solid color and gradient.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "return_format": "array",
             "library": "all",
             "min_width": "",
@@ -215,5 +317,5 @@
     "description": "Per–post-type settings for related section heading and background. Sub-page of Site Settings.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772680800
+    "modified": 1773970764
 }

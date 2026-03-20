@@ -1,4 +1,10 @@
-				<div id="sidebar1" class="sidebar col-xs-12 col-sm-4" role="complementary">
+<?php
+$tectn_sidebar_classes = ! empty( $GLOBALS['tectn_sidebar_wrapper_class'] )
+	? $GLOBALS['tectn_sidebar_wrapper_class']
+	: 'sidebar col-xs-12 col-sm-4';
+unset( $GLOBALS['tectn_sidebar_wrapper_class'] );
+?>
+				<div id="sidebar1" class="<?php echo esc_attr( $tectn_sidebar_classes ); ?>" role="complementary">
 
 					<?php if ( is_active_sidebar( 'sidebar1' ) ) : ?>
 

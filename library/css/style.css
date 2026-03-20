@@ -7777,6 +7777,28 @@ body.tectn-stories-index .hero__container--blog .hero__container--inner {
   background: rgba(116, 134, 74, 0.08);
 }
 
+/* Sidebar sits beside the grid only (below featured); top-align with first row of cards. */
+.c-storiesIndexLayout--with-sidebar {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+@media only screen and (min-width: 64em) {
+  .c-storiesIndexLayout--with-sidebar.c-storiesIndexLayout--sidebar-left {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+}
+
+/* Sidebar on blog index: keep 2-up grid at large breakpoints (sidebar replaces third column). */
+@media only screen and (min-width: 64em) {
+  .c-storiesIndex--with-sidebar .c-posts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .c-storiesIndex__empty {
   margin: 1rem 0 2rem;
   color: #74864a;
