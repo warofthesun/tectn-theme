@@ -4,11 +4,11 @@
     "fields": [
         {
             "key": "field_6826202d5e73e",
-            "label": "Hero Image",
-            "name": "hero_image",
+            "label": "Use solid color instead of featured image",
+            "name": "use_solid_color",
             "aria-label": "",
-            "type": "image",
-            "instructions": "",
+            "type": "true_false",
+            "instructions": "Use solid color (no image) instead of the page featured image.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,36 +16,43 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "url",
-            "preview_size": "medium",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": ""
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
         },
         {
             "key": "field_6826202d5eae7",
-            "label": "Page Title",
-            "name": "page_title",
+            "label": "Background color",
+            "name": "background_color",
             "aria-label": "",
-            "type": "textarea",
+            "type": "color_picker",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6826202d5e73e",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": 1,
-            "new_lines": ""
+            "default_value": "#238c55",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "allow_in_bindings": 0,
+            "show_custom_palette": 0,
+            "show_color_wheel": 1,
+            "custom_palette_source": "",
+            "palette_colors": ""
         }
     ],
     "location": [
@@ -70,7 +77,7 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": false,
+    "show_in_rest": 0,
     "display_title": "",
-    "modified": 1769993807
+    "modified": 1773885161
 }

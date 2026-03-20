@@ -4,11 +4,11 @@
     "fields": [
         {
             "key": "field_682620428efc9",
-            "label": "Page Title",
-            "name": "page_title",
+            "label": "Use solid color background",
+            "name": "use_solid_color",
             "aria-label": "",
-            "type": "textarea",
-            "instructions": "",
+            "type": "true_false",
+            "instructions": "When set to \"No,\" the default page background will be shown. Using an image is not an option with this hero size.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,11 +16,71 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_682620428efc7",
+            "label": "Background color",
+            "name": "background_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_682620428efc9",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#238c55",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "allow_in_bindings": 0,
+            "show_custom_palette": 0,
+            "show_color_wheel": 1,
+            "custom_palette_source": "",
+            "palette_colors": ""
+        },
+        {
+            "key": "field_682620428efc6",
+            "label": "Text color",
+            "name": "text_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Choose whether the hero headline text is light or dark.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "light": "Light",
+                "dark": "Dark"
+            },
+            "default_value": "light",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 1,
+            "ajax": 0,
             "placeholder": "",
-            "maxlength": "",
-            "rows": 1,
-            "new_lines": ""
+            "create_options": 0,
+            "save_options": 0
         }
     ],
     "location": [
@@ -45,7 +105,7 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": false,
+    "show_in_rest": 0,
     "display_title": "",
-    "modified": 1769993807
+    "modified": 1773886216
 }

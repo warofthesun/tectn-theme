@@ -4811,12 +4811,17 @@ POSTS & CONTENT STYLES
   margin-top: -90px;
   margin-bottom: 10px;
 }
-.hero__container--landing h1 {
-  font-size: 2.5em;
+.hero__container--landing h1.hero__title--landing {
+  font-size: 2.5rem;
   margin-top: 0;
   margin-bottom: 0;
+  color: #F4F5ED;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  line-height: 1.05;
+  text-shadow: 0 0 20px rgba(21, 29, 12, 0.35);
 }
-.hero__container--landing h1 span {
+.hero__container--landing h1.hero__title--landing span {
   display: block;
   color: #EFF1E5;
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
@@ -4843,6 +4848,9 @@ POSTS & CONTENT STYLES
 }
 .hero__container--landing .hero__content {
   height: 50vh;
+}
+.hero__container--landing .hero__content--text {
+  font-size: 1rem;
 }
 .hero__container--inner {
   position: relative;
@@ -4904,6 +4912,11 @@ POSTS & CONTENT STYLES
   background: -webkit-linear-gradient(top right, rgba(35, 140, 85, 0.7) 0%, rgba(60, 170, 110, 0.7) 55%, rgba(245, 176, 73, 0.9) 100%);
   background: linear-gradient(to bottom left, rgba(35, 140, 85, 0.7) 0%, rgba(60, 170, 110, 0.7) 55%, rgba(245, 176, 73, 0.9) 100%);
 }
+.hero__overlay--medium {
+  background: -webkit-gradient(linear, right top, left bottom, from(rgba(35, 140, 85, 0.7)), color-stop(55%, rgba(60, 170, 110, 0.7)), to(rgba(245, 176, 73, 0.9)));
+  background: -webkit-linear-gradient(top right, rgba(35, 140, 85, 0.7) 0%, rgba(60, 170, 110, 0.7) 55%, rgba(245, 176, 73, 0.9) 100%);
+  background: linear-gradient(to bottom left, rgba(35, 140, 85, 0.7) 0%, rgba(60, 170, 110, 0.7) 55%, rgba(245, 176, 73, 0.9) 100%);
+}
 .hero__wave--initiative {
   position: absolute;
   bottom: 0;
@@ -4938,6 +4951,24 @@ POSTS & CONTENT STYLES
   min-height: 70vh;
   margin-bottom: -120px;
 }
+.hero__container--medium .hero__container--inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 65vh;
+  margin-bottom: -120px;
+}
+.hero__container--small .hero__container--inner {
+  min-height: 35vh;
+  margin-bottom: -60px;
+}
+.hero__container--small .hero__content--bg {
+  min-height: 255px;
+}
 .hero__content--bg {
   position: absolute;
   inset: 0;
@@ -4965,7 +4996,58 @@ POSTS & CONTENT STYLES
   z-index: 2;
   padding: 2rem 7%;
 }
+.hero__content--medium {
+  position: absolute;
+  inset: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+  padding: 2rem 7%;
+}
+.hero__content--small {
+  position: absolute;
+  inset: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+  padding: 2rem 7%;
+  margin-bottom: 3vh;
+  min-height: 255px;
+}
 .hero__headline--initiative {
+  max-width: 100%;
+  text-align: center;
+}
+.hero__headline--medium {
+  max-width: 100%;
+  text-align: center;
+  margin-top: 10vh;
+}
+.hero__headline--small {
   max-width: 100%;
   text-align: center;
 }
@@ -4979,6 +5061,30 @@ POSTS & CONTENT STYLES
   margin: 0;
   font-size: 2.5rem;
   text-shadow: 0 0 20px rgba(21, 29, 12, 0.7);
+}
+.hero__title--medium {
+  color: #F4F5ED;
+  margin: 0;
+  font-size: 2.5rem;
+  text-shadow: 0 0 20px rgba(21, 29, 12, 0.7);
+}
+.hero__title--initiative.dark {
+  color: #151D0C;
+  text-shadow: none;
+}
+.hero__title--medium.dark {
+  color: #151D0C;
+  text-shadow: none;
+}
+.hero__title--small {
+  color: #F4F5ED;
+  margin: 0;
+  font-size: 2.5rem;
+  text-shadow: 0 0 20px rgba(21, 29, 12, 0.7);
+}
+.hero__title--small.dark {
+  color: #151D0C;
+  text-shadow: none;
 }
 .hero .hero__wave-svg .hero__wave-fill {
   fill: var(--body-bg, #F9FBF3);
@@ -5029,6 +5135,15 @@ POSTS & CONTENT STYLES
 
 /* Initiative hero: ensure background image displays when no .hero wrapper (partial outputs container only) */
 .hero__container--initiative .hero__content--bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Hero Medium: ensure background image displays when no .hero wrapper */
+.hero__container--medium .hero__content--bg {
   position: absolute;
   inset: 0;
   background-size: cover;

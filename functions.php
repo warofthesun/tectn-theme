@@ -90,7 +90,7 @@ function tectn_content_group_classes( $args = array() ) {
  * - Blog index: hero shown automatically; title from options or "News", optional image from options.
  * - Archive: hero shown automatically with archive title and description.
  *
- * @return array{ show: bool, type: string, data: array } 'show', 'type' (landing|post|blog|archive), 'data' (headline, paragraph, image_id, ctas, title, etc.).
+ * @return array{ show: bool, type: string, data: array } 'show', 'type' (landing|medium|initiative|post|blog|archive|single), 'data' (headline, paragraph, image_id, ctas, title, etc.).
  */
 function tectn_get_hero_config() {
   static $config = null;
@@ -100,7 +100,7 @@ function tectn_get_hero_config() {
 
   $default = array( 'show' => false, 'type' => 'landing', 'data' => array() );
 
-  // Events archive: hero and intro from Theme Settings > Events (no wave, gradient or solid, headline only)
+  // Events archive: same hero as Hero Medium; options from Theme Settings > Events (no wave, gradient or solid, headline only)
   if ( is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' ) ) {
     $use_solid = function_exists( 'get_field' ) ? (bool) tectn_get_events_option( 'events_hero_use_solid_color' ) : false;
     $bg_color  = function_exists( 'get_field' ) ? tectn_get_events_option( 'events_hero_background_color' ) : '';
@@ -114,7 +114,7 @@ function tectn_get_hero_config() {
     $show_hero = $use_solid && $bg_color || $bg_image || $headline !== '';
     $config = array(
       'show' => true,
-      'type' => 'events',
+      'type' => 'medium',
       'data' => array(
         'background_type'   => $use_solid ? 'color' : 'image',
         'background_color'  => $bg_color ? $bg_color : '#238c55',
@@ -270,6 +270,78 @@ function tectn_get_hero_config() {
           'logo_id'            => $logo_id,
           'headline_text'      => $headline_text,
           'gradient_overlay'   => isset( $init['gradient_overlay'] ) ? (bool) $init['gradient_overlay'] : true,
+        ),
+      );
+      return $config;
+    }
+
+    // Medium hero: solid color or featured image bg + headline only.
+    if ( $hero_style === 'medium' ) {
+      $medium = get_field( 'medium_hero_options', $post->ID );
+      if ( ! is_array( $medium ) ) {
+        $medium = array();
+      }
+
+      $page_title   = get_the_title( $post->ID );
+      $headline_wys = function_exists( 'get_field' ) ? get_field( 'hero_headline', $post->ID ) : '';
+      $headline_wys = is_string( $headline_wys ) ? trim( $headline_wys ) : '';
+      $headline_text = $headline_wys !== '' ? $headline_wys : $page_title;
+
+      $use_solid_color   = ! empty( $medium['use_solid_color'] );
+      $background_color  = isset( $medium['background_color'] ) && $medium['background_color'] ? $medium['background_color'] : '#238c55';
+      $page_image_id     = (int) get_post_thumbnail_id( $post->ID );
+
+      // If user picked image mode but the page has no featured image, hide the entire hero.
+      if ( ! $use_solid_color && $page_image_id <= 0 ) {
+        return $default;
+      }
+
+      $config = array(
+        'show' => true,
+        'type' => 'medium',
+        'data' => array(
+          'background_type'   => $use_solid_color ? 'color' : 'image',
+          'background_image'  => $use_solid_color ? 0 : $page_image_id,
+          'background_color'  => $background_color,
+          'headline_text'     => $headline_text,
+        ),
+      );
+      return $config;
+    }
+
+    // Small hero: half height of medium; background can be solid or none; no image option.
+    if ( $hero_style === 'small' ) {
+      $small = get_field( 'small_hero_options', $post->ID );
+      if ( ! is_array( $small ) ) {
+        $small = array();
+      }
+
+      $page_title   = get_the_title( $post->ID );
+      $headline_wys = function_exists( 'get_field' ) ? get_field( 'hero_headline', $post->ID ) : '';
+      $headline_wys = is_string( $headline_wys ) ? trim( $headline_wys ) : '';
+      $headline_text = $headline_wys !== '' ? $headline_wys : $page_title;
+
+      $use_solid_color  = ! empty( $small['use_solid_color'] );
+      $background_color = isset( $small['background_color'] ) && $small['background_color'] ? $small['background_color'] : '#238c55';
+      if ( ! $use_solid_color ) {
+        $background_color = '';
+      }
+
+      $text_color_mode = isset( $small['text_color'] ) ? (string) $small['text_color'] : 'light';
+      if ( $text_color_mode !== 'dark' && $text_color_mode !== 'light' ) {
+        $text_color_mode = 'light';
+      }
+
+      $config = array(
+        'show' => true,
+        'type' => 'medium',
+        'data' => array(
+          'background_type'  => 'color',
+          'background_image' => 0,
+          'background_color' => $background_color,
+          'headline_text'    => $headline_text,
+          'size'              => 'small',
+          'text_color'       => $text_color_mode,
         ),
       );
       return $config;
@@ -890,7 +962,7 @@ function tectn_get_events_option( $field_name ) {
 }
 
 /**
- * Prepend Events hero and intro HTML before the calendar view (Theme Settings > Events).
+ * Prepend Hero Medium (Events archive) and intro HTML before the calendar view (Theme Settings > Events).
  * When "Default Page Template" is used, hero and intro are already output in archive.php – do not duplicate.
  */
 function tectn_events_hero_and_intro_before_html( $before ) {
@@ -903,7 +975,7 @@ function tectn_events_hero_and_intro_before_html( $before ) {
 	}
 	$hero_config = tectn_get_hero_config();
 	$out        = '';
-	if ( ! empty( $hero_config['show'] ) && $hero_config['type'] === 'events' ) {
+	if ( ! empty( $hero_config['show'] ) && $hero_config['type'] === 'medium' ) {
 		ob_start();
 		$hero_config = $hero_config; // pass to partial
 		include get_template_directory() . '/partials/hero/hero.php';

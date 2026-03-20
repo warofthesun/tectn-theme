@@ -256,36 +256,6 @@
             ]
         },
         {
-            "key": "field_682626e226785",
-            "label": "Large Hero Options",
-            "name": "large_hero_options",
-            "aria-label": "",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_68260aefb86c7",
-                        "operator": "==",
-                        "value": "medium"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_68261fa8ee3eb"
-            ],
-            "display": "group",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
             "key": "field_6826270c26786",
             "label": "Medium Hero Options",
             "name": "medium_hero_options",
@@ -308,7 +278,8 @@
                 "id": ""
             },
             "clone": [
-                "group_6826202d5b036"
+                "group_6826202d5b036",
+                "field_68225159eee20"
             ],
             "display": "group",
             "layout": "block",
@@ -338,7 +309,8 @@
                 "id": ""
             },
             "clone": [
-                "group_682620428c475"
+                "group_682620428c475",
+                "field_68225159eee20"
             ],
             "display": "group",
             "layout": "block",
@@ -372,11 +344,6 @@
                 "param": "post_type",
                 "operator": "!=",
                 "value": "tribe_events"
-            },
-            {
-                "param": "post_type",
-                "operator": "!=",
-                "value": "people"
             }
         ]
     ],
@@ -385,12 +352,10 @@
     "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": [
-        "featured_image"
-    ],
+    "hide_on_screen": "",
     "active": true,
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773590785
+    "modified": 1773883733
 }

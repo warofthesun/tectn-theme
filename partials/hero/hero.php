@@ -2,6 +2,7 @@
 /**
  * Reusable hero partial. Uses tectn_get_hero_config() for context (page, post, blog, archive).
  * Editor choice on pages via ACF "Hero Style"; automatic type on single post, blog index, archive.
+ * Hero Medium is used for the Medium style on pages and for the Events archive (same markup/CSS).
  */
 $hero = isset( $hero_config ) ? $hero_config : tectn_get_hero_config();
 if ( empty( $hero['show'] ) ) {
@@ -131,34 +132,43 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
     </div>
   </div>
 
-<?php elseif ( $hero_type === 'events' ) : ?>
+<?php elseif ( $hero_type === 'medium' ) : ?>
   <?php
-  // Events hero: same gradient overlay as initiative when image; solid color when no image; no wave, no logo.
-  $events_bg_style = '';
+  // Hero Medium: gradient overlay when image; solid color when no image; no wave, no logo. (Events archive uses same markup.)
+  $medium_bg_style = '';
   if ( isset( $d['background_type'] ) && $d['background_type'] === 'color' && ! empty( $d['background_color'] ) ) {
-    $events_bg_style = 'background-color: ' . esc_attr( $d['background_color'] ) . ';';
+    $medium_bg_style = 'background-color: ' . esc_attr( $d['background_color'] ) . ';';
   } elseif ( ! empty( $d['background_image'] ) ) {
     $img = wp_get_attachment_image_src( (int) $d['background_image'], 'hero-bg' );
     if ( $img ) {
-      $events_bg_style = 'background-image: url(' . esc_url( $img[0] ) . ');';
+      $medium_bg_style = 'background-image: url(' . esc_url( $img[0] ) . ');';
     }
   }
-  $has_image = ! empty( $events_bg_style ) && strpos( $events_bg_style, 'background-image' ) !== false;
+  $has_image = ! empty( $medium_bg_style ) && strpos( $medium_bg_style, 'background-image' ) !== false;
   ?>
-  <div class="hero__container hero__container--events hero__container--initiative hero__container--gradient-full">
+  <?php
+  $is_small            = isset( $d['size'] ) && $d['size'] === 'small';
+  $is_events_archive   = is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' );
+  // Full-height medium uses --medium; Hero Small on pages uses --small only for headline/title.
+  $use_medium_text_classes = ! $is_small || $is_events_archive;
+  $text_mode               = isset( $d['text_color'] ) ? (string) $d['text_color'] : '';
+  $text_dark               = $text_mode === 'dark';
+  ?>
+  <div
+    class="<?php echo $is_small ? 'hero__container hero__container--small' : 'hero__container hero__container--medium'; ?>">
     <div class="hero__container--inner">
-      <?php if ( $events_bg_style ) : ?>
-        <div class="hero__content hero__content--bg col-xs-12" style="<?php echo $events_bg_style; ?>"></div>
+      <?php if ( $medium_bg_style ) : ?>
+        <div class="hero__content hero__content--bg col-xs-12" style="<?php echo $medium_bg_style; ?>"></div>
       <?php endif; ?>
 
       <?php if ( $has_image ) : ?>
-        <div class="hero__overlay hero__overlay--initiative hero__overlay--full-width" aria-hidden="true"></div>
+        <div class="hero__overlay hero__overlay--medium hero__overlay--full-width" aria-hidden="true"></div>
       <?php endif; ?>
 
-      <div class="hero__content hero__content--text hero__content--initiative hero__content--events col-xs-12">
-        <div class="hero__headline hero__headline--initiative hero__headline--events">
+      <div class="hero__content hero__content--text<?php echo $is_small ? ' hero__content--small' : ' hero__content--medium'; ?> col-xs-12">
+        <div class="hero__headline <?php echo $use_medium_text_classes ? 'hero__headline--medium' : 'hero__headline--small'; ?>">
           <?php if ( ! empty( $d['headline_text'] ) ) : ?>
-            <h1 class="hero__title hero__title--initiative"><?php echo esc_html( $d['headline_text'] ); ?></h1>
+            <h1 class="hero__title <?php echo $use_medium_text_classes ? 'hero__title--medium' : 'hero__title--small'; ?><?php echo $text_dark ? ' dark' : ''; ?>"><?php echo esc_html( $d['headline_text'] ); ?></h1>
           <?php endif; ?>
         </div>
       </div>
@@ -283,7 +293,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
         }
         ?>
         <div class="hero__text-block" style="margin-top:auto; margin-bottom:20vh;">
-          <h1 class="curve curve--back"><?php echo wp_kses_post( $landing_headline ); ?></h1>
+          <h1 class="hero__title--landing"><?php echo wp_kses_post( $landing_headline ); ?></h1>
           <?php if ( ! empty( $d['paragraph'] ) ) : ?>
             <p class="hero__paragraph"><?php echo esc_html( $d['paragraph'] ); ?></p>
           <?php endif; ?>

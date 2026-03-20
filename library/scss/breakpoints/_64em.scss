@@ -347,19 +347,37 @@
   HERO STYLES
   *********************/
 
-  .curve {
-	opacity: 0;
-	transform: translateY(20px);
-	animation: curveIn 1200ms cubic-bezier(.22,1,.36,1) forwards;
-  }
-  
-  .curve--middle { animation-delay: 120ms; }
-  .curve--back   { animation-delay: 240ms; }
-  
   @keyframes curveIn {
 	to {
 	  opacity: 1;
 	  transform: translateY(0);
+	}
+  }
+
+  // Landing overlay SVG paths only — do not use bare .curve on text (clashes with medium/initiative title work).
+  .hero__overlay-svg .curve {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: curveIn 1200ms cubic-bezier(.22,1,.36,1) forwards;
+  }
+
+  .hero__overlay-svg .curve--middle { animation-delay: 120ms; }
+  .hero__overlay-svg .curve--back   { animation-delay: 240ms; }
+
+  // Home / Landing headline: same stagger as former .curve--back on h1.
+  .hero__title--landing {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: curveIn 1200ms cubic-bezier(.22,1,.36,1) forwards;
+	animation-delay: 240ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+	.hero__overlay-svg .curve,
+	.hero__title--landing {
+		opacity: 1 !important;
+		transform: none !important;
+		animation: none !important;
 	}
   }
 
@@ -407,8 +425,9 @@
   		}
 
   		&--landing {
-  			h1 {
-  			font-size: 4.5em;
+  			// Match initiative / medium / small hero headline scale; rem avoids parent font-size shrinking em
+  			h1.hero__title--landing {
+  			font-size: 4.5rem;
   			margin-top: 0;
   			margin-bottom: 0;
 
@@ -417,7 +436,7 @@
   				color: $primary-50;
   				font-family: $header-font;
   				text-transform: uppercase;
-  				font-size: .4em;
+  				font-size: 0.4em;
   				line-height: 1.1;
   			}
   			}
@@ -486,6 +505,12 @@
   				padding-left: 7%;
   				padding-right: 5%;
   			}
+
+			&--small {
+				justify-content: end;
+				margin-bottom: 3vh;
+				min-height: 255px;
+			}
   	}
 
   	&__post {
@@ -504,6 +529,14 @@
 
   .hero__title--initiative {
 	font-size: 6.5em;
+  }
+
+  .hero__title--medium {
+  	font-size: 6.5em;
+  }
+
+  .hero__title--small {
+  	font-size: 6.5em;
   }
 
   /***************

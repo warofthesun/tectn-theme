@@ -142,8 +142,8 @@
   		}
 
   		&--landing {
-  			h1 {
-  			font-size: 4.5em;
+  			h1.hero__title--landing {
+  			font-size: 4.5rem;
   			margin-top: 0;
   			margin-bottom: 0;
 
@@ -152,7 +152,7 @@
   				color: $primary-50;
   				font-family: $header-font;
   				text-transform: uppercase;
-  				font-size: .4em;
+  				font-size: 0.4em;
   				line-height: 1.1;
   			}
   			}
