@@ -1942,11 +1942,33 @@ border: $spacing-xs solid $white;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 	height: 100%;
   }
-  
+
+  /* Full-card link (e.g. events) */
+  .c-postCard:has(> .c-postCard__link) {
+	display: flex;
+	flex-direction: column;
+  }
+
   .c-postCard__link {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	height: 100%;
+	text-decoration: none;
+	color: inherit;
+  }
+
+  /* Blog post: image + title (+ CTA) → post; author & chips → archives */
+  .c-postCard--split {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+  }
+
+  .c-postCard__mediaLink {
+	display: block;
+	flex-shrink: 0;
 	text-decoration: none;
 	color: inherit;
   }
@@ -1993,6 +2015,27 @@ border: $spacing-xs solid $white;
 	text-transform: uppercase;
 	letter-spacing: 0.02em;
   }
+
+  .c-postCard__titleLink {
+	color: inherit;
+	text-decoration: none;
+
+	&:hover,
+	&:focus-visible {
+		opacity: 0.92;
+	}
+  }
+
+  .c-postCard__authorLink {
+	color: inherit;
+	text-decoration: none;
+
+	&:hover,
+	&:focus-visible {
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+  }
   
   .c-postCard__chips {
 	display: flex;
@@ -2002,21 +2045,33 @@ border: $spacing-xs solid $white;
 	flex-shrink: 0;
   }
   
-  .c-chip {
+  .c-chip,
+  a.c-chip {
 	font-size: 11px;
 	padding: 4px 10px;
 	border-radius: 999px;
 	border: 1px solid rgba(255, 255, 255, 0.35);
 	background: rgba(255, 255, 255, 0.08);
 	color: rgba(255, 255, 255, 0.95);
+	text-decoration: none;
+	cursor: pointer;
+	display: inline-block;
+	line-height: 1.3;
+
+	&:hover,
+	&:focus-visible {
+		background: rgba(255, 255, 255, 0.14);
+	}
   }
   
   .c-postCard__cta {
 	display: inline-block;
 	width: 100%;
+	box-sizing: border-box;
 	text-align: center;
 	padding: 10px 12px;
 	margin-top: auto;
+	text-decoration: none;
 	@include border-radius-md;
 	@include color_surface__button_primary--default;
 	font-size: 1.1em;

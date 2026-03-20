@@ -267,6 +267,9 @@ if ( $show_no_events ) {
       <?php $grid_count = count($posts_to_render); $grid_class = ($grid_count <= 2) ? ' c-posts__grid--count-' . $grid_count : ''; ?>
       <div class="c-posts__grid<?= esc_attr($grid_class); ?>">
         <?php foreach ($posts_to_render as $p): ?>
+          <?php if ( $p->post_type === 'post' && function_exists( 'tectn_render_blog_post_card' ) ) : ?>
+            <?php tectn_render_blog_post_card( $p, array( 'show_cta' => true ) ); ?>
+          <?php else : ?>
           <?php
             // Use explicit post IDs so we don't depend on global $post
             $post_id  = $p->ID;
@@ -332,6 +335,7 @@ if ( $show_no_events ) {
               </div>
             </a>
           </article>
+          <?php endif; ?>
         <?php endforeach; ?>
       </div>
     <?php else: ?>

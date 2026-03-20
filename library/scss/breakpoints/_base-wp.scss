@@ -767,7 +767,9 @@ PAGE NAVI STYLES
       white-space: nowrap;
       padding: 0;
       clear: both;
-      border-radius: 3px;
+      border-radius: $radius-sm;
+
+	  
     }
 
     li {
@@ -777,6 +779,23 @@ PAGE NAVI STYLES
       display: inline;
       overflow: hidden;
       border-right: 1px solid $gray;
+	  width: 50px;
+
+	  .current {
+		background-color: $primary-700;
+		color: $white;
+	  }
+
+	  &:first-child {
+		border-radius: $radius-sm 0 0 $radius-sm;
+	  }
+
+	  &:last-child {
+		border-radius: 0 $radius-sm $radius-sm 0;
+		border-right: none;
+	  }
+
+	  
     }
 
     a, span {

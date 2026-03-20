@@ -44,6 +44,9 @@ BASE (MOBILE) SIZE
 // styles in base.scss
 @use "breakpoints/base";
 
+// blog index: featured story + stories grid
+@use "breakpoints/blog-stories-index" as *;
+
 // single post hero + related posts section
 @use "breakpoints/hero-single" as *;
 

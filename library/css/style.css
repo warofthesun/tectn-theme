@@ -2796,7 +2796,7 @@ PAGE NAVI STYLES
   white-space: nowrap;
   padding: 0;
   clear: both;
-  border-radius: 3px;
+  border-radius: 0.5em;
 }
 .pagination li {
   padding: 0;
@@ -2805,6 +2805,18 @@ PAGE NAVI STYLES
   display: inline;
   overflow: hidden;
   border-right: 1px solid #eaedf2;
+  width: 50px;
+}
+.pagination li .current {
+  background-color: #79853E;
+  color: #fff;
+}
+.pagination li:first-child {
+  border-radius: 0.5em 0 0 0.5em;
+}
+.pagination li:last-child {
+  border-radius: 0 0.5em 0.5em 0;
+  border-right: none;
 }
 .pagination a, .pagination span {
   margin: 0;
@@ -5389,7 +5401,36 @@ Card
   height: 100%;
 }
 
+/* Full-card link (e.g. events) */
+.c-postCard:has(> .c-postCard__link) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
 .c-postCard__link {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Blog post: image + title (+ CTA) → post; author & chips → archives */
+.c-postCard--split {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5398,6 +5439,12 @@ Card
   -ms-flex-direction: column;
   flex-direction: column;
   height: 100%;
+}
+
+.c-postCard__mediaLink {
+  display: block;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   text-decoration: none;
   color: inherit;
 }
@@ -5452,6 +5499,23 @@ Card
   letter-spacing: 0.02em;
 }
 
+.c-postCard__titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+.c-postCard__titleLink:hover, .c-postCard__titleLink:focus-visible {
+  opacity: 0.92;
+}
+
+.c-postCard__authorLink {
+  color: inherit;
+  text-decoration: none;
+}
+.c-postCard__authorLink:hover, .c-postCard__authorLink:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .c-postCard__chips {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5464,21 +5528,34 @@ Card
   flex-shrink: 0;
 }
 
-.c-chip {
+.c-chip,
+a.c-chip {
   font-size: 11px;
   padding: 4px 10px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.35);
   background: rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.3;
+}
+.c-chip:hover, .c-chip:focus-visible,
+a.c-chip:hover,
+a.c-chip:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .c-postCard__cta {
   display: inline-block;
   width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   text-align: center;
   padding: 10px 12px;
   margin-top: auto;
+  text-decoration: none;
   border-radius: 0.75em;
   background-color: #D4E485;
   font-size: 1.1em;
@@ -7274,6 +7351,437 @@ a.c-peopleCard__email {
     justify-content: center;
   }
 }
+/******************************************************************
+Site Name:
+Author: The SplitPixel
+
+Stylesheet: Main Stylesheet
+
+Helpful articles on Sass file organization:
+http://thesassway.com/advanced/modular-css-naming-conventions
+
+******************************************************************/
+/*********************
+IMPORTING PARTIALS
+*********************/
+/* =========================
+   Blog index — Stories (reference comp)
+========================= */
+/* Ref: flat header (no drop shadow) on stories index */
+body.tectn-stories-index .header {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* Blog hero uses absolutely positioned layers; inner needs height so content below doesn’t slide under the header */
+body.tectn-stories-index .hero__container--blog .hero__container--inner {
+  position: relative;
+  min-height: clamp(160px, 26vw, 300px);
+}
+
+.c-storiesPage {
+  background-color: #f9f8f0;
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(1.75rem, 4vw, 3rem);
+  margin-top: clamp(0.75rem, 2vw, 1.5rem);
+  margin-bottom: 0;
+}
+
+.c-storiesFeatured {
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+.c-storiesFeatured__inner {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  row-gap: 1.5rem;
+}
+@media only screen and (min-width: 64em) {
+  .c-storiesFeatured__inner {
+    row-gap: 1.75rem;
+  }
+}
+
+.c-storiesFeatured__content {
+  padding-bottom: 0;
+  max-width: none;
+}
+
+.c-storiesFeatured__title {
+  margin: 0 0 1rem;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+  font-size: clamp(1.85rem, 4.2vw, 3.1rem);
+  font-weight: 700;
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+  color: #5c6d3d;
+}
+
+.c-storiesFeatured__titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+.c-storiesFeatured__titleLink:hover, .c-storiesFeatured__titleLink:focus-visible {
+  opacity: 0.88;
+}
+
+.c-storiesFeatured__mediaLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.c-storiesFeatured__mediaLink .c-storiesFeatured__img {
+  display: block;
+}
+
+.c-storiesFeatured__meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  margin: 0 0 1rem;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #74864a;
+}
+
+.c-storiesFeatured__meta-item {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.c-storiesFeatured__meta-icon {
+  color: #74864a;
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+.c-storiesFeatured__meta-gap {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  background: rgba(116, 134, 74, 0.35);
+  margin: 0 0.1rem;
+}
+
+.c-storiesFeatured__authorLink {
+  color: #74864a;
+  text-decoration: none;
+  font-weight: 600;
+}
+.c-storiesFeatured__authorLink:hover, .c-storiesFeatured__authorLink:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.c-storiesFeatured__chips {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.125rem;
+}
+
+.c-storiesFeatured__chips .c-chip {
+  border: 1px solid #74864a;
+  background: transparent;
+  color: #5c6d3d;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.3;
+}
+.c-storiesFeatured__chips .c-chip:hover, .c-storiesFeatured__chips .c-chip:focus-visible {
+  background: rgba(116, 134, 74, 0.08);
+}
+
+.c-storiesFeatured__excerpt {
+  margin: 0 0 1.35rem;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  color: #3a3d35;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 40em;
+}
+
+/* Ref: gold button, white label, modest corner radius (not full pill) */
+.c-storiesFeatured__cta {
+  display: inline-block;
+  text-align: center;
+  padding: 12px 28px;
+  border-radius: 10px;
+  background-color: #f2c94c;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  -webkit-transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.c-storiesFeatured__cta:hover, .c-storiesFeatured__cta:focus-visible {
+  background-color: rgb(239.2375, 189.525, 37.9625);
+  color: #fff;
+}
+.c-storiesFeatured__cta:focus-visible {
+  outline: 2px solid #5c6d3d;
+  outline-offset: 3px;
+}
+
+.c-storiesFeatured__figure {
+  position: relative;
+  overflow: visible;
+  padding: 12px 14px 16px 10px;
+}
+
+.c-storiesFeatured__media {
+  position: relative;
+  z-index: 0;
+  margin: 0 auto;
+  max-width: 100%;
+  overflow: visible;
+}
+.c-storiesFeatured__media::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -8px;
+  right: -16px;
+  bottom: -16px;
+  left: 18%;
+  background: #4d5c32;
+  border-radius: 16px;
+}
+
+.c-storiesFeatured__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+  -webkit-box-shadow: 0 12px 40px rgba(41, 52, 28, 0.15);
+  box-shadow: 0 12px 40px rgba(41, 52, 28, 0.15);
+}
+
+.c-storiesFeatured--no-image .c-storiesFeatured__content {
+  max-width: 42rem;
+}
+
+/* Ref: “STORIES” stacked above full-width rule; small sans (body), not display font */
+.c-storiesDivider {
+  display: block;
+  margin: 0 0 1.5rem;
+}
+
+.c-storiesDivider__label {
+  display: block;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #5c6d3d;
+  margin-bottom: 0.5rem;
+}
+
+.c-storiesDivider__line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(92, 109, 61, 0.45);
+  border: 0;
+}
+
+.c-storiesIndex {
+  padding-bottom: clamp(20px, 3vw, 40px);
+}
+.c-storiesIndex .c-posts__grid {
+  margin-top: 0;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-column-gap: 1em;
+  -moz-column-gap: 1em;
+  column-gap: 1em;
+  row-gap: 2em;
+}
+@media only screen and (min-width: 48em) {
+  .c-storiesIndex .c-posts__grid {
+    -webkit-column-gap: 24px;
+    -moz-column-gap: 24px;
+    column-gap: 24px;
+    row-gap: 48px;
+  }
+}
+@media only screen and (min-width: 64em) {
+  .c-storiesIndex .c-posts__grid {
+    -webkit-column-gap: 28px;
+    -moz-column-gap: 28px;
+    column-gap: 28px;
+    row-gap: 56px;
+  }
+}
+.c-storiesIndex {
+  /* Ref: no card panel — cream page shows through; image is its own rounded block */
+}
+.c-storiesIndex .c-postCard {
+  height: auto;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+  border: none;
+}
+.c-storiesIndex .c-postCard__link {
+  height: auto;
+  min-height: 0;
+}
+.c-storiesIndex .c-postCard__mediaLink {
+  text-decoration: none;
+  color: inherit;
+}
+.c-storiesIndex .c-postCard__titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+.c-storiesIndex .c-postCard__titleLink:hover, .c-storiesIndex .c-postCard__titleLink:focus-visible {
+  opacity: 0.88;
+}
+.c-storiesIndex .c-postCard__authorLink {
+  color: inherit;
+  text-decoration: none;
+}
+.c-storiesIndex .c-postCard__authorLink:hover, .c-storiesIndex .c-postCard__authorLink:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.c-storiesIndex .c-postCard__media {
+  overflow: hidden;
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+.c-storiesIndex .c-postCard__media img,
+.c-storiesIndex .c-postCard__img {
+  border-radius: 14px !important;
+}
+.c-storiesIndex .c-postCard__body {
+  -webkit-box-flex: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  padding: 0 2px 8px;
+  background: transparent;
+}
+.c-storiesIndex .c-postCard__title {
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+  color: #5c6d3d;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.2;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.c-storiesIndex .c-postCard__meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: 0.65rem;
+  -moz-column-gap: 0.65rem;
+  column-gap: 0.65rem;
+  row-gap: 0.25rem;
+  margin: 0 0 10px;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+  color: #74864a;
+  opacity: 1;
+}
+.c-storiesIndex .c-postCard__meta-item {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+.c-storiesIndex .c-postCard__meta-icon {
+  color: #74864a;
+  font-size: 0.72rem;
+  opacity: 0.92;
+}
+.c-storiesIndex .c-postCard__chips {
+  gap: 8px;
+  margin: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+.c-storiesIndex .c-chip,
+.c-storiesIndex a.c-chip {
+  border: 1px solid #74864a;
+  background: transparent;
+  color: #5c6d3d;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.3;
+}
+.c-storiesIndex .c-chip:hover, .c-storiesIndex .c-chip:focus-visible,
+.c-storiesIndex a.c-chip:hover,
+.c-storiesIndex a.c-chip:focus-visible {
+  background: rgba(116, 134, 74, 0.08);
+}
+
+.c-storiesIndex__empty {
+  margin: 1rem 0 2rem;
+  color: #74864a;
+}
+
 /**
  * Single post hero: visual styles live in _base.scss (title size, chips, content padding, wave).
  * This file only adds: header transparent over hero, and related-posts section styles.
