@@ -44,6 +44,23 @@
     justify-content: center;
   }
 
+  .c-storiesFeatured__inner {
+    row-gap: 1.75rem;
+  }
+
+  .c-storiesIndex .c-posts__grid {
+    column-gap: 28px;
+    row-gap: 56px;
+  }
+
+  .c-storiesIndexLayout--with-sidebar.c-storiesIndexLayout--sidebar-left {
+    flex-direction: row-reverse;
+  }
+
+  .c-storiesIndex--with-sidebar .c-posts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .c-card-block__grid--count-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-content: center;

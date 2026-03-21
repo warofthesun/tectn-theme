@@ -286,6 +286,11 @@
     justify-content: center;
   }
 
+  .c-storiesIndex .c-posts__grid {
+    column-gap: 24px;
+    row-gap: 48px;
+  }
+
   .c-posts__blob {
     width: 1000px;
     height: 480px;
