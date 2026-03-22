@@ -1,0 +1,348 @@
+@use "../globals" as *;
+@use "sass:color";
+
+/******************************************************************
+Forms block — third-party embeds (e.g. Bloomerang `.interaction-form`)
+
+Global `modules/forms` styles `.field` like an input, which breaks
+embeds that use `.field` as a wrapper. Scope under `.c-formsEmbed`.
+
+Tokens/typography per `.cursor/rules/match-reference-design.mdc`:
+only `$primary-*`, `$secondary-*`, `$grey-*`, `$spacing-*`, `$radius-*`,
+`$header-font`, `$body-font`, and existing mixins.
+
+Reference: warm cream panel ($primary-10 ~#F5F7EF), olive heading +
+field borders ($primary-600), black labels, red required markers,
+tall pill inputs, generous 2×2 contact grid.
+
+Select chevron stroke matches $primary-700 (#79853E).
+
+******************************************************************/
+
+.c-formsEmbed {
+	// Surface: warm cream closest to comp ~#F5F7EF ($primary-10 / $grey-10 bracket)
+	background-color: $primary-10;
+	padding: $spacing-xxl $spacing-xxl;
+	border-radius: $radius-lg;
+	box-sizing: border-box;
+	max-width: 650px;
+	margin-left: auto;
+	margin-right: auto;
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	#interaction-form-container {
+		max-width: 100%;
+	}
+
+	// --- Reset: theme treats bare `.field` like an input (see modules/forms) ---
+	.interaction-form .field {
+		display: block;
+		width: auto;
+		max-width: none;
+		height: auto !important;
+		min-height: 0 !important;
+		margin: 0 0 $spacing-md;
+		padding: 0 !important;
+		border: none !important;
+		background: transparent !important;
+		box-shadow: none !important;
+		border-radius: 0 !important;
+		line-height: inherit !important;
+		vertical-align: baseline !important;
+		font-size: inherit !important;
+		color: inherit !important;
+
+		&:focus,
+		&:active {
+			background: transparent !important;
+		}
+	}
+
+	.interaction-form .field.checkbox,
+	.interaction-form .field.radio {
+		margin-bottom: $spacing-sm;
+	}
+
+	.interaction-form {
+		font-family: $body-font;
+
+		// Bloomerang injects a late <style>; higher specificity + !important where needed.
+		label {
+			color: $black !important;
+			display: block;
+			font-family: $body-font !important;
+			font-size: 0.875rem;
+			font-weight: 400;
+			line-height: 1.35;
+			// Reference: labels sit close above the control
+			margin: 0 0 $spacing-xxs;
+		}
+
+		label.error {
+			color: $grey-900 !important;
+			display: inline-block;
+			font-weight: 700;
+			padding: 0 $spacing-xs;
+			margin-top: $spacing-xxs;
+		}
+
+		.required-star {
+			// Reference + Bloomerang: red asterisk; no dedicated token in _variables.scss.
+			color: #aa0000 !important;
+			margin-left: $spacing-xxs;
+		}
+
+		h3 {
+			color: $primary-600 !important;
+			font-family: $header-font !important;
+			font-size: 1.625rem;
+			font-weight: 400;
+			letter-spacing: 0.1em;
+			line-height: 1.1;
+			text-align: left;
+			text-transform: uppercase;
+			margin: 0;
+			margin-bottom:0;
+			padding: 0;
+			border: none;
+			background: transparent;
+		}
+
+		.section {
+			margin-bottom: $spacing-xxl;
+		}
+
+		
+		input[type="text"],
+		input[type="email"],
+		input[type="tel"],
+		input[type="number"],
+		input[type="url"],
+		input[type="search"],
+		select,
+		textarea {
+			display: block;
+			width: 100% !important;
+			max-width: none !important;
+			height: auto !important;
+			min-height: calc(#{$spacing-xxl} + #{$spacing-lg});
+			margin: 0 !important;
+			padding: $spacing-md $spacing-xl !important;
+			font-family: $body-font !important;
+			font-size: 1rem !important;
+			line-height: 1.35 !important;
+			color: $grey-900 !important;
+			background-color: $white !important;
+			border: 1px solid $primary-600 !important;
+			border-radius: $radius-sm !important;
+			box-shadow: none !important;
+			vertical-align: middle !important;
+			@include transition(border-color 0.2s ease, box-shadow 0.2s ease);
+
+			&:focus,
+			&:active {
+				outline: none !important;
+				background-color: $white !important;
+				border-color: $primary-700 !important;
+				box-shadow: 0 0 0 3px rgba($primary-600, 0.22) !important;
+			}
+		}
+
+		textarea {
+			border-radius: $radius-sm !important;
+			min-height: calc(#{$spacing-xxl} * 3);
+			padding-top: $spacing-md !important;
+			padding-bottom: $spacing-md !important;
+			resize: vertical;
+		}
+
+		select {
+			appearance: none;
+			// stroke %2379853E = $primary-700
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%2379853E' stroke-width='1.5' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E") !important;
+			background-repeat: no-repeat !important;
+			background-position: right $spacing-md center !important;
+			padding-right: $spacing-xxl !important;
+		}
+
+		.section.contact {
+			display: grid;
+			grid-template-columns: 1fr;
+			// Reference: generous gutters between the 2×2 fields
+			column-gap: $spacing-xxl;
+			row-gap: $spacing-xl;
+
+			// Stack all fields on mobile; 2×2 from tablet up (matches theme 48em breakpoint)
+			@media (min-width: 48em) {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			> h3 {
+				grid-column: 1 / -1;
+			}
+
+			> .field {
+				margin-bottom: 0;
+			}
+		}
+
+		// Country, Address, City full width; State + Zip (or Province + Postal) paired — stacked until tablet
+		.section.address {
+			display: grid;
+			grid-template-columns: 1fr;
+			column-gap: $spacing-xxl;
+			row-gap: $spacing-xl;
+
+			@media (min-width: 48em) {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			> h3 {
+				grid-column: 1 / -1;
+			}
+
+			> .field.country,
+			> .field.street-address,
+			> .field.city {
+				grid-column: 1 / -1;
+			}
+
+			@media (min-width: 48em) {
+				> .field.state,
+				> .field.province {
+					grid-column: 1;
+				}
+
+				> .field.zip-code,
+				> .field.postal-code {
+					grid-column: 2;
+				}
+			}
+
+			> .field {
+				margin-bottom: 0;
+			}
+		}
+
+		// Single-column grid: same row/column gaps as contact/address for consistent rhythm
+		.section.custom-fields {
+			display: grid;
+			grid-template-columns: 1fr;
+			column-gap: $spacing-xxl;
+			row-gap: $spacing-xl;
+
+			> h3 {
+				grid-column: 1 / -1;
+			}
+
+			> .field {
+				margin-bottom: 0;
+			}
+		}
+
+		.section.comment,
+		.section.consent {
+			> .field:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		.section.comment {
+			margin-left: 0 !important;
+			padding: 0 !important;
+		}
+
+		.field .checkboxes {
+			max-width: 100% !important;
+			border-color: $primary-600 !important;
+			@include border-radius-sm;
+			overflow: hidden;
+
+			.checkbox {
+				padding: 10px 20px 10px 20px!important;
+				height: auto!important;
+			}
+			
+		}
+
+		.field .checkbox {
+			border-bottom-color: rgba($primary-600, 0.28) !important;
+		}
+
+		.field .checkbox.selected {
+			background: $primary-600 !important;
+			color: $white !important;
+		}
+
+		.errors {
+			@include border-radius-md;
+			margin-bottom: $spacing-md;
+			border-color: $secondary-600 !important;
+			color: $grey-900 !important;
+		}
+
+		.btn-group {
+			margin-top: $spacing-xl;
+		}
+
+		input[type="submit"].btn-submit-interaction,
+		.btn-submit-interaction {
+			display: inline-block;
+			width: auto !important;
+			min-height: 0 !important;
+			max-width: none !important;
+			margin: 0 !important;
+			padding: $spacing-sm $spacing-xxl !important;
+			font-family: $header-font !important;
+			font-size: 1rem !important;
+			font-weight: 400 !important;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			line-height: 1.2 !important;
+			color: $white !important;
+			@include color_surface__dark_primary;
+			border: 1px solid $primary-600 !important;
+			border-radius: $radius-sm !important;
+			cursor: pointer;
+			box-shadow: none !important;
+
+			&:hover,
+			&:focus {
+				background-color: color.adjust($primary-600, $lightness: -7%) !important;
+				border-color: color.adjust($primary-600, $lightness: -7%) !important;
+				color: $white !important;
+			}
+
+			&:disabled,
+			&.disabled {
+				opacity: 0.65;
+				cursor: not-allowed;
+			}
+		}
+	}
+
+	.donation-success {
+		h2 {
+			color: $primary-600 !important;
+			font-family: $header-font !important;
+			font-size: 1.5rem;
+			text-transform: uppercase;
+			margin-bottom: $spacing-md;
+		}
+
+		p {
+			color: $grey-800;
+			font-family: $body-font;
+			line-height: 1.5;
+		}
+	}
+}
+
+.entry-content pre {
+	display: none !important;
+}

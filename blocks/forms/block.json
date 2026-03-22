@@ -1,0 +1,25 @@
+{
+  "name": "tectn/forms",
+  "title": "Forms",
+  "description": "Embed a form configured under Site Settings → Forms.",
+  "style": ["file:../library/css/style.css"],
+  "category": "tectn-blocks",
+  "icon": "feedback",
+  "keywords": ["form", "embed", "contact", "newsletter"],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "forms.php"
+  },
+  "supports": {
+    "jsx": true,
+    "anchor": true
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {
+        "is_preview": true
+      }
+    }
+  }
+}
