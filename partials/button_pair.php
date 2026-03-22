@@ -1,6 +1,6 @@
 <?php
 // Button Pair: repeater buttons (per-button style class) + optional parent color class.
-// When $buttons_data is set (e.g. from footer Site Settings CTA), uses that array instead of have_rows.
+// When $buttons_data is set (e.g. from Footer Information options CTA), uses that array instead of have_rows.
 
 $use_passed_data = isset( $buttons_data ) && is_array( $buttons_data ) && ! empty( $buttons_data );
 $has_buttons     = $use_passed_data || have_rows( 'buttons' );

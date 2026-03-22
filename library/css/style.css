@@ -1678,6 +1678,344 @@ http://thesassway.com/advanced/modular-css-naming-conventions
 IMPORTING PARTIALS
 *********************/
 /******************************************************************
+Forms block — third-party embeds (e.g. Bloomerang `.interaction-form`)
+
+Global `modules/forms` styles `.field` like an input, which breaks
+embeds that use `.field` as a wrapper. Scope under `.c-formsEmbed`.
+
+Tokens/typography per `.cursor/rules/match-reference-design.mdc`:
+only `$primary-*`, `$secondary-*`, `$grey-*`, `$spacing-*`, `$radius-*`,
+`$header-font`, `$body-font`, and existing mixins.
+
+Reference: warm cream panel ($primary-10 ~#F5F7EF), olive heading +
+field borders ($primary-600), black labels, red required markers,
+tall pill inputs, generous 2×2 contact grid.
+
+Select chevron stroke matches $primary-700 (#79853E).
+
+******************************************************************/
+.c-formsEmbed {
+  background-color: #F4F5ED;
+  padding: 2em 2em;
+  border-radius: 1em;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.c-formsEmbed *,
+.c-formsEmbed *::before,
+.c-formsEmbed *::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.c-formsEmbed #interaction-form-container {
+  max-width: 100%;
+}
+.c-formsEmbed .interaction-form .field {
+  display: block;
+  width: auto;
+  max-width: none;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 0 1em;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  line-height: inherit !important;
+  vertical-align: baseline !important;
+  font-size: inherit !important;
+  color: inherit !important;
+}
+.c-formsEmbed .interaction-form .field:focus, .c-formsEmbed .interaction-form .field:active {
+  background: transparent !important;
+}
+.c-formsEmbed .interaction-form .field.checkbox,
+.c-formsEmbed .interaction-form .field.radio {
+  margin-bottom: 0.75em;
+}
+.c-formsEmbed .interaction-form {
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+}
+.c-formsEmbed .interaction-form label {
+  color: #000 !important;
+  display: block;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif !important;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.35;
+  margin: 0 0 0.25em;
+}
+.c-formsEmbed .interaction-form label.error {
+  color: #202123 !important;
+  display: inline-block;
+  font-weight: 700;
+  padding: 0 0.5em;
+  margin-top: 0.25em;
+}
+.c-formsEmbed .interaction-form .required-star {
+  color: #aa0000 !important;
+  margin-left: 0.25em;
+}
+.c-formsEmbed .interaction-form h3 {
+  color: #A1B152 !important;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
+  font-size: 1.625rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.1;
+  text-align: left;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+.c-formsEmbed .interaction-form .section {
+  margin-bottom: 2em;
+}
+.c-formsEmbed .interaction-form input[type=text],
+.c-formsEmbed .interaction-form input[type=email],
+.c-formsEmbed .interaction-form input[type=tel],
+.c-formsEmbed .interaction-form input[type=number],
+.c-formsEmbed .interaction-form input[type=url],
+.c-formsEmbed .interaction-form input[type=search],
+.c-formsEmbed .interaction-form select,
+.c-formsEmbed .interaction-form textarea {
+  display: block;
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: -webkit-calc(2em + 1.25em);
+  min-height: calc(2em + 1.25em);
+  margin: 0 !important;
+  padding: 1em 1.5em !important;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif !important;
+  font-size: 1rem !important;
+  line-height: 1.35 !important;
+  color: #202123 !important;
+  background-color: #fff !important;
+  border: 1px solid #A1B152 !important;
+  border-radius: 0.5em !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  vertical-align: middle !important;
+  -webkit-transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-transition: border-color 0.2s ease, -webkit-box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, -webkit-box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, -webkit-box-shadow 0.2s ease;
+}
+.c-formsEmbed .interaction-form input[type=text]:focus, .c-formsEmbed .interaction-form input[type=text]:active,
+.c-formsEmbed .interaction-form input[type=email]:focus,
+.c-formsEmbed .interaction-form input[type=email]:active,
+.c-formsEmbed .interaction-form input[type=tel]:focus,
+.c-formsEmbed .interaction-form input[type=tel]:active,
+.c-formsEmbed .interaction-form input[type=number]:focus,
+.c-formsEmbed .interaction-form input[type=number]:active,
+.c-formsEmbed .interaction-form input[type=url]:focus,
+.c-formsEmbed .interaction-form input[type=url]:active,
+.c-formsEmbed .interaction-form input[type=search]:focus,
+.c-formsEmbed .interaction-form input[type=search]:active,
+.c-formsEmbed .interaction-form select:focus,
+.c-formsEmbed .interaction-form select:active,
+.c-formsEmbed .interaction-form textarea:focus,
+.c-formsEmbed .interaction-form textarea:active {
+  outline: none !important;
+  background-color: #fff !important;
+  border-color: #79853E !important;
+  -webkit-box-shadow: 0 0 0 3px rgba(161, 177, 82, 0.22) !important;
+  box-shadow: 0 0 0 3px rgba(161, 177, 82, 0.22) !important;
+}
+.c-formsEmbed .interaction-form textarea {
+  border-radius: 0.5em !important;
+  min-height: -webkit-calc(2em * 3);
+  min-height: calc(2em * 3);
+  padding-top: 1em !important;
+  padding-bottom: 1em !important;
+  resize: vertical;
+}
+.c-formsEmbed .interaction-form select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%2379853E' stroke-width='1.5' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 1em center !important;
+  padding-right: 2em !important;
+}
+.c-formsEmbed .interaction-form .section.contact {
+  display: grid;
+  grid-template-columns: 1fr;
+  -webkit-column-gap: 2em;
+  -moz-column-gap: 2em;
+  column-gap: 2em;
+  row-gap: 1.5em;
+}
+@media (min-width: 48em) {
+  .c-formsEmbed .interaction-form .section.contact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.c-formsEmbed .interaction-form .section.contact > h3 {
+  grid-column: 1/-1;
+}
+.c-formsEmbed .interaction-form .section.contact > .field {
+  margin-bottom: 0;
+}
+.c-formsEmbed .interaction-form .section.address {
+  display: grid;
+  grid-template-columns: 1fr;
+  -webkit-column-gap: 2em;
+  -moz-column-gap: 2em;
+  column-gap: 2em;
+  row-gap: 1.5em;
+}
+@media (min-width: 48em) {
+  .c-formsEmbed .interaction-form .section.address {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.c-formsEmbed .interaction-form .section.address > h3 {
+  grid-column: 1/-1;
+}
+.c-formsEmbed .interaction-form .section.address > .field.country,
+.c-formsEmbed .interaction-form .section.address > .field.street-address,
+.c-formsEmbed .interaction-form .section.address > .field.city {
+  grid-column: 1/-1;
+}
+@media (min-width: 48em) {
+  .c-formsEmbed .interaction-form .section.address > .field.state,
+  .c-formsEmbed .interaction-form .section.address > .field.province {
+    grid-column: 1;
+  }
+  .c-formsEmbed .interaction-form .section.address > .field.zip-code,
+  .c-formsEmbed .interaction-form .section.address > .field.postal-code {
+    grid-column: 2;
+  }
+}
+.c-formsEmbed .interaction-form .section.address > .field {
+  margin-bottom: 0;
+}
+.c-formsEmbed .interaction-form .section.custom-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  -webkit-column-gap: 2em;
+  -moz-column-gap: 2em;
+  column-gap: 2em;
+  row-gap: 1.5em;
+}
+.c-formsEmbed .interaction-form .section.custom-fields > h3 {
+  grid-column: 1/-1;
+}
+.c-formsEmbed .interaction-form .section.custom-fields > .field {
+  margin-bottom: 0;
+}
+.c-formsEmbed .interaction-form .section.comment > .field:last-child,
+.c-formsEmbed .interaction-form .section.consent > .field:last-child {
+  margin-bottom: 0;
+}
+.c-formsEmbed .interaction-form .section.comment {
+  margin-left: 0 !important;
+  padding: 0 !important;
+}
+.c-formsEmbed .interaction-form .field .checkboxes {
+  max-width: 100% !important;
+  border-color: #A1B152 !important;
+  border-radius: 0.5em;
+  overflow: hidden;
+}
+.c-formsEmbed .interaction-form .field .checkboxes .checkbox {
+  padding: 10px 20px 10px 20px !important;
+  height: auto !important;
+}
+.c-formsEmbed .interaction-form .field .checkbox {
+  border-bottom-color: rgba(161, 177, 82, 0.28) !important;
+}
+.c-formsEmbed .interaction-form .field .checkbox.selected {
+  background: #A1B152 !important;
+  color: #fff !important;
+}
+.c-formsEmbed .interaction-form .errors {
+  border-radius: 0.75em;
+  margin-bottom: 1em;
+  border-color: #547231 !important;
+  color: #202123 !important;
+}
+.c-formsEmbed .interaction-form .btn-group {
+  margin-top: 1.5em;
+}
+.c-formsEmbed .interaction-form input[type=submit].btn-submit-interaction,
+.c-formsEmbed .interaction-form .btn-submit-interaction {
+  display: inline-block;
+  width: auto !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0.75em 2em !important;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2 !important;
+  color: #fff !important;
+  background-color: #A1B152;
+  border: 1px solid #A1B152 !important;
+  border-radius: 0.5em !important;
+  cursor: pointer;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.c-formsEmbed .interaction-form input[type=submit].btn-submit-interaction:hover, .c-formsEmbed .interaction-form input[type=submit].btn-submit-interaction:focus,
+.c-formsEmbed .interaction-form .btn-submit-interaction:hover,
+.c-formsEmbed .interaction-form .btn-submit-interaction:focus {
+  background-color: rgb(139.6737051793, 153.9079681275, 69.3920318725) !important;
+  border-color: rgb(139.6737051793, 153.9079681275, 69.3920318725) !important;
+  color: #fff !important;
+}
+.c-formsEmbed .interaction-form input[type=submit].btn-submit-interaction:disabled, .c-formsEmbed .interaction-form input[type=submit].btn-submit-interaction.disabled,
+.c-formsEmbed .interaction-form .btn-submit-interaction:disabled,
+.c-formsEmbed .interaction-form .btn-submit-interaction.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.c-formsEmbed .donation-success h2 {
+  color: #A1B152 !important;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+.c-formsEmbed .donation-success p {
+  color: #404346;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+}
+
+.entry-content pre {
+  display: none !important;
+}
+
+/******************************************************************
+Site Name:
+Author: The SplitPixel
+
+Stylesheet: Main Stylesheet
+
+Helpful articles on Sass file organization:
+http://thesassway.com/advanced/modular-css-naming-conventions
+
+******************************************************************/
+/*********************
+IMPORTING PARTIALS
+*********************/
+/******************************************************************
 Site Name:
 Author:
 

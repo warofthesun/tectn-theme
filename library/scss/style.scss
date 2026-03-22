@@ -34,6 +34,9 @@ IMPORTING MODULES
 // forms (inputs & labels)
 @use "modules/forms";
 
+// Forms block embeds (Bloomerang / third-party .interaction-form)
+@use "modules/forms-embed";
+
 // gradient (stops and starts)
 @use "modules/gradients";
 

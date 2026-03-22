@@ -11,10 +11,10 @@
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 							 <article id="post-<?php the_ID(); ?>" <?php post_class('cf row'); ?> role="article" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
 
-							<section class="entry-content cf <?php if(get_field('include_sidebar_on_blog_posts', 'option')) :  ?>col-xs-12 col-sm-7<?php else : ?>col-xs-12 col-md-9<?php endif; ?>" itemprop="articleBody">
+							<section class="entry-content cf <?php if ( function_exists( 'tectn_include_sidebar_on_blog_posts' ) && tectn_include_sidebar_on_blog_posts() ) : ?>col-xs-12 col-sm-7<?php else : ?>col-xs-12 col-md-9<?php endif; ?>" itemprop="articleBody">
 								<?php the_content(); ?>
                 			</section>
-							<?php if(get_field('include_sidebar_on_blog_posts', 'option')) :  ?>			
+							<?php if ( function_exists( 'tectn_include_sidebar_on_blog_posts' ) && tectn_include_sidebar_on_blog_posts() ) : ?>			
 							<?php get_sidebar(); ?>
 							<?php endif; ?>
 

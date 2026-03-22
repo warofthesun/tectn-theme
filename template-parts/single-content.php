@@ -21,7 +21,7 @@ if ( ! have_posts() ) {
 }
 while ( have_posts() ) {
 	the_post();
-	$include_sidebar = function_exists( 'get_field' ) && (bool) get_field( 'include_sidebar_on_blog_posts', 'option' );
+	$include_sidebar = function_exists( 'tectn_include_sidebar_on_blog_posts' ) && tectn_include_sidebar_on_blog_posts();
 	$content_col     = $include_sidebar ? 'col-xs-12 col-sm-7' : 'col-xs-12 col-md-9';
 	?>
 	<article id="post-<?php the_ID(); ?>" <?php post_class( 'cf row' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">

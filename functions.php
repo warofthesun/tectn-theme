@@ -184,7 +184,7 @@ function tectn_blog_index_pre_get_posts( $query ) {
 add_action( 'pre_get_posts', 'tectn_blog_index_pre_get_posts', 5 );
 
 /**
- * Blog index sidebar: Post Settings (Blog Posts tab), with legacy fallback to Theme General Settings.
+ * Blog index sidebar: Post Settings (Blog Posts tab), with legacy fallbacks.
  *
  * @return array{ active: bool, position: string } position is 'left' or 'right'.
  */
@@ -201,10 +201,39 @@ function tectn_get_blog_index_sidebar_config() {
 		return $cached;
 	}
 	$from_ps = (bool) get_field( 'blog_index_show_sidebar', 'post-settings' );
-	$legacy  = (bool) get_field( 'include_sidebar_on_blog_page', 'option' );
-	$cached['active']   = $from_ps || $legacy;
+	$legacy  = (bool) get_field( 'include_sidebar_on_blog_page', 'post-settings' );
+	if ( ! $legacy ) {
+		$legacy = (bool) get_field( 'include_sidebar_on_blog_page', 'option' );
+	}
+	if ( ! $legacy ) {
+		$legacy = (bool) get_field( 'include_sidebar_on_blog_page', 'theme-general-settings' );
+	}
+	$cached['active'] = $from_ps || $legacy;
 	$pos                = (string) get_field( 'blog_index_sidebar_position', 'post-settings' );
 	$cached['position'] = ( $pos === 'left' ) ? 'left' : 'right';
+	return $cached;
+}
+
+/**
+ * Whether single blog posts should show the sidebar (Post Settings → Blog Posts).
+ */
+function tectn_include_sidebar_on_blog_posts() {
+	static $cached = null;
+	if ( null !== $cached ) {
+		return $cached;
+	}
+	$cached = false;
+	if ( ! function_exists( 'get_field' ) ) {
+		return $cached;
+	}
+	$v = get_field( 'include_sidebar_on_blog_posts', 'post-settings' );
+	if ( $v === null || $v === false || $v === '' ) {
+		$v = get_field( 'include_sidebar_on_blog_posts', 'option' );
+	}
+	if ( $v === null || $v === false || $v === '' ) {
+		$v = get_field( 'include_sidebar_on_blog_posts', 'theme-general-settings' );
+	}
+	$cached = (bool) $v;
 	return $cached;
 }
 
@@ -377,7 +406,7 @@ function tectn_get_hero_config() {
 
   $default = array( 'show' => false, 'type' => 'landing', 'data' => array() );
 
-  // Events archive: same hero as Hero Medium; options from Theme Settings > Events (no wave, gradient or solid, headline only)
+  // Events archive: same hero as Hero Medium; options from Site Settings > Events (no wave, gradient or solid, headline only)
   if ( is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' ) ) {
     $use_solid = function_exists( 'get_field' ) ? (bool) tectn_get_events_option( 'events_hero_use_solid_color' ) : false;
     $bg_color  = function_exists( 'get_field' ) ? tectn_get_events_option( 'events_hero_background_color' ) : '';
@@ -999,7 +1028,7 @@ duplicate one of the lines in the array and name it according to your
 new image size.
 */
 
-/* Google Maps API key: env var > ACF Theme Settings > wp option. Restrict key by HTTP referrer in Google Cloud Console. */
+/* Google Maps API key: env var > Site Settings (site_settings group) > legacy ACF option > wp option. */
 function tectn_google_maps_api_key() {
 	if ( defined( 'GOOGLE_MAPS_API_KEY' ) && GOOGLE_MAPS_API_KEY !== '' ) {
 		return GOOGLE_MAPS_API_KEY;
@@ -1009,6 +1038,14 @@ function tectn_google_maps_api_key() {
 		return $env;
 	}
 	if ( function_exists( 'get_field' ) ) {
+		$ss = get_field( 'site_settings', 'site-settings' );
+		if ( ! is_array( $ss ) ) {
+			$ss = get_field( 'site_settings', 'option' );
+		}
+		if ( is_array( $ss ) && ! empty( $ss['google_maps_api_key'] ) && is_string( $ss['google_maps_api_key'] ) ) {
+			return $ss['google_maps_api_key'];
+		}
+		// Legacy: standalone field saved under default options before Google API tab moved to Site Settings.
 		$acf = get_field( 'google_maps_api_key', 'option' );
 		if ( is_string( $acf ) && $acf !== '' ) {
 			return $acf;
@@ -1221,7 +1258,7 @@ function tectn_enqueue_tribe_events_overrides() {
 add_action( 'wp_enqueue_scripts', 'tectn_enqueue_tribe_events_overrides', 100 );
 
 /**
- * Get an Events page option (Theme Settings > Events). Tries 'option' then sub-page slug.
+ * Get an Events page option (Site Settings > Events). Tries 'option' then sub-page slug.
  */
 function tectn_get_events_option( $field_name ) {
 	if ( ! function_exists( 'get_field' ) ) {
@@ -1236,7 +1273,7 @@ function tectn_get_events_option( $field_name ) {
 }
 
 /**
- * Prepend Hero Medium (Events archive) and intro HTML before the calendar view (Theme Settings > Events).
+ * Prepend Hero Medium (Events archive) and intro HTML before the calendar view (Site Settings > Events).
  * When "Default Page Template" is used, hero and intro are already output in archive.php – do not duplicate.
  */
 function tectn_events_hero_and_intro_before_html( $before ) {
@@ -1398,38 +1435,6 @@ function my_acf_settings_dir( $dir ) {
 // 4. Include ACF
 include_once( get_stylesheet_directory() . '/inc/acf/acf.php' );
 
-// Turn on ACF Options Page
-if( function_exists('acf_add_options_page') ) {
-
-	acf_add_options_page(array(
-		'page_title' 	=> 'Theme General Settings',
-		'menu_title'	=> 'Theme Settings',
-		'menu_slug' 	=> 'theme-general-settings',
-		'capability'	=> 'edit_posts',
-		'redirect'		=> false
-	));
-
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Theme Header Settings',
-		'menu_title'	=> 'Header',
-		'parent_slug'	=> 'theme-general-settings',
-	));
-
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Theme Footer Settings',
-		'menu_title'	=> 'Footer',
-		'parent_slug'	=> 'theme-general-settings',
-	));
-
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Events Page Settings',
-		'menu_title'	=> 'Events',
-		'menu_slug'     => 'theme-events-settings',
-		'parent_slug'	=> 'theme-general-settings',
-	));
-
-}
-
 /**
  * Register Post Settings as a sub-page of Site Settings.
  * Must run after ACF registers UI options pages (acf/init priority 6) so parent "site-settings" exists.
@@ -1456,7 +1461,502 @@ function tectn_register_post_settings_options_page() {
 add_action( 'acf/init', 'tectn_register_post_settings_options_page', 10 );
 
 /**
- * Register ACF field group for Events page (hero + intro) in Theme Settings > Events.
+ * Register Events Page Settings under Site Settings (moved from Theme Settings).
+ * Keeps menu_slug / post_id theme-events-settings so existing field values and get_field() calls still work.
+ */
+function tectn_register_events_page_options_under_site_settings() {
+	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
+		return;
+	}
+	$parent = 'site-settings';
+	$pages  = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
+	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
+		return;
+	}
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Events Page Settings',
+			'menu_title'  => 'Events',
+			'menu_slug'   => 'theme-events-settings',
+			'parent_slug' => $parent,
+			'capability'  => 'edit_posts',
+			'post_id'     => 'theme-events-settings',
+		)
+	);
+}
+add_action( 'acf/init', 'tectn_register_events_page_options_under_site_settings', 10 );
+
+/**
+ * Register Footer Information as a sub-page of Site Settings (contact, social, CTAs, disclaimer).
+ */
+function tectn_register_footer_information_options_page() {
+	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
+		return;
+	}
+	$parent = 'site-settings';
+	$pages  = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
+	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
+		return;
+	}
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Footer Information',
+			'menu_title'  => 'Footer Information',
+			'menu_slug'   => 'footer-information',
+			'parent_slug' => $parent,
+			'capability'  => 'edit_posts',
+			'post_id'     => 'footer-information',
+		)
+	);
+}
+add_action( 'acf/init', 'tectn_register_footer_information_options_page', 10 );
+
+/**
+ * Register Forms (embedded form snippets) under Site Settings.
+ */
+function tectn_register_forms_options_page() {
+	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
+		return;
+	}
+	$parent = 'site-settings';
+	$pages  = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
+	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
+		return;
+	}
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Forms',
+			'menu_title'  => 'Forms',
+			'menu_slug'   => 'tectn-forms',
+			'parent_slug' => $parent,
+			'capability'  => 'edit_posts',
+			'post_id'     => 'tectn-forms',
+		)
+	);
+}
+add_action( 'acf/init', 'tectn_register_forms_options_page', 10 );
+
+/**
+ * Embedded forms from Site Settings → Forms (repeater rows with form_embed_code, form_key).
+ *
+ * @return list<array{form_admin_label?: string, form_key?: string, form_embed_code?: string}>
+ */
+function tectn_get_embedded_forms() {
+	if ( ! function_exists( 'get_field' ) ) {
+		return array();
+	}
+	$rows = get_field( 'embedded_forms', 'tectn-forms' );
+	return is_array( $rows ) ? $rows : array();
+}
+
+/**
+ * One-time: assign UUID form_key to repeater rows missing it (Site Settings → Forms).
+ */
+function tectn_migrate_forms_repeater_row_keys() {
+	if ( get_option( 'tectn_forms_row_keys_initialized', '' ) === '1' ) {
+		return;
+	}
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+	$rows = get_field( 'embedded_forms', 'tectn-forms' );
+	if ( ! is_array( $rows ) ) {
+		update_option( 'tectn_forms_row_keys_initialized', '1' );
+		return;
+	}
+	$changed = false;
+	foreach ( $rows as $i => $row ) {
+		if ( ! is_array( $row ) ) {
+			continue;
+		}
+		$k = isset( $row['form_key'] ) ? trim( (string) $row['form_key'] ) : '';
+		if ( $k === '' ) {
+			$rows[ $i ]['form_key'] = wp_generate_uuid4();
+			$changed                = true;
+		}
+	}
+	if ( $changed ) {
+		update_field( 'embedded_forms', $rows, 'tectn-forms' );
+	}
+	update_option( 'tectn_forms_row_keys_initialized', '1' );
+}
+add_action( 'acf/init', 'tectn_migrate_forms_repeater_row_keys', 100 );
+
+/**
+ * After saving Forms options: ensure every repeater row has a non-empty form_key.
+ *
+ * @param int|string $post_id Post ID or options screen id (e.g. tectn-forms).
+ */
+function tectn_forms_ensure_row_keys_on_save( $post_id ) {
+	static $lock = false;
+	if ( $lock || (string) $post_id !== 'tectn-forms' ) {
+		return;
+	}
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+	$rows = get_field( 'embedded_forms', 'tectn-forms' );
+	if ( ! is_array( $rows ) ) {
+		return;
+	}
+	$changed = false;
+	foreach ( $rows as $i => $row ) {
+		if ( ! is_array( $row ) ) {
+			continue;
+		}
+		$k = isset( $row['form_key'] ) ? trim( (string) $row['form_key'] ) : '';
+		if ( $k === '' ) {
+			$rows[ $i ]['form_key'] = wp_generate_uuid4();
+			$changed                = true;
+		}
+	}
+	if ( $changed ) {
+		$lock = true;
+		update_field( 'embedded_forms', $rows, 'tectn-forms' );
+		$lock = false;
+	}
+}
+add_action( 'acf/save_post', 'tectn_forms_ensure_row_keys_on_save', 25 );
+
+/**
+ * Resolve Forms block selection from block JSON + ACF meta (handles field rename / key-based storage).
+ *
+ * Saved blocks often store the value under the field key `field_tectn_block_forms_selected` or the old
+ * name `selected_form_index`. get_field( 'selected_form_key' ) only checks the current meta names, so
+ * we fall back to raw $block['data'] to avoid resolving the wrong row or an empty snippet.
+ *
+ * @param array<string, mixed> $block ACF block props passed to the render template.
+ * @return mixed|null
+ */
+function tectn_forms_block_get_selected_raw( $block ) {
+	$data = isset( $block['data'] ) && is_array( $block['data'] ) ? $block['data'] : array();
+
+	if ( function_exists( 'get_field' ) ) {
+		$v = get_field( 'selected_form_key' );
+		if ( $v !== null && $v !== '' && $v !== false ) {
+			return $v;
+		}
+	}
+
+	$data_keys = array(
+		'field_tectn_block_forms_selected',
+		'selected_form_key',
+		'selected_form_index',
+	);
+	foreach ( $data_keys as $k ) {
+		if ( ! array_key_exists( $k, $data ) ) {
+			continue;
+		}
+		$v = $data[ $k ];
+		if ( $v !== null && $v !== '' && $v !== false ) {
+			return $v;
+		}
+	}
+
+	return null;
+}
+
+/**
+ * Decode entity-encoded embed HTML (e.g. &lt;script) so browsers execute scripts / render iframes.
+ *
+ * @param string $code Raw embed string from options.
+ * @return string
+ */
+function tectn_normalize_form_embed_markup( $code ) {
+	if ( ! is_string( $code ) || $code === '' ) {
+		return $code;
+	}
+	if ( strpos( $code, '&lt;' ) === false ) {
+		return $code;
+	}
+	if ( ! preg_match( '/&lt;(script|iframe|div|form)\b/i', $code ) ) {
+		return $code;
+	}
+	$flags   = ENT_QUOTES | ENT_SUBSTITUTE;
+	$flags  |= defined( 'ENT_HTML5' ) ? ENT_HTML5 : 0;
+	$decoded = html_entity_decode( $code, $flags, 'UTF-8' );
+	if ( $decoded !== $code && ( strpos( $decoded, '<script' ) !== false || strpos( $decoded, '<iframe' ) !== false ) ) {
+		return $decoded;
+	}
+	return $code;
+}
+
+/**
+ * Find a repeater row by stable form_key, or by legacy numeric index string.
+ *
+ * @param mixed $selected Stored block value (UUID or legacy "0", "1", …).
+ * @return array<string, mixed>|null Row with form_embed_code etc., or null.
+ */
+function tectn_find_embedded_form_by_selector( $selected ) {
+	if ( $selected === null || $selected === false || $selected === '' ) {
+		return null;
+	}
+	$selected = is_string( $selected ) ? trim( $selected ) : (string) $selected;
+	if ( $selected === '' ) {
+		return null;
+	}
+	$rows = tectn_get_embedded_forms();
+	foreach ( $rows as $row ) {
+		if ( ! is_array( $row ) ) {
+			continue;
+		}
+		$key = isset( $row['form_key'] ) ? trim( (string) $row['form_key'] ) : '';
+		if ( $key !== '' && $key === $selected ) {
+			return $row;
+		}
+	}
+	// Legacy: block stored repeater row index before form_key existed.
+	if ( preg_match( '/^\d+$/', $selected ) ) {
+		$idx = (int) $selected;
+		if ( isset( $rows[ $idx ] ) && is_array( $rows[ $idx ] ) ) {
+			return $rows[ $idx ];
+		}
+	}
+	return null;
+}
+
+/**
+ * Populate Forms block select from Site Settings → Forms repeater (by stable form_key).
+ *
+ * @param array<string, mixed> $field ACF field array.
+ * @return array<string, mixed>
+ */
+function tectn_load_field_forms_block_selected_form( $field ) {
+	if ( ! is_array( $field ) || ( $field['key'] ?? '' ) !== 'field_tectn_block_forms_selected' ) {
+		return $field;
+	}
+	$field['choices'] = array(
+		'' => __( '— Select a form —', 'tectn_theme' ),
+	);
+	$rows = tectn_get_embedded_forms();
+	foreach ( $rows as $i => $row ) {
+		if ( ! is_array( $row ) ) {
+			continue;
+		}
+		$key = isset( $row['form_key'] ) ? trim( (string) $row['form_key'] ) : '';
+		if ( $key === '' ) {
+			continue;
+		}
+		$label = isset( $row['form_admin_label'] ) ? trim( (string) $row['form_admin_label'] ) : '';
+		if ( $label === '' ) {
+			/* translators: %d: 1-based form row number in Site Settings. */
+			$label = sprintf( __( 'Form %d', 'tectn_theme' ), $i + 1 );
+		}
+		$field['choices'][ $key ] = $label;
+	}
+	if ( count( $field['choices'] ) === 1 ) {
+		$field['instructions'] = __( 'Add one or more forms under Site Settings → Forms, save that page to generate Form IDs, then refresh this screen to see them listed here.', 'tectn_theme' );
+	}
+	return $field;
+}
+add_filter( 'acf/load_field/key=field_tectn_block_forms_selected', 'tectn_load_field_forms_block_selected_form' );
+
+/**
+ * Footer options: Footer Information page first, then legacy keys still stored under Site Settings.
+ *
+ * @return array<string, mixed>
+ */
+function tectn_get_footer_information() {
+	static $cache = null;
+	if ( null !== $cache ) {
+		return $cache;
+	}
+	if ( ! function_exists( 'get_field' ) ) {
+		$cache = array();
+		return $cache;
+	}
+	$out = array();
+	$fi  = get_field( 'footer_information', 'footer-information' );
+	if ( ! is_array( $fi ) ) {
+		$fi = array();
+	}
+	$ss = get_field( 'site_settings', 'site-settings' );
+	if ( ! is_array( $ss ) ) {
+		$ss = get_field( 'site_settings', 'option' );
+	}
+	if ( ! is_array( $ss ) ) {
+		$ss = array();
+	}
+	$keys = array(
+		'contact_information',
+		'address',
+		'phone_number',
+		'email_address',
+		'social_platforms',
+		'buttons',
+		'button_color',
+		'disclaimer_text',
+		'footer_tagline',
+	);
+	foreach ( $keys as $key ) {
+		$from_fi = array_key_exists( $key, $fi ) ? $fi[ $key ] : null;
+		$from_ss = array_key_exists( $key, $ss ) ? $ss[ $key ] : null;
+		if ( ! tectn_footer_information_value_is_empty( $key, $from_fi ) ) {
+			$out[ $key ] = $from_fi;
+		} elseif ( ! tectn_footer_information_value_is_empty( $key, $from_ss ) ) {
+			$out[ $key ] = $from_ss;
+		}
+	}
+	$cache = $out;
+	return $cache;
+}
+
+/**
+ * @param string $key Field name.
+ * @param mixed  $val Value from ACF.
+ */
+function tectn_footer_information_value_is_empty( $key, $val ) {
+	if ( null === $val ) {
+		return true;
+	}
+	if ( 'social_platforms' === $key || 'buttons' === $key ) {
+		return ! is_array( $val ) || array() === $val;
+	}
+	if ( 'contact_information' === $key ) {
+		return ! is_array( $val ) || array() === $val;
+	}
+	if ( 'disclaimer_text' === $key || 'address' === $key || 'phone_number' === $key || 'email_address' === $key ) {
+		return is_string( $val ) ? trim( $val ) === '' : empty( $val );
+	}
+	if ( 'button_color' === $key ) {
+		return $val === '' || $val === null;
+	}
+	if ( 'footer_tagline' === $key ) {
+		return $val === null || $val === '' || ( is_string( $val ) && trim( $val ) === '' );
+	}
+	return empty( $val );
+}
+
+/**
+ * One-time copy of footer-related Site Settings fields into Footer Information (new options post_id).
+ */
+function tectn_migrate_footer_information_from_site_settings() {
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+	if ( get_option( 'tectn_footer_information_migrated_v1', '' ) === '1' ) {
+		return;
+	}
+	$ss = get_field( 'site_settings', 'site-settings' );
+	if ( ! is_array( $ss ) ) {
+		$ss = get_field( 'site_settings', 'option' );
+	}
+	if ( ! is_array( $ss ) ) {
+		update_option( 'tectn_footer_information_migrated_v1', '1' );
+		return;
+	}
+	$payload = array();
+	$keys    = array(
+		'contact_information',
+		'address',
+		'phone_number',
+		'email_address',
+		'social_platforms',
+		'buttons',
+		'button_color',
+		'disclaimer_text',
+	);
+	foreach ( $keys as $key ) {
+		if ( array_key_exists( $key, $ss ) && ! tectn_footer_information_value_is_empty( $key, $ss[ $key ] ) ) {
+			$payload[ $key ] = $ss[ $key ];
+		}
+	}
+	if ( array() !== $payload ) {
+		update_field( 'footer_information', $payload, 'footer-information' );
+	}
+	update_option( 'tectn_footer_information_migrated_v1', '1' );
+}
+add_action( 'acf/init', 'tectn_migrate_footer_information_from_site_settings', 99 );
+
+/**
+ * Copy legacy Google Maps API key (standalone Theme Settings field) into Site Settings → Google API tab once.
+ */
+function tectn_migrate_google_maps_key_into_site_settings() {
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+	if ( get_option( 'tectn_google_maps_key_migrated_v1', '' ) === '1' ) {
+		return;
+	}
+	$ss = get_field( 'site_settings', 'site-settings' );
+	if ( ! is_array( $ss ) ) {
+		$ss = get_field( 'site_settings', 'option' );
+	}
+	if ( ! is_array( $ss ) ) {
+		$ss = array();
+	}
+	$current = isset( $ss['google_maps_api_key'] ) ? trim( (string) $ss['google_maps_api_key'] ) : '';
+	if ( $current !== '' ) {
+		update_option( 'tectn_google_maps_key_migrated_v1', '1' );
+		return;
+	}
+	$legacy = get_field( 'google_maps_api_key', 'option' );
+	if ( is_string( $legacy ) && $legacy !== '' ) {
+		$ss['google_maps_api_key'] = $legacy;
+		update_field( 'site_settings', $ss, 'site-settings' );
+	}
+	update_option( 'tectn_google_maps_key_migrated_v1', '1' );
+}
+add_action( 'acf/init', 'tectn_migrate_google_maps_key_into_site_settings', 99 );
+
+/**
+ * Copy legacy Theme Settings sidebar toggles into Post Settings once.
+ */
+function tectn_migrate_theme_sidebar_fields_to_post_settings() {
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+	if ( get_option( 'tectn_theme_sidebar_fields_migrated_v1', '' ) === '1' ) {
+		return;
+	}
+	$names = array( 'include_sidebar_on_blog_posts', 'include_sidebar_on_blog_page' );
+	foreach ( $names as $name ) {
+		$old = get_field( $name, 'option' );
+		if ( $old === null ) {
+			$old = get_field( $name, 'theme-general-settings' );
+		}
+		if ( $old === null ) {
+			continue;
+		}
+		update_field( $name, $old, 'post-settings' );
+	}
+	update_option( 'tectn_theme_sidebar_fields_migrated_v1', '1' );
+}
+add_action( 'acf/init', 'tectn_migrate_theme_sidebar_fields_to_post_settings', 99 );
+
+/**
+ * Copy Footer Tagline from old Theme Settings → Footer sub-page into Footer Information once.
+ */
+function tectn_migrate_footer_tagline_to_footer_information() {
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+	if ( get_option( 'tectn_footer_tagline_migrated_v1', '' ) === '1' ) {
+		return;
+	}
+	$fi = get_field( 'footer_information', 'footer-information' );
+	if ( ! is_array( $fi ) ) {
+		$fi = array();
+	}
+	$existing = isset( $fi['footer_tagline'] ) ? trim( (string) $fi['footer_tagline'] ) : '';
+	if ( $existing !== '' ) {
+		update_option( 'tectn_footer_tagline_migrated_v1', '1' );
+		return;
+	}
+	$old = get_field( 'footer_tagline', 'acf-options-footer' );
+	if ( $old === null || $old === false || $old === '' ) {
+		$old = get_field( 'footer_tagline', 'option' );
+	}
+	if ( $old !== null && $old !== false && $old !== '' ) {
+		$fi['footer_tagline'] = $old;
+		update_field( 'footer_information', $fi, 'footer-information' );
+	}
+	update_option( 'tectn_footer_tagline_migrated_v1', '1' );
+}
+add_action( 'acf/init', 'tectn_migrate_footer_tagline_to_footer_information', 99 );
+
+/**
+ * Register ACF field group for Events page (hero + intro) on Site Settings > Events.
  */
 function tectn_register_acf_events_settings() {
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) {

@@ -126,6 +126,48 @@
             "save_options": 0
         },
         {
+            "key": "field_tectn_ps_include_sidebar_blog_posts",
+            "label": "Show sidebar on single blog posts",
+            "name": "include_sidebar_on_blog_posts",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "When enabled, single posts use a narrower content column with the primary widget sidebar.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Show",
+            "ui_off_text": "Hide",
+            "ui": 1
+        },
+        {
+            "key": "field_tectn_ps_include_sidebar_blog_page",
+            "label": "Legacy: sidebar on blog index",
+            "name": "include_sidebar_on_blog_page",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Superseded by “Show sidebar on blog index” above. Kept so values migrate from the old Theme Settings screen. You can turn this off and use the newer control only.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Show",
+            "ui_off_text": "Hide",
+            "ui": 1
+        },
+        {
             "key": "field_tectn_ps_tab_events",
             "label": "Events",
             "name": "",
@@ -317,5 +359,5 @@
     "description": "Per–post-type settings for related section heading and background. Sub-page of Site Settings.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773970764
+    "modified": 1774400100
 }

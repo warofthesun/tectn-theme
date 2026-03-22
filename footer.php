@@ -1,29 +1,22 @@
 <footer class="footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
 	<?php
-	$has_contact   = false;
-	$contact_info  = array();
-	if ( function_exists( 'get_field' ) ) {
-		$site_settings = get_field( 'site_settings', 'site-settings' );
-		if ( ! is_array( $site_settings ) ) {
-			$site_settings = get_field( 'site_settings', 'option' );
-		}
-		if ( is_array( $site_settings ) ) {
-			if ( ! empty( $site_settings['contact_information'] ) && is_array( $site_settings['contact_information'] ) ) {
-				$contact_info = $site_settings['contact_information'];
-			} else {
-				// Seamless clone may store fields at site_settings root.
-				$contact_info = array(
-					'address'       => isset( $site_settings['address'] ) ? $site_settings['address'] : '',
-					'phone_number'  => isset( $site_settings['phone_number'] ) ? $site_settings['phone_number'] : '',
-					'email_address' => isset( $site_settings['email_address'] ) ? $site_settings['email_address'] : '',
-				);
-			}
-		}
-		$addr  = isset( $contact_info['address'] ) ? $contact_info['address'] : '';
-		$phone = isset( $contact_info['phone_number'] ) ? $contact_info['phone_number'] : '';
-		$email = isset( $contact_info['email_address'] ) ? $contact_info['email_address'] : '';
-		$has_contact = ( is_string( $addr ) && trim( $addr ) !== '' ) || ( is_string( $phone ) && trim( $phone ) !== '' ) || ( is_string( $email ) && trim( $email ) !== '' );
+	$footer_opts  = function_exists( 'tectn_get_footer_information' ) ? tectn_get_footer_information() : array();
+	$has_contact  = false;
+	$contact_info = array();
+	if ( ! empty( $footer_opts['contact_information'] ) && is_array( $footer_opts['contact_information'] ) ) {
+		$contact_info = $footer_opts['contact_information'];
+	} else {
+		// Seamless clone may store fields at group root.
+		$contact_info = array(
+			'address'       => isset( $footer_opts['address'] ) ? $footer_opts['address'] : '',
+			'phone_number'  => isset( $footer_opts['phone_number'] ) ? $footer_opts['phone_number'] : '',
+			'email_address' => isset( $footer_opts['email_address'] ) ? $footer_opts['email_address'] : '',
+		);
 	}
+	$addr  = isset( $contact_info['address'] ) ? $contact_info['address'] : '';
+	$phone = isset( $contact_info['phone_number'] ) ? $contact_info['phone_number'] : '';
+	$email = isset( $contact_info['email_address'] ) ? $contact_info['email_address'] : '';
+	$has_contact = ( is_string( $addr ) && trim( $addr ) !== '' ) || ( is_string( $phone ) && trim( $phone ) !== '' ) || ( is_string( $email ) && trim( $email ) !== '' );
 	?>
 <div id="inner-footer" class="wrap row">
 	<div class="col-xs-12 col-md-6 footer__logo-nav">
@@ -52,16 +45,9 @@
 			?>
 		</div>
 		<?php
-		$social_platforms = array();
-		if ( function_exists( 'get_field' ) ) {
-			$footer_site_settings = get_field( 'site_settings', 'site-settings' );
-			if ( ! is_array( $footer_site_settings ) ) {
-				$footer_site_settings = get_field( 'site_settings', 'option' );
-			}
-			if ( is_array( $footer_site_settings ) && ! empty( $footer_site_settings['social_platforms'] ) ) {
-				$social_platforms = $footer_site_settings['social_platforms'];
-			}
-		}
+		$social_platforms = ( ! empty( $footer_opts['social_platforms'] ) && is_array( $footer_opts['social_platforms'] ) )
+			? $footer_opts['social_platforms']
+			: array();
 		if ( ! empty( $social_platforms ) ) :
 			?>
 		<nav class="footer__social" aria-label="<?php esc_attr_e( 'Social media', 'tectn_theme' ); ?>">
@@ -126,36 +112,19 @@
 	</div>
 	<div class="col-xs-12 col-md-6 footer__right">
 		<?php
-		$cta_buttons   = array();
-		$cta_btn_color = '';
-		if ( function_exists( 'get_field' ) ) {
-			$cta_site_settings = get_field( 'site_settings', 'site-settings' );
-			if ( ! is_array( $cta_site_settings ) ) {
-				$cta_site_settings = get_field( 'site_settings', 'option' );
-			}
-			if ( is_array( $cta_site_settings ) && ! empty( $cta_site_settings['buttons'] ) ) {
-				$cta_buttons = $cta_site_settings['buttons'];
-			}
-			if ( ! empty( $cta_site_settings['button_color'] ) ) {
-				$cta_btn_color = $cta_site_settings['button_color'];
-			}
-		}
+		$cta_buttons   = ( ! empty( $footer_opts['buttons'] ) && is_array( $footer_opts['buttons'] ) )
+			? $footer_opts['buttons']
+			: array();
+		$cta_btn_color = ! empty( $footer_opts['button_color'] ) ? $footer_opts['button_color'] : '';
 		if ( ! empty( $cta_buttons ) ) {
 			$buttons_data = $cta_buttons;
 			$button_color = $cta_btn_color;
 			include get_template_directory() . '/partials/button_pair.php';
 		}
 
-		$disclaimer_text = '';
-		if ( function_exists( 'get_field' ) ) {
-			$disclaimer_settings = get_field( 'site_settings', 'site-settings' );
-			if ( ! is_array( $disclaimer_settings ) ) {
-				$disclaimer_settings = get_field( 'site_settings', 'option' );
-			}
-			if ( is_array( $disclaimer_settings ) && isset( $disclaimer_settings['disclaimer_text'] ) && $disclaimer_settings['disclaimer_text'] !== '' ) {
-				$disclaimer_text = $disclaimer_settings['disclaimer_text'];
-			}
-		}
+		$disclaimer_text = ( isset( $footer_opts['disclaimer_text'] ) && $footer_opts['disclaimer_text'] !== '' )
+			? (string) $footer_opts['disclaimer_text']
+			: '';
 		if ( $disclaimer_text !== '' ) :
 			?>
 		<div class="footer__disclaimer <?php echo $has_contact ? 'footer__disclaimer--right' : ''; ?>">
