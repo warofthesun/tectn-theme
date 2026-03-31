@@ -60,22 +60,15 @@ add_action( 'acf/save_post', 'tectn_forms_ensure_row_keys_on_save', 25 );
 /**
  * Resolve Forms block selection from block JSON + ACF meta (handles field rename / key-based storage).
  *
- * Saved blocks often store the value under the field key `field_tectn_block_forms_selected` or the old
- * name `selected_form_index`. get_field( 'selected_form_key' ) only checks the current meta names, so
- * we fall back to raw $block['data'] to avoid resolving the wrong row or an empty snippet.
+ * Prefer $block['data'] first: it is the canonical store for ACF block attributes. get_field( 'selected_form_key' )
+ * without a post ID can follow the wrong context during some Loops/cached renders; block JSON stays correct.
+ * Fall back to get_field() when block markup has no data yet (e.g. edge REST/preview cases).
  *
  * @param array<string, mixed> $block ACF block props passed to the render template.
  * @return mixed|null
  */
 function tectn_forms_block_get_selected_raw( $block ) {
 	$data = isset( $block['data'] ) && is_array( $block['data'] ) ? $block['data'] : array();
-
-	if ( function_exists( 'get_field' ) ) {
-		$v = get_field( 'selected_form_key' );
-		if ( $v !== null && $v !== '' && $v !== false ) {
-			return $v;
-		}
-	}
 
 	$data_keys = array(
 		'field_tectn_block_forms_selected',
@@ -87,6 +80,13 @@ function tectn_forms_block_get_selected_raw( $block ) {
 			continue;
 		}
 		$v = $data[ $k ];
+		if ( $v !== null && $v !== '' && $v !== false ) {
+			return $v;
+		}
+	}
+
+	if ( function_exists( 'get_field' ) ) {
+		$v = get_field( 'selected_form_key' );
 		if ( $v !== null && $v !== '' && $v !== false ) {
 			return $v;
 		}
