@@ -6395,9 +6395,19 @@ and more scalable.
   http://www.alistapart.com/articles/organizing-mobile/
   */
 }
+.nav li ul.sub-menu,
+.nav li ul.children {
+  background-color: #F0F4EC;
+}
 .nav li ul.sub-menu li a,
 .nav li ul.children li a {
   padding-left: 30px;
+}
+.nav li ul.sub-menu li ul.sub-menu,
+.nav li ul.sub-menu li ul.children,
+.nav li ul.children li ul.sub-menu,
+.nav li ul.children li ul.children {
+  background-color: rgb(227.25, 234.65, 219.85);
 }
 .nav {
   /* end .menu li */
@@ -6406,7 +6416,7 @@ and more scalable.
 .nav li.current-menu-item a,
 .nav li.current_page_item a,
 .nav li.current_page_ancestor a {
-  color: #A5BC8B;
+  color: #87A564;
 }
 .nav {
   /* end current highlighters */
@@ -8521,7 +8531,7 @@ IMPORTING PARTIALS
     border: 0;
   }
   .nav ul {
-    background: rgba(249, 251, 243, 0.95);
+    background: #F0F4EC;
     margin-top: 0;
   }
   .nav li {
@@ -8571,6 +8581,7 @@ IMPORTING PARTIALS
   .nav li ul.children li ul {
     top: 0;
     left: 100%;
+    background-color: #F0F4EC;
   }
   .nav li ul.sub-menu,
   .nav li ul.children {
@@ -8684,6 +8695,7 @@ IMPORTING PARTIALS
     position: absolute;
     visibility: hidden;
     z-index: 8999;
+    background-color: #F0F4EC;
   }
   .menu ul li ul.sub-menu li,
   .menu ul li ul.children li {
@@ -8713,6 +8725,7 @@ IMPORTING PARTIALS
   .menu ul li ul.children li ul {
     top: 0;
     left: 100%;
+    background-color: #F0F4EC;
   }
   .menu ul li ul.sub-menu,
   .menu ul li ul.children {

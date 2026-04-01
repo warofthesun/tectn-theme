@@ -2561,6 +2561,7 @@ and more scalable.
 		*/
 		ul.sub-menu,
 		ul.children {
+			background-color: $secondary-100;
 
 			li {
 
@@ -2578,6 +2579,11 @@ and more scalable.
 
 				&:last-child {}
 
+				ul.sub-menu,
+				ul.children {
+					background-color: color.adjust($secondary-100, $lightness: -5%);
+				}
+
 			}
 
 		}
@@ -2590,7 +2596,7 @@ and more scalable.
 	li.current_page_ancestor {
 
 		a {
-			color: $secondary-300;
+			color: $secondary-400;
 		}
 
 	}  /* end current highlighters */

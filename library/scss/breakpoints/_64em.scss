@@ -131,7 +131,7 @@
   	border: 0;
 
   	ul {
-  		background: $secondary-50_95;
+  		background: $secondary-100;
   		margin-top: 0;
   	}
 
@@ -146,8 +146,8 @@
   		/*
   		plan your menus and drop-downs wisely.
   		*/
-  		ul.sub-menu,
-  		ul.children {
+  				ul.sub-menu,
+  				ul.children {
   			margin-top: 0;
   			border: 0px solid #ccc;
   			border-top: 0;
@@ -190,6 +190,7 @@
   				ul {
   					top: 0;
   					left: 100%;
+  					background-color: $secondary-100;
   				}
   			}
 
@@ -307,6 +308,7 @@
 					position: absolute;
 					visibility: hidden;
 					z-index: 8999;
+					background-color: $secondary-100;
 	  
 					li {
 						position: relative;
@@ -341,6 +343,7 @@
 						ul {
 							top:0;
 							left:100%;
+							background-color: $secondary-100;
 						}
 					}
 	  
