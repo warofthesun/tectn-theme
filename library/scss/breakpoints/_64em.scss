@@ -157,6 +157,9 @@
 			border-radius: $radius-sm;
 
   			li {
+  				// Containing block for nested flyouts (`ul { top: 0; left: 100% }`); otherwise `top: 0` aligns to the full submenu panel.
+  				position: relative;
+
   				a {
   					padding-left: 10px;
   					border-right: 0;
@@ -306,7 +309,8 @@
 					z-index: 8999;
 	  
 					li {
-	  
+						position: relative;
+
 						a {
 							padding-left: 10px;
 							border-right: 0;

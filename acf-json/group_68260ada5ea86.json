@@ -338,11 +338,6 @@
             {
                 "param": "post_type",
                 "operator": "!=",
-                "value": "form"
-            },
-            {
-                "param": "post_type",
-                "operator": "!=",
                 "value": "tribe_events"
             }
         ]
@@ -357,5 +352,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773883733
+    "modified": 1775000001
 }
