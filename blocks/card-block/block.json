@@ -18,7 +18,7 @@
   "example": {
     "attributes": {
       "mode": "preview",
-      "data": { "is_preview": true }
+      "data": { "inserter_preview": true }
     }
   }
 }

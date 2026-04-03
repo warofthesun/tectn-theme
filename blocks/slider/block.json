@@ -15,5 +15,13 @@
     "jsx": true,
     "anchor": true,
     "align": ["full", "wide"]
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {
+        "inserter_preview": true
+      }
+    }
   }
 }

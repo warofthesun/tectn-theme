@@ -5,15 +5,18 @@
  * @package tectn_theme
  */
 
-$block_id   = ! empty( $block['anchor'] ) ? $block['anchor'] : 'tectn-info-table-' . $block['id'];
-$is_preview = ! empty( $block['data']['is_preview'] );
+$block_id = ! empty( $block['anchor'] ) ? $block['anchor'] : 'tectn-info-table-' . $block['id'];
 
-if ( $is_preview ) {
-	?>
-	<div id="<?php echo esc_attr( $block_id ); ?>" class="c-infoTable c-infoTable--preview">
-		<p class="c-infoTable__preview-note"><?php esc_html_e( 'Information table — choose a table from Site Settings → Information tables in the sidebar.', 'tectn_theme' ); ?></p>
-	</div>
-	<?php
+$block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
+
+$is_inserter_preview =
+	! empty( $block['mode'] ) &&
+	$block['mode'] === 'preview' &&
+	! empty( $block_data['inserter_preview'] );
+
+if ( $is_inserter_preview ) {
+	$src = get_template_directory_uri() . '/blocks/info-table/preview.png';
+	echo '<img src="' . esc_url( $src ) . '" style="width:100%;height:auto;display:block;" alt="">';
 	return;
 }
 

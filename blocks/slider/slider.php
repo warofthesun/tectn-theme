@@ -6,14 +6,21 @@
  * @param array $block The block settings and attributes.
  */
 
-$is_preview = ! empty( $block['data']['is_preview'] );
+$block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
 
-if ( $is_preview ) {
-	?>
-	<div class="c-slider c-slider--preview" style="padding:2em;background:#f5f5f5;border:1px solid #ddd;">
-		<p style="margin:0;color:#666;">Image Slider — Add a headline, body copy, and gallery. Each image title becomes a list item.</p>
-	</div>
-	<?php
+$is_editor_context =
+	is_admin() ||
+	( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) ||
+	( defined( 'REST_REQUEST' ) && REST_REQUEST );
+
+$is_inserter_preview =
+	! empty( $block['mode'] ) &&
+	$block['mode'] === 'preview' &&
+	! empty( $block_data['inserter_preview'] );
+
+if ( $is_inserter_preview ) {
+	$src = get_template_directory_uri() . '/blocks/slider/preview.png';
+	echo '<img src="' . esc_url( $src ) . '" style="width:100%;height:auto;display:block;" alt="">';
 	return;
 }
 
@@ -74,6 +81,10 @@ $block_id = isset( $block['id'] ) ? $block['id'] : 'slider-' . wp_rand( 1000, 99
 $align    = ! empty( $block['align'] ) ? ' align' . $block['align'] : '';
 
 if ( empty( $items ) ) {
+	if ( $is_editor_context && empty( $block_data['inserter_preview'] ) ) {
+		echo '<div class="c-slider c-slider--empty' . esc_attr( $align ) . '"><div class="c-slider__placeholder"><strong>' . esc_html__( 'Image Slider', 'tectn_theme' ) . '</strong><br>' . esc_html__( 'Add a headline, body copy, and gallery images. Each image title becomes a list item.', 'tectn_theme' ) . '</div></div>';
+		return;
+	}
 	echo '<div class="c-slider c-slider--empty' . esc_attr( $align ) . '"><p class="c-slider__empty">' . esc_html__( 'Add images to the gallery. Each image title will become a clickable list item.', 'tectn_theme' ) . '</p></div>';
 	return;
 }

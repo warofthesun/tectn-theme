@@ -7,6 +7,24 @@
 $block_id   = !empty($block['anchor']) ? $block['anchor'] : 'sponsorships-' . $block['id'];
 $svg_id     = 'sp-' . preg_replace('/[^a-z0-9]+/i', '', $block['id']);
 
+$block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
+
+$is_editor_context =
+  is_admin() ||
+  ( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) ||
+  ( defined( 'REST_REQUEST' ) && REST_REQUEST );
+
+$is_inserter_preview =
+  ! empty( $block['mode'] ) &&
+  $block['mode'] === 'preview' &&
+  ! empty( $block_data['inserter_preview'] );
+
+if ( $is_inserter_preview ) {
+  $src = get_template_directory_uri() . '/blocks/sponsorships/preview.png';
+  echo '<img src="' . esc_url( $src ) . '" style="width:100%;height:auto;display:block;" alt="">';
+  return;
+}
+
 $classes = ['c-posts', 'c-sponsorships'];
 if (!empty($block['className'])) $classes[] = $block['className'];
 
@@ -29,6 +47,14 @@ if (!empty($bg_image) && is_array($bg_image)) {
 
 $tiers = get_field('tiers');
 if (!is_array($tiers)) $tiers = [];
+
+if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && empty( $tiers ) ) {
+  echo '<div class="c-sponsorships__placeholder alignfull">';
+  echo '<strong>' . esc_html__( 'Sponsorships', 'tectn_theme' ) . '</strong><br>';
+  echo esc_html__( 'Add sponsor tiers and logos in the block settings.', 'tectn_theme' );
+  echo '</div>';
+  return;
+}
 ?>
 
 <section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?> alignfull" style="--posts-bg-max-h: <?= esc_attr($bg_max_height); ?>px;">

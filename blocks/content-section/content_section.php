@@ -5,29 +5,71 @@
  * User can add any content in the middle and set a minimum height.
  *
  * @param array $block The block settings and attributes.
+ *
+ * @package tectn_theme
  */
 
-$is_preview = !empty($block['data']['is_preview']);
-
-if ($is_preview) {
-  // Working preview: same structure and classes as the block for consistent styling
-  $preview_min_h = 280;
-  $preview_bg = 'linear-gradient(135deg, #d4a574 0%, #8b7355 50%, #6b5344 100%)';
-  ?>
-  <section class="c-content-section c-content-section--py-xl c-content-section--overlay-warm c-content-section--content-middle alignfull" style="--content-section-min-height:<?php echo (int) $preview_min_h; ?>px; min-height:<?php echo (int) $preview_min_h; ?>px; position:relative; overflow:hidden;">
-    <div class="c-content-section__bg" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;">
-      <div class="c-content-section__bg-media c-content-section__bg-media--image" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;height:100%;background:<?php echo esc_attr($preview_bg); ?>;background-size:cover;background-position:center;"></div>
-      <div class="c-content-section__overlay" aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(236,186,39,0.45) 0%, rgba(105,143,61,0.6) 68%);pointer-events:none;z-index:1;"></div>
-    </div>
-    <div class="c-content-section__container wrap" style="position:relative;z-index:2;">
-      <div class="c-content-section__inner" style="display:flex;align-items:center;justify-content:center;min-height:<?php echo (int) ($preview_min_h - 80); ?>px;padding:2em;">
-        <p style="margin:0;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.3);font-size:1rem;">Content Section — Add blocks here</p>
-      </div>
-    </div>
-  </section>
-  <?php
-  return;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
+
+$block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
+
+$is_inserter_preview =
+	! empty( $block['mode'] ) &&
+	$block['mode'] === 'preview' &&
+	! empty( $block_data['inserter_preview'] );
+
+if ( $is_inserter_preview ) {
+	$variant = ! empty( $block_data['preview_variant'] )
+		? sanitize_key( $block_data['preview_variant'] )
+		: 'default';
+
+	$map = array(
+		'default' => 'preview.png',
+	);
+
+	$file = $map[ $variant ] ?? $map['default'];
+	$src  = get_template_directory_uri() . '/blocks/content-section/' . $file;
+
+	echo '<img src="' . esc_url( $src ) . '" style="width:100%;height:auto;display:block;" alt="">';
+	return;
+}
+
+/**
+ * @var WP_Block|null $wp_block
+ * @var string         $content Serialized inner blocks HTML from ACF render callback (in scope via include).
+ */
+$is_editor_context =
+	is_admin() ||
+	( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) ||
+	( defined( 'REST_REQUEST' ) && REST_REQUEST );
+
+$has_inner_blocks = false;
+
+if ( isset( $wp_block ) && $wp_block instanceof WP_Block && is_array( $wp_block->inner_blocks ) && count( $wp_block->inner_blocks ) > 0 ) {
+	$has_inner_blocks = true;
+}
+
+if ( ! $has_inner_blocks && ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
+	$has_inner_blocks = count( $block['innerBlocks'] ) > 0;
+}
+
+// Editor often exposes inner blocks on parsed_block before WP_Block::inner_blocks is populated (H4).
+if ( ! $has_inner_blocks && isset( $wp_block ) && $wp_block instanceof WP_Block && ! empty( $wp_block->parsed_block['innerBlocks'] ) && is_array( $wp_block->parsed_block['innerBlocks'] ) ) {
+	$has_inner_blocks = count( $wp_block->parsed_block['innerBlocks'] ) > 0;
+}
+
+if ( ! $has_inner_blocks ) {
+	$serialized_inner = isset( $content ) ? trim( (string) $content ) : '';
+	if ( $serialized_inner !== '' ) {
+		$has_inner_blocks = true;
+	}
+}
+
+// Must keep <InnerBlocks /> in the output or the editor (+) appender disappears. Show hint above appender when empty.
+$show_content_section_placeholder =
+	$is_editor_context && ! $has_inner_blocks && empty( $block_data['inserter_preview'] );
 
 $py            = get_field('padding_y') ?: 'xl';
 $content_align  = get_field('content_align') ?: 'middle';
@@ -123,6 +165,12 @@ if ($bg_enable) {
 
     <div class="c-content-section__container wrap">
       <div class="c-content-section__inner">
+        <?php if ( $show_content_section_placeholder ) : ?>
+          <div class="c-content-section__placeholder">
+            <strong><?php echo esc_html__( 'Content Section', 'tectn_theme' ); ?></strong><br>
+            <?php echo esc_html__( 'Use the block inserter (+) below or List view to add blocks inside this section (for example Text + Image). Adjust background and height in the sidebar.', 'tectn_theme' ); ?>
+          </div>
+        <?php endif; ?>
         <InnerBlocks />
       </div>
     </div>
@@ -146,6 +194,12 @@ if ($bg_enable) {
 
   <div class="c-content-section__container wrap">
     <div class="c-content-section__inner">
+      <?php if ( $show_content_section_placeholder ) : ?>
+        <div class="c-content-section__placeholder">
+          <strong><?php echo esc_html__( 'Content Section', 'tectn_theme' ); ?></strong><br>
+          <?php echo esc_html__( 'Use the block inserter (+) below or List view to add blocks inside this section (for example Text + Image). Adjust background and height in the sidebar.', 'tectn_theme' ); ?>
+        </div>
+      <?php endif; ?>
       <InnerBlocks />
     </div>
   </div>

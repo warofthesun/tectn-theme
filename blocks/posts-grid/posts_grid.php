@@ -3,6 +3,19 @@
  * Posts Grid (ACF Block)
  */
 
+$block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
+
+$is_inserter_preview =
+  ! empty( $block['mode'] ) &&
+  $block['mode'] === 'preview' &&
+  ! empty( $block_data['inserter_preview'] );
+
+if ( $is_inserter_preview ) {
+  $src = get_template_directory_uri() . '/blocks/posts-grid/preview.png';
+  echo '<img src="' . esc_url( $src ) . '" style="width:100%;height:auto;display:block;" alt="">';
+  return;
+}
+
 $block_id = !empty($block['anchor']) ? $block['anchor'] : 'posts-grid-' . $block['id'];
 
 $remove_bottom_margin = (bool) get_field('remove_bottom_margin');

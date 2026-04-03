@@ -10,8 +10,16 @@
     "anchor": true
   },
   "acf": {
-    "mode": "preview",
+    "mode": "edit",
     "renderTemplate": "people_list.php"
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {
+        "inserter_preview": true
+      }
+    }
   },
   "textdomain": "tectn_theme"
 }

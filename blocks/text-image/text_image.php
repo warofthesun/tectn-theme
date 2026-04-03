@@ -1,9 +1,28 @@
-<?php 
+<?php
     /**
      * Text + Image template, single row with background option.
      *
      * @param array $block The block settings and attributes.
      */
+
+    $block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
+
+    $is_editor_context =
+        is_admin() ||
+        ( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) ||
+        ( defined( 'REST_REQUEST' ) && REST_REQUEST );
+
+    $is_inserter_preview =
+        ! empty( $block['mode'] ) &&
+        $block['mode'] === 'preview' &&
+        ! empty( $block_data['inserter_preview'] );
+
+    if ( $is_inserter_preview ) {
+        $src = get_template_directory_uri() . '/blocks/text-image/preview.png';
+        echo '<img src="' . esc_url( $src ) . '" style="width:100%;height:auto;display:block;" alt="">';
+        return;
+    }
+
     // When nested inside Content Section or Content Container, always defer background to the parent.
     $is_inside_container = ! empty( $block['context']['tectn/insideContainer'] );
     $enable_bg         = $is_inside_container ? false : get_field('use_colored_background');
@@ -121,22 +140,17 @@
     }
 ?>
 <?php
-  // Editor-only placeholder so empty blocks are still visible when inserted.
-  // NOTE: `$block['data']['is_preview']` is not consistently present across all editor render paths,
-  // so we rely on `is_admin()` to detect the editor.
-  $is_editor = is_admin();
-
   // Treat WYSIWYG as empty if it's only whitespace / empty tags.
   $body_plain = is_string($body) ? trim( wp_strip_all_tags( $body ) ) : '';
 
   // Consider the block "empty" if it has no preheader, no headline, no meaningful body, and no media (images or video).
   $is_empty = empty($preheader) && empty($headline) && empty($body_plain) && ! $has_media;
 
-  if ( $is_editor && $is_empty ) :
+  if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && $is_empty ) :
 ?>
-  <div class="block-placeholder" style="border: 1px dashed #cfd3d7; padding: 1rem; border-radius: .5rem; background: rgba(255,255,255,.8);">
-    <strong style="display:block; margin-bottom:.25rem;">Text + Image</strong>
-    <p style="margin:0;">Add a headline, body copy, and images or a video.</p>
+  <div class="c-text-image__placeholder">
+    <strong><?php esc_html_e( 'Text + Image', 'tectn_theme' ); ?></strong><br>
+    <?php esc_html_e( 'Add a headline, body copy, and images or a video.', 'tectn_theme' ); ?>
   </div>
 <?php
     return;
@@ -248,8 +262,9 @@
                 </div>
             <?php elseif ( $media_type === 'slideshow' ) : ?>
                 <div class="c-content-group__slideshow c-content-group__slideshow--square">
-                    <div class="block-placeholder" style="border: 1px dashed #cfd3d7; padding: 2rem; border-radius: .5rem; background: rgba(255,255,255,.8); min-height: 200px; display: flex; align-items: center; justify-content: center;">
-                        <p style="margin: 0; color: #666;">Add images to the slideshow gallery above.</p>
+                    <div class="c-text-image__placeholder">
+                        <strong><?php esc_html_e( 'Slideshow', 'tectn_theme' ); ?></strong><br>
+                        <?php esc_html_e( 'Add images to the slideshow gallery in the block settings.', 'tectn_theme' ); ?>
                     </div>
                 </div>
             <?php elseif ( $images ) : ?>

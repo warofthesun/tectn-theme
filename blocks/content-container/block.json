@@ -22,5 +22,11 @@
   "supports": {
     "jsx": true,
     "anchor": true
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": { "inserter_preview": true }
+    }
   }
 }

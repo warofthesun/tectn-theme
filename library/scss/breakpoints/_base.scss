@@ -557,6 +557,10 @@ Content Section block
   display: block;
 }
 
+.c-content-section__inner > .c-content-section__placeholder {
+  margin-bottom: $spacing-md;
+}
+
 .c-content-section--py-none { --content-section-py: #{$spacing-none}; }
 .c-content-section--py-xxs  { --content-section-py: #{$spacing-xxs}; }
 .c-content-section--py-xs   { --content-section-py: #{$spacing-xs}; }
@@ -933,18 +937,31 @@ border: $spacing-xs solid $white;
 	margin-bottom: $spacing-xl;
    }
 
-   /* Card Repeater — editor empty state */
-	.c-cardrepeater__placeholder {
+   /* ACF blocks — editor empty state (same treatment as Card Repeater) */
+	.c-cardrepeater__placeholder,
+	.c-button-grid__placeholder,
+	.c-card-block__placeholder,
+	.c-content-section__placeholder,
+	.c-formsEmbed__placeholder,
+	.c-headline-group__placeholder,
+	.c-iframe-embed__placeholder,
+	.c-slider__placeholder,
+	.c-sponsorships__placeholder,
+	.c-text-image__placeholder {
+		box-sizing: border-box;
+		max-width: 650px;
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
 		padding: 1rem;
 		border: 1px dashed rgba(0, 0, 0, 0.28);
 		border-radius: 8px;
 		background: rgba(0, 0, 0, 0.03);
-	
 		line-height: 1.35;
-	
+
 		strong {
-		display: inline-block;
-		margin-bottom: 0.25rem;
+			display: inline-block;
+			margin-bottom: 0.25rem;
 		}
 	}
 

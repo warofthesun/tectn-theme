@@ -3,6 +3,7 @@
   "title": "Content Section",
   "description": "Full-width section with optional background (image + overlay or solid color), any content, and configurable min height. No top or bottom curves.",
   "style": ["file:../library/css/style.css"],
+  "editorScript": "file:./content-section-editor.js",
   "category": "tectn-blocks",
   "icon": "layout",
   "keywords": ["section", "background", "content", "container"],
@@ -27,7 +28,7 @@
   "example": {
     "attributes": {
       "mode": "preview",
-      "data": { "is_preview": true }
+      "data": { "inserter_preview": true }
     }
   }
 }

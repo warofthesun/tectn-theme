@@ -5,15 +5,23 @@
  * @package tectn_theme
  */
 
-$block_id   = ! empty( $block['anchor'] ) ? $block['anchor'] : 'tectn-forms-' . $block['id'];
-$is_preview = ! empty( $block['data']['is_preview'] );
+$block_id = ! empty( $block['anchor'] ) ? $block['anchor'] : 'tectn-forms-' . $block['id'];
 
-if ( $is_preview ) {
-	?>
-	<div id="<?php echo esc_attr( $block_id ); ?>" class="c-formsEmbed c-formsEmbed--preview">
-		<p class="c-formsEmbed__preview-note"><?php esc_html_e( 'Forms block — choose a form from Site Settings → Forms in the sidebar.', 'tectn_theme' ); ?></p>
-	</div>
-	<?php
+$block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
+
+$is_editor_context =
+	is_admin() ||
+	( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) ||
+	( defined( 'REST_REQUEST' ) && REST_REQUEST );
+
+$is_inserter_preview =
+	! empty( $block['mode'] ) &&
+	$block['mode'] === 'preview' &&
+	! empty( $block_data['inserter_preview'] );
+
+if ( $is_inserter_preview ) {
+	$src = get_template_directory_uri() . '/blocks/forms/preview.png';
+	echo '<img src="' . esc_url( $src ) . '" style="width:100%;height:auto;display:block;" alt="">';
 	return;
 }
 
@@ -21,18 +29,38 @@ $selected = function_exists( 'tectn_forms_block_get_selected_raw' )
 	? tectn_forms_block_get_selected_raw( $block )
 	: ( function_exists( 'get_field' ) ? get_field( 'selected_form_key' ) : null );
 
+$row = null;
+if ( $selected !== null && $selected !== '' && $selected !== false && function_exists( 'tectn_find_embedded_form_by_selector' ) ) {
+	$row = tectn_find_embedded_form_by_selector( $selected );
+}
+
+$code = is_array( $row ) && isset( $row['form_embed_code'] ) ? (string) $row['form_embed_code'] : '';
+
+$forms_incomplete =
+	$selected === null || $selected === '' || $selected === false ||
+	! is_array( $row ) ||
+	trim( $code ) === '';
+
+if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && $forms_incomplete ) {
+	?>
+	<div id="<?php echo esc_attr( $block_id ); ?>" class="c-formsEmbed">
+		<div class="c-formsEmbed__placeholder">
+			<strong><?php esc_html_e( 'Forms', 'tectn_theme' ); ?></strong><br>
+			<?php esc_html_e( 'Choose a form under Site Settings → Forms, or pick one in this block’s sidebar.', 'tectn_theme' ); ?>
+		</div>
+	</div>
+	<?php
+	return;
+}
+
 if ( $selected === null || $selected === '' || $selected === false ) {
 	return;
 }
 
-$row = function_exists( 'tectn_find_embedded_form_by_selector' )
-	? tectn_find_embedded_form_by_selector( $selected )
-	: null;
 if ( ! is_array( $row ) ) {
 	return;
 }
 
-$code = isset( $row['form_embed_code'] ) ? (string) $row['form_embed_code'] : '';
 if ( trim( $code ) === '' ) {
 	return;
 }

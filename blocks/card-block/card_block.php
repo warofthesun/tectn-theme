@@ -3,12 +3,62 @@
  * Card Block
  * Short headline + repeater of cards. Each card: image, title text, details text, headline, body text.
  * Single card centers; multiple cards in grid.
+ *
+ * @package tectn_theme
  */
 
-$block_id   = !empty($block['anchor']) ? $block['anchor'] : 'card-block-' . $block['id'];
-$headline   = get_field('section_headline');
-$cards      = get_field('cards');
-$card_count = is_array($cards) ? count($cards) : 0;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
+
+$is_inserter_preview =
+	! empty( $block['mode'] ) &&
+	$block['mode'] === 'preview' &&
+	! empty( $block_data['inserter_preview'] );
+
+if ( $is_inserter_preview ) {
+	$variant = ! empty( $block_data['preview_variant'] )
+		? sanitize_key( $block_data['preview_variant'] )
+		: 'default';
+
+	$map = array(
+		'default' => 'preview.png',
+	);
+
+	$file = $map[ $variant ] ?? $map['default'];
+	$src  = get_template_directory_uri() . '/blocks/card-block/' . $file;
+
+	echo '<img src="' . esc_url( $src ) . '" style="width:100%;height:auto;display:block;" alt="">';
+	return;
+}
+
+$is_editor_context =
+	is_admin() ||
+	( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) ||
+	( defined( 'REST_REQUEST' ) && REST_REQUEST );
+
+$cards = get_field( 'cards' );
+if ( ! is_array( $cards ) ) {
+	$cards = array();
+}
+
+if ( $is_editor_context && empty( $cards ) && empty( $block_data['inserter_preview'] ) ) {
+	echo '<section class="c-card-block alignfull">';
+	echo '  <div class="c-card-block__body">';
+	echo '    <div class="c-card-block__placeholder">';
+	echo '      <strong>' . esc_html__( 'Card Block', 'tectn_theme' ) . '</strong><br>';
+	echo '      ' . esc_html__( 'Add a section headline and one or more cards in the block settings, or click the pencil icon to edit in place.', 'tectn_theme' );
+	echo '    </div>';
+	echo '  </div>';
+	echo '</section>';
+	return;
+}
+
+$block_id   = ! empty( $block['anchor'] ) ? $block['anchor'] : 'card-block-' . $block['id'];
+$headline   = get_field( 'section_headline' );
+$card_count = count( $cards );
 
 $classes = ['c-card-block'];
 if (!empty($block['className'])) $classes[] = $block['className'];
@@ -16,22 +66,12 @@ $align = !empty($block['align']) ? 'align' . $block['align'] : '';
 if ($align) $classes[] = $align;
 
 $grid_class = '';
-if ($card_count >= 1 && $card_count <= 5) {
-  $grid_class = ' c-card-block__grid--count-' . $card_count;
-}
-
-$is_preview = !empty($block['data']['is_preview']);
-if ($is_preview) {
-  ?>
-  <div class="c-card-block alignfull" style="padding:2em;background:#e8f0e4;">
-    <p style="margin:0;"><strong>Card Block</strong> — Add a section headline and cards in the sidebar.</p>
-  </div>
-  <?php
-  return;
+if ( $card_count >= 1 && $card_count <= 5 ) {
+	$grid_class = ' c-card-block__grid--count-' . $card_count;
 }
 ?>
 
-<section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?>">
+<section id="<?= esc_attr( $block_id ); ?>" class="<?= esc_attr( implode( ' ', $classes ) ); ?>">
   <?php if ($headline !== ''): ?>
     <h2 class="c-card-block__headline"><?= esc_html($headline); ?></h2>
   <?php endif; ?>
