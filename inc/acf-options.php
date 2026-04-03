@@ -105,6 +105,32 @@ function tectn_register_forms_options_page() {
 	);
 }
 add_action( 'acf/init', 'tectn_register_forms_options_page', 10 );
+
+/**
+ * Register Information tables under Site Settings (reusable four-column tables + block).
+ */
+function tectn_register_info_tables_options_page() {
+	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
+		return;
+	}
+	$parent = 'site-settings';
+	$pages  = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
+	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
+		return;
+	}
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Information tables',
+			'menu_title'  => 'Information tables',
+			'menu_slug'   => 'tectn-info-tables',
+			'parent_slug' => $parent,
+			'capability'  => 'edit_posts',
+			'post_id'     => 'tectn-info-tables',
+		)
+	);
+}
+add_action( 'acf/init', 'tectn_register_info_tables_options_page', 10 );
+
 function tectn_get_footer_information() {
 	static $cache = null;
 	if ( null !== $cache ) {

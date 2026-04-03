@@ -18,6 +18,7 @@ require_once $tectn_theme_dir . '/library/starter.php';
 // require_once $tectn_theme_dir . '/library/admin.php';
 
 require_once $tectn_theme_dir . '/inc/blocks.php';
+require_once $tectn_theme_dir . '/inc/iframe-embed.php';
 require_once $tectn_theme_dir . '/inc/helpers.php';
 require_once $tectn_theme_dir . '/inc/blog.php';
 require_once $tectn_theme_dir . '/inc/hero.php';
@@ -39,5 +40,6 @@ require_once $tectn_theme_dir . '/inc/theme-setup.php';
 require_once $tectn_theme_dir . '/inc/editor.php';
 require_once $tectn_theme_dir . '/inc/acf-options.php';
 require_once $tectn_theme_dir . '/inc/forms.php';
+require_once $tectn_theme_dir . '/inc/info-tables.php';
 require_once $tectn_theme_dir . '/inc/migrations.php';
 require_once $tectn_theme_dir . '/inc/shortcodes-misc.php';

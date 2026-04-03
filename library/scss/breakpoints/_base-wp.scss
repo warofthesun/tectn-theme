@@ -102,8 +102,10 @@ article {
 
 			table {
 				width: 100%;
-				border: 1px solid $gray;
+				border: 0px solid $gray;
 				margin-bottom: 1.5em;
+				border-radius: $radius-sm;
+				box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
 				caption {
 					margin: 0 0 7px;
@@ -132,9 +134,10 @@ article {
 			}
 
 			th {
-				background-color: $light-gray;
+				background-color: $primary-700;
 				border-bottom: 1px solid $gray;
 				border-right: 1px solid $gray;
+				
 
 				&:last-child {
 					border-right: 0;

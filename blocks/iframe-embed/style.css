@@ -1,0 +1,5 @@
+/* Block-specific tweaks; layout tokens live in theme style.css (.c-iframe-embed). */
+.c-iframe-embed__frame iframe {
+	display: block;
+	max-width: 100%;
+}

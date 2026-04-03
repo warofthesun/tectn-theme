@@ -1,0 +1,60 @@
+{
+    "key": "group_tectn_iframe_embed_block",
+    "title": "Iframe Embed block",
+    "fields": [
+        {
+            "key": "field_ieb_headline",
+            "label": "Section headline",
+            "name": "section_headline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Optional title above the embed. Leave blank to hide.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ieb_iframe_embed",
+            "label": "Iframe embed",
+            "name": "iframe_embed",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Paste the full iframe markup from your provider (e.g. Google Maps embed, YouTube).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 6,
+            "placeholder": "Paste iframe code here",
+            "new_lines": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn/iframe-embed"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Matches Paste embed pattern from group_69cdc5bfb43fe for block context.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1775093666
+}

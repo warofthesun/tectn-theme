@@ -8,6 +8,9 @@
 - **Post Settings** (`post-settings`): blog/events/pickup options (including blog sidebars migrated from the old Theme Settings screen) — `group_tectn_post_settings.json`.
 - **Forms** (`tectn-forms`): repeater of plain-text embed snippets — `group_tectn_site_forms.json`. Use `tectn_get_embedded_forms()` in PHP.
 - **Block: Forms** (`tectn/forms`): `blocks/forms/` + `group_tectn_block_forms.json` — pick a form by **stable Form ID** (`form_key`, UUID on each repeater row). Saving **Site Settings → Forms** backfills empty IDs; the block stores the key (not row index) so reordering forms does not break the selection. Legacy blocks that only stored a numeric index still resolve until re-saved.
+- **Information tables** (`tectn-info-tables`): reusable four-column tables (configurable headers + rows) — `group_tectn_site_info_tables.json`. Use `tectn_get_embedded_info_tables()` in PHP.
+- **Block: Information table** (`tectn/info-table`): `blocks/info-table/` + `group_tectn_block_info_table.json` — pick a table by **stable table ID** (`info_table_key`, UUID). Saving **Site Settings → Information tables** backfills empty keys; legacy numeric selection still resolves until re-saved.
+- **Block: Iframe Embed** (`tectn/iframe-embed`): `blocks/iframe-embed/` + `group_tectn_iframe_embed_block.json` — optional section headline and a textarea for pasted **iframe** markup (same use as `group_69cdc5bfb43fe` field `iframe_embed`); output is passed through `wp_kses()` with an iframe allowlist. No map or search UI.
 
 There is **no** Theme Settings options page in this theme; options live under **Site Settings** and its sub-pages.
 

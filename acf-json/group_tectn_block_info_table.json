@@ -1,0 +1,48 @@
+{
+    "key": "group_tectn_block_info_table",
+    "title": "Block: Information table",
+    "fields": [
+        {
+            "key": "field_tectn_block_info_table_selected",
+            "label": "Information table",
+            "name": "selected_info_table_key",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Choices use each table’s stable ID from Site Settings → Information tables. Save that page first so IDs are generated.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": [],
+            "default_value": "",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 1,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn/info-table"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1775087215
+}

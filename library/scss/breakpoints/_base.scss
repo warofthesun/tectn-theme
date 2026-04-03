@@ -1272,6 +1272,75 @@ border: $spacing-xs solid $white;
 }
 
 /* =========================
+   Iframe Embed block — same card/hierarchy as Pick-up Sites Map; no search bar
+   ========================= */
+.c-iframe-embed {
+	padding: 0 1rem 2rem;
+	border-radius: 1rem;
+	margin-bottom: $spacing-xl;
+	display: flex;
+	flex-direction: column;
+}
+
+.c-iframe-embed__headline {
+	font-family: $header-font;
+	font-size: clamp(1.25rem, 3vw, 1.75rem);
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: $white;
+	text-align: center;
+	margin: 0;
+	padding: 0.75rem 1.25rem;
+	padding-bottom: 0;
+	@include color_surface__dark_primary;
+	border-top-left-radius: $radius-sm;
+	border-top-right-radius: $radius-sm;
+	display: block;
+	box-sizing: border-box;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.c-iframe-embed__body {
+	position: relative;
+	@include color_surface__dark_primary;
+	border-radius: $radius-md;
+	padding: $spacing-md;
+	overflow: hidden;
+}
+
+.c-iframe-embed__body:first-child {
+	border-top-left-radius: $radius-md;
+	border-top-right-radius: $radius-md;
+}
+
+.c-iframe-embed__body:last-child {
+	border-bottom-left-radius: $radius-md;
+	border-bottom-right-radius: $radius-md;
+}
+
+.c-iframe-embed__frame {
+	width: 100%;
+	border-radius: $radius-sm;
+	overflow: hidden;
+
+	iframe {
+		width: 100%;
+		display: block;
+		min-height: 320px;
+	}
+}
+
+.c-iframe-embed__empty {
+	margin: 0;
+	padding: 1em;
+	background: rgba($white, 0.9);
+	text-align: center;
+	color: $text-color;
+	border-radius: $radius-sm;
+}
+
+/* =========================
    Image Slider block — table-of-contents style (list left, image right); stacks on mobile
    ========================= */
 .c-slider {
@@ -4157,6 +4226,124 @@ body.tectn-stories-index .hero__container--blog .hero__container--inner {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	}
+}
+
+/*********************
+Information table block (ACF tectn/info-table) — .c-infoTable
+*********************/
+
+.c-infoTable {
+	font-family: $body-font;
+	margin-bottom: $spacing-md;
+
+	&--preview {
+		padding: $spacing-md;
+		background: $grey-10;
+		border: 1px solid $grey-200;
+		border-radius: $radius-sm;
+
+		.c-infoTable__preview-note {
+			margin: 0;
+			color: $grey-700;
+		}
+	}
+
+	&__th {
+		&--col4 {
+			min-width: 150px;
+		}
+	}
+}
+
+.c-infoTable__scroll {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	@include box-shadow($bottom-diffused);
+	border-radius: $radius-sm;
+	margin-bottom: $spacing-xl;
+}
+
+.c-infoTable__table {
+	width: 100%;
+	min-width: 40rem; /* keeps columns readable; wrapper scrolls on narrow viewports */
+	border-collapse: collapse;
+	font-family: $body-font;
+	background: $white;
+	border: 1px solid $grey-300;
+}
+
+table.c-infoTable__table {
+	margin-bottom: 0;
+}
+
+.c-infoTable__head th {
+	color: $grey-10;
+	font-weight: 700;
+	text-align: left;
+	vertical-align: middle;
+	padding: $spacing-sm $spacing-md;
+	border-right: 1px solid $grey-700;
+
+	&:last-child {
+		border-right: none;
+	}
+}
+
+.c-infoTable__row {
+	border-top: 1px solid $grey-300;
+
+	&:nth-child(even) {
+		background: $grey-10;
+	}
+}
+
+.c-infoTable__item {
+	text-align: left;
+	vertical-align: top;
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: $spacing-sm $spacing-md;
+	background: $grey-10;
+	border-right: 1px solid $grey-200;
+	width: 1%;
+	white-space: nowrap;
+}
+
+.c-infoTable__row:nth-child(even) .c-infoTable__item {
+	background: color.adjust($grey-10, $lightness: -2%);
+}
+
+.c-infoTable__row:nth-child(odd) .c-infoTable__item {
+	background: color.adjust($grey-10, $lightness: -1%);
+}
+
+.c-infoTable__cell {
+	vertical-align: top;
+	padding: $spacing-sm $spacing-md;
+	border-right: 1px solid $grey-200;
+
+	&:last-child {
+		border-right: none;
+	}
+
+	p {
+		margin-top: 0;
+		margin-bottom: $spacing-xs;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	ul {
+		list-style-type: disc;
+		margin: 0 0 $spacing-xs 0;
+		padding-left: 1.25em;
+
+		li {
+			margin-bottom: $spacing-xxs;
+		}
 	}
 }
 
