@@ -14,6 +14,7 @@
   "supports": {
     "jsx": true,
     "anchor": true,
-    "align": ["full", "wide"]
+    "align": ["full", "wide"],
+    "inserter": false
   }
 }
