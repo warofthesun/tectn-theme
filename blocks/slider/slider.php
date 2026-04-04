@@ -13,13 +13,20 @@ $is_editor_context =
 	( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) ||
 	( defined( 'REST_REQUEST' ) && REST_REQUEST );
 
+// Block inserter thumbnails use the REST block-renderer; ACF often omits $is_preview and strips
+// non-field keys from data. Use a registered top-level attribute (block.json) so the flag survives.
 $is_inserter_preview =
-	! empty( $block['mode'] ) &&
-	$block['mode'] === 'preview' &&
-	! empty( $block_data['inserter_preview'] );
+	! empty( $block['inserterPreview'] ) || ! empty( $block_data['inserter_preview'] );
 
 if ( $is_inserter_preview ) {
-	$src = get_template_directory_uri() . '/blocks/slider/preview.png';
+	$variant = isset( $block_data['slider_type'] ) ? sanitize_key( (string) $block_data['slider_type'] ) : '';
+	$map     = array(
+		'table_of_contents' => 'preview-table-of-contents.png',
+		'horizontal'        => 'preview-horizontal.png',
+		'slideshow'         => 'preview-slideshow.png',
+	);
+	$file = isset( $map[ $variant ] ) ? $map[ $variant ] : 'preview.png';
+	$src  = get_template_directory_uri() . '/blocks/slider/' . $file;
 	echo '<img src="' . esc_url( $src ) . '" style="width:100%;height:auto;display:block;" alt="">';
 	return;
 }
@@ -80,12 +87,36 @@ if ( is_array( $gallery ) && ! empty( $gallery ) ) {
 $block_id = isset( $block['id'] ) ? $block['id'] : 'slider-' . wp_rand( 1000, 9999 );
 $align    = ! empty( $block['align'] ) ? ' align' . $block['align'] : '';
 
+$slider_empty_editor = array(
+	'table_of_contents' => array(
+		'title' => __( 'Table of contents slider', 'tectn_theme' ),
+		'body'  => __( 'Add a headline and gallery images. Each image title becomes a list item on the left; visitors click a title to change the image on the right.', 'tectn_theme' ),
+	),
+	'horizontal'        => array(
+		'title' => __( 'Horizontal slider', 'tectn_theme' ),
+		'body'  => __( 'Add gallery images. Visitors use arrows or dots to change slides. Turn on Show captions in the block settings if images have captions or authors.', 'tectn_theme' ),
+	),
+	'slideshow'         => array(
+		'title' => __( 'Slideshow', 'tectn_theme' ),
+		'body'  => __( 'Add gallery images for a centered autoplay slideshow (square crop). Enable captions in the block settings when needed.', 'tectn_theme' ),
+	),
+);
+
+$slider_empty_front = array(
+	'table_of_contents' => __( 'Add images to the gallery. Each image title will become a clickable list item.', 'tectn_theme' ),
+	'horizontal'        => __( 'Add images to the gallery to use this horizontal slider.', 'tectn_theme' ),
+	'slideshow'         => __( 'Add images to the gallery to use this slideshow.', 'tectn_theme' ),
+);
+
 if ( empty( $items ) ) {
-	if ( $is_editor_context && empty( $block_data['inserter_preview'] ) ) {
-		echo '<div class="c-slider c-slider--empty' . esc_attr( $align ) . '"><div class="c-slider__placeholder"><strong>' . esc_html__( 'Image Slider', 'tectn_theme' ) . '</strong><br>' . esc_html__( 'Add a headline, body copy, and gallery images. Each image title becomes a list item.', 'tectn_theme' ) . '</div></div>';
+	if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && empty( $block['inserterPreview'] ) ) {
+		$empty_key = isset( $slider_empty_editor[ $slider_type ] ) ? $slider_type : 'table_of_contents';
+		$empty_ed  = $slider_empty_editor[ $empty_key ];
+		echo '<div class="c-slider c-slider--empty' . esc_attr( $align ) . '"><div class="c-slider__placeholder c-slider__placeholder--' . esc_attr( $empty_key ) . '"><strong>' . esc_html( $empty_ed['title'] ) . '</strong><br>' . esc_html( $empty_ed['body'] ) . '</div></div>';
 		return;
 	}
-	echo '<div class="c-slider c-slider--empty' . esc_attr( $align ) . '"><p class="c-slider__empty">' . esc_html__( 'Add images to the gallery. Each image title will become a clickable list item.', 'tectn_theme' ) . '</p></div>';
+	$front_key = isset( $slider_empty_front[ $slider_type ] ) ? $slider_type : 'table_of_contents';
+	echo '<div class="c-slider c-slider--empty' . esc_attr( $align ) . '"><p class="c-slider__empty">' . esc_html( $slider_empty_front[ $front_key ] ) . '</p></div>';
 	return;
 }
 

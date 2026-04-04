@@ -7,6 +7,12 @@
   "category": "tectn-blocks",
   "icon": "slides",
   "keywords": ["slider", "gallery", "table of contents", "toc"],
+  "attributes": {
+    "inserterPreview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
   "acf": {
     "mode": "preview",
     "renderTemplate": "slider.php"
@@ -16,12 +22,67 @@
     "anchor": true,
     "align": ["full", "wide"]
   },
-  "example": {
-    "attributes": {
-      "mode": "preview",
-      "data": {
-        "inserter_preview": true
+  "variations": [
+    {
+      "name": "table-of-contents",
+      "title": "Table of contents",
+      "description": "List left, image right.",
+      "attributes": {
+        "data": {
+          "slider_type": "table_of_contents"
+        }
+      },
+      "scope": ["inserter"],
+      "isDefault": true,
+      "example": {
+        "attributes": {
+          "mode": "preview",
+          "inserterPreview": true,
+          "data": {
+            "slider_type": "table_of_contents"
+          }
+        }
+      }
+    },
+    {
+      "name": "horizontal",
+      "title": "Horizontal",
+      "description": "Arrows and dots; optional captions.",
+      "attributes": {
+        "data": {
+          "slider_type": "horizontal"
+        }
+      },
+      "scope": ["inserter"],
+      "example": {
+        "attributes": {
+          "mode": "preview",
+          "inserterPreview": true,
+          "data": {
+            "slider_type": "horizontal"
+          }
+        }
+      }
+    },
+    {
+      "name": "slideshow",
+      "title": "Slideshow",
+      "description": "Centered slideshow with square images.",
+      "attributes": {
+        "data": {
+          "slider_type": "slideshow"
+        }
+      },
+      "scope": ["inserter"],
+      "example": {
+        "attributes": {
+          "mode": "preview",
+          "inserterPreview": true,
+          "data": {
+            "slider_type": "slideshow"
+          }
+        }
       }
     }
-  }
+  ]
 }
