@@ -77,7 +77,7 @@ function tectn_migrate_footer_information_from_site_settings() {
 add_action( 'acf/init', 'tectn_migrate_footer_information_from_site_settings', 99 );
 
 /**
- * Copy legacy Google Maps API key (standalone Theme Settings field) into Site Settings → Google API tab once.
+ * Copy legacy Google Maps API key (standalone Theme Settings field) into site_settings group once (legacy storage).
  */
 function tectn_migrate_google_maps_key_into_site_settings() {
 	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
@@ -108,6 +108,48 @@ function tectn_migrate_google_maps_key_into_site_settings() {
 add_action( 'acf/init', 'tectn_migrate_google_maps_key_into_site_settings', 99 );
 
 /**
+ * Copy Maps API key from legacy site_settings / options into Site Settings → Integrations once (for admin UI).
+ */
+function tectn_migrate_google_maps_key_to_integrations() {
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+	if ( get_option( 'tectn_google_maps_key_migrated_v2', '' ) === '1' ) {
+		return;
+	}
+	$on_integrations = get_field( 'google_maps_api_key', 'site-settings-integrations' );
+	if ( is_string( $on_integrations ) && trim( $on_integrations ) !== '' ) {
+		update_option( 'tectn_google_maps_key_migrated_v2', '1' );
+		return;
+	}
+	$key = '';
+	$ss  = get_field( 'site_settings', 'site-settings' );
+	if ( ! is_array( $ss ) ) {
+		$ss = get_field( 'site_settings', 'option' );
+	}
+	if ( is_array( $ss ) && ! empty( $ss['google_maps_api_key'] ) && is_string( $ss['google_maps_api_key'] ) ) {
+		$key = trim( $ss['google_maps_api_key'] );
+	}
+	if ( $key === '' ) {
+		$legacy = get_field( 'google_maps_api_key', 'option' );
+		if ( is_string( $legacy ) && $legacy !== '' ) {
+			$key = trim( $legacy );
+		}
+	}
+	if ( $key === '' ) {
+		$opt = get_option( 'tectn_google_maps_api_key', '' );
+		if ( is_string( $opt ) && $opt !== '' ) {
+			$key = trim( $opt );
+		}
+	}
+	if ( $key !== '' ) {
+		update_field( 'google_maps_api_key', $key, 'site-settings-integrations' );
+	}
+	update_option( 'tectn_google_maps_key_migrated_v2', '1' );
+}
+add_action( 'acf/init', 'tectn_migrate_google_maps_key_to_integrations', 101 );
+
+/**
  * Copy legacy Theme Settings sidebar toggles into Post Settings once.
  */
 function tectn_migrate_theme_sidebar_fields_to_post_settings() {
@@ -133,32 +175,37 @@ function tectn_migrate_theme_sidebar_fields_to_post_settings() {
 add_action( 'acf/init', 'tectn_migrate_theme_sidebar_fields_to_post_settings', 99 );
 
 /**
- * Copy Footer Tagline from old Theme Settings → Footer sub-page into Footer Information once.
+ * After contact fields moved into the footer_information group, copy values from legacy options-page root keys once.
  */
-function tectn_migrate_footer_tagline_to_footer_information() {
-	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+function tectn_migrate_footer_contact_into_footer_group() {
+	if ( get_option( 'tectn_footer_contact_into_group_v1', '' ) === '1' ) {
 		return;
 	}
-	if ( get_option( 'tectn_footer_tagline_migrated_v1', '' ) === '1' ) {
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) || ! function_exists( 'tectn_footer_information_value_is_empty' ) ) {
 		return;
 	}
 	$fi = get_field( 'footer_information', 'footer-information' );
 	if ( ! is_array( $fi ) ) {
 		$fi = array();
 	}
-	$existing = isset( $fi['footer_tagline'] ) ? trim( (string) $fi['footer_tagline'] ) : '';
-	if ( $existing !== '' ) {
-		update_option( 'tectn_footer_tagline_migrated_v1', '1' );
-		return;
+	$changed = false;
+	foreach ( array( 'address', 'phone_number', 'email_address' ) as $name ) {
+		$current = isset( $fi[ $name ] ) ? $fi[ $name ] : null;
+		if ( ! tectn_footer_information_value_is_empty( $name, $current ) ) {
+			continue;
+		}
+		$legacy = function_exists( 'acf_get_metadata' ) ? acf_get_metadata( 'footer-information', $name, false ) : null;
+		if ( tectn_footer_information_value_is_empty( $name, $legacy ) ) {
+			$legacy = get_field( $name, 'footer-information' );
+		}
+		if ( ! tectn_footer_information_value_is_empty( $name, $legacy ) ) {
+			$fi[ $name ] = $legacy;
+			$changed     = true;
+		}
 	}
-	$old = get_field( 'footer_tagline', 'acf-options-footer' );
-	if ( $old === null || $old === false || $old === '' ) {
-		$old = get_field( 'footer_tagline', 'option' );
-	}
-	if ( $old !== null && $old !== false && $old !== '' ) {
-		$fi['footer_tagline'] = $old;
+	if ( $changed ) {
 		update_field( 'footer_information', $fi, 'footer-information' );
 	}
-	update_option( 'tectn_footer_tagline_migrated_v1', '1' );
+	update_option( 'tectn_footer_contact_into_group_v1', '1' );
 }
-add_action( 'acf/init', 'tectn_migrate_footer_tagline_to_footer_information', 99 );
+add_action( 'acf/init', 'tectn_migrate_footer_contact_into_footer_group', 103 );

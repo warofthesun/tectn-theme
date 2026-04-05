@@ -19,7 +19,7 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_tectn_fi_tab_contact",
+                    "key": "field_69d2bb4cbbbba",
                     "label": "Contact Information",
                     "name": "",
                     "aria-label": "",
@@ -33,15 +33,15 @@
                         "id": ""
                     },
                     "placement": "top",
-                    "endpoint": 1,
-                    "selected": 1
+                    "endpoint": 0,
+                    "selected": 0
                 },
                 {
-                    "key": "field_tectn_fi_contact_information",
+                    "key": "field_tectn_fi_msg_contact",
                     "label": "Contact Information",
-                    "name": "contact_information",
+                    "name": "",
                     "aria-label": "",
-                    "type": "clone",
+                    "type": "message",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -50,13 +50,72 @@
                         "class": "",
                         "id": ""
                     },
-                    "clone": [
-                        "group_683db70464daa"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
+                    "message": "Mailing address, phone, and email appear in the footer (and anywhere the theme reads global contact data).",
+                    "new_lines": "wpautop",
+                    "esc_html": 0
+                },
+                {
+                    "key": "field_tectn_fi_contact_address",
+                    "label": "Address",
+                    "name": "address",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Enter your business mailing address. This appears in the footer and anywhere contact information is used site-wide (managed under Site Settings → Footer Information).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "rows": 3,
+                    "placeholder": "",
+                    "new_lines": "br"
+                },
+                {
+                    "key": "field_tectn_fi_contact_phone",
+                    "label": "Phone Number",
+                    "name": "phone_number",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "This is optional but if you include your phone number it will be used in the footer and contact page.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_tectn_fi_contact_email",
+                    "label": "Email Address",
+                    "name": "email_address",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Only add a business email address if you wish to provide an alternative option to filling out the form.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "key": "field_tectn_fi_tab_social",
@@ -74,7 +133,7 @@
                     },
                     "placement": "top",
                     "endpoint": 0,
-                    "selected": 0
+                    "selected": 1
                 },
                 {
                     "key": "field_tectn_fi_social_platforms",
@@ -225,45 +284,6 @@
                     "rows": 4,
                     "placeholder": "",
                     "new_lines": "br"
-                },
-                {
-                    "key": "field_tectn_fi_tab_tagline",
-                    "label": "Tagline",
-                    "name": "",
-                    "aria-label": "",
-                    "type": "tab",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "placement": "top",
-                    "endpoint": 0,
-                    "selected": 0
-                },
-                {
-                    "key": "field_tectn_fi_footer_tagline",
-                    "label": "Footer tagline",
-                    "name": "footer_tagline",
-                    "aria-label": "",
-                    "type": "wysiwyg",
-                    "instructions": "Optional rich text shown in the footer area when your templates output it.",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "tabs": "all",
-                    "toolbar": "basic",
-                    "media_upload": 0,
-                    "delay": 0,
-                    "allow_in_bindings": 0
                 }
             ]
         }
@@ -284,8 +304,8 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Footer contact, social links, CTAs, disclaimer, and tagline. Sub-page of Site Settings.",
+    "description": "Footer contact, social links, CTAs, and disclaimer. Sub-page of Site Settings.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1775349681
+    "modified": 1775418224
 }

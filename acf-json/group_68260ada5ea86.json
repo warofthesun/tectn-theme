@@ -333,11 +333,6 @@
             {
                 "param": "post_type",
                 "operator": "!=",
-                "value": "testimonials"
-            },
-            {
-                "param": "post_type",
-                "operator": "!=",
                 "value": "tribe_events"
             }
         ]
@@ -352,5 +347,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1775000001
+    "modified": 1735689600
 }

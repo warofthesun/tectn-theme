@@ -18,8 +18,7 @@
             },
             "choices": {
                 "post": "Post",
-                "page": "Page",
-                "testimonials": "Testimonial"
+                "page": "Page"
             },
             "default_value": false,
             "return_format": "value",
@@ -73,5 +72,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1775000000
+    "modified": 1735689600
 }

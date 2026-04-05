@@ -119,7 +119,7 @@ duplicate one of the lines in the array and name it according to your
 new image size.
 */
 
-/* Google Maps API key: env var > Site Settings (site_settings group) > legacy ACF option > wp option. */
+/* Google Maps API key: env var > Integrations options > legacy site_settings group > legacy ACF option > wp option. */
 function tectn_google_maps_api_key() {
 	if ( defined( 'GOOGLE_MAPS_API_KEY' ) && GOOGLE_MAPS_API_KEY !== '' ) {
 		return GOOGLE_MAPS_API_KEY;
@@ -129,6 +129,10 @@ function tectn_google_maps_api_key() {
 		return $env;
 	}
 	if ( function_exists( 'get_field' ) ) {
+		$integrations = get_field( 'google_maps_api_key', 'site-settings-integrations' );
+		if ( is_string( $integrations ) && $integrations !== '' ) {
+			return $integrations;
+		}
 		$ss = get_field( 'site_settings', 'site-settings' );
 		if ( ! is_array( $ss ) ) {
 			$ss = get_field( 'site_settings', 'option' );

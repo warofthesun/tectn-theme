@@ -4,7 +4,7 @@
     "active": true,
     "menu_order": 0,
     "page_title": "Site Settings",
-    "menu_slug": "site-settings",
+    "menu_slug": "site-settings-parent",
     "parent_slug": "none",
     "advanced_configuration": 1,
     "icon_url": "",
@@ -22,5 +22,5 @@
     "data_storage": "options",
     "post_id": "",
     "autoload": 0,
-    "modified": 1772414057
+    "modified": 1735689600
 }

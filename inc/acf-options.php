@@ -9,11 +9,149 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * ACF options parent: `site-settings-parent` (container menu) after syncing theme JSON;
+ * falls back to `site-settings` before sync (legacy top-level options page).
+ */
+function tectn_site_settings_parent_slug() {
+	$pages = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
+	if ( ! empty( $pages['site-settings-parent'] ) ) {
+		return 'site-settings-parent';
+	}
+	return 'site-settings';
+}
+
+/**
+ * First sub-item: Brand (same post_id as site-settings for existing get_field(..., 'site-settings') calls).
+ *
+ * Must run after ACF's register_ui_options_pages (acf/init priority 6) so site-settings-parent exists.
+ */
+function tectn_register_site_settings_brand_subpage() {
+	if ( ! function_exists( 'acf_add_options_sub_page' ) || ! function_exists( 'acf_get_options_pages' ) ) {
+		return;
+	}
+	$pages = acf_get_options_pages();
+	if ( empty( $pages['site-settings-parent'] ) ) {
+		return;
+	}
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Brand',
+			'menu_title'  => 'Brand',
+			'menu_slug'   => 'site-settings',
+			'parent_slug' => 'site-settings-parent',
+			'capability'  => 'edit_posts',
+			'post_id'     => 'site-settings',
+		)
+	);
+}
+add_action( 'acf/init', 'tectn_register_site_settings_brand_subpage', 7 );
+
+/**
+ * Google Maps API key (moved from Brand / site_settings group).
+ */
+function tectn_register_site_settings_integrations_subpage() {
+	if ( ! function_exists( 'acf_add_options_sub_page' ) || ! function_exists( 'acf_get_options_pages' ) ) {
+		return;
+	}
+	$pages = acf_get_options_pages();
+	if ( empty( $pages['site-settings-parent'] ) ) {
+		return;
+	}
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Integrations',
+			'menu_title'  => 'Integrations',
+			'menu_slug'   => 'site-settings-integrations',
+			'parent_slug' => 'site-settings-parent',
+			'capability'  => 'edit_posts',
+			'post_id'     => 'site-settings-integrations',
+		)
+	);
+}
+add_action( 'acf/init', 'tectn_register_site_settings_integrations_subpage', 8 );
+
+/**
+ * Fields for Integrations options sub-page.
+ */
+function tectn_register_acf_integrations_field_group() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+	acf_add_local_field_group(
+		array(
+			'key'                   => 'group_tectn_integrations',
+			'title'                 => 'Integrations',
+			'active'                => true,
+			'fields'                => array(
+				array(
+					'key'           => 'field_tectn_integrations_gmaps_key',
+					'label'         => 'Google Maps API key',
+					'name'          => 'google_maps_api_key',
+					'type'          => 'text',
+					'instructions'  => 'Used for ACF Google Map fields and map features. You can also set GOOGLE_MAPS_API_KEY / tectn_google_maps_api_key. Restrict the key by HTTP referrer in Google Cloud Console.',
+					'required'      => 0,
+					'default_value' => '',
+				),
+			),
+			'location'              => array(
+				array(
+					array(
+						'param'    => 'options_page',
+						'operator' => '==',
+						'value'    => 'site-settings-integrations',
+					),
+				),
+			),
+		)
+	);
+}
+add_action( 'acf/init', 'tectn_register_acf_integrations_field_group', 15 );
+
+/**
+ * Remove the self-referencing duplicate submenu WordPress adds for the Site Settings parent.
+ */
+function tectn_remove_site_settings_parent_submenu_duplicate() {
+	$pages = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
+	if ( empty( $pages['site-settings-parent'] ) ) {
+		return;
+	}
+	remove_submenu_page( 'site-settings-parent', 'site-settings-parent' );
+}
+add_action( 'admin_menu', 'tectn_remove_site_settings_parent_submenu_duplicate', 999 );
+
+/**
+ * Make the Site Settings container menu open-only (no navigation) on wide viewports.
+ */
+function tectn_site_settings_parent_menu_non_navigable() {
+	$pages = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
+	if ( empty( $pages['site-settings-parent'] ) ) {
+		return;
+	}
+	?>
+<script>
+(function () {
+	var li = document.getElementById('toplevel_page_site-settings-parent');
+	if (!li || !li.classList.contains('wp-has-submenu')) return;
+	var a = li.querySelector(':scope > a');
+	if (!a) return;
+	a.setAttribute('href', '#');
+	a.addEventListener('click', function (e) {
+		if (window.innerWidth > 960) {
+			e.preventDefault();
+		}
+	});
+})();
+</script>
+	<?php
+}
+add_action( 'admin_footer', 'tectn_site_settings_parent_menu_non_navigable', 99 );
+
 function tectn_register_post_settings_options_page() {
 	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
 		return;
 	}
-	$parent = 'site-settings';
+	$parent = tectn_site_settings_parent_slug();
 	// Only add if parent exists (Site Settings from ACF UI).
 	$pages = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
 	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
@@ -38,7 +176,7 @@ function tectn_register_events_page_options_under_site_settings() {
 	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
 		return;
 	}
-	$parent = 'site-settings';
+	$parent = tectn_site_settings_parent_slug();
 	$pages  = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
 	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
 		return;
@@ -63,7 +201,7 @@ function tectn_register_footer_information_options_page() {
 	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
 		return;
 	}
-	$parent = 'site-settings';
+	$parent = tectn_site_settings_parent_slug();
 	$pages  = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
 	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
 		return;
@@ -88,7 +226,7 @@ function tectn_register_forms_options_page() {
 	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
 		return;
 	}
-	$parent = 'site-settings';
+	$parent = tectn_site_settings_parent_slug();
 	$pages  = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
 	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
 		return;
@@ -113,7 +251,7 @@ function tectn_register_info_tables_options_page() {
 	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
 		return;
 	}
-	$parent = 'site-settings';
+	$parent = tectn_site_settings_parent_slug();
 	$pages  = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
 	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
 		return;
@@ -161,13 +299,24 @@ function tectn_get_footer_information() {
 		'buttons',
 		'button_color',
 		'disclaimer_text',
-		'footer_tagline',
 	);
 	foreach ( $keys as $key ) {
 		$from_fi = array_key_exists( $key, $fi ) ? $fi[ $key ] : null;
 		$from_ss = array_key_exists( $key, $ss ) ? $ss[ $key ] : null;
+		// Legacy: contact saved on Brand options context before it moved to Footer Information.
+		$from_legacy_brand = in_array( $key, array( 'address', 'phone_number', 'email_address' ), true )
+			? get_field( $key, 'site-settings' )
+			: null;
+		// Legacy: contact stored at options-page root before fields moved into footer_information (see migrations.php).
+		$from_legacy_root = in_array( $key, array( 'address', 'phone_number', 'email_address' ), true ) && function_exists( 'acf_get_metadata' )
+			? acf_get_metadata( 'footer-information', $key, false )
+			: null;
 		if ( ! tectn_footer_information_value_is_empty( $key, $from_fi ) ) {
 			$out[ $key ] = $from_fi;
+		} elseif ( ! tectn_footer_information_value_is_empty( $key, $from_legacy_root ) ) {
+			$out[ $key ] = $from_legacy_root;
+		} elseif ( ! tectn_footer_information_value_is_empty( $key, $from_legacy_brand ) ) {
+			$out[ $key ] = $from_legacy_brand;
 		} elseif ( ! tectn_footer_information_value_is_empty( $key, $from_ss ) ) {
 			$out[ $key ] = $from_ss;
 		}
@@ -195,9 +344,6 @@ function tectn_footer_information_value_is_empty( $key, $val ) {
 	}
 	if ( 'button_color' === $key ) {
 		return $val === '' || $val === null;
-	}
-	if ( 'footer_tagline' === $key ) {
-		return $val === null || $val === '' || ( is_string( $val ) && trim( $val ) === '' );
 	}
 	return empty( $val );
 }
