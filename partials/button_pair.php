@@ -1,7 +1,9 @@
 <?php
 // Button Pair: repeater buttons (per-button style class) + optional parent color class.
 // When $buttons_data is set (e.g. from Footer Information options CTA), uses that array instead of have_rows.
+// Set $button_pair_use_darkbg true (e.g. from footer) to append c-button-pair__button--darkbg for primary outline/text/solid tokens.
 
+$use_darkbg      = ! empty( $button_pair_use_darkbg );
 $use_passed_data = isset( $buttons_data ) && is_array( $buttons_data ) && ! empty( $buttons_data );
 $has_buttons     = $use_passed_data || have_rows( 'buttons' );
 
@@ -42,6 +44,9 @@ if ( $has_buttons ) :
                         }
                     }
                 }
+                if ( $use_darkbg && ! in_array( 'c-button-pair__button--darkbg', $btn_classes, true ) ) {
+                    $btn_classes[] = 'c-button-pair__button--darkbg';
+                }
                 ?>
                 <a class="<?php echo esc_attr( implode( ' ', array_filter( $btn_classes ) ) ); ?>"
                     href="<?php echo esc_url( $url ); ?>"
@@ -72,6 +77,9 @@ if ( $has_buttons ) :
                             $btn_classes[] = 'c-button-pair__button--' . sanitize_html_class( $cls );
                         }
                     }
+                }
+                if ( $use_darkbg && ! in_array( 'c-button-pair__button--darkbg', $btn_classes, true ) ) {
+                    $btn_classes[] = 'c-button-pair__button--darkbg';
                 }
                 ?>
                 <a class="<?php echo esc_attr( implode( ' ', array_filter( $btn_classes ) ) ); ?>"

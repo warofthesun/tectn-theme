@@ -117,9 +117,11 @@
 			: array();
 		$cta_btn_color = ! empty( $footer_opts['button_color'] ) ? $footer_opts['button_color'] : '';
 		if ( ! empty( $cta_buttons ) ) {
-			$buttons_data = $cta_buttons;
-			$button_color = $cta_btn_color;
+			$buttons_data           = $cta_buttons;
+			$button_color           = $cta_btn_color;
+			$button_pair_use_darkbg = true;
 			include get_template_directory() . '/partials/button_pair.php';
+			unset( $button_pair_use_darkbg );
 		}
 
 		$disclaimer_text = ( isset( $footer_opts['disclaimer_text'] ) && $footer_opts['disclaimer_text'] !== '' )

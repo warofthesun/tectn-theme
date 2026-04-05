@@ -14,26 +14,6 @@ Stylesheet: Tokens
     background-color: rgba($secondary-50, 0.95);
 }
 
-@mixin color_surface__button_primary--default {
-    background-color: $primary-400;
-}
-
-@mixin color_surface__button_primary--hover {
-    background-color: $primary-300;
-}
-
-@mixin color_surface__button_primary--is_active {
-    background-color: $primary-600;
-}
-
-@mixin color_border__button_primary--default {
-    border-color: $primary-600;
-}
-
-@mixin color_border__button_surface {
-    background-color: $primary-10_10;
-}
-
 @mixin color_surface__card_primary {
     background-color: $primary-200;
 }
@@ -52,8 +32,74 @@ Stylesheet: Tokens
     background-color: $secondary-200;
 }
 
+/* COLOR - SURFACE - ACCENT */
+
+@mixin color_surface__card_accent {
+    background-color: $accent-200;
+}
+
+@mixin color_surface__card_accent--dark {
+    background-color: $accent-600;
+}
+
+/* COLOR - SURFACE - BUTTON - PRIMARY */
+
+@mixin color_surface__button_primary--default {
+    background-color: $primary-500;
+}
+
+@mixin color_surface__button_primary--outline {
+    background-color: $primary-10_10;
+}
+
+@mixin color_surface__button_primary--text {
+    background-color: transparent;
+}
+
+@mixin color_surface_darkbg__button_primary--default {
+    background-color: $primary-400;
+}
+
+@mixin color_surface__button_primary--hover {
+    background-color: $primary-300;
+}
+
+@mixin color_surface__button_primary--is_active {
+    background-color: $primary-600;
+}
+
+/* COLOR - BORDER - BUTTON - PRIMARY */
+
+@mixin color_border__button_primary--default {
+    border-color: $primary-600;
+}
+
+/* COLOR - TEXT - LABEL - PRIMARY */
+
+@mixin color_text__label_primary--default {
+    color: $primary-800;
+}
+
+@mixin color_text__label_primary--outline {
+    color: $primary-700;
+}
+
+@mixin color_text_darkbg__label_primary--default {
+    color: $primary-400;
+}
+
+/* COLOR - SURFACE - BUTTON - SECONDARY */
+
 @mixin color_surface__button_secondary--default {
-    background-color: rgba($white, 0.8);
+    background-color: $secondary-600;
+}
+
+@mixin color_surface_darkbg__button_secondary--default {
+    background-color: $secondary-400;
+}
+
+@mixin color_surface__button_secondary--outline {
+    background-color: $secondary-10_10;
 }
 
 @mixin color_surface__button_secondary--hover {
@@ -64,15 +110,39 @@ Stylesheet: Tokens
     background-color: $secondary-600;
 }
 
-/* COLOR - SURFACE - ACCENT */
+/* COLOR - BORDER - BUTTON - SECONDARY */
 
-@mixin color_surface__card_accent {
-    background-color: $accent-200;
+@mixin color_border__button_secondary--default {
+    border-color: $secondary-600;
 }
 
-@mixin color_surface__card_accent--dark {
-    background-color: $accent-600;
+@mixin color_border_darkbg__button_secondary--default {
+    border-color: $secondary-300;
 }
+
+/* COLOR - TEXT - LABEL - SECONDARY */
+
+@mixin color_text__label_secondary--default {
+    color: $secondary-200;
+}
+
+@mixin color_text__label_secondary--hover {
+    color: $secondary-700;
+}
+
+@mixin color_text__label_secondary--outline {
+    color: $secondary-600;
+}
+
+@mixin color_text_darkbg__label_secondary--default {
+    color: $secondary-700;
+}
+
+@mixin color_text_darkbg__label_secondary--outline {
+    color: $secondary-300;
+}
+
+/* COLOR - SURFACE - BUTTON - ACCENT */
 
 @mixin color_surface__button_accent--default {
     background-color: $accent-400;
@@ -86,13 +156,46 @@ Stylesheet: Tokens
     background-color: $accent-600;
 }
 
+@mixin color_surface_darkbg__button_accent--default {
+    background-color: $accent-300;
+}
+
+/* COLOR - BORDER - BUTTON - ACCENT */
+
 @mixin color_border__button_accent--default {
+    border-color: $accent-500;
+}
+
+@mixin color_border_darkbg__button_accent--default {
     border-color: $accent-400;
 }
+
+/* COLOR - TEXT - LABEL - ACCENT */
 
 @mixin color_text__label_accent--default {
     color: $accent-900;
 }
+
+@mixin color_text__label_accent--outline {
+    color: $accent-600;
+}
+
+@mixin color_text_darkbg__label_accent--default {
+    color: $accent-900;
+}
+
+@mixin color_text_darkbg__label_accent--outline {
+    color: $accent-300;
+}
+
+@mixin color_text_darkbg__label_accent--hover {
+    color: $accent-300;
+}
+
+@mixin color_text_darkbg__label_accent--light {
+    color: $accent-200;
+}
+
 
 /* COLOR - TEXT */
 
@@ -107,14 +210,6 @@ Stylesheet: Tokens
 
 @mixin color_text__nav-item_pressed {
     color: $primary-800;
-}
-
-@mixin color_text__label_primary--default {
-    color: $primary-800;
-}
-
-@mixin color_text__label_secondary--default {
-    color: $primary-500;
 }
 
 @mixin border-radius-xs {

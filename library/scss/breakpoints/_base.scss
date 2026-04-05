@@ -78,12 +78,24 @@ Buttons and such
 				@extend %btn--primary--solid;
 			}
 
+			&.c-button-pair__button--solid.c-button-pair__button--darkbg {
+				@extend %btn--primary--darkbg;
+			}
+
 			&.c-button-pair__button--outline {
 				@extend %btn--primary--outline;
 			}
 
+			&.c-button-pair__button--outline.c-button-pair__button--darkbg {
+				@extend %btn--primary--outline--darkbg;
+			}
+
 			&.c-button-pair__button--text {
 				@extend %btn--primary--text;
+			}
+
+			&.c-button-pair__button--text.c-button-pair__button--darkbg {
+				@extend %btn--primary--text--darkbg;
 			}
 		}
 	}
@@ -96,12 +108,24 @@ Buttons and such
 				@extend %btn--secondary--solid;
 			}
 
+			&.c-button-pair__button--solid.c-button-pair__button--darkbg {
+				@extend %btn--secondary--solid--darkbg;
+			}
+
 			&.c-button-pair__button--outline {
 				@extend %btn--secondary--outline;
 			}
 
+			&.c-button-pair__button--outline.c-button-pair__button--darkbg {
+				@extend %btn--secondary--outline--darkbg;
+			}
+
 			&.c-button-pair__button--text {
 				@extend %btn--secondary--text;
+			}
+
+			&.c-button-pair__button--text.c-button-pair__button--darkbg {
+				@extend %btn--secondary--text--darkbg;
 			}
 		}
 	}
@@ -114,12 +138,24 @@ Buttons and such
 				@extend %btn--accent--solid;
 			}
 
+			&.c-button-pair__button--solid.c-button-pair__button--darkbg {
+				@extend %btn--accent--solid--darkbg;
+			}
+
 			&.c-button-pair__button--outline {
 				@extend %btn--accent--outline;
 			}
 
+			&.c-button-pair__button--outline.c-button-pair__button--darkbg {
+				@extend %btn--accent--outline--darkbg;
+			}
+
 			&.c-button-pair__button--text {
 				@extend %btn--accent--text;
+			}
+
+			&.c-button-pair__button--text.c-button-pair__button--darkbg {
+				@extend %btn--accent--text--darkbg;
 			}
 		}
 	}

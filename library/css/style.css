@@ -278,6 +278,15 @@ Stylesheet: Tokens
 /* COLOR - SURFACE - PRIMARY */
 /* COLOR - SURFACE - SECONDARY */
 /* COLOR - SURFACE - ACCENT */
+/* COLOR - SURFACE - BUTTON - PRIMARY */
+/* COLOR - BORDER - BUTTON - PRIMARY */
+/* COLOR - TEXT - LABEL - PRIMARY */
+/* COLOR - SURFACE - BUTTON - SECONDARY */
+/* COLOR - BORDER - BUTTON - SECONDARY */
+/* COLOR - TEXT - LABEL - SECONDARY */
+/* COLOR - SURFACE - BUTTON - ACCENT */
+/* COLOR - BORDER - BUTTON - ACCENT */
+/* COLOR - TEXT - LABEL - ACCENT */
 /* COLOR - TEXT */
 /* COLOR - BORDER */
 .container-fluid,
@@ -1233,7 +1242,7 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   padding-top: 0.9em;
   line-height: 1;
   border-radius: 0.25em;
-  border: 2px solid;
+  border: 3px solid;
   cursor: pointer;
   -webkit-transition: background-color 0.14s ease-in-out;
   transition: background-color 0.14s ease-in-out;
@@ -1249,8 +1258,8 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 .c-button-pair .c-button-pair__button:active, #menu-login-and-forms.nav li a:active, .gallery-item .c-button-pair__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active {
   top: 1px;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid {
-  background-color: #D4E485;
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid, .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg {
+  background-color: #C9DD67;
   color: #505829;
   border-color: #A1B152;
 }
@@ -1259,10 +1268,16 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   color: #79853E;
   border-color: #A1B152;
 }
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg {
+  color: #D4E485;
+}
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text {
   color: #79853E;
   border: 0px;
   display: inline-block;
+}
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg {
+  color: #D4E485;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:focus {
   color: #547231;
@@ -1279,25 +1294,49 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   background-color: #A1B152;
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid, #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
-  color: #2A3918;
+  background-color: #547231;
+  color: #D2DDC5;
   border-color: #547231;
-  background-color: #A5BC8B;
+}
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg {
+  background-color: #87A564;
+  color: #3F5625;
+  border-color: #A5BC8B;
+}
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg:focus {
+  background-color: rgba(244, 245, 237, 0.1);
+  color: #A5BC8B;
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline {
-  color: #698f3d;
-  border-color: #698f3d;
   background-color: rgba(244, 245, 237, 0.1);
+  color: #547231;
+  border-color: #547231;
+}
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg {
+  color: #A5BC8B;
+  border-color: #A5BC8B;
+}
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg:focus {
+  background-color: #87A564;
+  color: #3F5625;
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text, .gallery-item .c-button-pair__button {
-  color: #698f3d;
+  color: #547231;
   border: 0px;
   display: inline-block;
 }
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg {
+  color: #A5BC8B;
+}
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg:focus {
+  background-color: transparent;
+  color: #D2DDC5;
+}
 .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:hover, .gallery-item .c-button-pair__button:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:focus, .gallery-item .c-button-pair__button:focus {
-  color: #547231;
+  color: #3F5625;
   text-decoration: none;
   outline: none;
-  background-color: rgba(244, 245, 237, 0.1);
+  background-color: transparent;
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button:hover, #menu-login-and-forms.nav li a:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button:focus, #menu-login-and-forms.nav li a:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
   color: #3F5625;
@@ -1308,17 +1347,42 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid {
   background-color: #F0C852;
   color: #2F2508;
+  border-color: #ECBA27;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg {
+  background-color: #F4D67D;
+  color: #2F2508;
   border-color: #F0C852;
 }
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg:focus {
+  background-color: rgba(244, 245, 237, 0.1);
+  color: #F4D67D;
+  border-color: #ECBA27;
+}
 .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(244, 245, 237, 0.1);
   color: #BD951F;
+  border-color: #ECBA27;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg {
+  color: #F4D67D;
   border-color: #F0C852;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg:focus {
+  background-color: #F4D67D;
+  color: #2F2508;
 }
 .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text {
   color: #BD951F;
   border: 0px;
   display: inline-block;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg {
+  color: #F4D67D;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg:focus {
+  color: #F9EABE;
+  background-color: transparent;
 }
 .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:focus {
   color: #5E4A10;
@@ -5958,7 +6022,7 @@ a.c-chip:focus-visible {
   margin-top: auto;
   text-decoration: none;
   border-radius: 0.75em;
-  background-color: #D4E485;
+  background-color: #C9DD67;
   font-size: 1.1em;
   color: #505829;
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif;

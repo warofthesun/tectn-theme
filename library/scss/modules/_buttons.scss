@@ -38,7 +38,7 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   padding-top: 0.9em;
   line-height: 1;
   border-radius: $radius-xs;
-  border: 2px solid;
+  border: 3px solid;
   cursor: pointer;
   @include transition(background-color 0.14s ease-in-out);
 
@@ -59,22 +59,30 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   } // end active
 
   &--primary {
-    &--solid {
-      background-color: $primary-400;
-      color: $primary-800;
-      border-color: $primary-600;
+    &--solid, &--darkbg {
+      @include color_surface__button_primary--default;
+      @include color_text__label_primary--default;
+      @include color_border__button_primary--default;
     }
 
     &--outline {
-      background-color: $primary-10_10;
-      color: $primary-700;
-      border-color: $primary-600;
+      @include color_surface__button_primary--outline;
+      @include color_text__label_primary--outline;
+      @include color_border__button_primary--default;
+
+      &--darkbg {
+        @include color_text_darkbg__label_primary--default;
+      }
     }
 
     &--text {
-      color: $primary-700;
+      @include color_text__label_primary--outline;
       border: 0px;
       display: inline-block;
+
+      &--darkbg {
+        @include color_text_darkbg__label_primary--default;
+      }
 
       &:hover, &:focus {
         color: $secondary-600;
@@ -97,27 +105,57 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 
   &--secondary {
     &--solid {
-      color: $secondary-800;
-      border-color: $secondary-600;
-      background-color: $secondary-300;
+      @include color_surface__button_secondary--default;
+      @include color_text__label_secondary--default;
+      @include color_border__button_secondary--default;
+
+      &--darkbg {
+        @include color_surface_darkbg__button_secondary--default;
+        @include color_text_darkbg__label_secondary--default;
+        @include color_border_darkbg__button_secondary--default;
+
+        &:hover, &:focus {
+          @include color_surface__button_secondary--outline;
+          @include color_text_darkbg__label_secondary--outline;
+        }
+      }
     }
 
     &--outline {
-      color: $secondary-500;
-      border-color: $secondary-500;
-      background-color: $primary-10_10;
+      @include color_surface__button_secondary--outline;
+      @include color_text__label_secondary--outline;
+      @include color_border__button_secondary--default;
+
+      &--darkbg {
+        @include color_text_darkbg__label_secondary--outline;
+        @include color_border_darkbg__button_secondary--default;
+
+        &:hover, &:focus {
+          @include color_surface_darkbg__button_secondary--default;
+          @include color_text_darkbg__label_secondary--default;
+        }
+      }
     }
 
     &--text {
-      color: $secondary-500;
+      @include color_text__label_secondary--outline;
       border: 0px;
       display: inline-block;
 
+      &--darkbg {
+        @include color_text_darkbg__label_secondary--outline;
+
+        &:hover, &:focus {
+          background-color: transparent;
+          @include color_text__label_secondary--default;
+        }
+      }
+
       &:hover, &:focus {
-        color: $secondary-600;
+        @include color_text__label_secondary--hover;
         text-decoration: none;
         outline: none;
-        background-color: $primary-10_10;
+        background-color: transparent;
       }
     }
 
@@ -134,18 +172,49 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
       @include color_surface__button_accent--default;
       @include color_text__label_accent--default;
       @include color_border__button_accent--default;
+
+      &--darkbg {
+        @include color_surface_darkbg__button_accent--default;
+        @include color_text_darkbg__label_accent--default;
+        @include color_border_darkbg__button_accent--default;
+
+        &:hover, &:focus {
+          background-color: $primary-10_10;
+          @include color_text_darkbg__label_accent--outline;
+          @include color_border__button_accent--default;
+        }
+      }
     }
 
     &--outline {
-      @include color_surface__button_secondary--default;
-      color: $accent-600;
+      background-color: $primary-10_10;
+      @include color_text__label_accent--outline;
       @include color_border__button_accent--default;
+
+      &--darkbg {
+        @include color_text_darkbg__label_accent--outline;
+        @include color_border_darkbg__button_accent--default;
+
+        &:hover, &:focus {
+          @include color_surface_darkbg__button_accent--default;
+          @include color_text_darkbg__label_accent--default;
+        }
+      }
     }
 
     &--text {
-      color: $accent-600;
+      @include color_text__label_accent--outline;
       border: 0px;
       display: inline-block;
+
+      &--darkbg {
+        @include color_text_darkbg__label_accent--outline;
+
+        &:hover, &:focus {
+          @include color_text_darkbg__label_accent--light;
+          background-color: transparent;
+        }
+      }
 
       &:hover, &:focus {
         color: $accent-800;
