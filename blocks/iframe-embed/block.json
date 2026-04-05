@@ -1,6 +1,6 @@
 {
   "name": "tectn/iframe-embed",
-  "title": "Iframe Embed",
+  "title": "Iframe embed",
   "description": "Optional headline and a pasted iframe embed (maps, videos, etc.).",
   "style": ["file:../library/css/style.css", "file:./style.css"],
   "category": "tectn-blocks",

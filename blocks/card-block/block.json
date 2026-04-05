@@ -1,6 +1,6 @@
 {
   "name": "tectn/card-block",
-  "title": "Card Block",
+  "title": "Card block",
   "description": "Section with short headline and repeater of cards (image, title, details, headline, body). Single card centers.",
   "style": ["file:../library/css/style.css"],
   "category": "tectn-blocks",

@@ -777,7 +777,9 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   text-transform: uppercase;
   font-size: 1em;
   font-weight: 400;
-  padding: 0.5em 1em;
+  padding: 0.75em 1.25em;
+  padding-top: 0.9em;
+  line-height: 1;
   border-radius: 0.25em;
   border: 2px solid;
   cursor: pointer;
@@ -798,22 +800,23 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid {
   background-color: #D4E485;
   color: #505829;
-  border-color: #D4E485;
+  border-color: #A1B152;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline {
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #C9DD67;
-  border-color: #D4E485;
+  background-color: rgba(244, 245, 237, 0.1);
+  color: #79853E;
+  border-color: #A1B152;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text {
-  color: #698f3d;
+  color: #79853E;
   border: 0px;
-  display: block;
+  display: inline-block;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:focus {
   color: #547231;
   text-decoration: none;
   outline: none;
+  background-color: rgba(244, 245, 237, 0.1);
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus {
   background-color: #DFEBA4;
@@ -824,31 +827,29 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   background-color: #A1B152;
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid, #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
-  color: rgb(12, 12, 4);
-  border: 1px solid #698f3d;
-  background: -webkit-linear-gradient(45deg, #87A564, #698f3d);
-  background: linear-gradient(45deg, #87A564, #698f3d);
+  color: #2A3918;
+  border-color: #547231;
+  background-color: #A5BC8B;
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline {
   color: #698f3d;
-  border: 2px solid #698f3d;
+  border-color: #698f3d;
+  background-color: rgba(244, 245, 237, 0.1);
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text, .gallery-item .c-button-pair__button {
   color: #698f3d;
   border: 0px;
-  display: block;
+  display: inline-block;
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:hover, .gallery-item .c-button-pair__button:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:focus, .gallery-item .c-button-pair__button:focus {
   color: #547231;
   text-decoration: none;
   outline: none;
+  background-color: rgba(244, 245, 237, 0.1);
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button:hover, #menu-login-and-forms.nav li a:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button:focus, #menu-login-and-forms.nav li a:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
-  color: #87A564;
-  background: -webkit-linear-gradient(90deg, #547231, #3F5625);
-  background: -webkit-gradient(linear, left top, right top, from(#547231), to(#3F5625));
-  background: -webkit-linear-gradient(left, #547231, #3F5625);
-  background: linear-gradient(90deg, #547231, #3F5625);
+  color: #3F5625;
+  background-color: #D2DDC5;
   text-decoration: none;
   outline: none;
 }
@@ -859,21 +860,23 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 }
 .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline {
   background-color: rgba(255, 255, 255, 0.8);
-  color: #2F2508;
+  color: #BD951F;
   border-color: #F0C852;
 }
 .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text {
-  color: #8E7017;
+  color: #BD951F;
   border: 0px;
-  display: block;
+  display: inline-block;
 }
 .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:focus {
   color: #5E4A10;
   text-decoration: none;
   outline: none;
+  background-color: rgba(244, 245, 237, 0.1);
 }
 .c-button-pair.c-button-pair--accent .c-button-pair__button:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button:focus {
   background-color: #F4D67D;
+  color: #2F2508;
   text-decoration: none;
   outline: none;
 }
@@ -1741,13 +1744,20 @@ FOOTER STYLES
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: end;
-  -ms-flex-align: end;
-  align-items: flex-end;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.footer__logo img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 .footer__logo #tectn_logo {
   margin-top: 2em;
-  margin-left: auto;
 }
 .footer__curve {
   background-size: cover;
@@ -1801,8 +1811,12 @@ FOOTER STYLES
 #inner-footer {
   padding-top: 2em;
 }
+#inner-footer .footer__right {
+  text-align: center;
+}
 #inner-footer .footer__right .c-button-pair {
   margin-bottom: 1.25em;
+  text-align: center;
 }
 #inner-footer .footer__contact {
   color: #EFF5D1;
@@ -1886,6 +1900,11 @@ view.
   margin-top: 1.25em;
 }
 
+/* Full-width disclaimer row when no contact (see footer.php). */
+.footer__disclaimer-wrap {
+  text-align: center;
+}
+
 .footer__disclaimer {
   text-align: center;
   color: #EFF5D1;
@@ -1895,12 +1914,6 @@ view.
   width: 100%;
   line-height: 1.5;
   font-size: 0.9rem;
-}
-.footer__disclaimer.footer__disclaimer--right {
-  text-align: right;
-  margin-left: auto;
-  margin-right: 0;
-  max-width: 100%;
 }
 
 .footer__copyright {

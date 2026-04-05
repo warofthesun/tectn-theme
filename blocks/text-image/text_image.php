@@ -79,7 +79,8 @@
         $grid_class = 'c-image-grid c-image-grid--one';
     }
     
-    $buttons     = get_field('buttons');
+    $buttons      = get_field( 'buttons' );
+    $has_buttons  = function_exists( 'have_rows' ) && have_rows( 'buttons' );
 
     // Build classes for the content group using BEM naming
     $classes_cg = ['c-content-group'];
@@ -143,8 +144,8 @@
   // Treat WYSIWYG as empty if it's only whitespace / empty tags.
   $body_plain = is_string($body) ? trim( wp_strip_all_tags( $body ) ) : '';
 
-  // Consider the block "empty" if it has no preheader, no headline, no meaningful body, and no media (images or video).
-  $is_empty = empty($preheader) && empty($headline) && empty($body_plain) && ! $has_media;
+  // Consider the block "empty" if it has no preheader, no headline, no meaningful body, no media, and no buttons.
+  $is_empty = empty($preheader) && empty($headline) && empty($body_plain) && ! $has_media && ! $has_buttons;
 
   if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && $is_empty ) :
 ?>

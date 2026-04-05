@@ -125,13 +125,37 @@
 		$disclaimer_text = ( isset( $footer_opts['disclaimer_text'] ) && $footer_opts['disclaimer_text'] !== '' )
 			? (string) $footer_opts['disclaimer_text']
 			: '';
-		if ( $disclaimer_text !== '' ) :
+		// With contact info the right column uses text-align:right (see _64em.scss); keep disclaimer there + --right.
+		// Without contact, render disclaimer full-width so it centers across the footer instead of the right half-column.
+		if ( $has_contact && $disclaimer_text !== '' ) :
 			?>
-		<div class="footer__disclaimer <?php echo $has_contact ? 'footer__disclaimer--right' : ''; ?>">
-			<?php echo nl2br( esc_html( trim( $disclaimer_text ) ) ); ?>
+		<div class="footer__disclaimer footer__disclaimer--right">
+			<?php
+			$disclaimer_trimmed = trim( $disclaimer_text );
+			if ( preg_match( '/<\s*br\s*\/?>/i', $disclaimer_trimmed ) ) {
+				echo wp_kses_post( $disclaimer_trimmed );
+			} else {
+				echo nl2br( esc_html( $disclaimer_trimmed ), false );
+			}
+			?>
 		</div>
 		<?php endif; ?>
 	</div>
+
+	<?php if ( ! $has_contact && $disclaimer_text !== '' ) : ?>
+	<div class="col-xs-12 footer__disclaimer-wrap">
+		<div class="footer__disclaimer">
+			<?php
+			$disclaimer_trimmed = trim( $disclaimer_text );
+			if ( preg_match( '/<\s*br\s*\/?>/i', $disclaimer_trimmed ) ) {
+				echo wp_kses_post( $disclaimer_trimmed );
+			} else {
+				echo nl2br( esc_html( $disclaimer_trimmed ), false );
+			}
+			?>
+		</div>
+	</div>
+	<?php endif; ?>
 
 	<div class="footer__copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</div>
 </div>

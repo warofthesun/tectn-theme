@@ -809,7 +809,18 @@
   	.footer__right {
   		text-align: right;
 		align-content: flex-end;
+
+		.c-button-pair {
+			text-align: right;
+		}
   	}
+
+	.footer__disclaimer.footer__disclaimer--right {
+		text-align: right;
+		margin-left: auto;
+		margin-right: 0;
+		max-width: 100%;
+	}
 
   	.footer__contact--left {
   		text-align: left;
@@ -842,6 +853,8 @@
 
   .footer {
   	&__logo {
+  		justify-content: flex-start;
+  		align-items: flex-end;
 
   		#tectn_logo {
   			margin-top: 0em;

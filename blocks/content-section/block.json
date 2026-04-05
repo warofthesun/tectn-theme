@@ -1,6 +1,6 @@
 {
   "name": "tectn/content-section",
-  "title": "Content Section",
+  "title": "Content section",
   "description": "Full-width section with optional background (image + overlay or solid color), any content, and configurable min height. Optional top or bottom curves.",
   "style": ["file:../library/css/style.css"],
   "editorScript": "file:./content-section-editor.js",

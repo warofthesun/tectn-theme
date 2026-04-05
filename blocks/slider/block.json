@@ -1,7 +1,7 @@
 {
   "name": "tectn/slider",
   "title": "Image Slider",
-  "description": "Table-of-contents style slider (list + image). More slider types (navigation, slideshow) can be added later.",
+  "description": "Multiple slider types available. Use the 'Slider style' dropdown to change your selection.",
   "style": ["file:../library/css/style.css", "file:./style.css"],
   "viewScript": ["file:./view.js"],
   "category": "tectn-blocks",
@@ -25,7 +25,7 @@
   "variations": [
     {
       "name": "table-of-contents",
-      "title": "Table of contents",
+      "title": "Menu-style slider",
       "description": "List left, image right.",
       "attributes": {
         "data": {
@@ -46,7 +46,7 @@
     },
     {
       "name": "horizontal",
-      "title": "Horizontal",
+      "title": "Horizontal slider",
       "description": "Arrows and dots; optional captions.",
       "attributes": {
         "data": {
@@ -66,7 +66,7 @@
     },
     {
       "name": "slideshow",
-      "title": "Slideshow",
+      "title": "Slideshow (square crop)",
       "description": "Centered slideshow with square images.",
       "attributes": {
         "data": {

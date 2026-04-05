@@ -27,7 +27,11 @@ Stylesheet: Tokens
 }
 
 @mixin color_border__button_primary--default {
-    border-color: $primary-400;
+    border-color: $primary-600;
+}
+
+@mixin color_border__button_surface {
+    background-color: $primary-10_10;
 }
 
 @mixin color_surface__card_primary {
@@ -53,11 +57,11 @@ Stylesheet: Tokens
 }
 
 @mixin color_surface__button_secondary--hover {
-    background-color: $primary-300;
+    background-color: $secondary-200;
 }
 
 @mixin color_surface__button_secondary--is_active {
-    background-color: $primary-600;
+    background-color: $secondary-600;
 }
 
 /* COLOR - SURFACE - ACCENT */
