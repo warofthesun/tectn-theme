@@ -59,102 +59,102 @@ CONTROLS
 Buttons and such
 ****************/
 
-.c-button-pair {
+.c-button-group {
 
-	.c-button-pair__button {
+	.c-button-group__button {
 		@extend %btn;
 		margin-bottom: $spacing-md;
 
-		&:nth-child(2) {
+		&:not(:first-child) {
 			margin-left: $spacing-md;
 		}
 	}
 
-	&.c-button-pair--primary {
-		.c-button-pair__button {
+	&.c-button-group--primary {
+		.c-button-group__button {
 			@extend %btn--primary;
 
-			&.c-button-pair__button--solid {
+			&.c-button-group__button--solid {
 				@extend %btn--primary--solid;
 			}
 
-			&.c-button-pair__button--solid.c-button-pair__button--darkbg {
+			&.c-button-group__button--solid.c-button-group__button--darkbg {
 				@extend %btn--primary--darkbg;
 			}
 
-			&.c-button-pair__button--outline {
+			&.c-button-group__button--outline {
 				@extend %btn--primary--outline;
 			}
 
-			&.c-button-pair__button--outline.c-button-pair__button--darkbg {
+			&.c-button-group__button--outline.c-button-group__button--darkbg {
 				@extend %btn--primary--outline--darkbg;
 			}
 
-			&.c-button-pair__button--text {
+			&.c-button-group__button--text {
 				@extend %btn--primary--text;
 			}
 
-			&.c-button-pair__button--text.c-button-pair__button--darkbg {
+			&.c-button-group__button--text.c-button-group__button--darkbg {
 				@extend %btn--primary--text--darkbg;
 			}
 		}
 	}
 
-	&.c-button-pair--secondary {
-		.c-button-pair__button {
+	&.c-button-group--secondary {
+		.c-button-group__button {
 			@extend %btn--secondary;
 
-			&.c-button-pair__button--solid {
+			&.c-button-group__button--solid {
 				@extend %btn--secondary--solid;
 			}
 
-			&.c-button-pair__button--solid.c-button-pair__button--darkbg {
+			&.c-button-group__button--solid.c-button-group__button--darkbg {
 				@extend %btn--secondary--solid--darkbg;
 			}
 
-			&.c-button-pair__button--outline {
+			&.c-button-group__button--outline {
 				@extend %btn--secondary--outline;
 			}
 
-			&.c-button-pair__button--outline.c-button-pair__button--darkbg {
+			&.c-button-group__button--outline.c-button-group__button--darkbg {
 				@extend %btn--secondary--outline--darkbg;
 			}
 
-			&.c-button-pair__button--text {
+			&.c-button-group__button--text {
 				@extend %btn--secondary--text;
 			}
 
-			&.c-button-pair__button--text.c-button-pair__button--darkbg {
+			&.c-button-group__button--text.c-button-group__button--darkbg {
 				@extend %btn--secondary--text--darkbg;
 			}
 		}
 	}
 
-	&.c-button-pair--accent {
-		.c-button-pair__button {
+	&.c-button-group--accent {
+		.c-button-group__button {
 			@extend %btn--accent;
 
-			&.c-button-pair__button--solid {
+			&.c-button-group__button--solid {
 				@extend %btn--accent--solid;
 			}
 
-			&.c-button-pair__button--solid.c-button-pair__button--darkbg {
+			&.c-button-group__button--solid.c-button-group__button--darkbg {
 				@extend %btn--accent--solid--darkbg;
 			}
 
-			&.c-button-pair__button--outline {
+			&.c-button-group__button--outline {
 				@extend %btn--accent--outline;
 			}
 
-			&.c-button-pair__button--outline.c-button-pair__button--darkbg {
+			&.c-button-group__button--outline.c-button-group__button--darkbg {
 				@extend %btn--accent--outline--darkbg;
 			}
 
-			&.c-button-pair__button--text {
+			&.c-button-group__button--text {
 				@extend %btn--accent--text;
 			}
 
-			&.c-button-pair__button--text.c-button-pair__button--darkbg {
+			&.c-button-group__button--text.c-button-group__button--darkbg {
 				@extend %btn--accent--text--darkbg;
 			}
 		}
@@ -183,15 +183,15 @@ Buttons and such
 	gap: 16px;
 	width: 100%;
 
-	.c-button-pair__button {
+	.c-button-group__button {
 		margin-bottom: 0;
 		margin-left: 0;
 		text-align: center;
 		box-sizing: border-box;
 		min-width: 0;
 
-		/* Override .c-button-pair's nth-child(2) margin-left so grid gap is uniform */
-		&:nth-child(2) {
+		/* Override .c-button-group sibling margin-left so grid gap is uniform */
+		&:not(:first-child) {
 			margin-left: 0;
 		}
 	}
@@ -1867,7 +1867,7 @@ border: $spacing-xs solid $white;
 		overflow: hidden;
 		padding: clamp(48px, 6vw, 96px) 0;
 
-		.c-button-pair {
+		.c-button-group {
 			display: flex;
 			justify-content: center;
 		}
@@ -3323,7 +3323,7 @@ POSTS & CONTENT STYLES
 		padding-bottom: 16px;
 	}
 
-	.c-button-pair__button {
+	.c-button-group__button {
 		padding: 1em;
 		margin-top: auto;
 		@extend %btn;
@@ -4132,8 +4132,12 @@ Information table block (ACF tectn/info-table) — .c-infoTable
 	}
 
 	&__th {
-		&--col4 {
-			min-width: 150px;
+		/* Fixed table layout reads column width from first row; width + max-width caps col 1. */
+		&--col1, &--col4 {
+			width: 200px;
+			max-width: 200px;
+			word-break: break-word;
+			overflow-wrap: break-word;
 		}
 	}
 }
@@ -4149,6 +4153,7 @@ Information table block (ACF tectn/info-table) — .c-infoTable
 .c-infoTable__table {
 	width: 100%;
 	min-width: 40rem; /* keeps columns readable; wrapper scrolls on narrow viewports */
+	table-layout: fixed; /* so first-column width applies to the whole column */
 	border-collapse: collapse;
 	font-family: $body-font;
 	background: $white;
@@ -4188,8 +4193,9 @@ table.c-infoTable__table {
 	padding: $spacing-sm $spacing-md;
 	background: $grey-10;
 	border-right: 1px solid $grey-200;
-	width: 1%;
-	white-space: nowrap;
+	max-width: 150px;
+	word-break: break-word;
+	overflow-wrap: break-word;
 }
 
 .c-infoTable__row:nth-child(even) .c-infoTable__item {

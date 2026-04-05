@@ -85,7 +85,7 @@ if ( ! empty( $block['className'] ) ) {
 <div id="<?php echo esc_attr( $block_id ); ?>"
 	class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
 	style="<?php echo $no_bg ? '' : '--button-grid-bg: ' . $bg_color . ';'; ?> --button-grid-max-w: <?php echo (int) $max_w; ?>px;">
-	<div class="c-button-pair c-button-pair--<?php echo esc_attr( $btn_color ); ?> c-button-grid__list">
+	<div class="c-button-group c-button-group--<?php echo esc_attr( $btn_color ); ?> c-button-grid__list">
 		<?php
 		foreach ( $buttons as $row ) {
 			$link = isset( $row['link'] ) && is_array( $row['link'] ) ? $row['link'] : array();
@@ -97,7 +97,7 @@ if ( ! empty( $block['className'] ) ) {
 			}
 			$style = isset( $row['button_style'] ) ? $row['button_style'] : 'solid';
 			$style = in_array( $style, array( 'solid', 'outline', 'text' ), true ) ? $style : 'solid';
-			$btn_classes = array( 'c-button-pair__button', 'c-button-grid__button', 'c-button-pair__button--' . $style );
+			$btn_classes = array( 'c-button-group__button', 'c-button-grid__button', 'c-button-group__button--' . $style );
 			?>
 			<a class="<?php echo esc_attr( implode( ' ', $btn_classes ) ); ?>"
 				href="<?php echo esc_url( $url ); ?>"

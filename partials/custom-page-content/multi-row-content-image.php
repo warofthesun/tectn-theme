@@ -38,9 +38,9 @@ endif;
         <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
         <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
         <?php if (!empty($buttons)) : ?>
-        <div class="c-button-pair">
+        <div class="c-button-group">
             <?php foreach ($buttons as $btn) : ?>
-            <a class="c-button-pair__button"
+            <a class="c-button-group__button"
                 href="<?php echo esc_url($btn['url']); ?>"
                 target="<?php echo esc_attr($btn['target']); ?>"
                 <?php echo ($btn['target'] === '_blank') ? 'rel="noopener noreferrer"' : ''; ?>>
@@ -109,9 +109,9 @@ endif;
         <?php if($headline) : ?><<?php echo esc_html($headline_size); ?>><?php echo esc_html($headline); ?></<?php echo esc_html($headline_size); ?>><?php endif; ?>
         <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
         <?php if (!empty($buttons)) : ?>
-        <div class="c-button-pair">
+        <div class="c-button-group">
             <?php foreach ($buttons as $btn) : ?>
-            <a class="c-button-pair__button"
+            <a class="c-button-group__button"
                 href="<?php echo esc_url($btn['url']); ?>"
                 target="<?php echo esc_attr($btn['target']); ?>"
                 <?php echo ($btn['target'] === '_blank') ? 'rel="noopener noreferrer"' : ''; ?>>

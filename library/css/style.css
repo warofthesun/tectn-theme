@@ -1230,7 +1230,7 @@ Here's a quick video to show how it works:
 http://www.youtube.com/watch?v=hwdVpKiJzac
 
 *********************/
-.c-button-pair .c-button-pair__button, #menu-login-and-forms.nav li a, .gallery-item .c-button-pair__button, input[type=submit], input[type=file], #wp-submit {
+.c-button-group .c-button-group__button, #menu-login-and-forms.nav li a, .gallery-item .c-button-group__button, input[type=submit], input[type=file], #wp-submit {
   display: inline-block;
   position: relative;
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
@@ -1247,156 +1247,156 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   -webkit-transition: background-color 0.14s ease-in-out;
   transition: background-color 0.14s ease-in-out;
 }
-.c-button-pair .c-button-pair__button .svg-inline--fa, #menu-login-and-forms.nav li a .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa {
+.c-button-group .c-button-group__button .svg-inline--fa, #menu-login-and-forms.nav li a .svg-inline--fa, .gallery-item .c-button-group__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa {
   font-size: 0.9em;
 }
-.c-button-pair .c-button-pair__button:hover, #menu-login-and-forms.nav li a:hover, .gallery-item .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-pair .c-button-pair__button:focus, #menu-login-and-forms.nav li a:focus, .gallery-item .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
+.c-button-group .c-button-group__button:hover, #menu-login-and-forms.nav li a:hover, .gallery-item .c-button-group__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-group .c-button-group__button:focus, #menu-login-and-forms.nav li a:focus, .gallery-item .c-button-group__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
   color: #fff;
   text-decoration: none;
   outline: none;
 }
-.c-button-pair .c-button-pair__button:active, #menu-login-and-forms.nav li a:active, .gallery-item .c-button-pair__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active {
+.c-button-group .c-button-group__button:active, #menu-login-and-forms.nav li a:active, .gallery-item .c-button-group__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active {
   top: 1px;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid, .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg {
+.c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--solid, .c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--solid.c-button-group__button--darkbg {
   background-color: #C9DD67;
   color: #505829;
   border-color: #A1B152;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline {
+.c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--outline {
   background-color: rgba(244, 245, 237, 0.1);
   color: #79853E;
   border-color: #A1B152;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg {
+.c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--outline.c-button-group__button--darkbg {
   color: #D4E485;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text {
+.c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--text {
   color: #79853E;
   border: 0px;
   display: inline-block;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg {
+.c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--text.c-button-group__button--darkbg {
   color: #D4E485;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:focus {
+.c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--text:hover, .c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--text:focus {
   color: #547231;
   text-decoration: none;
   outline: none;
   background-color: rgba(244, 245, 237, 0.1);
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus {
+.c-button-group.c-button-group--primary .c-button-group__button:hover, .c-button-group.c-button-group--primary .c-button-group__button:focus {
   background-color: #DFEBA4;
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button:active {
+.c-button-group.c-button-group--primary .c-button-group__button:active {
   background-color: #A1B152;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid, #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
+.c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--solid, #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
   background-color: #547231;
   color: #D2DDC5;
   border-color: #547231;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg {
+.c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--solid.c-button-group__button--darkbg {
   background-color: #87A564;
   color: #3F5625;
   border-color: #A5BC8B;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg:focus {
+.c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--solid.c-button-group__button--darkbg:hover, .c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--solid.c-button-group__button--darkbg:focus {
   background-color: rgba(244, 245, 237, 0.1);
   color: #A5BC8B;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline {
+.c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--outline {
   background-color: rgba(244, 245, 237, 0.1);
   color: #547231;
   border-color: #547231;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg {
+.c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--outline.c-button-group__button--darkbg {
   color: #A5BC8B;
   border-color: #A5BC8B;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg:focus {
+.c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--outline.c-button-group__button--darkbg:hover, .c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--outline.c-button-group__button--darkbg:focus {
   background-color: #87A564;
   color: #3F5625;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text, .gallery-item .c-button-pair__button {
+.c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--text, .gallery-item .c-button-group__button {
   color: #547231;
   border: 0px;
   display: inline-block;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg {
+.c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--text.c-button-group__button--darkbg {
   color: #A5BC8B;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg:focus {
+.c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--text.c-button-group__button--darkbg:hover, .c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--text.c-button-group__button--darkbg:focus {
   background-color: transparent;
   color: #D2DDC5;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:hover, .gallery-item .c-button-pair__button:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:focus, .gallery-item .c-button-pair__button:focus {
+.c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--text:hover, .gallery-item .c-button-group__button:hover, .c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--text:focus, .gallery-item .c-button-group__button:focus {
   color: #3F5625;
   text-decoration: none;
   outline: none;
   background-color: transparent;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button:hover, #menu-login-and-forms.nav li a:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button:focus, #menu-login-and-forms.nav li a:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
+.c-button-group.c-button-group--secondary .c-button-group__button:hover, #menu-login-and-forms.nav li a:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-group.c-button-group--secondary .c-button-group__button:focus, #menu-login-and-forms.nav li a:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
   color: #3F5625;
   background-color: #D2DDC5;
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid {
+.c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--solid {
   background-color: #F0C852;
   color: #2F2508;
   border-color: #ECBA27;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg {
+.c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--solid.c-button-group__button--darkbg {
   background-color: #F4D67D;
   color: #2F2508;
   border-color: #F0C852;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid.c-button-pair__button--darkbg:focus {
+.c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--solid.c-button-group__button--darkbg:hover, .c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--solid.c-button-group__button--darkbg:focus {
   background-color: rgba(244, 245, 237, 0.1);
   color: #F4D67D;
   border-color: #ECBA27;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline {
+.c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--outline {
   background-color: rgba(244, 245, 237, 0.1);
   color: #BD951F;
   border-color: #ECBA27;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg {
+.c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--outline.c-button-group__button--darkbg {
   color: #F4D67D;
   border-color: #F0C852;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline.c-button-pair__button--darkbg:focus {
+.c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--outline.c-button-group__button--darkbg:hover, .c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--outline.c-button-group__button--darkbg:focus {
   background-color: #F4D67D;
   color: #2F2508;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text {
+.c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--text {
   color: #BD951F;
   border: 0px;
   display: inline-block;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg {
+.c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--text.c-button-group__button--darkbg {
   color: #F4D67D;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text.c-button-pair__button--darkbg:focus {
+.c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--text.c-button-group__button--darkbg:hover, .c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--text.c-button-group__button--darkbg:focus {
   color: #F9EABE;
   background-color: transparent;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:focus {
+.c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--text:hover, .c-button-group.c-button-group--accent .c-button-group__button.c-button-group__button--text:focus {
   color: #5E4A10;
   text-decoration: none;
   outline: none;
   background-color: rgba(244, 245, 237, 0.1);
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button:focus {
+.c-button-group.c-button-group--accent .c-button-group__button:hover, .c-button-group.c-button-group--accent .c-button-group__button:focus {
   background-color: #F4D67D;
   color: #2F2508;
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button:active {
+.c-button-group.c-button-group--accent .c-button-group__button:active {
   background-color: #BD951F;
 }
 
@@ -3474,7 +3474,7 @@ FOOTER STYLES
 #inner-footer .footer__right {
   text-align: center;
 }
-#inner-footer .footer__right .c-button-pair {
+#inner-footer .footer__right .c-button-group {
   margin-bottom: 1.25em;
   text-align: center;
 }
@@ -3646,10 +3646,10 @@ img {
 CONTROLS
 Buttons and such
 ****************/
-.c-button-pair .c-button-pair__button {
+.c-button-group .c-button-group__button {
   margin-bottom: 1em;
 }
-.c-button-pair .c-button-pair__button:nth-child(2) {
+.c-button-group .c-button-group__button:not(:first-child) {
   margin-left: 1em;
 }
 /* Button Grid block: centered container, optional background + shadow, flex grid */
@@ -3675,16 +3675,16 @@ Buttons and such
   gap: 16px;
   width: 100%;
 }
-.c-button-grid__list .c-button-pair__button {
+.c-button-grid__list .c-button-group__button {
   margin-bottom: 0;
   margin-left: 0;
   text-align: center;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   min-width: 0;
-  /* Override .c-button-pair's nth-child(2) margin-left so grid gap is uniform */
+  /* Override .c-button-group sibling margin-left so grid gap is uniform */
 }
-.c-button-grid__list .c-button-pair__button:nth-child(2) {
+.c-button-grid__list .c-button-group__button:not(:first-child) {
   margin-left: 0;
 }
 
@@ -5631,7 +5631,7 @@ Content Section block
   overflow: hidden;
   padding: clamp(48px, 6vw, 96px) 0;
 }
-.c-posts .c-button-pair {
+.c-posts .c-button-group {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7171,7 +7171,7 @@ POSTS & CONTENT STYLES
   justify-content: space-between;
   padding-bottom: 16px;
 }
-.gallery-item .c-button-pair__button {
+.gallery-item .c-button-group__button {
   padding: 1em;
   margin-top: auto;
 }
@@ -8065,8 +8065,14 @@ Information table block (ACF tectn/info-table) — .c-infoTable
   margin: 0;
   color: #606469;
 }
-.c-infoTable__th--col4 {
-  min-width: 150px;
+.c-infoTable__th {
+  /* Fixed table layout reads column width from first row; width + max-width caps col 1. */
+}
+.c-infoTable__th--col1, .c-infoTable__th--col4 {
+  width: 200px;
+  max-width: 200px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .c-infoTable__scroll {
@@ -8081,6 +8087,7 @@ Information table block (ACF tectn/info-table) — .c-infoTable
 .c-infoTable__table {
   width: 100%;
   min-width: 40rem; /* keeps columns readable; wrapper scrolls on narrow viewports */
+  table-layout: fixed; /* so first-column width applies to the whole column */
   border-collapse: collapse;
   font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
   background: #fff;
@@ -8118,8 +8125,9 @@ table.c-infoTable__table {
   padding: 0.75em 1em;
   background: #F5F6F7;
   border-right: 1px solid #C6CACF;
-  width: 1%;
-  white-space: nowrap;
+  max-width: 150px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .c-infoTable__row:nth-child(even) .c-infoTable__item {
@@ -9206,7 +9214,7 @@ IMPORTING PARTIALS
     -ms-flex-line-pack: end;
     align-content: flex-end;
   }
-  #inner-footer .footer__right .c-button-pair {
+  #inner-footer .footer__right .c-button-group {
     text-align: right;
   }
   #inner-footer .footer__disclaimer.footer__disclaimer--right {

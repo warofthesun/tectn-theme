@@ -298,9 +298,9 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
             <p class="hero__paragraph"><?php echo esc_html( $d['paragraph'] ); ?></p>
           <?php endif; ?>
           <?php if ( ! empty( $d['ctas'] ) ) : ?>
-            <div class="c-button-pair">
+            <div class="c-button-group">
               <?php foreach ( $d['ctas'] as $cta ) : ?>
-                <a class="c-button-pair__button" href="<?php echo esc_url( $cta['url'] ); ?>" target="<?php echo esc_attr( $cta['target'] ); ?>"><?php echo esc_html( $cta['title'] ); ?></a>
+                <a class="c-button-group__button" href="<?php echo esc_url( $cta['url'] ); ?>" target="<?php echo esc_attr( $cta['target'] ); ?>"><?php echo esc_html( $cta['title'] ); ?></a>
               <?php endforeach; ?>
             </div>
           <?php endif; ?>

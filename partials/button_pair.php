@@ -1,7 +1,7 @@
 <?php
 // Button Pair: repeater buttons (per-button style class) + optional parent color class.
 // When $buttons_data is set (e.g. from Footer Information options CTA), uses that array instead of have_rows.
-// Set $button_pair_use_darkbg true (e.g. from footer) to append c-button-pair__button--darkbg for primary outline/text/solid tokens.
+// Set $button_pair_use_darkbg true (e.g. from footer) to append c-button-group__button--darkbg for primary outline/text/solid tokens.
 
 $use_darkbg      = ! empty( $button_pair_use_darkbg );
 $use_passed_data = isset( $buttons_data ) && is_array( $buttons_data ) && ! empty( $buttons_data );
@@ -15,11 +15,11 @@ if ( $has_buttons ) :
         $pair_color = get_field( 'button_color' );
     }
 
-    $pair_classes = array( 'c-button-pair' );
+    $pair_classes = array( 'c-button-group' );
     if ( ! empty( $pair_color ) ) {
         foreach ( preg_split( '/\s+/', trim( (string) $pair_color ) ) as $cls ) {
             if ( $cls !== '' ) {
-                $pair_classes[] = 'c-button-pair--' . sanitize_html_class( $cls );
+                $pair_classes[] = 'c-button-group--' . sanitize_html_class( $cls );
             }
         }
     }
@@ -36,16 +36,16 @@ if ( $has_buttons ) :
                     continue;
                 }
                 $style       = isset( $row['button_style'] ) ? $row['button_style'] : '';
-                $btn_classes = array( 'c-button-pair__button' );
+                $btn_classes = array( 'c-button-group__button' );
                 if ( ! empty( $style ) ) {
                     foreach ( preg_split( '/\s+/', trim( (string) $style ) ) as $cls ) {
                         if ( $cls !== '' ) {
-                            $btn_classes[] = 'c-button-pair__button--' . sanitize_html_class( $cls );
+                            $btn_classes[] = 'c-button-group__button--' . sanitize_html_class( $cls );
                         }
                     }
                 }
-                if ( $use_darkbg && ! in_array( 'c-button-pair__button--darkbg', $btn_classes, true ) ) {
-                    $btn_classes[] = 'c-button-pair__button--darkbg';
+                if ( $use_darkbg && ! in_array( 'c-button-group__button--darkbg', $btn_classes, true ) ) {
+                    $btn_classes[] = 'c-button-group__button--darkbg';
                 }
                 ?>
                 <a class="<?php echo esc_attr( implode( ' ', array_filter( $btn_classes ) ) ); ?>"
@@ -70,16 +70,16 @@ if ( $has_buttons ) :
                 if ( ! $url || ! $title ) {
                     continue;
                 }
-                $btn_classes = array( 'c-button-pair__button' );
+                $btn_classes = array( 'c-button-group__button' );
                 if ( ! empty( $style ) ) {
                     foreach ( preg_split( '/\s+/', trim( (string) $style ) ) as $cls ) {
                         if ( $cls !== '' ) {
-                            $btn_classes[] = 'c-button-pair__button--' . sanitize_html_class( $cls );
+                            $btn_classes[] = 'c-button-group__button--' . sanitize_html_class( $cls );
                         }
                     }
                 }
-                if ( $use_darkbg && ! in_array( 'c-button-pair__button--darkbg', $btn_classes, true ) ) {
-                    $btn_classes[] = 'c-button-pair__button--darkbg';
+                if ( $use_darkbg && ! in_array( 'c-button-group__button--darkbg', $btn_classes, true ) ) {
+                    $btn_classes[] = 'c-button-group__button--darkbg';
                 }
                 ?>
                 <a class="<?php echo esc_attr( implode( ' ', array_filter( $btn_classes ) ) ); ?>"
