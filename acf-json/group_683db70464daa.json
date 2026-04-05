@@ -70,11 +70,6 @@
         [
             {
                 "param": "options_page",
-                "operator": "!=",
-                "value": "site-settings"
-            },
-            {
-                "param": "options_page",
                 "operator": "==",
                 "value": "site-settings"
             }
@@ -90,5 +85,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772415957
+    "modified": 1777500000
 }
