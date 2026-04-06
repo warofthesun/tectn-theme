@@ -3,8 +3,8 @@
 <?php if ( tectn_get_hero_config()['show'] ) { include get_template_directory() . '/partials/hero/hero.php'; } ?>
 
 <?php
-// Events Calendar (when page template is used for events index): Intro heading and body from Site Settings > Events.
-if ( is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' ) && function_exists( 'tectn_get_events_option' ) ) {
+// Events Calendar (TEC default template uses page.php + tribe_is_event_query): intro from Site Settings > Events.
+if ( function_exists( 'tectn_is_events_listing_view' ) && tectn_is_events_listing_view() && function_exists( 'tectn_get_events_option' ) ) {
 	$intro_heading = tectn_get_events_option( 'events_intro_heading' );
 	$intro_body    = tectn_get_events_option( 'events_intro_body' );
 	$intro_heading = is_string( $intro_heading ) ? trim( $intro_heading ) : '';

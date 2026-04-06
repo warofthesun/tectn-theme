@@ -27,8 +27,8 @@ function tectn_get_hero_config() {
 
   $default = array( 'show' => false, 'type' => 'landing', 'data' => array() );
 
-  // Events archive: same hero as Hero Medium; options from Site Settings > Events (no wave, gradient or solid, headline only)
-  if ( is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' ) ) {
+  // Events listing (incl. TEC default page template): Hero Medium data from Site Settings > Events.
+  if ( function_exists( 'tectn_is_events_listing_view' ) && tectn_is_events_listing_view() ) {
     $use_solid = function_exists( 'get_field' ) ? (bool) tectn_get_events_option( 'events_hero_use_solid_color' ) : false;
     $bg_color  = function_exists( 'get_field' ) ? tectn_get_events_option( 'events_hero_background_color' ) : '';
     $bg_image  = function_exists( 'get_field' ) ? tectn_get_events_option( 'events_hero_background_image' ) : 0;

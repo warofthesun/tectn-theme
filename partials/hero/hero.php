@@ -148,7 +148,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
   ?>
   <?php
   $is_small            = isset( $d['size'] ) && $d['size'] === 'small';
-  $is_events_archive   = is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' );
+  $is_events_archive   = function_exists( 'tectn_is_events_listing_view' ) && tectn_is_events_listing_view();
   // Full-height medium uses --medium; Hero Small on pages uses --small only for headline/title.
   $use_medium_text_classes = ! $is_small || $is_events_archive;
   $text_mode               = isset( $d['text_color'] ) ? (string) $d['text_color'] : '';

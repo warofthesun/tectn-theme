@@ -2,6 +2,25 @@
 <?php get_header(); ?>
 <?php if ( tectn_get_hero_config()['show'] ) { include get_template_directory() . '/partials/hero/hero.php'; } ?>
 
+<?php
+if ( function_exists( 'tectn_is_events_listing_view' ) && tectn_is_events_listing_view() && function_exists( 'tectn_get_events_option' ) ) {
+	$intro_heading = tectn_get_events_option( 'events_intro_heading' );
+	$intro_body    = tectn_get_events_option( 'events_intro_body' );
+	$intro_heading = is_string( $intro_heading ) ? trim( $intro_heading ) : '';
+	$intro_body    = is_string( $intro_body ) ? trim( $intro_body ) : '';
+	if ( $intro_heading !== '' || $intro_body !== '' ) {
+		echo '<div class="events-intro wrap row"><div class="events-intro__inner col-xs-12">';
+		if ( $intro_heading !== '' ) {
+			echo '<h2 class="events-intro__heading">' . esc_html( $intro_heading ) . '</h2>';
+		}
+		if ( $intro_body !== '' ) {
+			echo '<div class="events-intro__body">' . wp_kses_post( $intro_body ) . '</div>';
+		}
+		echo '</div></div>';
+	}
+}
+?>
+
 			<div id="content">
 
 				<div id="inner-content" class="wrap  row">

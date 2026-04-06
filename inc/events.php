@@ -84,7 +84,7 @@ if ( function_exists( 'tribe_get_event_link' ) ) {
  * so theme fonts and colors apply. Loads after the active stylesheet to avoid duplicate enqueue.
  */
 function tectn_enqueue_tribe_events_overrides() {
-	if ( ! is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' ) ) {
+	if ( ! tectn_is_events_listing_view() && ! is_singular( 'tribe_events' ) ) {
 		return;
 	}
 	$path = get_template_directory() . '/tribe-events/tribe-events.css';
@@ -106,29 +106,50 @@ function tectn_enqueue_tribe_events_overrides() {
 add_action( 'wp_enqueue_scripts', 'tectn_enqueue_tribe_events_overrides', 100 );
 
 /**
- * Get an Events page option (Site Settings > Events). Tries 'option' then sub-page slug.
+ * Whether we are on a public Events Calendar list view (list/month/etc.), not a single event.
+ * TEC “Default template” loads page.php with tribe_is_event_query; is_post_type_archive( tribe_events ) is false there.
+ */
+function tectn_is_events_listing_view() {
+	if ( is_admin() ) {
+		return false;
+	}
+	if ( ! post_type_exists( 'tribe_events' ) ) {
+		return false;
+	}
+	if ( is_singular( 'tribe_events' ) ) {
+		return false;
+	}
+	if ( function_exists( 'tribe_is_event_query' ) && tribe_is_event_query() ) {
+		return true;
+	}
+	return is_post_type_archive( 'tribe_events' );
+}
+
+/**
+ * Get an Events page option (Site Settings > Events). Values are stored on post_id theme-events-settings.
  */
 function tectn_get_events_option( $field_name ) {
 	if ( ! function_exists( 'get_field' ) ) {
 		return null;
 	}
-	$val = get_field( $field_name, 'option' );
-	if ( $val !== null && $val !== false && $val !== '' ) {
-		return $val;
+	if ( function_exists( 'get_field_object' ) ) {
+		$field_object = get_field_object( $field_name, 'theme-events-settings' );
+		if ( $field_object ) {
+			return get_field( $field_name, 'theme-events-settings' );
+		}
 	}
-	$val = get_field( $field_name, 'theme-events-settings' );
-	return $val;
+	return get_field( $field_name, 'option' );
 }
 
 /**
- * Prepend Hero Medium (Events archive) and intro HTML before the calendar view (Site Settings > Events).
- * When "Default Page Template" is used, hero and intro are already output in archive.php – do not duplicate.
+ * Prepend Hero Medium + intro before TEC view HTML when a non-default Events template is selected.
+ * Default TEC template uses page.php (intro) + header hero; see tectn_is_events_listing_view().
  */
 function tectn_events_hero_and_intro_before_html( $before ) {
-	if ( ! is_post_type_archive( 'tribe_events' ) || is_singular( 'tribe_events' ) ) {
+	if ( ! tectn_is_events_listing_view() ) {
 		return $before;
 	}
-	// Default Page Template = theme template (archive.php) already shows hero + intro; skip to avoid duplicate.
+	// Hero + intro for “default” TEC template are output via header (hero) and page.php (intro); this filter only for other template modes.
 	if ( function_exists( 'tribe_get_option' ) && tribe_get_option( 'tribeEventsTemplate', 'default' ) === 'default' ) {
 		return $before;
 	}
