@@ -68,3 +68,43 @@ function tectn_content_group_classes( $args = array() ) {
   }
   return $classes;
 }
+
+/**
+ * Featured image URL for post cards (size: post-card).
+ *
+ * After cropping/replacing the attachment in the media library, the main file can be newer than
+ * the post-card intermediate still referenced in metadata; using that URL shows stale pixels.
+ * If the main file is newer than the post-card file on disk, use the full-size URL instead.
+ *
+ * @param int $post_id Post ID.
+ * @return string URL or empty string.
+ */
+function tectn_get_post_card_image_url( $post_id ) {
+	$post_id = (int) $post_id;
+	if ( $post_id <= 0 ) {
+		return '';
+	}
+	$thumb_id = (int) get_post_thumbnail_id( $post_id );
+	if ( ! $thumb_id ) {
+		return '';
+	}
+	$meta = wp_get_attachment_metadata( $thumb_id );
+	if ( empty( $meta['sizes']['post-card']['file'] ) ) {
+		return (string) get_the_post_thumbnail_url( $post_id, 'post-card' );
+	}
+	$main_file = get_attached_file( $thumb_id );
+	if ( ! $main_file || ! is_readable( $main_file ) ) {
+		return (string) get_the_post_thumbnail_url( $post_id, 'post-card' );
+	}
+	$size_rel  = $meta['sizes']['post-card']['file'];
+	$size_path = path_join( dirname( $main_file ), $size_rel );
+	if ( ! is_readable( $size_path ) ) {
+		$full = wp_get_attachment_image_url( $thumb_id, 'full' );
+		return $full ? (string) $full : (string) get_the_post_thumbnail_url( $post_id, 'post-card' );
+	}
+	if ( filemtime( $main_file ) > filemtime( $size_path ) ) {
+		$full = wp_get_attachment_image_url( $thumb_id, 'full' );
+		return $full ? (string) $full : (string) get_the_post_thumbnail_url( $post_id, 'post-card' );
+	}
+	return (string) get_the_post_thumbnail_url( $post_id, 'post-card' );
+}

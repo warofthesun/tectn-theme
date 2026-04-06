@@ -300,7 +300,7 @@ if ( $show_no_events ) {
               $permalink = get_permalink( $post_id );
             }
 
-            $img_url = get_the_post_thumbnail_url($post_id, 'post-card');
+            $img_url = tectn_get_post_card_image_url( $post_id );
 
             // Default WP taxonomies (will be empty for CPTs that don't use them)
             $categories = get_the_category($post_id);

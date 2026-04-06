@@ -106,7 +106,7 @@ $effective_bg_max_h = ( count( $related ) >= 1 && count( $related ) <= 3 ) ? 600
 					: get_the_date( 'm/d/y', $p_id );
 				$title     = get_the_title( $p_id );
 				$permalink = get_permalink( $p_id );
-				$img_url   = get_the_post_thumbnail_url( $p_id, 'post-card' );
+				$img_url   = tectn_get_post_card_image_url( $p_id );
 
 				$categories = get_the_category( $p_id );
 				$tags       = get_the_tags( $p_id );

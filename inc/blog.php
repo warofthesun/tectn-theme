@@ -265,7 +265,7 @@ function tectn_render_blog_post_card( $p, $args = array() ) {
 	$date_iso  = get_the_date( 'c', $post_id );
 	$title     = get_the_title( $post_id );
 	$permalink = get_permalink( $post_id );
-	$img_url   = get_the_post_thumbnail_url( $post_id, 'post-card' );
+	$img_url   = tectn_get_post_card_image_url( $post_id );
 
 	$author_id   = post_type_supports( 'post', 'author' ) ? (int) $p->post_author : 0;
 	$author_name = $author_id ? get_the_author_meta( 'display_name', $author_id ) : '';
