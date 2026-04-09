@@ -2,7 +2,7 @@
   "name": "tectn/card-block",
   "title": "Card block",
   "description": "Section with short headline and repeater of cards (image, title, details, headline, body). Single card centers.",
-  "style": ["file:../library/css/style.css"],
+  "style": ["file:../../library/css/style.css"],
   "category": "tectn-blocks",
   "icon": "grid-view",
   "keywords": ["card", "grid", "headline"],

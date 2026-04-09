@@ -2,7 +2,7 @@
   "name": "tectn/button-grid",
   "title": "Button grid",
   "description": "Grid of buttons with optional background, width, and buttons per row.",
-  "style": ["file:../library/css/style.css"],
+  "style": ["file:../../library/css/style.css"],
   "category": "tectn-blocks",
   "icon": "grid-view",
   "keywords": ["buttons", "grid", "links"],

@@ -4621,6 +4621,44 @@ Content Section block
   margin-bottom: 0.25rem;
 }
 
+/*
+ * Block editor canvas (iframe): core UI sets fonts on wrappers so empty-state copy
+ * may not inherit theme body type. Scope fixes to .editor-styles-wrapper only (not front-end).
+ */
+.editor-styles-wrapper .c-cardrepeater__placeholder,
+.editor-styles-wrapper .c-button-grid__placeholder,
+.editor-styles-wrapper .c-card-block__placeholder,
+.editor-styles-wrapper .c-content-section__placeholder,
+.editor-styles-wrapper .c-formsEmbed__placeholder,
+.editor-styles-wrapper .c-headline-group__placeholder,
+.editor-styles-wrapper .c-iframe-embed__placeholder,
+.editor-styles-wrapper .c-slider__placeholder,
+.editor-styles-wrapper .c-sponsorships__placeholder,
+.editor-styles-wrapper .c-text-image__placeholder,
+.editor-styles-wrapper .c-peopleList__empty,
+.editor-styles-wrapper .c-pickup-sites-map__empty,
+.editor-styles-wrapper .c-iframe-embed__empty,
+.editor-styles-wrapper .c-slider--empty .c-slider__empty {
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  line-height: 1.35;
+  color: #5c6b80;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.editor-styles-wrapper .c-cardrepeater__placeholder strong,
+.editor-styles-wrapper .c-button-grid__placeholder strong,
+.editor-styles-wrapper .c-card-block__placeholder strong,
+.editor-styles-wrapper .c-content-section__placeholder strong,
+.editor-styles-wrapper .c-formsEmbed__placeholder strong,
+.editor-styles-wrapper .c-headline-group__placeholder strong,
+.editor-styles-wrapper .c-iframe-embed__placeholder strong,
+.editor-styles-wrapper .c-slider__placeholder strong,
+.editor-styles-wrapper .c-sponsorships__placeholder strong,
+.editor-styles-wrapper .c-text-image__placeholder strong {
+  font-weight: 700;
+}
+
 .c-cardrepeater__grid {
   display: grid;
   grid-template-columns: 1fr;

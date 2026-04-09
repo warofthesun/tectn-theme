@@ -2,7 +2,7 @@
   "name": "tectn/sponsorships",
   "title": "Sponsorships",
   "description": "Thank-you section with headline and multiple sponsor tiers (logos and links) on gradient background.",
-  "style": ["file:../library/css/style.css"],
+  "style": ["file:../../library/css/style.css"],
   "category": "tectn-blocks",
   "icon": "awards",
   "keywords": ["sponsors", "logos", "tiers"],

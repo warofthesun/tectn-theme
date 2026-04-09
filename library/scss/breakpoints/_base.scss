@@ -1001,6 +1001,47 @@ border: $spacing-xs solid $white;
 		}
 	}
 
+	/*
+	 * Block editor canvas (iframe): core UI sets fonts on wrappers so empty-state copy
+	 * may not inherit theme body type. Scope fixes to .editor-styles-wrapper only (not front-end).
+	 */
+	.editor-styles-wrapper {
+		.c-cardrepeater__placeholder,
+		.c-button-grid__placeholder,
+		.c-card-block__placeholder,
+		.c-content-section__placeholder,
+		.c-formsEmbed__placeholder,
+		.c-headline-group__placeholder,
+		.c-iframe-embed__placeholder,
+		.c-slider__placeholder,
+		.c-sponsorships__placeholder,
+		.c-text-image__placeholder,
+		.c-peopleList__empty,
+		.c-pickup-sites-map__empty,
+		.c-iframe-embed__empty,
+		.c-slider--empty .c-slider__empty {
+			font-family: $body-font;
+			font-size: 1rem;
+			line-height: 1.35;
+			color: $text-color;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+
+		.c-cardrepeater__placeholder strong,
+		.c-button-grid__placeholder strong,
+		.c-card-block__placeholder strong,
+		.c-content-section__placeholder strong,
+		.c-formsEmbed__placeholder strong,
+		.c-headline-group__placeholder strong,
+		.c-iframe-embed__placeholder strong,
+		.c-slider__placeholder strong,
+		.c-sponsorships__placeholder strong,
+		.c-text-image__placeholder strong {
+			font-weight: 700;
+		}
+	}
+
    .c-cardrepeater__grid {
 	display: grid;
 	grid-template-columns: 1fr;

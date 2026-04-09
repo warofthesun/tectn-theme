@@ -168,7 +168,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
       <div class="hero__content hero__content--text<?php echo $is_small ? ' hero__content--small' : ' hero__content--medium'; ?> col-xs-12">
         <div class="hero__headline <?php echo $use_medium_text_classes ? 'hero__headline--medium' : 'hero__headline--small'; ?>">
           <?php if ( ! empty( $d['headline_text'] ) ) : ?>
-            <h1 class="hero__title <?php echo $use_medium_text_classes ? 'hero__title--medium' : 'hero__title--small'; ?><?php echo $text_dark ? ' dark' : ''; ?>"><?php echo esc_html( $d['headline_text'] ); ?></h1>
+            <h1 class="hero__title <?php echo $use_medium_text_classes ? 'hero__title--medium' : 'hero__title--small'; ?><?php echo $text_dark ? ' dark' : ''; ?>"><?php echo wp_kses_post( $d['headline_text'] ); ?></h1>
           <?php endif; ?>
         </div>
       </div>
@@ -298,11 +298,23 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
             <p class="hero__paragraph"><?php echo esc_html( $d['paragraph'] ); ?></p>
           <?php endif; ?>
           <?php if ( ! empty( $d['ctas'] ) ) : ?>
-            <div class="c-button-group">
-              <?php foreach ( $d['ctas'] as $cta ) : ?>
-                <a class="c-button-group__button" href="<?php echo esc_url( $cta['url'] ); ?>" target="<?php echo esc_attr( $cta['target'] ); ?>"><?php echo esc_html( $cta['title'] ); ?></a>
-              <?php endforeach; ?>
-            </div>
+            <?php
+            $buttons_data = array();
+            foreach ( $d['ctas'] as $cta ) {
+              $buttons_data[] = array(
+                'button'       => array(
+                  'url'    => $cta['url'],
+                  'title'  => isset( $cta['title'] ) ? $cta['title'] : '',
+                  'target' => isset( $cta['target'] ) ? $cta['target'] : '_self',
+                ),
+                'button_style' => isset( $cta['button_style'] ) ? $cta['button_style'] : '',
+              );
+            }
+            $button_color           = isset( $d['button_color'] ) ? $d['button_color'] : '';
+            $button_pair_use_darkbg = ! empty( $d['button_darkbg'] );
+            include get_theme_file_path( '/partials/button_pair.php' );
+            unset( $buttons_data, $button_color, $button_pair_use_darkbg );
+            ?>
           <?php endif; ?>
         </div>
 

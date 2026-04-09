@@ -2,7 +2,7 @@
   "name": "tectn/content-container",
   "title": "Content container",
   "description": "Container holding two stacked Text + Image blocks with optional background",
-  "style": ["file:../library/css/style.css"],
+  "style": ["file:../../library/css/style.css"],
   "category": "tectn-blocks",
   "icon": "admin-comments",
   "keywords": ["card", "text", "steps", "container"],

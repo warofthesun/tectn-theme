@@ -143,14 +143,15 @@ function tectn_get_hero_config() {
 
   // Pages (including front page): editor choice via ACF Hero Style
   if ( is_front_page() || is_page() ) {
-    $hero_style = get_field( 'hero_style' );
-    $show       = is_front_page() || ( $hero_style && $hero_style !== 'none' );
-    if ( ! $show ) {
+    $post = get_queried_object();
+    if ( ! $post || ! isset( $post->ID ) ) {
       $config = $default;
       return $config;
     }
-    $post = get_queried_object();
-    if ( ! $post ) {
+    // Resolve hero style for this page explicitly (avoids empty/wrong values when get_field() runs without a post ID).
+    $hero_style = function_exists( 'get_field' ) ? get_field( 'hero_style', $post->ID ) : '';
+    $show       = is_front_page() || ( $hero_style && $hero_style !== 'none' );
+    if ( ! $show ) {
       $config = $default;
       return $config;
     }
@@ -277,15 +278,29 @@ function tectn_get_hero_config() {
         the_row();
         $link = get_sub_field( 'hero_cta_button' );
         if ( ! empty( $link['url'] ) ) {
+          $cta_style = get_sub_field( 'hero_cta_button_style' );
+          $cta_style = is_string( $cta_style )
+            ? $cta_style
+            : ( is_scalar( $cta_style ) && $cta_style !== false ? (string) $cta_style : '' );
           $ctas[] = array(
-            'url'    => $link['url'],
-            'title'  => isset( $link['title'] ) ? $link['title'] : '',
-            'target' => isset( $link['target'] ) ? $link['target'] : '_self',
+            'url'          => $link['url'],
+            'title'        => isset( $link['title'] ) ? $link['title'] : '',
+            'target'       => isset( $link['target'] ) ? $link['target'] : '_self',
+            'button_style' => $cta_style,
           );
         }
       }
     }
-    $config = array(
+    $hero_button_color = function_exists( 'get_field' ) ? get_field( 'hero_button_color', $post->ID ) : '';
+    if ( ! ( is_string( $hero_button_color ) && $hero_button_color !== '' ) ) {
+      if ( is_scalar( $hero_button_color ) && (string) $hero_button_color !== '' ) {
+        $hero_button_color = (string) $hero_button_color;
+      } else {
+        $hero_button_color = 'primary';
+      }
+    }
+    $hero_button_darkbg  = function_exists( 'get_field' ) ? (bool) get_field( 'hero_button_darkbg', $post->ID ) : false;
+    $config              = array(
       'show' => true,
       'type' => 'landing',
       'data' => array(
@@ -293,6 +308,8 @@ function tectn_get_hero_config() {
         'paragraph'             => get_field( 'hero_paragraph', $post->ID ),
         'image_id'              => $image_id,
         'ctas'                  => $ctas,
+        'button_color'          => $hero_button_color,
+        'button_darkbg'         => $hero_button_darkbg,
         'include_featured_post' => (bool) get_field( 'include_featured_post', $post->ID ),
       ),
     );

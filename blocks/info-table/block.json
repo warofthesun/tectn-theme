@@ -2,7 +2,7 @@
   "name": "tectn/info-table",
   "title": "Information table",
   "description": "Display a four-column table from Site Settings → Information tables.",
-  "style": ["file:../library/css/style.css"],
+  "style": ["file:../../library/css/style.css"],
   "category": "tectn-blocks",
   "icon": "editor-table",
   "keywords": ["table", "grid", "information", "columns"],

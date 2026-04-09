@@ -63,9 +63,8 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_697fe85af2201",
-                        "operator": "==",
-                        "value": "headline"
+                        "field": "field_68225159eee20",
+                        "operator": "!=empty"
                     }
                 ]
             ],
@@ -74,7 +73,7 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "table",
+            "layout": "block",
             "pagination": 0,
             "min": 0,
             "max": 2,
@@ -98,8 +97,106 @@
                     },
                     "return_format": "array",
                     "parent_repeater": "field_682251bfeee22"
+                },
+                {
+                    "key": "field_683a10a1beb03",
+                    "label": "Button style",
+                    "name": "hero_cta_button_style",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "solid": "Solid",
+                        "outline": "Outline",
+                        "text": "Text"
+                    },
+                    "default_value": false,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0,
+                    "parent_repeater": "field_682251bfeee22"
                 }
             ]
+        },
+        {
+            "key": "field_683a10a1beb01",
+            "label": "Button color",
+            "name": "hero_button_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Choose whether the hero CTAs use the primary, secondary, or accent color.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_697fe85af2201",
+                        "operator": "==",
+                        "value": "headline"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "primary": "Primary",
+                "secondary": "Secondary",
+                "accent": "Accent"
+            },
+            "default_value": "primary",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 1,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_683a10a1beb02",
+            "label": "Buttons on dark background",
+            "name": "hero_button_darkbg",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Use when CTAs sit on a dark area (adds the dark-background modifier for solid, outline, and text styles).",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_697fe85af2201",
+                        "operator": "==",
+                        "value": "headline"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
         }
     ],
     "location": [
@@ -128,5 +225,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773590442
+    "modified": 1775699000
 }

@@ -2,7 +2,7 @@
   "name": "tectn/forms",
   "title": "Forms",
   "description": "Embed a form configured under Site Settings → Forms.",
-  "style": ["file:../library/css/style.css"],
+  "style": ["file:../../library/css/style.css"],
   "category": "tectn-blocks",
   "icon": "feedback",
   "keywords": ["form", "embed", "contact", "newsletter"],
