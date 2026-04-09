@@ -19,6 +19,14 @@ Select chevron stroke matches $primary-700 (#79853E).
 
 ******************************************************************/
 
+.c-formsEmbed__iframe {
+	width: 100%;
+	min-height: 32rem;
+	border: 0;
+	display: block;
+	background: transparent;
+}
+
 .c-formsEmbed {
 	// Surface: warm cream closest to comp ~#F5F7EF ($primary-10 / $grey-10 bracket)
 	background-color: $primary-10;

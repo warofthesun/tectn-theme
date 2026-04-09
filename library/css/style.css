@@ -1761,6 +1761,14 @@ tall pill inputs, generous 2×2 contact grid.
 Select chevron stroke matches $primary-700 (#79853E).
 
 ******************************************************************/
+.c-formsEmbed__iframe {
+  width: 100%;
+  min-height: 32rem;
+  border: 0;
+  display: block;
+  background: transparent;
+}
+
 .c-formsEmbed {
   background-color: #F4F5ED;
   padding: 2em 2em;

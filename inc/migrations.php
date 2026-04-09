@@ -21,19 +21,19 @@ function tectn_migrate_forms_repeater_row_keys() {
 		update_option( 'tectn_forms_row_keys_initialized', '1' );
 		return;
 	}
-	$changed = false;
+	$rows = array_values( $rows );
 	foreach ( $rows as $i => $row ) {
 		if ( ! is_array( $row ) ) {
 			continue;
 		}
 		$k = isset( $row['form_key'] ) ? trim( (string) $row['form_key'] ) : '';
-		if ( $k === '' ) {
-			$rows[ $i ]['form_key'] = wp_generate_uuid4();
-			$changed                = true;
+		if ( $k === '' && function_exists( 'update_sub_field' ) ) {
+			update_sub_field(
+				array( 'embedded_forms', $i + 1, 'form_key' ),
+				wp_generate_uuid4(),
+				'tectn-forms'
+			);
 		}
-	}
-	if ( $changed ) {
-		update_field( 'embedded_forms', $rows, 'tectn-forms' );
 	}
 	update_option( 'tectn_forms_row_keys_initialized', '1' );
 }

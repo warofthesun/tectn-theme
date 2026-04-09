@@ -74,6 +74,22 @@
                     "placeholder": "",
                     "new_lines": "",
                     "parent_repeater": "field_tectn_forms_embedded_list"
+                },
+                {
+                    "key": "field_tectn_form_isolate_frame",
+                    "label": "Load in isolated frame",
+                    "name": "form_isolate_frame",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "Enable when you place more than one script-based form on the same page (e.g. Bloomerang). Each vendor often allows only one embed per browser context; an iframe gives this form its own document so multiples work. Theme styling inside the frame comes from the embed only.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "message": "Render this embed in an iframe (multiple forms per page)",
+                    "default_value": 0,
+                    "ui": 1,
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_tectn_forms_embedded_list"
                 }
             ]
         }
@@ -97,5 +113,5 @@
     "description": "Third-party form embeds. Sub-page of Site Settings.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1774700000
+    "modified": 1775500000
 }

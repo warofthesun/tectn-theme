@@ -10,6 +10,53 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Allow trusted script/iframes in Form embed textareas when saving Site Settings → Forms only.
+ *
+ * ACF runs wp_kses_post_deep() on $_POST['acf'] when the user lacks unfiltered_html (common on
+ * multisite or for roles below Administrator), which strips Bloomerang-style <script> blocks;
+ * repeater saves can then persist empty embeds for one or all rows.
+ *
+ * @param bool $allow Default from current_user_can( 'unfiltered_html' ).
+ * @return bool
+ */
+function tectn_forms_allow_unfiltered_html_on_options_save( $allow ) {
+	if ( $allow ) {
+		return true;
+	}
+	if ( ! is_admin() || ! function_exists( 'acf_get_form_data' ) ) {
+		return false;
+	}
+	// Set in acf_save_post() before the kses check (see acf/includes/acf-form-functions.php).
+	if ( (string) acf_get_form_data( 'post_id' ) !== 'tectn-forms' ) {
+		return false;
+	}
+	// Match capability on the Forms options sub-page (acf-options.php registers edit_posts).
+	return current_user_can( 'edit_posts' );
+}
+add_filter( 'acf/allow_unfiltered_html', 'tectn_forms_allow_unfiltered_html_on_options_save', 5 );
+
+/**
+ * Map ACF subfield keys to names when a row only has field_* keys (raw load edge cases).
+ *
+ * @param array<string, mixed> $row Repeater sub-row.
+ * @return array<string, mixed>
+ */
+function tectn_normalize_embedded_form_row( array $row ) {
+	$map = array(
+		'field_tectn_form_admin_label'   => 'form_admin_label',
+		'field_tectn_form_row_key'       => 'form_key',
+		'field_tectn_form_embed_code'    => 'form_embed_code',
+		'field_tectn_form_isolate_frame' => 'form_isolate_frame',
+	);
+	foreach ( $map as $field_key => $name ) {
+		if ( ! array_key_exists( $name, $row ) && array_key_exists( $field_key, $row ) ) {
+			$row[ $name ] = $row[ $field_key ];
+		}
+	}
+	return $row;
+}
+
+/**
  * Embedded forms from Site Settings → Forms (repeater rows with form_embed_code, form_key).
  *
  * @return list<array{form_admin_label?: string, form_key?: string, form_embed_code?: string}>
@@ -19,43 +66,66 @@ function tectn_get_embedded_forms() {
 		return array();
 	}
 	$rows = get_field( 'embedded_forms', 'tectn-forms' );
-	return is_array( $rows ) ? $rows : array();
+	if ( ! is_array( $rows ) ) {
+		return array();
+	}
+	$out = array();
+	foreach ( $rows as $row ) {
+		if ( is_array( $row ) ) {
+			$out[] = tectn_normalize_embedded_form_row( $row );
+		}
+	}
+	return $out;
 }
 /**
- * After saving Forms options: ensure every repeater row has a non-empty form_key.
+ * After saving Forms options: fill empty form_key values only (never rewrite the whole repeater).
  *
- * @param int|string $post_id Post ID or options screen id (e.g. tectn-forms).
+ * Replacing the entire repeater via update_field() while rows contain large script embeds can drop or
+ * corrupt sibling rows during the same save; updating one subfield at a time avoids that.
  */
-function tectn_forms_ensure_row_keys_on_save( $post_id ) {
-	static $lock = false;
-	if ( $lock || (string) $post_id !== 'tectn-forms' ) {
+function tectn_forms_schedule_missing_form_keys( $post_id ) {
+	if ( (string) $post_id !== 'tectn-forms' ) {
 		return;
 	}
-	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_sub_field' ) ) {
+		return;
+	}
+	static $scheduled = false;
+	if ( $scheduled ) {
+		return;
+	}
+	$scheduled = true;
+	add_action( 'shutdown', 'tectn_forms_fill_missing_form_keys_shutdown', 5 );
+}
+add_action( 'acf/save_post', 'tectn_forms_schedule_missing_form_keys', 50 );
+
+/**
+ * Runs after the request so ACF has persisted the repeater; patches only empty form_key cells.
+ */
+function tectn_forms_fill_missing_form_keys_shutdown() {
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_sub_field' ) ) {
 		return;
 	}
 	$rows = get_field( 'embedded_forms', 'tectn-forms' );
-	if ( ! is_array( $rows ) ) {
+	if ( ! is_array( $rows ) || $rows === array() ) {
 		return;
 	}
-	$changed = false;
+	$rows = array_values( $rows );
 	foreach ( $rows as $i => $row ) {
 		if ( ! is_array( $row ) ) {
 			continue;
 		}
 		$k = isset( $row['form_key'] ) ? trim( (string) $row['form_key'] ) : '';
-		if ( $k === '' ) {
-			$rows[ $i ]['form_key'] = wp_generate_uuid4();
-			$changed                = true;
+		if ( $k !== '' ) {
+			continue;
 		}
-	}
-	if ( $changed ) {
-		$lock = true;
-		update_field( 'embedded_forms', $rows, 'tectn-forms' );
-		$lock = false;
+		update_sub_field(
+			array( 'embedded_forms', $i + 1, 'form_key' ),
+			wp_generate_uuid4(),
+			'tectn-forms'
+		);
 	}
 }
-add_action( 'acf/save_post', 'tectn_forms_ensure_row_keys_on_save', 25 );
 
 /**
  * Resolve Forms block selection from block JSON + ACF meta (handles field rename / key-based storage).
@@ -69,6 +139,9 @@ add_action( 'acf/save_post', 'tectn_forms_ensure_row_keys_on_save', 25 );
  */
 function tectn_forms_block_get_selected_raw( $block ) {
 	$data = isset( $block['data'] ) && is_array( $block['data'] ) ? $block['data'] : array();
+	if ( $data === array() && isset( $block['attrs']['data'] ) && is_array( $block['attrs']['data'] ) ) {
+		$data = $block['attrs']['data'];
+	}
 
 	$data_keys = array(
 		'field_tectn_block_forms_selected',
@@ -118,6 +191,39 @@ function tectn_normalize_form_embed_markup( $code ) {
 		return $decoded;
 	}
 	return $code;
+}
+
+/**
+ * Wrap raw embed HTML in an iframe via srcdoc so each form has its own JavaScript global scope.
+ * Needed for vendors (e.g. Bloomerang) that limit one “interaction” form per page.document.
+ *
+ * @param string $html Full embed markup (scripts, etc.).
+ * @param string $iframe_title Accessible title (optional).
+ * @return string iframe HTML or empty string if $html is empty.
+ */
+function tectn_forms_embed_iframe_srcdoc( $html, $iframe_title = '' ) {
+	if ( ! is_string( $html ) || trim( $html ) === '' ) {
+		return '';
+	}
+	$title = is_string( $iframe_title ) ? trim( $iframe_title ) : '';
+	if ( $title === '' ) {
+		$title = __( 'Embedded form', 'tectn_theme' );
+	}
+	$document = '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><base target="_top"></head><body>'
+		. $html
+		. '</body></html>';
+	$flags = ENT_QUOTES | ENT_SUBSTITUTE;
+	if ( defined( 'ENT_HTML5' ) ) {
+		$flags |= ENT_HTML5;
+	}
+	$srcdoc = htmlspecialchars( $document, $flags, 'UTF-8' );
+	$uid    = wp_unique_id( 'tectn-form-iframe-' );
+	return sprintf(
+		'<iframe id="%1$s" class="c-formsEmbed__iframe" title="%2$s" loading="lazy" referrerpolicy="no-referrer-when-downgrade" srcdoc="%3$s" style="width:100%%;min-height:32rem;border:0;display:block;background:transparent"></iframe>',
+		esc_attr( $uid ),
+		esc_attr( $title ),
+		$srcdoc
+	);
 }
 
 /**

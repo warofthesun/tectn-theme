@@ -69,6 +69,12 @@ if ( function_exists( 'tectn_normalize_form_embed_markup' ) ) {
 	$code = tectn_normalize_form_embed_markup( $code );
 }
 
+$isolate_frame = is_array( $row ) && ! empty( $row['form_isolate_frame'] );
+$iframe_title  = '';
+if ( is_array( $row ) && ! empty( $row['form_admin_label'] ) ) {
+	$iframe_title = trim( (string) $row['form_admin_label'] );
+}
+
 $classes = array( 'c-formsEmbed' );
 if ( ! empty( $block['className'] ) ) {
 	$extra = preg_split( '/\s+/', trim( $block['className'] ) );
@@ -81,7 +87,24 @@ if ( ! empty( $block['className'] ) ) {
 ?>
 <div id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 	<?php
-	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- intentional third-party embed (scripts/iframes); editors are trusted.
-	echo $code;
+	if ( $isolate_frame ) {
+		if ( $is_editor_context ) {
+			?>
+			<div class="c-formsEmbed__placeholder">
+				<strong><?php esc_html_e( 'Isolated form embed', 'tectn_theme' ); ?></strong><br>
+				<?php esc_html_e( 'This form is set to load in its own frame on the live site so it can appear alongside other script-based forms (e.g. multiple Bloomerang snippets).', 'tectn_theme' ); ?>
+			</div>
+			<?php
+		} elseif ( function_exists( 'tectn_forms_embed_iframe_srcdoc' ) ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- iframe built with escaped srcdoc attribute.
+			echo tectn_forms_embed_iframe_srcdoc( $code, $iframe_title );
+		} else {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $code;
+		}
+	} else {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- intentional third-party embed (scripts/iframes); editors are trusted.
+		echo $code;
+	}
 	?>
 </div>
