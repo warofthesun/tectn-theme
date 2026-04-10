@@ -145,27 +145,116 @@
   fill: #698f3d !important;
 }
 
-/* Find Events button: transparent bg, thin olive border, olive text, rounded right corners */
+/*
+ * Find Events button — match .c-button-group--primary .c-button-group__button--outline
+ * (library/css/style.css ~1266–1295). Keep right-side radius to align with search input group.
+ */
 .tribe-events .tribe-events-c-search__button,
 .tribe-events .tribe-common-c-btn.tribe-events-c-search__button,
 .tribe-events button.tribe-events-c-search__button {
-  background-color: transparent !important;
-  color: #698f3d !important;
+  display: inline-block !important;
+  position: relative !important;
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
-  font-weight: 700 !important;
+  font-weight: 400 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.02em !important;
-  border: 1px solid #698f3d !important;
-  border-radius: 8px !important;
-  padding: 0.5rem 1rem !important;
+  text-decoration: none !important;
+  font-size: 1em !important;
+  line-height: 1 !important;
+  padding: 0.75em 1.25em !important;
+  padding-top: 0.9em !important;
+  border: 3px solid #A1B152 !important;
+  /* Longhands override .tribe-common-c-btn radius so corners match the 8px search bar clip */
+  border-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+  -webkit-border-top-left-radius: 0 !important;
+  -webkit-border-bottom-left-radius: 0 !important;
+  -webkit-border-top-right-radius: 8px !important;
+  -webkit-border-bottom-right-radius: 8px !important;
+  box-sizing: border-box !important;
+  background-color: rgba(244, 245, 237, 0.1) !important;
+  color: #79853E !important;
+  cursor: pointer !important;
+  -webkit-transition: background-color 0.14s ease-in-out !important;
+  transition: background-color 0.14s ease-in-out !important;
 }
 
 .tribe-events .tribe-events-c-search__button:hover,
+.tribe-events .tribe-events-c-search__button:focus,
 .tribe-events .tribe-common-c-btn.tribe-events-c-search__button:hover,
-.tribe-events button.tribe-events-c-search__button:hover {
-  background-color: rgba(105, 143, 61, 0.08) !important;
-  color: #547231 !important;
-  border-color: #547231 !important;
+.tribe-events .tribe-common-c-btn.tribe-events-c-search__button:focus,
+.tribe-events button.tribe-events-c-search__button:hover,
+.tribe-events button.tribe-events-c-search__button:focus {
+  background-color: #DFEBA4 !important;
+  color: #505829 !important;
+  border-color: #A1B152 !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.tribe-events .tribe-events-c-search__button:active,
+.tribe-events .tribe-common-c-btn.tribe-events-c-search__button:active,
+.tribe-events button.tribe-events-c-search__button:active {
+  top: 1px !important;
+  background-color: #A1B152 !important;
+  color: #505829 !important;
+  border-color: #A1B152 !important;
+}
+
+/*
+ * Subscribe / Add to calendar dropdown trigger — match theme CTA
+ * .c-button-group--primary .c-button-group__button--outline (see library/css/style.css)
+ */
+.tribe-events .tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button,
+.tribe-events button.tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button,
+.tribe-events a.tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button {
+  display: inline-block !important;
+  position: relative !important;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  font-size: 1em !important;
+  line-height: 1 !important;
+  padding: 0.75rem 1.25rem !important;
+  padding-top: 0.9em !important;
+  border: 3px solid #A1B152 !important;
+  border-radius: 0.25em !important;
+  box-sizing: border-box !important;
+  background-color: rgba(244, 245, 237, 0.1) !important;
+  color: #79853E !important;
+  cursor: pointer !important;
+  transition: background-color 0.14s ease-in-out !important;
+}
+
+.tribe-events .tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button:hover,
+.tribe-events .tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button:focus,
+.tribe-events button.tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button:hover,
+.tribe-events button.tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button:focus,
+.tribe-events a.tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button:hover,
+.tribe-events a.tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button:focus {
+  background-color: #DFEBA4 !important;
+  color: #505829 !important;
+  border-color: #A1B152 !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.tribe-events .tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button:active,
+.tribe-events button.tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button:active,
+.tribe-events a.tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button:active {
+  top: 1px !important;
+  background-color: #A1B152 !important;
+  color: #505829 !important;
+  border-color: #A1B152 !important;
+}
+
+.tribe-events .tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button .tribe-common-c-btn-icon__svg path,
+.tribe-events .tribe-common-c-btn-border.tribe-events-c-subscribe-dropdown__button svg path {
+  fill: currentColor !important;
+  stroke: currentColor !important;
 }
 
 /* View selector button (shows current view e.g. DAY): active style – olive bg, white text, rounded */
@@ -205,74 +294,155 @@
   justify-content: center !important;
 }
 
+/*
+ * View tabs — inactive: .c-button-group--primary .c-button-group__button--outline
+ * Current view (see --active block below): .c-button-group--primary .c-button-group__button--solid
+ */
 .tribe-events .tribe-events-c-view-selector__list-item-link,
 .tribe-events a.tribe-events-c-view-selector__list-item-link {
-  display: inline-block !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
-  font-weight: 700 !important;
+  font-weight: 400 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.02em !important;
-  color: var(--c-charcoal) !important;
   text-decoration: none !important;
-  border-radius: 8px !important;
-  padding: 0.35rem 0.75rem !important;
-  background-color: transparent !important;
-  border: 1px solid transparent !important;
+  font-size: 1em !important;
+  line-height: 1 !important;
+  padding: 0.75em 1.25em !important;
+  padding-top: 0.9em !important;
+  border: 3px solid #A1B152 !important;
+  border-radius: 0.25em !important;
+  box-sizing: border-box !important;
+  background-color: rgba(244, 245, 237, 0.1) !important;
+  color: #79853E !important;
+  cursor: pointer !important;
+  -webkit-transition: background-color 0.14s ease-in-out !important;
+  transition: background-color 0.14s ease-in-out !important;
 }
 
 .tribe-events .tribe-events-c-view-selector__list-item-link:hover,
 .tribe-events .tribe-events-c-view-selector__list-item-link:focus,
 .tribe-events a.tribe-events-c-view-selector__list-item-link:hover,
 .tribe-events a.tribe-events-c-view-selector__list-item-link:focus {
-  color: #698f3d !important;
+  background-color: #DFEBA4 !important;
+  color: #505829 !important;
+  border-color: #A1B152 !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item-link:active,
+.tribe-events a.tribe-events-c-view-selector__list-item-link:active {
+  top: 1px !important;
+  background-color: #A1B152 !important;
+  color: #505829 !important;
+  border-color: #A1B152 !important;
+}
+
+/* LIST tab — .c-button-group--primary .c-button-group__button--text */
+.tribe-events .tribe-events-c-view-selector__list-item--list .tribe-events-c-view-selector__list-item-link,
+.tribe-events .tribe-events-c-view-selector__list-item--list a.tribe-events-c-view-selector__list-item-link {
+  border: 0 !important;
+  background-color: transparent !important;
+  color: #79853E !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item--list .tribe-events-c-view-selector__list-item-link:hover,
+.tribe-events .tribe-events-c-view-selector__list-item--list .tribe-events-c-view-selector__list-item-link:focus,
+.tribe-events .tribe-events-c-view-selector__list-item--list a.tribe-events-c-view-selector__list-item-link:hover,
+.tribe-events .tribe-events-c-view-selector__list-item--list a.tribe-events-c-view-selector__list-item-link:focus {
+  color: #547231 !important;
+  background-color: rgba(244, 245, 237, 0.1) !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item--list .tribe-events-c-view-selector__list-item-link:active,
+.tribe-events .tribe-events-c-view-selector__list-item--list a.tribe-events-c-view-selector__list-item-link:active {
+  top: 1px !important;
+  color: #547231 !important;
+  background-color: rgba(244, 245, 237, 0.1) !important;
 }
 
 .tribe-events .tribe-events-c-view-selector__list-item-text {
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
-  font-weight: 700 !important;
+  font-weight: 400 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.02em !important;
   color: inherit !important;
   height: auto !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding-top: 2px !important;
+  padding-top: 0 !important;
 }
 
 .tribe-events .tribe-events-c-view-selector__list-item-icon-svg path {
   fill: currentColor !important;
 }
 
-/* Active view tab (e.g. DAY when on day view): olive background, white text, thin olive border */
+/* Current view tab — .c-button-group--primary .c-button-group__button--solid */
 .tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link,
 .tribe-events .tribe-events-c-view-selector__list-item--active a.tribe-events-c-view-selector__list-item-link {
-  background-color: #698f3d !important;
-  color: #fff !important;
-  border: 1px solid #698f3d !important;
+  background-color: #C9DD67 !important;
+  color: #505829 !important;
+  border-color: #A1B152 !important;
   height: auto !important;
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
 .tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-text {
-  color: #fff !important;
+  color: inherit !important;
 }
 
 .tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link:hover,
 .tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link:focus {
-  background-color: #547231 !important;
-  border-color: #547231 !important;
+  background-color: #DFEBA4 !important;
+  border-color: #A1B152 !important;
   color: #fff !important;
   height: auto !important;
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
+.tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link:active {
+  top: 1px !important;
+  background-color: #A1B152 !important;
+  color: #fff !important;
+  border-color: #A1B152 !important;
+}
+
 .tribe-events .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-icon-svg path {
-  fill: #fff !important;
+  fill: currentColor !important;
+}
+
+/* LIST + current view: keep primary text (do not use solid pill) */
+.tribe-events .tribe-events-c-view-selector__list-item--list.tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link,
+.tribe-events .tribe-events-c-view-selector__list-item--list.tribe-events-c-view-selector__list-item--active a.tribe-events-c-view-selector__list-item-link {
+  background-color: transparent !important;
+  border: 0 !important;
+  color: #79853E !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item--list.tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link:hover,
+.tribe-events .tribe-events-c-view-selector__list-item--list.tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link:focus,
+.tribe-events .tribe-events-c-view-selector__list-item--list.tribe-events-c-view-selector__list-item--active a.tribe-events-c-view-selector__list-item-link:hover,
+.tribe-events .tribe-events-c-view-selector__list-item--list.tribe-events-c-view-selector__list-item--active a.tribe-events-c-view-selector__list-item-link:focus {
+  color: #547231 !important;
+  background-color: rgba(244, 245, 237, 0.1) !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.tribe-events .tribe-events-c-view-selector__list-item--list.tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link:active,
+.tribe-events .tribe-events-c-view-selector__list-item--list.tribe-events-c-view-selector__list-item--active a.tribe-events-c-view-selector__list-item-link:active {
+  top: 1px !important;
+  color: #547231 !important;
+  background-color: rgba(244, 245, 237, 0.1) !important;
 }
 
 /* Remove underline/artifact under view selector button and active tab (plugin may add ::after or border) */
@@ -326,22 +496,28 @@
   fill: #547231 !important;
 }
 
-/* Today button – white bg, olive border & text, uppercase bold */
+/* Today button — match .c-button-group--primary .c-button-group__button--outline */
 .tribe-events-view--list .tribe-events-c-top-bar__today-button,
 .tribe-events-view--month .tribe-events-c-top-bar__today-button,
 .tribe-events-view--day .tribe-events-c-top-bar__today-button {
+  display: inline-block !important;
+  position: relative !important;
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 1rem !important;
+  font-weight: 400 !important;
+  font-size: 1em !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.02em !important;
-  color: #698f3d !important;
-  background-color: #fff !important;
-  border: 1px solid #698f3d !important;
-  border-radius: $border-radius-md !important;
-  padding: 0.35rem 0.75rem !important;
-  padding-top: 8px !important;
   text-decoration: none !important;
+  line-height: 1 !important;
+  padding: 0.75em 1.25em !important;
+  padding-top: 0.9em !important;
+  border: 3px solid #A1B152 !important;
+  border-radius: 0.25em !important;
+  box-sizing: border-box !important;
+  background-color: rgba(244, 245, 237, 0.1) !important;
+  color: #79853E !important;
+  cursor: pointer !important;
+  -webkit-transition: background-color 0.14s ease-in-out !important;
+  transition: background-color 0.14s ease-in-out !important;
 }
 
 .tribe-events-view--list .tribe-events-c-top-bar__today-button:hover,
@@ -350,9 +526,20 @@
 .tribe-events-view--month .tribe-events-c-top-bar__today-button:focus,
 .tribe-events-view--day .tribe-events-c-top-bar__today-button:hover,
 .tribe-events-view--day .tribe-events-c-top-bar__today-button:focus {
-  color: #547231 !important;
-  border-color: #547231 !important;
-  background-color: #fff !important;
+  background-color: #DFEBA4 !important;
+  color: #505829 !important;
+  border-color: #A1B152 !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.tribe-events-view--list .tribe-events-c-top-bar__today-button:active,
+.tribe-events-view--month .tribe-events-c-top-bar__today-button:active,
+.tribe-events-view--day .tribe-events-c-top-bar__today-button:active {
+  top: 1px !important;
+  background-color: #A1B152 !important;
+  color: #505829 !important;
+  border-color: #A1B152 !important;
 }
 
 /* Datepicker button – "NOW - MARCH" / "Upcoming": dark text, Bebas, uppercase bold */

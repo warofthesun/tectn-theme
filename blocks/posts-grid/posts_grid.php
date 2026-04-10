@@ -286,8 +286,8 @@ if ( $show_no_events ) {
           <?php
             // Use explicit post IDs so we don't depend on global $post
             $post_id  = $p->ID;
-            $date     = ( $p->post_type === 'tribe_events' && function_exists( 'tribe_get_start_date' ) )
-              ? ( tribe_get_start_date( $post_id, false, 'm/d/y' ) ?: get_the_date( 'm/d/y', $post_id ) )
+            $date     = ( $p->post_type === 'tribe_events' && function_exists( 'tectn_get_event_post_card_date' ) )
+              ? tectn_get_event_post_card_date( $post_id, 'm/d/y' )
               : get_the_date( 'm/d/y', $post_id );
             $title    = get_the_title($post_id);
             // For events, allow external override URL; otherwise use the normal permalink.
@@ -335,7 +335,7 @@ if ( $show_no_events ) {
               </div>
 
               <div class="c-postCard__body">
-                <h6 class="c-postCard__meta"><?= esc_html( $date ); ?></h6>
+                <h5 class="c-postCard__meta"><?= esc_html( $date ); ?></h5>
                 <h3 class="c-postCard__title"><?= esc_html( $title ); ?></h3>
                 <?php if ( ! empty( $chips ) ) : ?>
                   <div class="c-postCard__chips">

@@ -284,14 +284,14 @@ function tectn_render_blog_post_card( $p, $args = array() ) {
 		<div class="c-postCard__body">
 			<h3 class="c-postCard__title"><a class="c-postCard__titleLink" href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $title ); ?></a></h3>
 			<?php if ( $author_name || $date ) : ?>
-			<h6 class="c-postCard__meta">
+			<h5 class="c-postCard__meta">
 				<?php if ( $author_name && $author_url ) : ?>
 					<span class="c-postCard__meta-item"><i class="fa-regular fa-circle-user c-postCard__meta-icon" aria-hidden="true"></i><a class="c-postCard__authorLink" href="<?php echo esc_url( $author_url ); ?>" rel="author"><?php echo esc_html( $author_name ); ?></a></span>
 				<?php endif; ?>
 				<?php if ( $date ) : ?>
 					<span class="c-postCard__meta-item"><i class="fa-regular fa-circle-calendar c-postCard__meta-icon" aria-hidden="true"></i><time datetime="<?php echo esc_attr( $date_iso ); ?>"><?php echo esc_html( $date ); ?></time></span>
 				<?php endif; ?>
-			</h6>
+			</h5>
 			<?php endif; ?>
 			<?php if ( ! empty( $chip_terms ) ) : ?>
 				<div class="c-postCard__chips">

@@ -10,6 +10,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Date string for event post cards: start only, or "start–end" when the event spans multiple days.
+ *
+ * @param int    $event_id Event post ID.
+ * @param string $format   PHP date format (default matches existing cards: m/d/y).
+ * @return string
+ */
+function tectn_get_event_post_card_date( $event_id, $format = 'm/d/y' ) {
+  $event_id = (int) $event_id;
+  if ( $event_id <= 0 || get_post_type( $event_id ) !== 'tribe_events' ) {
+    return '';
+  }
+  if ( ! function_exists( 'tribe_get_start_date' ) ) {
+    return (string) get_the_date( $format, $event_id );
+  }
+
+  $start = tribe_get_start_date( $event_id, false, $format );
+  if ( $start === false || $start === '' ) {
+    return (string) get_the_date( $format, $event_id );
+  }
+
+  if ( function_exists( 'tribe_event_is_multiday' ) && tribe_event_is_multiday( $event_id ) && function_exists( 'tribe_get_end_date' ) ) {
+    $end = tribe_get_end_date( $event_id, false, $format );
+    if ( $end !== false && $end !== '' && $end !== $start ) {
+      $en_dash = html_entity_decode( '&#8211;', ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+      return $start . $en_dash . $end;
+    }
+  }
+
+  return $start;
+}
+
+/**
  * Get the external URL for an event, if set, normalized with https://.
  *
  * @param int $event_id Event post ID.

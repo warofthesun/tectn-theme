@@ -101,8 +101,8 @@ $effective_bg_max_h = ( count( $related ) >= 1 && count( $related ) <= 3 ) ? 600
 			<?php foreach ( $related as $p ) : ?>
 				<?php
 				$p_id      = $p->ID;
-				$date      = ( $p->post_type === 'tribe_events' && function_exists( 'tribe_get_start_date' ) )
-					? ( tribe_get_start_date( $p_id, false, 'm/d/y' ) ?: get_the_date( 'm/d/y', $p_id ) )
+				$date      = ( $p->post_type === 'tribe_events' && function_exists( 'tectn_get_event_post_card_date' ) )
+					? tectn_get_event_post_card_date( $p_id, 'm/d/y' )
 					: get_the_date( 'm/d/y', $p_id );
 				$title     = get_the_title( $p_id );
 				$permalink = get_permalink( $p_id );
@@ -132,7 +132,7 @@ $effective_bg_max_h = ( count( $related ) >= 1 && count( $related ) <= 3 ) ? 600
 							<?php endif; ?>
 						</div>
 						<div class="c-postCard__body">
-							<h6 class="c-postCard__meta"><?php echo esc_html( $date ); ?></h6>
+							<h5 class="c-postCard__meta"><?php echo esc_html( $date ); ?></h5>
 							<h3 class="c-postCard__title"><?php echo esc_html( $title ); ?></h3>
 							<?php if ( ! empty( $chips ) ) : ?>
 								<div class="c-postCard__chips">

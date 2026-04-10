@@ -221,6 +221,7 @@ THE EVENTS CALENDAR
 
 .tribe-events-calendar-month {
   border: none !important;
+  background-color: rgba($white, 0.9) !important;
 }
 
 .tribe-events-calendar-month__header-column {
@@ -252,6 +253,17 @@ THE EVENTS CALENDAR
 	}
 }
 
+.tribe-common .tribe-common-h8 {
+	font-size: 1.125rem !important;
+	line-height: 1 !important;
+	letter-spacing: 0.05em !important;
+	color: $secondary-700 !important;
+}
+
+.tribe-events .tribe-events-calendar-month__header-column {
+	padding-top: $spacing-md !important;
+}
+
 .tribe-events-c-view-selector__list-item-text {
 	padding-top: 2px !important;
 }
@@ -270,6 +282,78 @@ THE EVENTS CALENDAR
   text-align: center;
 }
 
+.tribe-events-calendar-month__multiday-event-bar {
+	background-color: $secondary-50 !important;
+	border-color: $secondary-300 !important;
+	border-width: 1px !important;
+	border-style: solid !important;
+	border-radius: $radius-sm !important;
+	padding-top: 2px !important;
+}
+
+.tribe-events-calendar-month__calendar-event-datetime {
+	color: $accent-900 !important;
+	font-weight: 500 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.02em !important;
+	font-family: $body-font !important;
+	font-size: $spacing-sm !important;
+	font-weight: 700 !important;
+	margin-top: $spacing-sm !important;
+}
+
+.tribe-events-view--month .tribe-events-calendar-month__calendar-event-title-link {
+	color: $secondary-700 !important;
+	font-weight: 700 !important;
+	letter-spacing: 0.05em !important;
+
+	&:hover, &:focus {
+		color: $accent-900 !important;
+		text-decoration: none !important;
+		border-bottom: none !important;
+	}
+}
+
+.tooltipster-box {
+	background: transparent !important;
+	border: 0px solid $secondary-300 !important;
+	padding: 0px !important;
+}
+
+.tooltipster-base .tooltipster-content {
+	background-color: $secondary-100 !important;
+	color: $white !important;
+	font-family: $body-font !important;
+	font-size: $spacing-sm !important;
+	font-weight: 700 !important;
+	letter-spacing: 0.05em !important;
+	border-radius: $radius-md !important;
+	border: 0px solid $secondary-300 !important;
+	padding: $spacing-sm !important;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.tribe-events-calendar-month__calendar-event-tooltip-datetime {
+	color: $accent-900 !important;
+	font-weight: 700 !important;
+	letter-spacing: 0em !important;
+	line-height: 1 !important;
+}
+
+.tribe-events-calendar-month__calendar-event-tooltip-description {
+	color: $secondary-800 !important;
+}
+
+.tribe-events-calendar-month__calendar-event-tooltip-title {
+	font-size: 1.125rem !important;
+	line-height: 1 !important;
+	letter-spacing: 0.05em !important;
+	color: $secondary-700 !important;
+}
+
+.tribe-common--breakpoint-medium.tribe-events .tribe-common-c-btn.tribe-events-c-search__button {
+	border-radius: 4px !important;
+}
 /********************
 WORDPRESS BODY CLASSES
 style a page via class
