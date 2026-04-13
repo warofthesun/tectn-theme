@@ -41,5 +41,6 @@ require_once $tectn_theme_dir . '/inc/editor.php';
 require_once $tectn_theme_dir . '/inc/acf-options.php';
 require_once $tectn_theme_dir . '/inc/forms.php';
 require_once $tectn_theme_dir . '/inc/info-tables.php';
+require_once $tectn_theme_dir . '/inc/information-lists.php';
 require_once $tectn_theme_dir . '/inc/migrations.php';
 require_once $tectn_theme_dir . '/inc/shortcodes-misc.php';

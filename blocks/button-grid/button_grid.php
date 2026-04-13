@@ -62,7 +62,7 @@ $bg_style  = get_field( 'background_style' ) ?: 'color';
 $no_bg     = ( $bg_style === 'none' );
 $bg_color  = ! $no_bg && get_field( 'background_color' ) ? esc_attr( get_field( 'background_color' ) ) : '#fcfce0';
 $per_row   = (int) ( get_field( 'buttons_per_row' ) ?: 3 );
-$per_row   = max( 2, min( 4, $per_row ) );
+$per_row   = max( 1, min( 4, $per_row ) );
 $width     = get_field( 'block_width' ) ?: 'medium';
 $max_width = array(
 	'small'  => 400,

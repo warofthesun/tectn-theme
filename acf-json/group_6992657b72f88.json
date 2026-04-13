@@ -78,7 +78,7 @@
             "name": "on_dark_background",
             "aria-label": "",
             "type": "true_false",
-            "instructions": "When checked, adds the class \"light\" to the preheader and headline for use on dark backgrounds.",
+            "instructions": "Activate to use the \"light\" mode on dark backgrounds.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": { "width": "", "class": "", "id": "" },

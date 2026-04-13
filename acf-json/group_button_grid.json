@@ -38,6 +38,7 @@
             "type": "radio",
             "required": 0,
             "choices": {
+                "1": "1 (centered)",
                 "2": "2",
                 "3": "3",
                 "4": "4"
@@ -133,5 +134,5 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "active": true,
-    "modified": 1773000000
+    "modified": 1773100000
 }

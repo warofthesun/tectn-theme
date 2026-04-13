@@ -1,0 +1,149 @@
+{
+    "key": "group_tectn_block_information_list",
+    "title": "Block: Information lists",
+    "fields": [
+        {
+            "key": "field_tectn_block_information_list_selected",
+            "label": "Information list",
+            "name": "selected_information_list_key",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Choices use each list’s stable ID from Site Settings → Information lists. Save that page first so IDs are generated.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": [],
+            "default_value": "",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 1,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_tectn_block_information_list_bg_style",
+            "label": "Block background",
+            "name": "background_style",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "None = no background, no shadow. Color = background + drop shadow (same as Button Grid).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "none": "None",
+                "color": "Color"
+            },
+            "default_value": "color",
+            "return_format": "value",
+            "ui": 1,
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_tectn_block_information_list_bg_color",
+            "label": "Block background color",
+            "name": "background_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_tectn_block_information_list_bg_style",
+                        "operator": "==",
+                        "value": "color"
+                    }
+                ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "#fcfce0",
+            "return_format": "string",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_tectn_block_information_list_columns",
+            "label": "Columns",
+            "name": "list_columns",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "Number of columns on larger screens. On small screens the grid uses two columns (or one if you choose a single column here).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "1": "1",
+                "2": "2",
+                "3": "3",
+                "4": "4"
+            },
+            "default_value": "3",
+            "return_format": "value",
+            "layout": "horizontal",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_tectn_block_information_list_flow",
+            "label": "Fill order",
+            "name": "list_flow",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "Left to right: fill each row before the next. Top to bottom: fill each column before the next.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "row": "Left to right (by row)",
+                "column": "Top to bottom (by column)"
+            },
+            "default_value": "row",
+            "return_format": "value",
+            "layout": "horizontal",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_tectn_block_information_list_block_width",
+            "label": "Maximum width",
+            "name": "block_width",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Same sizes as the Button Grid block.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "small": "Small (400px)",
+                "medium": "Medium (600px)",
+                "large": "Large (800px)"
+            },
+            "default_value": "medium",
+            "return_format": "value",
+            "ui": 1,
+            "allow_in_bindings": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn/information-lists"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1776039800
+}

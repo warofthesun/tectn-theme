@@ -197,6 +197,18 @@ Buttons and such
 	}
 }
 
+.c-button-grid--cols-1 .c-button-grid__list {
+	grid-template-columns: 1fr;
+	justify-items: center;
+
+	.c-button-group__button {
+		justify-self: center;
+		width: fit-content;
+		max-width: 100%;
+		min-width: unset;
+	}
+}
+
 .c-button-grid--cols-2 .c-button-grid__list {
 	grid-template-columns: repeat(2, 1fr);
 }
@@ -212,6 +224,89 @@ Buttons and such
 @media (max-width: 47.99em) {
 	.c-button-grid__list {
 		grid-template-columns: repeat(2, 1fr) !important;
+	}
+
+	.c-button-grid--cols-1 .c-button-grid__list {
+		grid-template-columns: 1fr !important;
+		justify-items: center;
+	}
+}
+
+/* Information lists block (ACF tectn/information-lists) — shell matches Button Grid */
+.c-information-lists {
+	max-width: var(--information-lists-max-w, 600px);
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: $spacing-md;
+	font-family: $body-font;
+	padding: clamp(20px, 2.5vw, 32px);
+	@include border-radius-lg;
+	background: var(--information-lists-bg, #fcfce0);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+	&.c-information-lists--no-bg {
+		background: transparent;
+		box-shadow: none;
+	}
+}
+
+.c-information-lists__grid {
+	display: grid;
+	gap: $spacing-sm $spacing-lg;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.c-information-lists--cols-1 .c-information-lists__grid {
+	grid-template-columns: 1fr;
+}
+
+.c-information-lists--cols-2 .c-information-lists__grid {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.c-information-lists--cols-3 .c-information-lists__grid {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.c-information-lists--cols-4 .c-information-lists__grid {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+/* Column (top-to-bottom) fill order is handled in PHP (row-major grid); do not use grid-auto-flow: column. */
+
+.c-information-lists__item {
+	margin: 0;
+	min-width: 0;
+}
+
+.c-information-lists__link {
+	color: $link-color;
+	text-decoration: underline;
+	text-underline-offset: 0.12em;
+	font-weight: 600;
+
+	&:hover,
+	&:focus {
+		color: $link-hover;
+	}
+}
+
+.c-information-lists__text {
+	font-weight: 600;
+	color: $text-color;
+}
+
+@media (max-width: 47.99em) {
+	.c-information-lists:not(.c-information-lists--cols-1) .c-information-lists__grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+	}
+
+	.c-information-lists--cols-1 .c-information-lists__grid {
+		grid-template-columns: 1fr !important;
 	}
 }
 
@@ -1060,6 +1155,7 @@ border: $spacing-xs solid $white;
    /* ACF blocks — editor empty state (same treatment as Card Repeater) */
 	.c-cardrepeater__placeholder,
 	.c-button-grid__placeholder,
+	.c-information-lists__placeholder,
 	.c-card-block__placeholder,
 	.c-content-section__placeholder,
 	.c-formsEmbed__placeholder,
@@ -1092,6 +1188,7 @@ border: $spacing-xs solid $white;
 	.editor-styles-wrapper {
 		.c-cardrepeater__placeholder,
 		.c-button-grid__placeholder,
+		.c-information-lists__placeholder,
 		.c-card-block__placeholder,
 		.c-content-section__placeholder,
 		.c-formsEmbed__placeholder,
@@ -1114,6 +1211,7 @@ border: $spacing-xs solid $white;
 
 		.c-cardrepeater__placeholder strong,
 		.c-button-grid__placeholder strong,
+		.c-information-lists__placeholder strong,
 		.c-card-block__placeholder strong,
 		.c-content-section__placeholder strong,
 		.c-formsEmbed__placeholder strong,

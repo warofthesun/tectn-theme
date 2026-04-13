@@ -1,0 +1,161 @@
+{
+    "key": "group_tectn_site_information_lists",
+    "title": "Information lists",
+    "fields": [
+        {
+            "key": "field_tectn_information_lists_embedded",
+            "label": "Lists",
+            "name": "embedded_information_lists",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Each entry is one named list with a stable ID. Use the ID in templates or future blocks to pull list items.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_tectn_information_list_admin_label",
+            "button_label": "Add list",
+            "rows_per_page": 20,
+            "allow_in_bindings": 0,
+            "sub_fields": [
+                {
+                    "key": "field_tectn_information_list_admin_label",
+                    "label": "Label (optional)",
+                    "name": "information_list_admin_label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "For your reference in the admin.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "e.g. Quick links",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_tectn_information_lists_embedded"
+                },
+                {
+                    "key": "field_tectn_information_list_key",
+                    "label": "List ID",
+                    "name": "information_list_key",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Stable ID for this list (UUID). Filled automatically when you save if left empty.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": 64,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_tectn_information_lists_embedded"
+                },
+                {
+                    "key": "field_tectn_information_list_items",
+                    "label": "List items",
+                    "name": "information_list_items",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "field_tectn_information_list_item_name",
+                    "button_label": "Add item",
+                    "rows_per_page": 20,
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_tectn_information_lists_embedded",
+                    "sub_fields": [
+                        {
+                            "key": "field_tectn_information_list_item_name",
+                            "label": "Item name",
+                            "name": "item_name",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "60",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_tectn_information_list_items"
+                        },
+                        {
+                            "key": "field_tectn_information_list_item_link",
+                            "label": "Item link (optional)",
+                            "name": "item_link",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "40",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "allow_in_bindings": 0,
+                            "parent_repeater": "field_tectn_information_list_items"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "tectn-information-lists"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Reusable labeled link lists. Sub-page of Site Settings.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1776038361
+}
