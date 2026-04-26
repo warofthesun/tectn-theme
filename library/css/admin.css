@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /******************************************************************
 Site Name:
 Author:
@@ -10,3 +11,31 @@ is empty, but you can just start dropping your styles here to
 start customizing. All admin functions are located in lib/admin/
 
 ******************************************************************/
+/* Insert/Edit link modal — #link-options secondary labels (e.g. “or link to existing content”) */
+#wp-link #link-options label span,
+#wp-link #link-options label .howto {
+  float: none;
+  text-align: left;
+  width: auto !important;
+}
+
+#wp-link #link-options label {
+  text-align: left;
+  /* If core uses flex on the label, keep controls + text bunched to the start */
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+/* Insert/Edit link modal — search panel (link to existing content) */
+#wp-link #search-panel label span.search-label {
+  float: none;
+  text-align: left;
+}
+
+#wp-link #search-panel label {
+  text-align: left;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}

@@ -4937,6 +4937,8 @@ h3, .h3 {
   font-size: 2em;
   line-height: 1.1;
   color: #79853E;
+  margin-top: 0;
+  margin-bottom: 0.375em;
 }
 h3.light, .h3.light {
   color: #DFEBA4;
@@ -4945,6 +4947,8 @@ h3.light, .h3.light {
 h4, .h4 {
   font-size: 1.5em;
   color: #79853E;
+  margin-top: 0;
+  margin-bottom: 0.375em;
 }
 h4.light, .h4.light {
   color: #DFEBA4;
@@ -4955,6 +4959,8 @@ h5, .h5 {
   line-height: 1.6em;
   text-transform: normal;
   color: #505829;
+  margin-top: 0;
+  margin-bottom: 0.375em;
 }
 h5.light, .h5.light {
   color: #EFF5D1;

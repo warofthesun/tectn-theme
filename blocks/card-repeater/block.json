@@ -1,7 +1,7 @@
 {
   "name": "tectn/content-cards",
   "title": "Multi-card repeater",
-  "description": "Informational cards with title and brief body copy",
+  "description": "Informational cards with optional title and brief body copy",
   "style": ["file:../../library/css/style.css"],
   "category": "tectn-blocks",
   "icon": "admin-comments",

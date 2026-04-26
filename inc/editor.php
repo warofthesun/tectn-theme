@@ -10,6 +10,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Admin & block editor: theme overrides (link modal, etc.).
+ */
+function tectn_enqueue_admin_styles() {
+	if ( ! function_exists( 'get_template_directory_uri' ) || ! function_exists( 'tectn_asset_version' ) ) {
+		return;
+	}
+	wp_enqueue_style(
+		'tectn-admin',
+		get_template_directory_uri() . '/library/css/admin.css',
+		array(),
+		tectn_asset_version( 'library/css/admin.css' )
+	);
+}
+add_action( 'admin_enqueue_scripts', 'tectn_enqueue_admin_styles', 20 );
+
+/**
  * Custom block category for TecTN ACF blocks.
  *
  * @param array[]             $categories       Categories.

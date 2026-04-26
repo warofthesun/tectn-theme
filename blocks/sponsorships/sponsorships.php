@@ -41,8 +41,14 @@ $on_dark          = (bool) get_field('on_dark_background');
 $headline_parsed  = function_exists( 'tectn_headline_tag_and_class' ) ? tectn_headline_tag_and_class( $headline_size, 'c-sponsorships__title' ) : array( 'tag' => 'h2', 'class' => 'c-sponsorships__title' );
 
 $bg_url = '';
-if (!empty($bg_image) && is_array($bg_image)) {
-  $bg_url = esc_url($bg_image['sizes']['large'] ?? $bg_image['url']);
+if ( ! empty( $bg_image ) ) {
+	if ( is_array( $bg_image ) ) {
+		$raw = $bg_image['sizes']['large'] ?? $bg_image['url'] ?? '';
+		$bg_url = $raw !== '' ? esc_url( $raw ) : '';
+	} elseif ( is_numeric( $bg_image ) ) {
+		$src = wp_get_attachment_image_url( (int) $bg_image, 'large' );
+		$bg_url = $src ? esc_url( $src ) : '';
+	}
 }
 
 $tiers = get_field('tiers');
@@ -58,11 +64,10 @@ if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && empty( $t
 ?>
 
 <section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?> alignfull" style="--posts-bg-max-h: <?= esc_attr($bg_max_height); ?>px;">
-  <!-- Background art layer (same as posts-grid) -->
+  <?php if ( $bg_url ) : ?>
+  <!-- Background art layer (same as posts-grid); omitted when no Background image is set -->
   <div class="c-posts__bg" aria-hidden="true">
-    <?php if ($bg_url): ?>
-      <div class="c-posts__bgImage" style="background-image:url('<?= $bg_url; ?>')"></div>
-    <?php endif; ?>
+    <div class="c-posts__bgImage" style="background-image:url('<?= $bg_url; ?>')"></div>
 
     <svg class="c-posts__overlaySvg c-posts__overlaySvg--front" viewBox="0 0 1440 1200" preserveAspectRatio="none" aria-hidden="true">
       <defs>
@@ -118,6 +123,7 @@ if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && empty( $t
     <span class="c-posts__wave c-posts__wave--top" aria-hidden="true"></span>
     <span class="c-posts__wave c-posts__wave--bottom" aria-hidden="true"></span>
   </div>
+  <?php endif; ?>
 
   <!-- Foreground content -->
   <div class="c-posts__inner c-sponsorships__inner l-container wrap">

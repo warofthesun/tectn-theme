@@ -1,8 +1,10 @@
 <?php
 /**
  * Content Section block
- * No top/bottom curves. Background: image (with 3 overlay choices) or solid color.
- * User can add any content in the middle and set a minimum height.
+ * Optional top/bottom curves (solid color + “Add curve to background” only). Background: image
+ * (with 3 overlay choices) or solid color. “Background color contains content” is mutually
+ * exclusive with curves in the form; the template also forces curves off if that option is on
+ * (so stale `wave_curves` values are not shown).
  *
  * @param array $block The block settings and attributes.
  *
@@ -82,11 +84,12 @@ $bg_color   = get_field('bg_color');
 $bg_height  = (int) (get_field('bg_height') ?: 800);
 $bg_align_y = get_field('bg_align_y') ?: 'center';
 
+$bg_color_contains = (bool) get_field( 'bg_color_contains' );
 $remove_bottom_margin = (bool) get_field('remove_bottom_margin');
 $classes = ['c-content-section', "c-content-section--py-{$py}", "c-content-section--content-{$content_align}"];
 $classes[] = 'c-content-section--overlay-' . $bg_overlay;
 if ($remove_bottom_margin) $classes[] = 'c-content-section--no-mb';
-if ($bg_type === 'color' && (bool) get_field('bg_color_contains')) {
+if ($bg_type === 'color' && $bg_color_contains) {
   $classes[] = 'c-content-section--bg-contains';
 }
 
@@ -106,6 +109,13 @@ if ($wave_curves === null || $wave_curves === false) {
 $has_waves = $wave_top || $wave_bottom;
 if (!$bg_enable || $bg_type === 'image') {
   $has_waves = false;
+}
+// “Background color contains content” and curves are mutually exclusive in the UI. If
+// this flag is on, never render the wave layer (stale `wave_curves` may still be in block meta).
+if ( $bg_type === 'color' && $bg_color_contains ) {
+  $has_waves   = false;
+  $wave_top    = false;
+  $wave_bottom = false;
 }
 
 $should_render_bg = false;

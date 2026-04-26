@@ -4,7 +4,7 @@
  *
  * Repeater: content_cards
  * Sub fields:
- * - Title (text)      : title
+ * - Title (text)      : title (optional; if empty the title bar is not output)
  * - Icon (dashicons)  : icon   (returns a string)
  * - Body (WYSIWYG)    : body   (text-only)
  */
@@ -102,20 +102,22 @@ if ($is_editor_context && empty($rows) && empty($block_data['inserter_preview'])
           $icon  = get_sub_field('icon'); // dashicons string
           $body  = get_sub_field('body');
           $icon_class = $dashicon_class($icon);
+          $title_text = is_string($title) ? trim($title) : '';
+          $show_title_section = ( $title_text !== '' );
         ?>
 
         <li class="c-stepcard">
-          <div class="c-stepcard__head">
-            <?php if (!empty($title)) : ?>
-              <span class="c-stepcard__kicker"><?php echo esc_html($title); ?></span>
-            <?php endif; ?>
+          <?php if ( $show_title_section ) : ?>
+            <div class="c-stepcard__head">
+              <span class="c-stepcard__kicker"><?php echo esc_html( $title_text ); ?></span>
 
-            <?php if (!empty($icon_class)) : ?>
-              <span class="c-stepcard__icon" aria-hidden="true">
-                <span class="<?php echo esc_attr($icon_class); ?>" aria-hidden="true"></span>
-              </span>
-            <?php endif; ?>
-          </div>
+              <?php if (!empty($icon_class)) : ?>
+                <span class="c-stepcard__icon" aria-hidden="true">
+                  <span class="<?php echo esc_attr($icon_class); ?>" aria-hidden="true"></span>
+                </span>
+              <?php endif; ?>
+            </div>
+          <?php endif; ?>
 
           <?php if (!empty($body)) : ?>
             <div class="c-stepcard__body">
