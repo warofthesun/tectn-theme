@@ -1,0 +1,87 @@
+{
+    "key": "group_tectn_site_tracking_codes",
+    "title": "Tracking Codes",
+    "fields": [
+        {
+            "key": "field_tectn_tracking_codes_repeater",
+            "label": "Tracking codes",
+            "name": "tracking_codes",
+            "type": "repeater",
+            "instructions": "Paste full snippets from Google Analytics, Tag Manager, Meta Pixel, etc. Each row outputs on every front-end page in the head or footer.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_tectn_tracking_code_admin_label",
+            "button_label": "Add tracking code",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_tectn_tracking_code_admin_label",
+                    "label": "Label (optional)",
+                    "name": "tracking_code_admin_label",
+                    "type": "text",
+                    "instructions": "For your reference in the admin list only.",
+                    "required": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "placeholder": "e.g. Google Analytics",
+                    "parent_repeater": "field_tectn_tracking_codes_repeater"
+                },
+                {
+                    "key": "field_tectn_tracking_code_placement",
+                    "label": "Insert in",
+                    "name": "tracking_code_placement",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "choices": {
+                        "head": "Head",
+                        "footer": "Footer"
+                    },
+                    "default_value": "head",
+                    "return_format": "value",
+                    "layout": "horizontal",
+                    "parent_repeater": "field_tectn_tracking_codes_repeater"
+                },
+                {
+                    "key": "field_tectn_tracking_code_markup",
+                    "label": "Code",
+                    "name": "tracking_code_markup",
+                    "type": "textarea",
+                    "instructions": "Paste the full HTML snippet, including script tags and comments.",
+                    "required": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "rows": 12,
+                    "new_lines": "",
+                    "parent_repeater": "field_tectn_tracking_codes_repeater"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "tectn-tracking-codes"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Sitewide tracking snippets for wp_head and wp_footer.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1776043000
+}

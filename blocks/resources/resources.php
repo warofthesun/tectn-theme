@@ -45,7 +45,7 @@ $is_editor_context =
 /**
  * Build resolved sections from flexible content rows.
  *
- * @return list<array{preheader: string, headline: string, headline_size: string, entries: list<array<string, string>>}>
+ * @return list<array{preheader: string, headline: string, headline_size: string, hide_header: bool, entries: list<array<string, string>>}>
  */
 $resolve_sections = static function () {
 	$sections = array();
@@ -103,10 +103,21 @@ $resolve_sections = static function () {
 			continue;
 		}
 
+		$hide_header = (bool) get_sub_field( 'hide_header' );
+		$edit_header = (bool) get_sub_field( 'edit_header' );
+
+		if ( $edit_header ) {
+			$override_pre = get_sub_field( 'header_preheader_override' );
+			$override_head = get_sub_field( 'header_headline_override' );
+			$preheader     = is_string( $override_pre ) ? trim( $override_pre ) : '';
+			$headline      = is_string( $override_head ) ? trim( $override_head ) : '';
+		}
+
 		$sections[] = array(
 			'preheader'     => $preheader,
 			'headline'      => $headline,
 			'headline_size' => $headline_size,
+			'hide_header'   => $hide_header,
 			'entries'       => $entries,
 		);
 	}
@@ -133,7 +144,7 @@ $render_placeholder = static function ( $message ) use ( $res_no_bg, $res_bg_col
 };
 
 if ( $is_editor_context && empty( $sections ) && empty( $block_data['inserter_preview'] ) ) {
-	$render_placeholder( __( 'Add sections in the block sidebar. Choose Site Settings sections or create page-only sections with links.', 'tectn_theme' ) );
+	$render_placeholder( __( 'Add sections in the block sidebar. Choose Resources sections or create page-only sections with links.', 'tectn_theme' ) );
 	return;
 }
 
@@ -181,6 +192,7 @@ if ( ! empty( $block['className'] ) ) {
 		$preheader     = $section['preheader'];
 		$headline      = $section['headline'];
 		$headline_size = $section['headline_size'];
+		$hide_header   = ! empty( $section['hide_header'] );
 		$entries       = $section['entries'];
 
 		if ( 'column' === $flow && function_exists( 'tectn_information_lists_reorder_for_column_flow' ) ) {
@@ -193,7 +205,7 @@ if ( ! empty( $block['className'] ) ) {
 		$has_headline    = $preheader !== '' || $headline !== '';
 		?>
 		<section class="c-resources__section">
-			<?php if ( $has_headline ) : ?>
+			<?php if ( ! $hide_header && $has_headline ) : ?>
 				<div class="c-resources__headline">
 					<?php if ( $preheader !== '' ) : ?>
 						<h5 class="c-headline-group__preheader"><?php echo esc_html( $preheader ); ?></h5>

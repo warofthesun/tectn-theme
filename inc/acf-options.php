@@ -22,9 +22,34 @@ function tectn_site_settings_parent_slug() {
 }
 
 /**
- * First sub-item: Brand (same post_id as site-settings for existing get_field(..., 'site-settings') calls).
- *
- * Must run after ACF's register_ui_options_pages (acf/init priority 6) so site-settings-parent exists.
+ * Sitewide container under Site Settings (Brand + Integrations group label).
+ * Skipped when synced from acf-json/ui_options_page_tectn_sitewide.json.
+ */
+function tectn_register_site_settings_sitewide_parent() {
+	if ( ! function_exists( 'acf_add_options_sub_page' ) || ! function_exists( 'acf_get_options_pages' ) ) {
+		return;
+	}
+	$pages = acf_get_options_pages();
+	if ( empty( $pages['site-settings-parent'] ) || ! empty( $pages['tectn-sitewide'] ) ) {
+		return;
+	}
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Sitewide',
+			'menu_title'  => 'Sitewide',
+			'menu_slug'   => 'tectn-sitewide',
+			'parent_slug' => 'site-settings-parent',
+			'capability'  => 'edit_posts',
+			'post_id'     => 'tectn-sitewide',
+			'redirect'    => false,
+			'position'    => 90,
+		)
+	);
+}
+add_action( 'acf/init', 'tectn_register_site_settings_sitewide_parent', 6 );
+
+/**
+ * Brand (same post_id as site-settings for existing get_field(..., 'site-settings') calls).
  */
 function tectn_register_site_settings_brand_subpage() {
 	if ( ! function_exists( 'acf_add_options_sub_page' ) || ! function_exists( 'acf_get_options_pages' ) ) {
@@ -42,6 +67,7 @@ function tectn_register_site_settings_brand_subpage() {
 			'parent_slug' => 'site-settings-parent',
 			'capability'  => 'edit_posts',
 			'post_id'     => 'site-settings',
+			'position'    => 91,
 		)
 	);
 }
@@ -66,10 +92,36 @@ function tectn_register_site_settings_integrations_subpage() {
 			'parent_slug' => 'site-settings-parent',
 			'capability'  => 'edit_posts',
 			'post_id'     => 'site-settings-integrations',
+			'position'    => 92,
 		)
 	);
 }
 add_action( 'acf/init', 'tectn_register_site_settings_integrations_subpage', 8 );
+
+/**
+ * Tracking Codes under Site Settings → Sitewide group.
+ */
+function tectn_register_tracking_codes_options_page() {
+	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
+		return;
+	}
+	$pages = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
+	if ( empty( $pages['site-settings-parent'] ) ) {
+		return;
+	}
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Tracking Codes',
+			'menu_title'  => 'Tracking Codes',
+			'menu_slug'   => 'tectn-tracking-codes',
+			'parent_slug' => 'site-settings-parent',
+			'capability'  => 'edit_posts',
+			'post_id'     => 'tectn-tracking-codes',
+			'position'    => 93,
+		)
+	);
+}
+add_action( 'acf/init', 'tectn_register_tracking_codes_options_page', 8 );
 
 /**
  * Fields for Integrations options sub-page.
@@ -121,31 +173,119 @@ function tectn_remove_site_settings_parent_submenu_duplicate() {
 add_action( 'admin_menu', 'tectn_remove_site_settings_parent_submenu_duplicate', 999 );
 
 /**
- * Make the Site Settings container menu open-only (no navigation) on wide viewports.
+ * Order Site Settings submenu: all pages first, Sitewide group last.
+ * Applies indented labels for Brand / Integrations under Sitewide.
  */
-function tectn_site_settings_parent_menu_non_navigable() {
+function tectn_sort_site_settings_submenu() {
+	global $submenu;
+
+	$parent = 'site-settings-parent';
+	if ( empty( $submenu[ $parent ] ) || ! is_array( $submenu[ $parent ] ) ) {
+		return;
+	}
+
+	$sitewide_slugs = array(
+		'tectn-sitewide',
+		'site-settings',
+		'site-settings-integrations',
+		'tectn-tracking-codes',
+	);
+
+	$priority_order = array(
+		'post-settings',
+		'theme-events-settings',
+		'footer-information',
+		'tectn-forms',
+		'tectn-info-tables',
+		'tectn-information-lists',
+		'tectn-resources',
+	);
+
+	$indented_labels = array(
+		'site-settings'              => '— Brand',
+		'site-settings-integrations' => '— Integrations',
+		'tectn-tracking-codes'       => '— Tracking Codes',
+	);
+
+	$by_slug = array();
+	foreach ( $submenu[ $parent ] as $item ) {
+		if ( ! is_array( $item ) || empty( $item[2] ) ) {
+			continue;
+		}
+		$by_slug[ $item[2] ] = $item;
+	}
+
+	if ( ! empty( $submenu['tectn-sitewide'] ) && is_array( $submenu['tectn-sitewide'] ) ) {
+		foreach ( $submenu['tectn-sitewide'] as $item ) {
+			if ( ! is_array( $item ) || empty( $item[2] ) || $item[2] === 'tectn-sitewide' ) {
+				continue;
+			}
+			$by_slug[ $item[2] ] = $item;
+		}
+		unset( $submenu['tectn-sitewide'] );
+	}
+
+	$sorted = array();
+	$used   = array();
+
+	$append_slug = static function ( $slug ) use ( &$sorted, &$used, $by_slug, $indented_labels ) {
+		if ( ! isset( $by_slug[ $slug ] ) || ! empty( $used[ $slug ] ) ) {
+			return;
+		}
+		$item = $by_slug[ $slug ];
+		if ( isset( $indented_labels[ $slug ] ) ) {
+			$item[0] = $indented_labels[ $slug ];
+		}
+		$sorted[]     = $item;
+		$used[ $slug ] = true;
+	};
+
+	foreach ( $priority_order as $slug ) {
+		$append_slug( $slug );
+	}
+
+	foreach ( $submenu[ $parent ] as $item ) {
+		if ( ! is_array( $item ) || empty( $item[2] ) ) {
+			continue;
+		}
+		$slug = $item[2];
+		if ( ! empty( $used[ $slug ] ) || $slug === $parent || in_array( $slug, $sitewide_slugs, true ) ) {
+			continue;
+		}
+		$sorted[]     = $item;
+		$used[ $slug ] = true;
+	}
+
+	foreach ( $sitewide_slugs as $slug ) {
+		$append_slug( $slug );
+	}
+
+	$submenu[ $parent ] = $sorted;
+}
+add_action( 'admin_menu', 'tectn_sort_site_settings_submenu', 1000 );
+
+/**
+ * Sitewide is a container-only options page; prevent navigating to an empty screen.
+ */
+function tectn_sitewide_options_menu_non_navigable() {
 	$pages = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
-	if ( empty( $pages['site-settings-parent'] ) ) {
+	if ( empty( $pages['tectn-sitewide'] ) ) {
 		return;
 	}
 	?>
 <script>
 (function () {
-	var li = document.getElementById('toplevel_page_site-settings-parent');
-	if (!li || !li.classList.contains('wp-has-submenu')) return;
-	var a = li.querySelector(':scope > a');
-	if (!a) return;
-	a.setAttribute('href', '#');
-	a.addEventListener('click', function (e) {
-		if (window.innerWidth > 960) {
-			e.preventDefault();
-		}
+	var sitewideLink = document.querySelector('#toplevel_page_site-settings-parent .wp-submenu a[href*="page=tectn-sitewide"]');
+	if (!sitewideLink) return;
+	sitewideLink.setAttribute('href', '#');
+	sitewideLink.addEventListener('click', function (e) {
+		e.preventDefault();
 	});
 })();
 </script>
 	<?php
 }
-add_action( 'admin_footer', 'tectn_site_settings_parent_menu_non_navigable', 99 );
+add_action( 'admin_footer', 'tectn_sitewide_options_menu_non_navigable', 99 );
 
 function tectn_register_post_settings_options_page() {
 	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
@@ -164,6 +304,7 @@ function tectn_register_post_settings_options_page() {
 		'parent_slug'  => $parent,
 		'capability'   => 'edit_posts',
 		'post_id'      => 'post-settings', // Store/load fields under this key so get_field( $field, 'post-settings' ) works.
+		'position'     => 10,
 	) );
 }
 add_action( 'acf/init', 'tectn_register_post_settings_options_page', 10 );
@@ -189,6 +330,7 @@ function tectn_register_events_page_options_under_site_settings() {
 			'parent_slug' => $parent,
 			'capability'  => 'edit_posts',
 			'post_id'     => 'theme-events-settings',
+			'position'    => 11,
 		)
 	);
 }
@@ -214,6 +356,7 @@ function tectn_register_footer_information_options_page() {
 			'parent_slug' => $parent,
 			'capability'  => 'edit_posts',
 			'post_id'     => 'footer-information',
+			'position'    => 12,
 		)
 	);
 }
@@ -239,6 +382,7 @@ function tectn_register_forms_options_page() {
 			'parent_slug' => $parent,
 			'capability'  => 'edit_posts',
 			'post_id'     => 'tectn-forms',
+			'position'    => 13,
 		)
 	);
 }
@@ -264,6 +408,7 @@ function tectn_register_info_tables_options_page() {
 			'parent_slug' => $parent,
 			'capability'  => 'edit_posts',
 			'post_id'     => 'tectn-info-tables',
+			'position'    => 14,
 		)
 	);
 }
@@ -289,6 +434,7 @@ function tectn_register_information_lists_options_page() {
 			'parent_slug' => $parent,
 			'capability'  => 'edit_posts',
 			'post_id'     => 'tectn-information-lists',
+			'position'    => 15,
 		)
 	);
 }
@@ -314,6 +460,7 @@ function tectn_register_resources_options_page() {
 			'parent_slug' => $parent,
 			'capability'  => 'edit_posts',
 			'post_id'     => 'tectn-resources',
+			'position'    => 16,
 		)
 	);
 }

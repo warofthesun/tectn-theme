@@ -36,6 +36,74 @@
                             "ui": 1
                         },
                         {
+                            "key": "field_tectn_resource_section_hide_header",
+                            "label": "Hide header",
+                            "name": "hide_header",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": { "width": "50", "class": "", "id": "" },
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "Yes",
+                            "ui_off_text": "No"
+                        },
+                        {
+                            "key": "field_tectn_resource_section_edit_header",
+                            "label": "Edit header",
+                            "name": "edit_header",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": { "width": "50", "class": "", "id": "" },
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "Yes",
+                            "ui_off_text": "No"
+                        },
+                        {
+                            "key": "field_tectn_resource_section_header_preheader_override",
+                            "label": "Preheader override",
+                            "name": "header_preheader_override",
+                            "type": "text",
+                            "instructions": "Leave empty to hide the preheader while editing is enabled.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_edit_header",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "default_value": ""
+                        },
+                        {
+                            "key": "field_tectn_resource_section_header_headline_override",
+                            "label": "Headline override",
+                            "name": "header_headline_override",
+                            "type": "text",
+                            "instructions": "Leave empty to hide the headline while editing is enabled.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_edit_header",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "default_value": ""
+                        },
+                        {
                             "key": "field_tectn_resource_section_selected_key",
                             "label": "Site section",
                             "name": "selected_resource_section_key",
@@ -115,6 +183,11 @@
                                         "field": "field_tectn_resource_section_source",
                                         "operator": "==",
                                         "value": "local"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_section_edit_header",
+                                        "operator": "!=",
+                                        "value": "1"
                                     }
                                 ]
                             ],
@@ -133,6 +206,11 @@
                                         "field": "field_tectn_resource_section_source",
                                         "operator": "==",
                                         "value": "local"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_section_edit_header",
+                                        "operator": "!=",
+                                        "value": "1"
                                     }
                                 ]
                             ],
@@ -151,6 +229,11 @@
                                         "field": "field_tectn_resource_section_source",
                                         "operator": "==",
                                         "value": "local"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_section_edit_header",
+                                        "operator": "!=",
+                                        "value": "1"
                                     }
                                 ]
                             ],
@@ -331,5 +414,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1776040000
+    "modified": 1776041000
 }
