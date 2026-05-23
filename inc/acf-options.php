@@ -294,6 +294,31 @@ function tectn_register_information_lists_options_page() {
 }
 add_action( 'acf/init', 'tectn_register_information_lists_options_page', 10 );
 
+/**
+ * Site Settings → Resources (reusable resource sections for the Resources block).
+ */
+function tectn_register_resources_options_page() {
+	if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
+		return;
+	}
+	$parent = tectn_site_settings_parent_slug();
+	$pages  = function_exists( 'acf_get_options_pages' ) ? acf_get_options_pages() : array();
+	if ( empty( $pages ) || ! isset( $pages[ $parent ] ) ) {
+		return;
+	}
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Resources',
+			'menu_title'  => 'Resources',
+			'menu_slug'   => 'tectn-resources',
+			'parent_slug' => $parent,
+			'capability'  => 'edit_posts',
+			'post_id'     => 'tectn-resources',
+		)
+	);
+}
+add_action( 'acf/init', 'tectn_register_resources_options_page', 10 );
+
 function tectn_get_footer_information() {
 	static $cache = null;
 	if ( null !== $cache ) {

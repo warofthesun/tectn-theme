@@ -1,0 +1,23 @@
+{
+  "name": "tectn/resources",
+  "title": "Resources",
+  "description": "Display resource sections from Site Settings with optional page-only items in a configurable link grid.",
+  "style": ["file:../../library/css/style.css"],
+  "category": "tectn-blocks",
+  "icon": "admin-links",
+  "keywords": ["resources", "links", "grid", "sections"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "resources.php"
+  },
+  "supports": {
+    "jsx": true,
+    "anchor": true
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": { "inserter_preview": true }
+    }
+  }
+}

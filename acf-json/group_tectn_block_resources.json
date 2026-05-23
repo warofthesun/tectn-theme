@@ -1,0 +1,335 @@
+{
+    "key": "group_tectn_block_resources",
+    "title": "Block: Resources",
+    "fields": [
+        {
+            "key": "field_tectn_block_resources_sections",
+            "label": "Sections",
+            "name": "resource_sections",
+            "type": "flexible_content",
+            "instructions": "Add sections from Site Settings or create page-only sections. Page-only items on a site section appear only on this page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layouts": {
+                "layout_tectn_resource_section": {
+                    "key": "layout_tectn_resource_section",
+                    "name": "section",
+                    "label": "Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_tectn_resource_section_source",
+                            "label": "Section source",
+                            "name": "section_source",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "choices": {
+                                "site": "Site Settings section",
+                                "local": "Page-only section"
+                            },
+                            "default_value": "site",
+                            "return_format": "value",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_tectn_resource_section_selected_key",
+                            "label": "Site section",
+                            "name": "selected_resource_section_key",
+                            "type": "select",
+                            "instructions": "Choices use each section’s stable ID from Site Settings → Resources.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "site"
+                                    }
+                                ]
+                            ],
+                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "choices": [],
+                            "default_value": "",
+                            "return_format": "value",
+                            "ui": 1,
+                            "allow_null": 1
+                        },
+                        {
+                            "key": "field_tectn_resource_page_only_items",
+                            "label": "Page-only items",
+                            "name": "page_only_items",
+                            "type": "repeater",
+                            "instructions": "Extra links shown only on this page, appended after the site section items.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "site"
+                                    }
+                                ]
+                            ],
+                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "layout": "block",
+                            "min": 0,
+                            "max": 0,
+                            "button_label": "Add page-only item",
+                            "sub_fields": [
+                                {
+                                    "key": "field_tectn_resource_page_only_item_link",
+                                    "label": "Link",
+                                    "name": "item_link",
+                                    "type": "link",
+                                    "required": 0,
+                                    "wrapper": { "width": "50", "class": "", "id": "" },
+                                    "return_format": "array",
+                                    "parent_repeater": "field_tectn_resource_page_only_items"
+                                },
+                                {
+                                    "key": "field_tectn_resource_page_only_item_body",
+                                    "label": "Body text (optional)",
+                                    "name": "item_body",
+                                    "type": "textarea",
+                                    "required": 0,
+                                    "wrapper": { "width": "50", "class": "", "id": "" },
+                                    "rows": 3,
+                                    "new_lines": "br",
+                                    "parent_repeater": "field_tectn_resource_page_only_items"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_tectn_resource_local_preheader",
+                            "label": "Preheader (optional)",
+                            "name": "preheader",
+                            "type": "text",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "local"
+                                    }
+                                ]
+                            ],
+                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "default_value": ""
+                        },
+                        {
+                            "key": "field_tectn_resource_local_headline",
+                            "label": "Headline (optional)",
+                            "name": "headline",
+                            "type": "text",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "local"
+                                    }
+                                ]
+                            ],
+                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "default_value": ""
+                        },
+                        {
+                            "key": "field_tectn_resource_local_headline_size",
+                            "label": "Headline size",
+                            "name": "headline_size",
+                            "type": "button_group",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "local"
+                                    }
+                                ]
+                            ],
+                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "choices": {
+                                "hero": "Hero",
+                                "h1": "H1",
+                                "h2": "H2",
+                                "h3": "H3",
+                                "h4": "H4",
+                                "h5": "H5"
+                            },
+                            "default_value": "h2",
+                            "return_format": "value",
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_tectn_resource_local_items",
+                            "label": "Items",
+                            "name": "resource_items",
+                            "type": "repeater",
+                            "instructions": "Links stored on this page only.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "local"
+                                    }
+                                ]
+                            ],
+                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "layout": "block",
+                            "min": 0,
+                            "max": 0,
+                            "button_label": "Add item",
+                            "sub_fields": [
+                                {
+                                    "key": "field_tectn_resource_local_item_link",
+                                    "label": "Link",
+                                    "name": "item_link",
+                                    "type": "link",
+                                    "required": 0,
+                                    "wrapper": { "width": "50", "class": "", "id": "" },
+                                    "return_format": "array",
+                                    "parent_repeater": "field_tectn_resource_local_items"
+                                },
+                                {
+                                    "key": "field_tectn_resource_local_item_body",
+                                    "label": "Body text (optional)",
+                                    "name": "item_body",
+                                    "type": "textarea",
+                                    "required": 0,
+                                    "wrapper": { "width": "50", "class": "", "id": "" },
+                                    "rows": 3,
+                                    "new_lines": "br",
+                                    "parent_repeater": "field_tectn_resource_local_items"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "min": 0,
+            "max": 0,
+            "button_label": "Add section"
+        },
+        {
+            "key": "field_tectn_block_resources_bg_style",
+            "label": "Block background",
+            "name": "background_style",
+            "type": "select",
+            "instructions": "None = no background, no shadow. Color = background + drop shadow (same as Button Grid).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "none": "None",
+                "color": "Color"
+            },
+            "default_value": "color",
+            "return_format": "value",
+            "ui": 1
+        },
+        {
+            "key": "field_tectn_block_resources_bg_color",
+            "label": "Block background color",
+            "name": "background_color",
+            "type": "color_picker",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_tectn_block_resources_bg_style",
+                        "operator": "==",
+                        "value": "color"
+                    }
+                ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "#fcfce0",
+            "return_format": "string"
+        },
+        {
+            "key": "field_tectn_block_resources_columns",
+            "label": "Columns",
+            "name": "list_columns",
+            "type": "radio",
+            "instructions": "Number of columns on larger screens. On small screens the grid uses two columns (or one if you choose a single column here).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "1": "1",
+                "2": "2",
+                "3": "3",
+                "4": "4"
+            },
+            "default_value": "3",
+            "return_format": "value",
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_tectn_block_resources_flow",
+            "label": "Fill order",
+            "name": "list_flow",
+            "type": "radio",
+            "instructions": "Left to right: fill each row before the next. Top to bottom: fill each column before the next.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "row": "Left to right (by row)",
+                "column": "Top to bottom (by column)"
+            },
+            "default_value": "row",
+            "return_format": "value",
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_tectn_block_resources_block_width",
+            "label": "Maximum width",
+            "name": "block_width",
+            "type": "select",
+            "instructions": "Small (600px), Medium (800px), or Large (1000px).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "small": "Small (600px)",
+                "medium": "Medium (800px)",
+                "large": "Large (1000px)"
+            },
+            "default_value": "medium",
+            "return_format": "value",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn/resources"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1776040000
+}

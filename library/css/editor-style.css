@@ -2201,6 +2201,105 @@ Buttons and such
     grid-template-columns: 1fr !important;
   }
 }
+/* Resources block (ACF tectn/resources) — shell matches Information lists */
+.c-resources {
+  max-width: var(--resources-max-w, 800px);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1em;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  padding: clamp(20px, 2.5vw, 32px);
+  border-radius: 1em;
+  background: var(--resources-bg, #fcfce0);
+  -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.c-resources.c-resources--no-bg {
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.c-resources__section + .c-resources__section {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid rgba(32, 33, 35, 0.12);
+}
+
+.c-resources--no-bg .c-resources__section + .c-resources__section {
+  border-top-color: rgba(32, 33, 35, 0.08);
+}
+
+.c-resources__headline {
+  text-align: center;
+  margin-bottom: 0.75em;
+}
+.c-resources__headline h5 {
+  margin-bottom: 0;
+}
+
+.c-resources__grid {
+  display: grid;
+  gap: 0.75em 1.25em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.c-resources--cols-1 .c-resources__grid {
+  grid-template-columns: 1fr;
+}
+
+.c-resources--cols-2 .c-resources__grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.c-resources--cols-3 .c-resources__grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.c-resources--cols-4 .c-resources__grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.c-resources__item {
+  margin: 0;
+  min-width: 0;
+}
+
+.c-resources__link {
+  color: #698f3d;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+  font-weight: 600;
+}
+.c-resources__link:hover, .c-resources__link:focus {
+  color: rgb(81.375, 110.825, 47.275);
+}
+
+.c-resources__text {
+  font-weight: 600;
+  color: #5c6b80;
+}
+
+.c-resources__body {
+  margin: 0.5em 0 0;
+  font-size: 0.95em;
+  line-height: 1.5;
+  color: #5c6b80;
+}
+
+@media (max-width: 47.99em) {
+  .c-resources:not(.c-resources--cols-1) .c-resources__grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .c-resources--cols-1 .c-resources__grid {
+    grid-template-columns: 1fr !important;
+  }
+}
 /*********************
 THE EVENTS CALENDAR
 *********************/
@@ -3161,6 +3260,7 @@ Content Section block
 .c-cardrepeater__placeholder,
 .c-button-grid__placeholder,
 .c-information-lists__placeholder,
+.c-resources__placeholder,
 .c-card-block__placeholder,
 .c-content-section__placeholder,
 .c-formsEmbed__placeholder,
@@ -3184,6 +3284,7 @@ Content Section block
 .c-cardrepeater__placeholder strong,
 .c-button-grid__placeholder strong,
 .c-information-lists__placeholder strong,
+.c-resources__placeholder strong,
 .c-card-block__placeholder strong,
 .c-content-section__placeholder strong,
 .c-formsEmbed__placeholder strong,
@@ -3203,6 +3304,7 @@ Content Section block
 .editor-styles-wrapper .c-cardrepeater__placeholder,
 .editor-styles-wrapper .c-button-grid__placeholder,
 .editor-styles-wrapper .c-information-lists__placeholder,
+.editor-styles-wrapper .c-resources__placeholder,
 .editor-styles-wrapper .c-card-block__placeholder,
 .editor-styles-wrapper .c-content-section__placeholder,
 .editor-styles-wrapper .c-formsEmbed__placeholder,

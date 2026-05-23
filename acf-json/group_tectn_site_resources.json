@@ -1,0 +1,156 @@
+{
+    "key": "group_tectn_site_resources",
+    "title": "Resources",
+    "fields": [
+        {
+            "key": "field_tectn_site_resources_embedded",
+            "label": "Sections",
+            "name": "embedded_resource_sections",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Each entry is one named resource section with a stable ID. Pick sections in the Resources block; items can be extended per page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_tectn_resource_section_admin_label",
+            "button_label": "Add section",
+            "rows_per_page": 20,
+            "allow_in_bindings": 0,
+            "sub_fields": [
+                {
+                    "key": "field_tectn_resource_section_admin_label",
+                    "label": "Label (optional)",
+                    "name": "resource_section_admin_label",
+                    "type": "text",
+                    "instructions": "For your reference in the admin.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "placeholder": "e.g. Downloads",
+                    "parent_repeater": "field_tectn_site_resources_embedded"
+                },
+                {
+                    "key": "field_tectn_resource_section_key",
+                    "label": "Section ID",
+                    "name": "resource_section_key",
+                    "type": "text",
+                    "instructions": "Stable ID (UUID). Filled automatically when you save if left empty.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": 64,
+                    "parent_repeater": "field_tectn_site_resources_embedded"
+                },
+                {
+                    "key": "field_tectn_site_resource_section_preheader",
+                    "label": "Preheader (optional)",
+                    "name": "preheader",
+                    "type": "text",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "parent_repeater": "field_tectn_site_resources_embedded"
+                },
+                {
+                    "key": "field_tectn_site_resource_section_headline",
+                    "label": "Headline (optional)",
+                    "name": "headline",
+                    "type": "text",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "parent_repeater": "field_tectn_site_resources_embedded"
+                },
+                {
+                    "key": "field_tectn_site_resource_section_headline_size",
+                    "label": "Headline size",
+                    "name": "headline_size",
+                    "type": "button_group",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "choices": {
+                        "hero": "Hero",
+                        "h1": "H1",
+                        "h2": "H2",
+                        "h3": "H3",
+                        "h4": "H4",
+                        "h5": "H5"
+                    },
+                    "default_value": "h2",
+                    "return_format": "value",
+                    "layout": "horizontal",
+                    "parent_repeater": "field_tectn_site_resources_embedded"
+                },
+                {
+                    "key": "field_tectn_site_resource_section_items",
+                    "label": "Items",
+                    "name": "resource_section_items",
+                    "type": "repeater",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "layout": "block",
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "field_tectn_site_resource_item_link",
+                    "button_label": "Add item",
+                    "parent_repeater": "field_tectn_site_resources_embedded",
+                    "sub_fields": [
+                        {
+                            "key": "field_tectn_site_resource_item_link",
+                            "label": "Link",
+                            "name": "item_link",
+                            "type": "link",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": { "width": "50", "class": "", "id": "" },
+                            "return_format": "array",
+                            "parent_repeater": "field_tectn_site_resource_section_items"
+                        },
+                        {
+                            "key": "field_tectn_site_resource_item_body",
+                            "label": "Body text (optional)",
+                            "name": "item_body",
+                            "type": "textarea",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": { "width": "50", "class": "", "id": "" },
+                            "rows": 3,
+                            "new_lines": "br",
+                            "parent_repeater": "field_tectn_site_resource_section_items"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "tectn-resources"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Reusable resource sections. Sub-page of Site Settings.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1776040000
+}

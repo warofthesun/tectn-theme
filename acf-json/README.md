@@ -11,12 +11,14 @@
 - **Forms** (`tectn-forms`): repeater of plain-text embed snippets — `group_tectn_site_forms.json`. Use `tectn_get_embedded_forms()` in PHP.
 - **Information tables** (`tectn-info-tables`): reusable four-column tables — `group_tectn_site_info_tables.json`. Use `tectn_get_embedded_info_tables()` in PHP.
 - **Information lists** (`tectn-information-lists`): repeater of lists (optional label, stable list ID, items with name + optional ACF link) — `group_tectn_site_information_lists.json`. Use `tectn_get_embedded_information_lists()` or `tectn_find_information_list_by_selector()` in PHP.
+- **Resources** (`tectn-resources`): repeater of named sections (optional minimal headline, stable section ID, items with link + optional body text) — `group_tectn_site_resources.json`. Use `tectn_get_embedded_resource_sections()` or `tectn_find_resource_section_by_selector()` in PHP.
 
 ### Block-related options
 
 - **Block: Forms** (`tectn/forms`): `blocks/forms/` + `group_tectn_block_forms.json` — pick a form by **stable Form ID** (`form_key`, UUID on each repeater row). Saving **Site Settings → Forms** backfills empty IDs; the block stores the key (not row index) so reordering forms does not break the selection. Legacy blocks that only stored a numeric index still resolve until re-saved.
 - **Block: Information table** (`tectn/info-table`): `blocks/info-table/` + `group_tectn_block_info_table.json` — pick a table by **stable table ID** (`info_table_key`, UUID). Saving **Site Settings → Information tables** backfills empty keys; legacy numeric selection still resolves until re-saved.
 - **Block: Information lists** (`tectn/information-lists`): `blocks/information-lists/` + `group_tectn_block_information_list.json` — pick a list by **stable list ID** (`information_list_key`); layout options for columns (1–4), fill order (row vs column), and max width (same Small/Medium/Large as Button Grid). On viewports ≤ ~768px the grid uses two columns unless the block is set to a single column.
+- **Block: Resources** (`tectn/resources`): `blocks/resources/` + `group_tectn_block_resources.json` — compose **sections** via flexible content: pick Site Settings sections by **stable section ID** (`resource_section_key`) with optional **page-only items**, or add **page-only sections** inline. Block-level layout matches Information lists (background, columns, fill order, max width). Saving **Site Settings → Resources** backfills empty section IDs.
 - **Block: Iframe Embed** (`tectn/iframe-embed`): `blocks/iframe-embed/` + `group_tectn_iframe_embed_block.json` — optional section headline+textarea for pasted **iframe** markup; output is passed through `wp_kses()` with an iframe allowlist.
 
 There is **no** Theme Settings options page in this theme; options live under **Site Settings** and its sub-pages.

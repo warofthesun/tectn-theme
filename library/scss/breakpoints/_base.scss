@@ -310,6 +310,108 @@ Buttons and such
 	}
 }
 
+/* Resources block (ACF tectn/resources) — shell matches Information lists */
+.c-resources {
+	max-width: var(--resources-max-w, 800px);
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: $spacing-md;
+	font-family: $body-font;
+	padding: clamp(20px, 2.5vw, 32px);
+	@include border-radius-lg;
+	background: var(--resources-bg, #fcfce0);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+	&.c-resources--no-bg {
+		background: transparent;
+		box-shadow: none;
+	}
+}
+
+.c-resources__section + .c-resources__section {
+	margin-top: $spacing-md;
+	padding-top: $spacing-md;
+	border-top: 1px solid rgba($grey-900, 0.12);
+}
+
+.c-resources--no-bg .c-resources__section + .c-resources__section {
+	border-top-color: rgba($grey-900, 0.08);
+}
+
+.c-resources__headline {
+	text-align: center;
+	margin-bottom: $spacing-sm;
+
+	h5 {
+		margin-bottom: 0;
+	}
+}
+
+.c-resources__grid {
+	display: grid;
+	gap: $spacing-sm $spacing-lg;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.c-resources--cols-1 .c-resources__grid {
+	grid-template-columns: 1fr;
+}
+
+.c-resources--cols-2 .c-resources__grid {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.c-resources--cols-3 .c-resources__grid {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.c-resources--cols-4 .c-resources__grid {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.c-resources__item {
+	margin: 0;
+	min-width: 0;
+}
+
+.c-resources__link {
+	color: $link-color;
+	text-decoration: underline;
+	text-underline-offset: 0.12em;
+	font-weight: 600;
+
+	&:hover,
+	&:focus {
+		color: $link-hover;
+	}
+}
+
+.c-resources__text {
+	font-weight: 600;
+	color: $text-color;
+}
+
+.c-resources__body {
+	margin: $spacing-xs 0 0;
+	font-size: 0.95em;
+	line-height: 1.5;
+	color: $text-color;
+}
+
+@media (max-width: 47.99em) {
+	.c-resources:not(.c-resources--cols-1) .c-resources__grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+	}
+
+	.c-resources--cols-1 .c-resources__grid {
+		grid-template-columns: 1fr !important;
+	}
+}
+
 /*********************
 THE EVENTS CALENDAR
 *********************/
@@ -1156,6 +1258,7 @@ border: $spacing-xs solid $white;
 	.c-cardrepeater__placeholder,
 	.c-button-grid__placeholder,
 	.c-information-lists__placeholder,
+	.c-resources__placeholder,
 	.c-card-block__placeholder,
 	.c-content-section__placeholder,
 	.c-formsEmbed__placeholder,
@@ -1189,6 +1292,7 @@ border: $spacing-xs solid $white;
 		.c-cardrepeater__placeholder,
 		.c-button-grid__placeholder,
 		.c-information-lists__placeholder,
+	.c-resources__placeholder,
 		.c-card-block__placeholder,
 		.c-content-section__placeholder,
 		.c-formsEmbed__placeholder,
