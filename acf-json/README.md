@@ -17,6 +17,7 @@
 
 ### Block-related options
 
+- **Hide on Front End** (all `tectn/*` blocks): shared field group `group_tectn_block_hide_front_end.json` — last sidebar toggle on every block (`hide_on_front_end`, default No). Front end: no DOM output when Yes. Editor: “This block is hidden.” label above the preview at 50% opacity (`inc/blocks.php` + `.tectn-block-hidden-editor` in editor styles).
 - **Block: Forms** (`tectn/forms`): `blocks/forms/` + `group_tectn_block_forms.json` — pick a form by **stable Form ID** (`form_key`, UUID on each repeater row). Saving **Site Settings → Forms** backfills empty IDs; the block stores the key (not row index) so reordering forms does not break the selection. Legacy blocks that only stored a numeric index still resolve until re-saved.
 - **Block: Information table** (`tectn/info-table`): `blocks/info-table/` + `group_tectn_block_info_table.json` — pick a table by **stable table ID** (`info_table_key`, UUID). Saving **Site Settings → Information tables** backfills empty keys; legacy numeric selection still resolves until re-saved.
 - **Block: Information lists** (`tectn/information-lists`): `blocks/information-lists/` + `group_tectn_block_information_list.json` — pick a list by **stable list ID** (`information_list_key`); layout options for columns (1–4), fill order (row vs column), and max width (same Small/Medium/Large as Button Grid). On viewports ≤ ~768px the grid uses two columns unless the block is set to a single column.

@@ -3301,6 +3301,16 @@ Content Section block
  * Block editor canvas (iframe): core UI sets fonts on wrappers so empty-state copy
  * may not inherit theme body type. Scope fixes to .editor-styles-wrapper only (not front-end).
  */
+.editor-styles-wrapper .tectn-block-hidden-editor__notice {
+  margin: 0 0 0.25em;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  color: #70757B;
+}
+.editor-styles-wrapper .tectn-block-hidden-editor__preview {
+  opacity: 0.5;
+}
 .editor-styles-wrapper .c-cardrepeater__placeholder,
 .editor-styles-wrapper .c-button-grid__placeholder,
 .editor-styles-wrapper .c-information-lists__placeholder,

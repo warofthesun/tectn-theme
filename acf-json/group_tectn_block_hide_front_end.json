@@ -1,0 +1,57 @@
+{
+    "key": "group_tectn_block_hide_front_end",
+    "title": "Hide on Front End - TecTN Block Piece",
+    "fields": [
+        {
+            "key": "field_tectn_block_hide_on_front_end",
+            "label": "Hide on front end",
+            "name": "hide_on_front_end",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "When enabled, this block is not output on the public site. It remains visible in the editor at reduced opacity.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "Yes",
+            "ui_off_text": "No"
+        }
+    ],
+    "location": [
+        [{ "param": "block", "operator": "==", "value": "tectn/headline-group" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/text-image" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/slider" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/sponsorships" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/button-grid" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/card-block" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/content-cards" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/content-section" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/content-container" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/forms" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/info-table" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/information-lists" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/resources" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/posts-grid" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/people-list" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/pickup-sites-map" }],
+        [{ "param": "block", "operator": "==", "value": "tectn/iframe-embed" }]
+    ],
+    "menu_order": 100,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Shared toggle for all TecTN ACF blocks. Render behavior is handled in inc/blocks.php.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1779727493
+}

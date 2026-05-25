@@ -1289,6 +1289,18 @@ border: $spacing-xs solid $white;
 	 * may not inherit theme body type. Scope fixes to .editor-styles-wrapper only (not front-end).
 	 */
 	.editor-styles-wrapper {
+		.tectn-block-hidden-editor__notice {
+			margin: 0 0 $spacing-xxs;
+			font-family: $body-font;
+			font-size: 0.8125rem;
+			line-height: 1.3;
+			color: $grey-600;
+		}
+
+		.tectn-block-hidden-editor__preview {
+			opacity: 0.5;
+		}
+
 		.c-cardrepeater__placeholder,
 		.c-button-grid__placeholder,
 		.c-information-lists__placeholder,
