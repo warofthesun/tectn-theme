@@ -65,8 +65,8 @@ Buttons and such
 		@extend %btn;
 		margin-bottom: $spacing-md;
 
-		&:not(:first-child) {
-			margin-left: $spacing-md;
+		&:not(:last-child) {
+			margin-right: $spacing-md;
 		}
 	}
 
@@ -186,14 +186,10 @@ Buttons and such
 	.c-button-group__button {
 		margin-bottom: 0;
 		margin-left: 0;
+		margin-right: 0;
 		text-align: center;
 		box-sizing: border-box;
 		min-width: 0;
-
-		/* Override .c-button-group sibling margin-left so grid gap is uniform */
-		&:not(:first-child) {
-			margin-left: 0;
-		}
 	}
 }
 
