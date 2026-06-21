@@ -77,6 +77,17 @@
           "new_lines": "br",
           "wrapper": { "width": "", "class": "", "id": "" },
           "parent_repeater": "field_699cb002"
+        },
+        {
+          "key": "field_699cb008",
+          "label": "CTA Button",
+          "name": "cta_button",
+          "type": "link",
+          "instructions": "Optional. Set the link URL and button label (e.g. Buy Now).",
+          "required": 0,
+          "return_format": "array",
+          "wrapper": { "width": "", "class": "", "id": "" },
+          "parent_repeater": "field_699cb002"
         }
       ],
       "wrapper": { "width": "", "class": "", "id": "" }

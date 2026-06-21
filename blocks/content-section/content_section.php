@@ -96,7 +96,7 @@ if ($bg_type === 'color' && $bg_color_contains) {
 $align = !empty($block['align']) ? 'align' . $block['align'] : '';
 if ($align) $classes[] = $align;
 
-// Waves: only when background on and type is color (same as Content Container)
+// Waves: only when background on and type is color (same as Text + Image Combo)
 $wave_curves = get_field('wave_curves');
 if ($wave_curves === null || $wave_curves === false) {
   $wave_top = false;

@@ -1,6 +1,6 @@
 <?php
 /**
- * Content Container block (formerly Band)
+ * Text + Image Combo block (formerly Band / Content Container)
  *
  * @param array $block The block settings and attributes.
  *

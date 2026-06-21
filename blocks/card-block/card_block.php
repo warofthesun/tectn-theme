@@ -86,6 +86,11 @@ if ( $card_count >= 1 && $card_count <= 5 ) {
           $details = isset($card['details_text']) ? $card['details_text'] : '';
           $head    = isset($card['headline']) ? $card['headline'] : '';
           $body    = isset($card['body_text']) ? $card['body_text'] : '';
+          $cta     = isset($card['cta_button']) && is_array($card['cta_button']) ? $card['cta_button'] : array();
+          $cta_url = ! empty($cta['url']) ? $cta['url'] : '';
+          $cta_title = ! empty($cta['title']) ? $cta['title'] : '';
+          $cta_target = ! empty($cta['target']) ? $cta['target'] : '_self';
+          $has_cta = $cta_url !== '' && $cta_title !== '';
         ?>
           <article class="c-card-block__card">
             <div class="c-card-block__card-content">
@@ -108,9 +113,21 @@ if ( $card_count >= 1 && $card_count <= 5 ) {
                     <div class="c-card-block__card-body"><?= wp_kses_post(wpautop($body)); ?></div>
                   <?php endif; ?>
                 </div>
-                <?php if ($img_id): ?>
+                <?php if ($img_id || $has_cta): ?>
                   <div class="c-card-block__card-media">
-                    <?= wp_get_attachment_image( $img_id, 'card-block', false, ['loading' => 'lazy'] ); ?>
+                    <?php if ($img_id): ?>
+                      <div class="c-card-block__card-image">
+                        <?= wp_get_attachment_image( $img_id, 'card-block', false, ['loading' => 'lazy'] ); ?>
+                      </div>
+                    <?php endif; ?>
+                    <?php if ($has_cta): ?>
+                      <a class="c-card-block__card-cta"
+                         href="<?= esc_url($cta_url); ?>"
+                         target="<?= esc_attr($cta_target); ?>"
+                         <?= ($cta_target === '_blank') ? ' rel="noopener noreferrer"' : ''; ?>>
+                        <?= esc_html($cta_title); ?>
+                      </a>
+                    <?php endif; ?>
                   </div>
                 <?php endif; ?>
               </div>

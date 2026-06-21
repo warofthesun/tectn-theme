@@ -28,7 +28,7 @@
                             "conditional_logic": 0,
                             "wrapper": { "width": "", "class": "", "id": "" },
                             "choices": {
-                                "site": "Site Settings section",
+                                "site": "Resources section",
                                 "local": "Page-only section"
                             },
                             "default_value": "site",
