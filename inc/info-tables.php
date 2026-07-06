@@ -24,7 +24,43 @@ function tectn_get_embedded_info_tables() {
 }
 
 /**
- * After saving Information tables options: ensure every top-level repeater row has a non-empty info_table_key.
+ * Whether an info table column is shown on the front end (columns 2–4 only; column 1 is always visible).
+ *
+ * @param array<string, mixed> $table Table row from Site Settings.
+ * @param int                  $col   Column number 2, 3, or 4.
+ */
+function tectn_info_table_is_col_visible( $table, $col ) {
+	if ( $col < 2 || $col > 4 ) {
+		return true;
+	}
+	if ( ! is_array( $table ) ) {
+		return true;
+	}
+	$key = 'show_col_' . $col;
+	if ( ! array_key_exists( $key, $table ) ) {
+		return true;
+	}
+	return (bool) $table[ $key ];
+}
+
+/**
+ * Append " (copy)" to an admin label when missing.
+ *
+ * @param string $label Existing label.
+ */
+function tectn_info_table_append_copy_label( $label ) {
+	$label = trim( (string) $label );
+	if ( $label === '' ) {
+		return __( '(copy)', 'tectn_theme' );
+	}
+	if ( preg_match( '/\(copy(?:\s*\d+)?\)$/i', $label ) ) {
+		return $label;
+	}
+	return $label . ' ' . __( '(copy)', 'tectn_theme' );
+}
+
+/**
+ * After saving Information tables options: ensure unique info_table_key values and backfill empty keys.
  *
  * @param int|string $post_id Post ID or options screen id.
  */
@@ -40,7 +76,8 @@ function tectn_info_tables_ensure_row_keys_on_save( $post_id ) {
 	if ( ! is_array( $rows ) ) {
 		return;
 	}
-	$changed = false;
+	$changed  = false;
+	$seen_keys = array();
 	foreach ( $rows as $i => $row ) {
 		if ( ! is_array( $row ) ) {
 			continue;
@@ -49,7 +86,17 @@ function tectn_info_tables_ensure_row_keys_on_save( $post_id ) {
 		if ( $k === '' ) {
 			$rows[ $i ]['info_table_key'] = wp_generate_uuid4();
 			$changed                      = true;
+			$k                            = $rows[ $i ]['info_table_key'];
 		}
+		if ( isset( $seen_keys[ $k ] ) ) {
+			$rows[ $i ]['info_table_key'] = wp_generate_uuid4();
+			$changed                      = true;
+			$k                            = $rows[ $i ]['info_table_key'];
+			$label                        = isset( $row['info_table_admin_label'] ) ? (string) $row['info_table_admin_label'] : '';
+			$rows[ $i ]['info_table_admin_label'] = tectn_info_table_append_copy_label( $label );
+			$changed                      = true;
+		}
+		$seen_keys[ $k ] = true;
 	}
 	if ( $changed ) {
 		$lock = true;
@@ -58,6 +105,27 @@ function tectn_info_tables_ensure_row_keys_on_save( $post_id ) {
 	}
 }
 add_action( 'acf/save_post', 'tectn_info_tables_ensure_row_keys_on_save', 25 );
+
+/**
+ * Admin scripts for Site Settings → Information tables (duplicate table control).
+ */
+function tectn_info_tables_admin_enqueue_scripts() {
+	$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+	if ( $page !== 'tectn-info-tables' ) {
+		return;
+	}
+	if ( ! function_exists( 'get_template_directory_uri' ) || ! function_exists( 'tectn_asset_version' ) ) {
+		return;
+	}
+	wp_enqueue_script(
+		'tectn-info-tables-admin',
+		get_template_directory_uri() . '/library/js/admin/info-tables.js',
+		array( 'acf-input' ),
+		tectn_asset_version( 'library/js/admin/info-tables.js' ),
+		true
+	);
+}
+add_action( 'acf/input/admin_enqueue_scripts', 'tectn_info_tables_admin_enqueue_scripts' );
 
 /**
  * Resolve Info table block selection from block JSON + ACF meta.

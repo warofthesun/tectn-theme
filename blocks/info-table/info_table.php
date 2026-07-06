@@ -36,13 +36,20 @@ if ( ! is_array( $table ) ) {
 }
 
 $h1 = isset( $table['header_col_1'] ) ? (string) $table['header_col_1'] : '';
-$h2 = isset( $table['header_col_2'] ) ? (string) $table['header_col_2'] : '';
-$h3 = isset( $table['header_col_3'] ) ? (string) $table['header_col_3'] : '';
-$h4 = isset( $table['header_col_4'] ) ? (string) $table['header_col_4'] : '';
+
+$show_col_2 = function_exists( 'tectn_info_table_is_col_visible' ) ? tectn_info_table_is_col_visible( $table, 2 ) : true;
+$show_col_3 = function_exists( 'tectn_info_table_is_col_visible' ) ? tectn_info_table_is_col_visible( $table, 3 ) : true;
+$show_col_4 = function_exists( 'tectn_info_table_is_col_visible' ) ? tectn_info_table_is_col_visible( $table, 4 ) : true;
+
+$h2 = $show_col_2 && isset( $table['header_col_2'] ) ? (string) $table['header_col_2'] : '';
+$h3 = $show_col_3 && isset( $table['header_col_3'] ) ? (string) $table['header_col_3'] : '';
+$h4 = $show_col_4 && isset( $table['header_col_4'] ) ? (string) $table['header_col_4'] : '';
 
 $body_rows = isset( $table['table_rows'] ) && is_array( $table['table_rows'] ) ? $table['table_rows'] : array();
 
-$classes = array( 'c-infoTable' );
+$visible_col_count = 1 + (int) $show_col_2 + (int) $show_col_3 + (int) $show_col_4;
+
+$classes = array( 'c-infoTable', 'c-infoTable--visible-cols-' . $visible_col_count );
 if ( ! empty( $block['className'] ) ) {
 	$extra = preg_split( '/\s+/', trim( $block['className'] ) );
 	foreach ( $extra as $c ) {
@@ -58,9 +65,15 @@ if ( ! empty( $block['className'] ) ) {
 			<thead class="c-infoTable__head">
 				<tr>
 					<th class="c-infoTable__th c-infoTable__th--col1" scope="col"><?php echo esc_html( $h1 ); ?></th>
-					<th class="c-infoTable__th c-infoTable__th--col2" scope="col"><?php echo esc_html( $h2 ); ?></th>
-					<th class="c-infoTable__th c-infoTable__th--col3" scope="col"><?php echo esc_html( $h3 ); ?></th>
-					<th class="c-infoTable__th c-infoTable__th--col4" scope="col"><?php echo esc_html( $h4 ); ?></th>
+					<?php if ( $show_col_2 ) : ?>
+						<th class="c-infoTable__th c-infoTable__th--col2" scope="col"><?php echo esc_html( $h2 ); ?></th>
+					<?php endif; ?>
+					<?php if ( $show_col_3 ) : ?>
+						<th class="c-infoTable__th c-infoTable__th--col3" scope="col"><?php echo esc_html( $h3 ); ?></th>
+					<?php endif; ?>
+					<?php if ( $show_col_4 ) : ?>
+						<th class="c-infoTable__th c-infoTable__th--col4" scope="col"><?php echo esc_html( $h4 ); ?></th>
+					<?php endif; ?>
 				</tr>
 			</thead>
 			<?php if ( ! empty( $body_rows ) ) : ?>
@@ -70,31 +83,37 @@ if ( ! empty( $block['className'] ) ) {
 						if ( ! is_array( $row ) ) {
 							continue;
 						}
-						$item          = isset( $row['col_item'] ) ? (string) $row['col_item'] : '';
-						$accepted      = isset( $row['col_accepted'] ) ? (string) $row['col_accepted'] : '';
-						$not_accepted  = isset( $row['col_not_accepted'] ) ? (string) $row['col_not_accepted'] : '';
-						$recycled      = isset( $row['col_recycled_by'] ) ? (string) $row['col_recycled_by'] : '';
+						$item         = isset( $row['col_item'] ) ? (string) $row['col_item'] : '';
+						$accepted     = isset( $row['col_accepted'] ) ? (string) $row['col_accepted'] : '';
+						$not_accepted = isset( $row['col_not_accepted'] ) ? (string) $row['col_not_accepted'] : '';
+						$recycled     = isset( $row['col_recycled_by'] ) ? (string) $row['col_recycled_by'] : '';
 						?>
 						<tr class="c-infoTable__row">
 							<th class="c-infoTable__item" scope="row"><?php echo esc_html( $item ); ?></th>
-							<td class="c-infoTable__cell c-infoTable__cell--rich">
-								<?php
-								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- KSES allows safe HTML from editor.
-								echo $accepted !== '' ? wp_kses_post( $accepted ) : '';
-								?>
-							</td>
-							<td class="c-infoTable__cell">
-								<?php
-								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- ACF may return paragraphs from wpautop formatting.
-								echo $not_accepted !== '' ? wp_kses_post( $not_accepted ) : '';
-								?>
-							</td>
-							<td class="c-infoTable__cell">
-								<?php
-								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								echo $recycled !== '' ? wp_kses_post( $recycled ) : '';
-								?>
-							</td>
+							<?php if ( $show_col_2 ) : ?>
+								<td class="c-infoTable__cell c-infoTable__cell--rich c-infoTable__cell--col2">
+									<?php
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- KSES allows safe HTML from editor.
+									echo $accepted !== '' ? wp_kses_post( $accepted ) : '';
+									?>
+								</td>
+							<?php endif; ?>
+							<?php if ( $show_col_3 ) : ?>
+								<td class="c-infoTable__cell c-infoTable__cell--col3">
+									<?php
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- ACF may return paragraphs from wpautop formatting.
+									echo $not_accepted !== '' ? wp_kses_post( $not_accepted ) : '';
+									?>
+								</td>
+							<?php endif; ?>
+							<?php if ( $show_col_4 ) : ?>
+								<td class="c-infoTable__cell c-infoTable__cell--col4">
+									<?php
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									echo $recycled !== '' ? wp_kses_post( $recycled ) : '';
+									?>
+								</td>
+							<?php endif; ?>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>

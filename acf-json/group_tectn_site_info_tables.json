@@ -58,6 +58,60 @@
                     "parent_repeater": "field_tectn_info_tables_embedded_list"
                 },
                 {
+                    "key": "field_tectn_info_table_show_col_2",
+                    "label": "Show column 2",
+                    "name": "show_col_2",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "Turn off to hide this column on the front end. Content is kept when hidden.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "33", "class": "", "id": "" },
+                    "message": "",
+                    "default_value": 1,
+                    "allow_in_bindings": 0,
+                    "ui_on_text": "Show",
+                    "ui_off_text": "Hide",
+                    "ui": 1,
+                    "parent_repeater": "field_tectn_info_tables_embedded_list"
+                },
+                {
+                    "key": "field_tectn_info_table_show_col_3",
+                    "label": "Show column 3",
+                    "name": "show_col_3",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "Turn off to hide this column on the front end. Content is kept when hidden.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "33", "class": "", "id": "" },
+                    "message": "",
+                    "default_value": 1,
+                    "allow_in_bindings": 0,
+                    "ui_on_text": "Show",
+                    "ui_off_text": "Hide",
+                    "ui": 1,
+                    "parent_repeater": "field_tectn_info_tables_embedded_list"
+                },
+                {
+                    "key": "field_tectn_info_table_show_col_4",
+                    "label": "Show column 4",
+                    "name": "show_col_4",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "Turn off to hide this column on the front end. Content is kept when hidden.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "34", "class": "", "id": "" },
+                    "message": "",
+                    "default_value": 1,
+                    "allow_in_bindings": 0,
+                    "ui_on_text": "Show",
+                    "ui_off_text": "Hide",
+                    "ui": 1,
+                    "parent_repeater": "field_tectn_info_tables_embedded_list"
+                },
+                {
                     "key": "field_tectn_header_col_1",
                     "label": "Column 1 header",
                     "name": "header_col_1",
@@ -83,7 +137,15 @@
                     "type": "text",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tectn_info_table_show_col_2",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": { "width": "25", "class": "", "id": "" },
                     "default_value": "ACCEPTED",
                     "maxlength": "",
@@ -101,7 +163,15 @@
                     "type": "text",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tectn_info_table_show_col_3",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": { "width": "25", "class": "", "id": "" },
                     "default_value": "NOT ACCEPTED",
                     "maxlength": "",
@@ -119,7 +189,15 @@
                     "type": "text",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tectn_info_table_show_col_4",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": { "width": "25", "class": "", "id": "" },
                     "default_value": "RECYCLED BY",
                     "maxlength": "",
@@ -174,7 +252,15 @@
                             "type": "wysiwyg",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_info_table_show_col_2",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": { "width": "", "class": "", "id": "" },
                             "default_value": "",
                             "tabs": "all",
@@ -191,7 +277,15 @@
                             "type": "textarea",
                             "instructions": "Optional.",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_info_table_show_col_3",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": { "width": "", "class": "", "id": "" },
                             "default_value": "",
                             "maxlength": "",
@@ -209,7 +303,15 @@
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_info_table_show_col_4",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": { "width": "", "class": "", "id": "" },
                             "default_value": "",
                             "maxlength": "",
@@ -244,5 +346,5 @@
     "description": "Reusable four-column tables. Sub-page of Site Settings.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1775087215
+    "modified": 1783371389
 }

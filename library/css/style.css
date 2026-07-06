@@ -8455,6 +8455,18 @@ Information table block (ACF tectn/info-table) — .c-infoTable
   font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
   margin-bottom: 1em;
 }
+.c-infoTable--visible-cols-1 .c-infoTable__table {
+  min-width: 16rem;
+}
+.c-infoTable--visible-cols-2 .c-infoTable__table {
+  min-width: 28rem;
+}
+.c-infoTable--visible-cols-3 .c-infoTable__table {
+  min-width: 34rem;
+}
+.c-infoTable--visible-cols-4 .c-infoTable__table {
+  min-width: 40rem;
+}
 .c-infoTable--preview {
   padding: 1em;
   background: #F5F6F7;
@@ -8486,7 +8498,7 @@ Information table block (ACF tectn/info-table) — .c-infoTable
 
 .c-infoTable__table {
   width: 100%;
-  min-width: 40rem; /* keeps columns readable; wrapper scrolls on narrow viewports */
+  min-width: 40rem; /* overridden by .c-infoTable--visible-cols-* */
   table-layout: fixed; /* so first-column width applies to the whole column */
   border-collapse: collapse;
   font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;

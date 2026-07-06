@@ -4501,6 +4501,22 @@ Information table block (ACF tectn/info-table) — .c-infoTable
 	font-family: $body-font;
 	margin-bottom: $spacing-md;
 
+	&--visible-cols-1 .c-infoTable__table {
+		min-width: 16rem;
+	}
+
+	&--visible-cols-2 .c-infoTable__table {
+		min-width: 28rem;
+	}
+
+	&--visible-cols-3 .c-infoTable__table {
+		min-width: 34rem;
+	}
+
+	&--visible-cols-4 .c-infoTable__table {
+		min-width: 40rem;
+	}
+
 	&--preview {
 		padding: $spacing-md;
 		background: $grey-10;
@@ -4534,7 +4550,7 @@ Information table block (ACF tectn/info-table) — .c-infoTable
 
 .c-infoTable__table {
 	width: 100%;
-	min-width: 40rem; /* keeps columns readable; wrapper scrolls on narrow viewports */
+	min-width: 40rem; /* overridden by .c-infoTable--visible-cols-* */
 	table-layout: fixed; /* so first-column width applies to the whole column */
 	border-collapse: collapse;
 	font-family: $body-font;

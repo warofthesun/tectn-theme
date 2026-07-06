@@ -39,3 +39,21 @@ start customizing. All admin functions are located in lib/admin/
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
+
+/* Site Settings → Information tables: duplicate table row */
+.tectn-info-table-label-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tectn-info-table-label-row > .acf-input-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.tectn-info-table-duplicate {
+  flex: 0 0 auto;
+  margin: 0;
+  white-space: nowrap;
+}
