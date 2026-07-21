@@ -97,6 +97,7 @@
             "name": "bg_color",
             "type": "color_picker",
             "conditional_logic": [[{ "field": "field_699cs004", "operator": "==", "value": "color" }]],
+            "default_value": "#EFF5D1",
             "return_format": "string",
             "enable_opacity": 1,
             "wrapper": { "width": "", "class": "", "id": "" }
@@ -196,5 +197,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 0
+    "show_in_rest": 0,
+    "modified": 1784655000
 }

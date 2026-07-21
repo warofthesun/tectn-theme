@@ -337,7 +337,7 @@
                 ]
             ],
             "wrapper": { "width": "", "class": "", "id": "" },
-            "default_value": "#fcfce0",
+            "default_value": "#EFF5D1",
             "return_format": "string"
         },
         {
@@ -414,5 +414,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1776041000
+    "modified": 1784655000
 }

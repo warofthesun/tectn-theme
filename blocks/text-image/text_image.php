@@ -27,14 +27,21 @@
     $is_inside_container = ! empty( $block['context']['tectn/insideContainer'] );
     $enable_bg         = $is_inside_container ? false : get_field('use_colored_background');
     $content_full_width = (bool) get_field('content_full_width');
-    $bg_choice        = get_field('background_color') ?: 'sage';
-    $bg_map = [
-        'sage'     => 'var(--c-sage)',
-        'cream'    => 'var(--c-cream)',
-        'charcoal' => 'var(--c-charcoal)',
-        'white'    => 'var(--c-white)',
-    ];
-    $bg_value = $bg_map[$bg_choice] ?? $bg_map['sage'];
+    // Resolve background: hex from color picker, or legacy named values (pre-picker).
+    $bg_raw = get_field( 'background_color' );
+    $bg_legacy = array(
+        'sage'     => '#EFF5D1',
+        'cream'    => '#F0F4EC',
+        'charcoal' => '#5C6B80',
+        'white'    => '#FFFFFF',
+    );
+    if ( empty( $bg_raw ) ) {
+        $bg_value = defined( 'TECTN_COLOR_PICKER_DEFAULT' ) ? TECTN_COLOR_PICKER_DEFAULT : '#EFF5D1';
+    } elseif ( isset( $bg_legacy[ $bg_raw ] ) ) {
+        $bg_value = $bg_legacy[ $bg_raw ];
+    } else {
+        $bg_value = $bg_raw;
+    }
 
     $preheader        = get_field('preheader');
     $headline         = get_field('headline');
@@ -135,8 +142,7 @@
     }
 
     $style_attr = '';
-    if ($enable_bg) {
-        $bg_value   = $bg_map[$bg_choice] ?? $bg_map['sage'];
+    if ( $enable_bg ) {
         $style_attr = ' style="--waveband-bg:' . esc_attr( $bg_value ) . ';"';
     }
 ?>
@@ -172,12 +178,16 @@
 <?php if ( ! $enable_bg && ! $content_full_width ) : ?><div class="c-text-image__content"><?php endif; ?>
 
         <div class="<?php echo esc_attr(implode(' ', $classes_cg)); ?> row<?php echo $has_video ? ' c-content-group__row--has-video' : ''; ?><?php echo ($has_slideshow || $media_type === 'slideshow') ? ' c-content-group__row--has-slideshow' : ''; ?>">
-            <div class="<?= esc_attr($text_col); ?> c-content-group__content">
+            <div class="<?= esc_attr($text_col); ?> c-content-group__content<?php echo $on_dark ? ' c-content-group__content--on-dark' : ''; ?>">
                 <?php if ( $preheader ) : ?><h5 class="c-headline-group__preheader<?php echo $on_dark ? ' light' : ''; ?>"><?php echo esc_html( $preheader ); ?></h5><?php endif; ?>
                 <?php if ( $headline ) : ?><<?php echo esc_attr( $headline_parsed['tag'] ); ?> class="<?php echo esc_attr( trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) ) ); ?>"><?php echo esc_html( $headline ); ?></<?php echo esc_attr( $headline_parsed['tag'] ); ?>><?php endif; ?>
                 <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
-                    <?php $partial_path = get_theme_file_path('/partials/button_pair.php'); ?>
-                    <?php include $partial_path; ?>
+                    <?php
+                    $button_pair_use_darkbg = $on_dark;
+                    $partial_path = get_theme_file_path('/partials/button_pair.php');
+                    include $partial_path;
+                    unset( $button_pair_use_darkbg );
+                    ?>
             </div>
             <div class="<?= esc_attr($image_col); ?><?php echo $has_video ? ' c-content-group__media-col--video' : ''; ?>">
             <?php if ( $has_video ) :

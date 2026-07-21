@@ -61,7 +61,7 @@
                 ]
             ],
             "wrapper": { "width": "", "class": "", "id": "" },
-            "default_value": "#fcfce0",
+            "default_value": "#EFF5D1",
             "return_format": "string",
             "allow_in_bindings": 0
         },
@@ -145,5 +145,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1776039800
+    "modified": 1784655000
 }

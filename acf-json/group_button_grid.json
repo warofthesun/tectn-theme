@@ -27,7 +27,7 @@
             "conditional_logic": [
                 [ { "field": "field_bg_bg_style", "operator": "==", "value": "color" } ]
             ],
-            "default_value": "#fcfce0",
+            "default_value": "#EFF5D1",
             "return_format": "string",
             "wrapper": { "width": "", "class": "", "id": "" }
         },
@@ -134,5 +134,5 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "active": true,
-    "modified": 1773100000
+    "modified": 1784655000
 }

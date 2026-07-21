@@ -17,7 +17,7 @@ $il_bg_style = function_exists( 'get_field' ) ? get_field( 'background_style' ) 
 $il_bg_style = ( $il_bg_style !== null && $il_bg_style !== '' ) ? (string) $il_bg_style : 'color';
 $il_no_bg    = ( $il_bg_style === 'none' );
 $il_bg_raw   = function_exists( 'get_field' ) ? get_field( 'background_color' ) : null;
-$il_bg_color = ( $il_bg_raw !== null && $il_bg_raw !== '' ) ? esc_attr( (string) $il_bg_raw ) : '#fcfce0';
+$il_bg_color = ( $il_bg_raw !== null && $il_bg_raw !== '' ) ? esc_attr( (string) $il_bg_raw ) : '#EFF5D1';
 
 $is_inserter_preview =
 	! empty( $block['mode'] ) &&

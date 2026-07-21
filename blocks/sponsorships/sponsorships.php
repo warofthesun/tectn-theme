@@ -146,7 +146,7 @@ if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && empty( $t
           $tier_title = $tier['tier_title'] ?? '';
           $tier_bg_style = $tier['tier_background_style'] ?? 'color';
           $tier_no_bg = ($tier_bg_style === 'none');
-          $tier_bg = !$tier_no_bg && !empty($tier['tier_background_color']) ? esc_attr($tier['tier_background_color']) : '#F9FBF3';
+          $tier_bg = !$tier_no_bg && !empty($tier['tier_background_color']) ? esc_attr($tier['tier_background_color']) : '#EFF5D1';
           $logos_per_row = (int) ($tier['logos_per_row'] ?? 4);
           $logos_per_row = max(1, min(6, $logos_per_row));
           $sponsors = $tier['sponsors'] ?? [];

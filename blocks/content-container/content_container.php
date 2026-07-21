@@ -45,7 +45,10 @@ $bg_image  = get_field('bg_image');
 $bg_height = (int) (get_field('bg_height') ?: 800);
 
 // Solid color background fields
-$bg_color  = get_field('bg_color'); // hex from ACF color picker
+$bg_color = get_field( 'bg_color' ); // hex from ACF color picker
+if ( $bg_type === 'color' ) {
+	$bg_color = function_exists( 'tectn_color_or_default' ) ? tectn_color_or_default( $bg_color ) : ( $bg_color ?: '#EFF5D1' );
+}
 
 $remove_bottom_margin = (bool) get_field('remove_bottom_margin');
 $classes = ['c-band', "c-band--py-{$py}"];

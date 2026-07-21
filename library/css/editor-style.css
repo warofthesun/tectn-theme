@@ -2909,6 +2909,17 @@ Content Section block
   mask-position: center top;
 }
 
+/* Light body copy when “On a dark background” is enabled (Text + Image) */
+.c-content-group__content--on-dark {
+  color: #F4F5ED;
+}
+.c-content-group__content--on-dark a {
+  color: #EFF5D1;
+}
+.c-content-group__content--on-dark a:hover, .c-content-group__content--on-dark a:focus {
+  color: #DFEBA4;
+}
+
 .c-image-grid--two,
 .c-image-grid--three {
   grid-template-columns: 1fr;

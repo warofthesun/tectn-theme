@@ -940,6 +940,20 @@ Content Section block
   mask-position: center top;
 }
 
+/* Light body copy when “On a dark background” is enabled (Text + Image) */
+.c-content-group__content--on-dark {
+  color: $primary-10;
+
+  a {
+    color: $primary-100;
+
+    &:hover,
+    &:focus {
+      color: $primary-300;
+    }
+  }
+}
+
 // Use the c-image-grid block name consistently across modifier rules
 .c-image-grid--two,
   .c-image-grid--three {

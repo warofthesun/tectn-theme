@@ -78,7 +78,7 @@
                         ]
                     ],
                     "wrapper": { "width": "", "class": "", "id": "" },
-                    "default_value": "#F9FBF3",
+                    "default_value": "#EFF5D1",
                     "enable_opacity": 0,
                     "return_format": "string",
                     "parent_repeater": "field_69sp_tiers"
@@ -222,5 +222,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772900000
+    "modified": 1784655000
 }

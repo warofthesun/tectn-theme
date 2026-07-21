@@ -81,6 +81,9 @@ $bg_type    = get_field('bg_type') ?: 'image';
 $bg_image   = get_field('bg_image');
 $bg_overlay = get_field('bg_overlay') ?: 'warm'; // none | warm | medium | dark
 $bg_color   = get_field('bg_color');
+if ( $bg_type === 'color' ) {
+	$bg_color = function_exists( 'tectn_color_or_default' ) ? tectn_color_or_default( $bg_color ) : ( $bg_color ?: '#EFF5D1' );
+}
 $bg_height  = (int) (get_field('bg_height') ?: 800);
 $bg_align_y = get_field('bg_align_y') ?: 'center';
 
