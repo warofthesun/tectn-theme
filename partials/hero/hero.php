@@ -218,7 +218,18 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
       <div class="hero__content hero__content--text hero__content--initiative col-xs-12">
         <div class="hero__headline hero__headline--initiative">
           <?php if ( ! empty( $d['headline_type'] ) && $d['headline_type'] === 'logo' && ! empty( $d['logo_id'] ) ) : ?>
-            <?php echo wp_get_attachment_image( (int) $d['logo_id'], 'large', false, array( 'class' => 'hero__logo' ) ); ?>
+            <?php
+            $logo_size = isset( $d['logo_size'] ) ? sanitize_key( (string) $d['logo_size'] ) : 'medium';
+            if ( ! in_array( $logo_size, array( 'small', 'medium', 'large' ), true ) ) {
+              $logo_size = 'medium';
+            }
+            echo wp_get_attachment_image(
+              (int) $d['logo_id'],
+              'large',
+              false,
+              array( 'class' => 'hero__logo hero__logo--' . $logo_size )
+            );
+            ?>
           <?php else : ?>
             <?php
             $ht = isset( $d['headline_text'] ) ? $d['headline_text'] : '';
@@ -229,6 +240,14 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
             if ( $ht === '' ) {
               $ht = get_the_title();
             }
+            if ( ! empty( $d['include_logo_mark'] ) && ! empty( $d['logo_mark_id'] ) ) :
+              echo wp_get_attachment_image(
+                (int) $d['logo_mark_id'],
+                'medium',
+                false,
+                array( 'class' => 'hero__logo-mark' )
+              );
+            endif;
             ?>
             <h1 class="hero__title hero__title--initiative"><?php echo wp_kses_post( $ht ); ?></h1>
           <?php endif; ?>

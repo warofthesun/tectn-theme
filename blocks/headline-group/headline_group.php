@@ -50,11 +50,15 @@ if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && $is_head_
 ?>
 
 <div class="row">
-    <div class="col-xs-12 c-headline-group">
+    <div class="col-xs-12 c-headline-group<?php echo $on_dark ? ' c-headline-group--on-dark' : ''; ?>">
     <?php if ( $preheader ) : ?><h5 class="c-headline-group__preheader<?php echo $on_dark ? ' light' : ''; ?>"><?php echo esc_html( $preheader ); ?></h5><?php endif; ?>
     <?php if ( $headline ) : ?><<?php echo esc_attr( $headline_parsed['tag'] ); ?> class="<?php echo esc_attr( trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) ) ); ?>"><?php echo esc_html( $headline ); ?></<?php echo esc_attr( $headline_parsed['tag'] ); ?>><?php endif; ?>
     <?php if ( $body ) : ?><?php echo wp_kses_post( $body ); ?><?php endif; ?>
-        <?php $partial_path = get_theme_file_path( '/partials/button_pair.php' ); ?>
-        <?php include $partial_path; ?>
+        <?php
+        $button_pair_use_darkbg = $on_dark;
+        $partial_path           = get_theme_file_path( '/partials/button_pair.php' );
+        include $partial_path;
+        unset( $button_pair_use_darkbg );
+        ?>
     </div>
 </div>

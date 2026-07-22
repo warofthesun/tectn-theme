@@ -940,8 +940,9 @@ Content Section block
   mask-position: center top;
 }
 
-/* Light body copy when “On a dark background” is enabled (Text + Image) */
-.c-content-group__content--on-dark {
+/* Light body copy when “On a dark background” is enabled (Text + Image, Headline Group) */
+.c-content-group__content--on-dark,
+.c-headline-group--on-dark {
   color: $primary-10;
 
   a {
@@ -3400,9 +3401,29 @@ POSTS & CONTENT STYLES
 	}
 
 	&__logo {
-		max-width: 100%;
 		height: auto;
 		display: block;
+		margin-inline: auto;
+
+		&--large {
+			max-width: 90%;
+		}
+
+		&--medium {
+			max-width: 75%;
+		}
+
+		&--small {
+			max-width: 60%;
+		}
+	}
+
+	/* Brand logo mark above Initiative text headline */
+	&__logo-mark {
+		display: block;
+		height: auto;
+		max-width: 120px;
+		margin: 0 auto $spacing-md;
 	}
 
 	&__title--initiative {

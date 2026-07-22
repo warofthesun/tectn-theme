@@ -4513,14 +4513,18 @@ Content Section block
   mask-position: center top;
 }
 
-/* Light body copy when “On a dark background” is enabled (Text + Image) */
-.c-content-group__content--on-dark {
+/* Light body copy when “On a dark background” is enabled (Text + Image, Headline Group) */
+.c-content-group__content--on-dark,
+.c-headline-group--on-dark {
   color: #F4F5ED;
 }
-.c-content-group__content--on-dark a {
+.c-content-group__content--on-dark a,
+.c-headline-group--on-dark a {
   color: #EFF5D1;
 }
-.c-content-group__content--on-dark a:hover, .c-content-group__content--on-dark a:focus {
+.c-content-group__content--on-dark a:hover, .c-content-group__content--on-dark a:focus,
+.c-headline-group--on-dark a:hover,
+.c-headline-group--on-dark a:focus {
   color: #DFEBA4;
 }
 
@@ -7273,9 +7277,27 @@ POSTS & CONTENT STYLES
   text-align: center;
 }
 .hero__logo {
-  max-width: 100%;
   height: auto;
   display: block;
+  margin-inline: auto;
+}
+.hero__logo--large {
+  max-width: 90%;
+}
+.hero__logo--medium {
+  max-width: 75%;
+}
+.hero__logo--small {
+  max-width: 60%;
+}
+.hero {
+  /* Brand logo mark above Initiative text headline */
+}
+.hero__logo-mark {
+  display: block;
+  height: auto;
+  max-width: 120px;
+  margin: 0 auto 1em;
 }
 .hero__title--initiative {
   color: #F4F5ED;

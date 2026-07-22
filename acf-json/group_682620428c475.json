@@ -45,7 +45,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "#238c55",
+            "default_value": "#EFF5D1",
             "enable_opacity": 0,
             "return_format": "string",
             "allow_in_bindings": 0,
@@ -107,5 +107,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773886216
+    "modified": 1784671500
 }

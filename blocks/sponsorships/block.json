@@ -11,7 +11,6 @@
     "renderTemplate": "sponsorships.php"
   },
   "supports": {
-    "jsx": true,
     "anchor": true,
     "align": ["full", "wide"]
   },

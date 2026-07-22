@@ -111,6 +111,13 @@
                 "operator": "==",
                 "value": "tectn\/slider"
             }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "tectn\/sponsorships"
+            }
         ]
     ],
     "menu_order": 0,
@@ -123,5 +130,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773609200
+    "modified": 1784692800
 }

@@ -12,7 +12,6 @@
   },
   "usesContext": ["tectn/insideContainer"],
   "supports": {
-    "jsx": true,
     "anchor": true,
     "align": ["full", "wide"]
   },

@@ -35,3 +35,34 @@ start customizing. All admin functions are located in lib/admin/
 	text-align: left;
 	justify-content: flex-start;
 }
+
+/*
+ * ACF image Edit/Remove in side meta boxes (e.g. Hero Options → Initiative logo).
+ * Hover-only actions + narrow sidebar often leave controls untouchable after upload.
+ */
+#side-sortables .acf-image-uploader .image-wrap,
+.edit-post-meta-boxes-area .acf-image-uploader .image-wrap,
+.editor-sidebar .acf-image-uploader .image-wrap {
+	max-width: 100%;
+	overflow: visible;
+}
+
+#side-sortables .acf-image-uploader .acf-actions.-hover,
+.edit-post-meta-boxes-area .acf-image-uploader .acf-actions.-hover,
+.editor-sidebar .acf-image-uploader .acf-actions.-hover {
+	display: flex !important;
+	opacity: 1 !important;
+	pointer-events: auto !important;
+	z-index: 10050 !important;
+	gap: 4px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+#side-sortables .acf-image-uploader .acf-actions.-hover a,
+.edit-post-meta-boxes-area .acf-image-uploader .acf-actions.-hover a,
+.editor-sidebar .acf-image-uploader .acf-actions.-hover a {
+	pointer-events: auto !important;
+	cursor: pointer;
+}

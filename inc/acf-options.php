@@ -572,7 +572,7 @@ function tectn_register_acf_events_settings() {
 				'label'             => 'Background color',
 				'name'              => 'events_hero_background_color',
 				'type'              => 'color_picker',
-				'default_value'     => '#238c55',
+				'default_value'     => '#EFF5D1',
 				'conditional_logic' => array(
 					array(
 						array(

@@ -44,7 +44,7 @@ function tectn_get_hero_config() {
       'type' => 'medium',
       'data' => array(
         'background_type'   => $use_solid ? 'color' : 'image',
-        'background_color'  => $bg_color ? $bg_color : '#238c55',
+        'background_color'  => $bg_color ? $bg_color : ( defined( 'TECTN_COLOR_PICKER_DEFAULT' ) ? TECTN_COLOR_PICKER_DEFAULT : '#EFF5D1' ),
         'background_image' => $use_solid ? 0 : $bg_image,
         'headline_text'     => is_string( $headline ) ? $headline : '',
       ),
@@ -184,15 +184,49 @@ function tectn_get_hero_config() {
         }
       }
       $headline_text = is_string( $headline_text ) ? $headline_text : '';
+      $logo_size     = isset( $init['logo_size'] ) ? sanitize_key( (string) $init['logo_size'] ) : 'medium';
+      if ( ! in_array( $logo_size, array( 'small', 'medium', 'large' ), true ) ) {
+        $logo_size = 'medium';
+      }
+      $headline_type      = isset( $init['headline_type'] ) ? $init['headline_type'] : 'text';
+      $include_logo_mark  = ( $headline_type === 'text' ) && ! empty( $init['include_logo_mark'] );
+      $logo_mark_id       = 0;
+      if ( $include_logo_mark ) {
+        $site_settings = get_field( 'site_settings', 'site-settings' );
+        if ( ! is_array( $site_settings ) ) {
+          $site_settings = get_field( 'site_settings', 'option' );
+        }
+        if ( is_array( $site_settings ) ) {
+          $mark = null;
+          if ( ! empty( $site_settings['primary_logo_mark'] ) ) {
+            $mark = $site_settings['primary_logo_mark'];
+          } elseif ( ! empty( $site_settings['secondary_logo_mark'] ) ) {
+            $mark = $site_settings['secondary_logo_mark'];
+          }
+          if ( is_array( $mark ) && ! empty( $mark['ID'] ) ) {
+            $logo_mark_id = (int) $mark['ID'];
+          } elseif ( is_numeric( $mark ) ) {
+            $logo_mark_id = (int) $mark;
+          }
+        }
+        if ( $logo_mark_id <= 0 ) {
+          $include_logo_mark = false;
+        }
+      }
       $config = array(
         'show' => true,
         'type' => 'initiative',
         'data' => array(
           'background_type'   => $use_solid_color ? 'color' : 'image',
           'background_image'   => $use_solid_color ? 0 : $image_id,
-          'background_color'  => isset( $init['background_color'] ) ? $init['background_color'] : '#238c55',
-          'headline_type'      => isset( $init['headline_type'] ) ? $init['headline_type'] : 'text',
+          'background_color'  => isset( $init['background_color'] ) && $init['background_color']
+            ? $init['background_color']
+            : ( defined( 'TECTN_COLOR_PICKER_DEFAULT' ) ? TECTN_COLOR_PICKER_DEFAULT : '#EFF5D1' ),
+          'headline_type'      => $headline_type,
           'logo_id'            => $logo_id,
+          'logo_size'          => $logo_size,
+          'include_logo_mark'  => $include_logo_mark,
+          'logo_mark_id'       => $logo_mark_id,
           'headline_text'      => $headline_text,
           'gradient_overlay'   => isset( $init['gradient_overlay'] ) ? (bool) $init['gradient_overlay'] : true,
         ),
@@ -213,7 +247,9 @@ function tectn_get_hero_config() {
       $headline_text = $headline_wys !== '' ? $headline_wys : $page_title;
 
       $use_solid_color   = ! empty( $medium['use_solid_color'] );
-      $background_color  = isset( $medium['background_color'] ) && $medium['background_color'] ? $medium['background_color'] : '#238c55';
+      $background_color  = isset( $medium['background_color'] ) && $medium['background_color']
+        ? $medium['background_color']
+        : ( defined( 'TECTN_COLOR_PICKER_DEFAULT' ) ? TECTN_COLOR_PICKER_DEFAULT : '#EFF5D1' );
       $page_image_id     = (int) get_post_thumbnail_id( $post->ID );
 
       // If user picked image mode but the page has no featured image, hide the entire hero.
@@ -247,7 +283,9 @@ function tectn_get_hero_config() {
       $headline_text = $headline_wys !== '' ? $headline_wys : $page_title;
 
       $use_solid_color  = ! empty( $small['use_solid_color'] );
-      $background_color = isset( $small['background_color'] ) && $small['background_color'] ? $small['background_color'] : '#238c55';
+      $background_color = isset( $small['background_color'] ) && $small['background_color']
+        ? $small['background_color']
+        : ( defined( 'TECTN_COLOR_PICKER_DEFAULT' ) ? TECTN_COLOR_PICKER_DEFAULT : '#EFF5D1' );
       if ( ! $use_solid_color ) {
         $background_color = '';
       }
