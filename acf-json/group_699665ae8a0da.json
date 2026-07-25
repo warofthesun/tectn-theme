@@ -58,7 +58,7 @@
             "name": "filter_by",
             "aria-label": "",
             "type": "select",
-            "instructions": "Optionally limit displayed posts to selected categories or tags.",
+            "instructions": "Optionally limit displayed items to categories or tags for the selected post type.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -87,8 +87,8 @@
             "label": "Categories",
             "name": "filter_categories",
             "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "Show only posts in one or more of these categories.",
+            "type": "select",
+            "instructions": "Show only items in one or more of these categories for the selected post type.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -104,25 +104,23 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "category",
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "field_type": "multi_select",
+            "choices": [],
+            "default_value": [],
+            "return_format": "value",
+            "multiple": 1,
             "allow_null": 1,
-            "allow_in_bindings": 0,
-            "bidirectional": 0,
-            "multiple": 0,
-            "bidirectional_target": []
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "",
+            "allow_in_bindings": 0
         },
         {
             "key": "field_tectn_posts_grid_filter_tags",
             "label": "Tags",
             "name": "filter_tags",
             "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "Show only posts with one or more of these tags.",
+            "type": "select",
+            "instructions": "Show only items with one or more of these tags for the selected post type.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -138,17 +136,15 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "post_tag",
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "field_type": "multi_select",
+            "choices": [],
+            "default_value": [],
+            "return_format": "value",
+            "multiple": 1,
             "allow_null": 1,
-            "allow_in_bindings": 0,
-            "bidirectional": 0,
-            "multiple": 0,
-            "bidirectional_target": []
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "",
+            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -170,5 +166,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1753386000
+    "modified": 1784998800
 }

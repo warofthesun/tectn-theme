@@ -297,9 +297,19 @@ if ( $preheader ) {
 	$first_has_caption = $show_captions && ( (string) $first['caption'] !== '' || (string) $first['author'] !== '' );
 	$slideshow_wrap_mod = ( $slideshow_aspect === 'portrait' ) ? 'c-slider__image-wrap--portrait' : 'c-slider__image-wrap--square';
 	$slideshow_img_mod  = ( $slideshow_aspect === 'portrait' ) ? 'c-slider__image--contain' : 'c-slider__image--cover';
+	$portrait_wrap_style = '';
+	if ( $slideshow_aspect === 'portrait' && is_array( $gallery ) && ! empty( $gallery[0] ) ) {
+		$first_id = isset( $gallery[0]['ID'] ) ? (int) $gallery[0]['ID'] : ( isset( $gallery[0]['id'] ) ? (int) $gallery[0]['id'] : 0 );
+		if ( $first_id ) {
+			$meta = wp_get_attachment_metadata( $first_id );
+			if ( ! empty( $meta['width'] ) && ! empty( $meta['height'] ) ) {
+				$portrait_wrap_style = '--slider-aspect-ratio: ' . ( (float) $meta['width'] / (float) $meta['height'] );
+			}
+		}
+	}
 	?>
 	<div class="c-slider__panel">
-		<div class="c-slider__image-wrap <?php echo esc_attr( $slideshow_wrap_mod ); ?>">
+		<div class="c-slider__image-wrap <?php echo esc_attr( $slideshow_wrap_mod ); ?>"<?php echo $portrait_wrap_style !== '' ? ' style="' . esc_attr( $portrait_wrap_style ) . '"' : ''; ?>>
 			<div class="c-slider__slide c-slider__slide--current" data-slider-slide>
 				<img src="<?php echo esc_url( $first['url'] ); ?>"
 					 alt="<?php echo esc_attr( $first['title'] ); ?>"

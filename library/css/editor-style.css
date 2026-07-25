@@ -3203,7 +3203,7 @@ Content Section block
   border-radius: 0.75em;
 }
 
-/* Text + Image block: slideshow in its own wrapper so square ratio is retained */
+/* Text + Image block: slideshow in its own wrapper so aspect ratio is retained */
 .c-content-group__slideshow--square {
   width: 100%;
   aspect-ratio: 1/1;
@@ -3221,6 +3221,21 @@ Content Section block
 }
 .c-content-group__slideshow--square .c-slider__image-wrap {
   height: 100%;
+}
+
+.c-content-group__slideshow--portrait {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+.c-content-group__slideshow--portrait .c-slider {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.c-content-group__slideshow--portrait .c-slider__image-wrap--portrait {
+  max-width: none;
+  margin: 0;
 }
 
 .c-content-group__slideshow {
@@ -4365,13 +4380,13 @@ Content Section block
 }
 
 .c-slider--slideshow .c-slider__image-wrap--portrait {
-  aspect-ratio: 4/5;
   width: 100%;
   max-width: 28rem;
   margin-left: auto;
   margin-right: auto;
-  -webkit-transition: none;
-  transition: none;
+  aspect-ratio: var(--slider-aspect-ratio, 4/5);
+  -webkit-transition: aspect-ratio 0.35s ease-out;
+  transition: aspect-ratio 0.35s ease-out;
   background-color: #F9FBF3;
 }
 

@@ -54,6 +54,11 @@
     $media_type       = get_field('media_type') ?: 'gallery';
     $images           = get_field('images');
     $slideshow_gallery = get_field('slideshow_gallery');
+    $slideshow_aspect  = get_field('slideshow_aspect');
+    $slideshow_aspect  = ( is_string( $slideshow_aspect ) && $slideshow_aspect === 'portrait' ) ? 'portrait' : 'square';
+    $autoplay_raw     = get_field('autoplay');
+    // Legacy slideshows had no Autoplay field and always played; default on when unset.
+    $autoplay         = ( $media_type === 'slideshow' && $autoplay_raw === null ) ? true : (bool) $autoplay_raw;
     $show_captions    = (bool) get_field('show_captions');
     $video_url        = get_field('video_url', false, false); // raw URL for wp_oembed_get()
     $count            = is_array($images) ? count($images) : 0;
@@ -125,7 +130,8 @@
             if ( $id ) {
                 $caption = isset( $img['caption'] ) && (string) $img['caption'] !== '' ? $img['caption'] : wp_get_attachment_caption( $id );
                 $author  = function_exists( 'get_field' ) ? ( get_field( 'caption_author', $id ) ?: '' ) : '';
-                $src     = wp_get_attachment_image_url( $id, 'tectn_slider_square' );
+                $size    = ( $slideshow_aspect === 'square' ) ? 'tectn_slider_square' : 'large';
+                $src     = wp_get_attachment_image_url( $id, $size );
                 if ( $src ) {
                     $url = $src;
                 }
@@ -224,28 +230,42 @@
                 $first = $slideshow_items[0];
                 $first_has_caption = $show_captions && ( (string) $first['caption'] !== '' || (string) $first['author'] !== '' );
                 $slideshow_overlap = $enable_bg;
+                $outer_aspect_mod  = ( $slideshow_aspect === 'portrait' ) ? 'c-content-group__slideshow--portrait' : 'c-content-group__slideshow--square';
+                $wrap_mod          = ( $slideshow_aspect === 'portrait' ) ? 'c-slider__image-wrap--portrait' : 'c-slider__image-wrap--square';
+                $img_mod           = ( $slideshow_aspect === 'portrait' ) ? 'c-slider__image--contain' : 'c-slider__image--cover';
+                $slider_aspect_mod = 'c-slider--aspect-' . $slideshow_aspect;
+                $portrait_wrap_style = '';
+                if ( $slideshow_aspect === 'portrait' && is_array( $slideshow_gallery ) && ! empty( $slideshow_gallery[0] ) ) {
+                    $first_id = isset( $slideshow_gallery[0]['ID'] ) ? (int) $slideshow_gallery[0]['ID'] : ( isset( $slideshow_gallery[0]['id'] ) ? (int) $slideshow_gallery[0]['id'] : 0 );
+                    if ( $first_id ) {
+                        $meta = wp_get_attachment_metadata( $first_id );
+                        if ( ! empty( $meta['width'] ) && ! empty( $meta['height'] ) ) {
+                            $portrait_wrap_style = '--slider-aspect-ratio: ' . ( (float) $meta['width'] / (float) $meta['height'] );
+                        }
+                    }
+                }
                 ?>
-                <div class="c-content-group__slideshow c-content-group__slideshow--square<?php echo $slideshow_overlap ? ' c-content-group__slideshow--overlap-wave' : ''; ?>">
-                <div class="c-slider c-slider--slideshow"
+                <div class="c-content-group__slideshow <?php echo esc_attr( $outer_aspect_mod ); ?><?php echo $slideshow_overlap ? ' c-content-group__slideshow--overlap-wave' : ''; ?>">
+                <div class="c-slider c-slider--slideshow <?php echo esc_attr( $slider_aspect_mod ); ?>"
                     id="<?php echo esc_attr( $slideshow_id ); ?>"
                     data-slider-type="slideshow"
                     data-items="<?php echo esc_attr( wp_json_encode( $slideshow_items ) ); ?>"
-                    data-autoplay="1"
+                    data-autoplay="<?php echo $autoplay ? '1' : '0'; ?>"
                     data-show-captions="<?php echo $show_captions ? '1' : '0'; ?>"
                     role="region"
                     aria-label="<?php esc_attr_e( 'Image slideshow', 'tectn_theme' ); ?>">
                     <div class="c-slider__panel">
-                        <div class="c-slider__image-wrap c-slider__image-wrap--square">
+                        <div class="c-slider__image-wrap <?php echo esc_attr( $wrap_mod ); ?>"<?php echo $portrait_wrap_style !== '' ? ' style="' . esc_attr( $portrait_wrap_style ) . '"' : ''; ?>>
                             <div class="c-slider__slide c-slider__slide--current" data-slider-slide>
                                 <img src="<?php echo esc_url( $first['url'] ); ?>"
                                     alt="<?php echo esc_attr( $first['title'] ); ?>"
-                                    class="c-slider__image c-slider__image--cover"
+                                    class="c-slider__image <?php echo esc_attr( $img_mod ); ?>"
                                     data-slider-image>
                             </div>
                             <div class="c-slider__slide c-slider__slide--next" data-slider-slide>
                                 <img src="<?php echo esc_url( $first['url'] ); ?>"
                                     alt=""
-                                    class="c-slider__image c-slider__image--cover"
+                                    class="c-slider__image <?php echo esc_attr( $img_mod ); ?>"
                                     data-slider-image>
                             </div>
                             <?php if ( $show_captions ) : ?>
@@ -272,7 +292,7 @@
                 </div>
                 </div>
             <?php elseif ( $media_type === 'slideshow' ) : ?>
-                <div class="c-content-group__slideshow c-content-group__slideshow--square">
+                <div class="c-content-group__slideshow <?php echo esc_attr( ( $slideshow_aspect === 'portrait' ) ? 'c-content-group__slideshow--portrait' : 'c-content-group__slideshow--square' ); ?>">
                     <div class="c-text-image__placeholder">
                         <strong><?php esc_html_e( 'Slideshow', 'tectn_theme' ); ?></strong><br>
                         <?php esc_html_e( 'Add images to the slideshow gallery in the block settings.', 'tectn_theme' ); ?>

@@ -187,6 +187,149 @@ function tectn_acf_input_admin_footer_color_picker_palettes() {
 add_action( 'acf/input/admin_footer', 'tectn_acf_input_admin_footer_color_picker_palettes', 20 );
 
 /**
+ * Posts Grid: refresh category/tag term options when Post type changes,
+ * and when the Category/Tag filter fields are shown.
+ */
+function tectn_acf_input_admin_footer_posts_grid_filter_taxonomies() {
+	$nonce = wp_create_nonce( 'tectn_posts_grid_filters' );
+	?>
+	<script>
+	(function ($) {
+	  if (!window.acf || !acf.addAction || !window.jQuery) return;
+
+	  var ajaxUrl = (typeof window.ajaxurl === 'string') ? window.ajaxurl : '';
+	  var nonce = <?php echo wp_json_encode( $nonce ); ?>;
+
+	  function findScopedField(fromField, key) {
+	    if (!fromField || !fromField.$el || !fromField.$el.length) return null;
+	    var $scope = fromField.$el.closest('.acf-block-fields, .acf-fields');
+	    if (!$scope.length) $scope = fromField.$el.parent();
+	    var $el = $scope.find('.acf-field[data-key="' + key + '"]').first();
+	    if (!$el.length) return null;
+	    return acf.getField($el);
+	  }
+
+	  function findPostTypeField(fromField) {
+	    return findScopedField(fromField, 'field_699665aeec2b9');
+	  }
+
+	  function isPostsGridPostTypeField(field) {
+	    if (!field || typeof field.get !== 'function') return false;
+	    if (field.get('key') !== 'field_699665aeec2b9') return false;
+	    return !!(findScopedField(field, 'field_tectn_posts_grid_filter_by'));
+	  }
+
+	  function applyTermsToSelectField(selectField, payload) {
+	    if (!selectField || !selectField.$el || !selectField.$el.length) return;
+	    var terms = (payload && payload.terms) ? payload.terms : [];
+	    var label = (payload && payload.label) ? payload.label : '';
+
+	    if (label) {
+	      selectField.$el.find('> .acf-label label').first().text(label);
+	    }
+
+	    var $select = selectField.$el.find('select').first();
+	    if (!$select.length) return;
+
+	    var current = selectField.val();
+	    var currentIds = [];
+	    if (Array.isArray(current)) {
+	      currentIds = current.map(String);
+	    } else if (current !== null && current !== undefined && current !== '') {
+	      currentIds = [String(current)];
+	    }
+
+	    var validIds = {};
+	    terms.forEach(function (t) { validIds[String(t.id)] = true; });
+	    var keep = currentIds.filter(function (id) { return !!validIds[id]; });
+
+	    $select.empty();
+	    terms.forEach(function (t) {
+	      var selected = keep.indexOf(String(t.id)) !== -1;
+	      $select.append(new Option(t.name, String(t.id), selected, selected));
+	    });
+
+	    // Rebuild Select2 choices without relying on taxonomy AJAX.
+	    try {
+	      if ($select.data('select2')) {
+	        $select.trigger('change.select2');
+	      }
+	    } catch (e) {}
+
+	    selectField.val(keep.length ? keep : null);
+	  }
+
+	  function refreshFilterTerms(postTypeField, kind) {
+	    if (!ajaxUrl || !postTypeField) return;
+	    var key = (kind === 'tag')
+	      ? 'field_tectn_posts_grid_filter_tags'
+	      : 'field_tectn_posts_grid_filter_categories';
+	    var selectField = findScopedField(postTypeField, key);
+	    if (!selectField) return;
+
+	    $.post(ajaxUrl, {
+	      action: 'tectn_posts_grid_filter_terms',
+	      nonce: nonce,
+	      post_type: postTypeField.val() || 'post',
+	      kind: kind
+	    }).done(function (resp) {
+	      if (!resp || !resp.success || !resp.data) return;
+	      applyTermsToSelectField(selectField, resp.data);
+	    });
+	  }
+
+	  function refreshAll(postTypeField) {
+	    refreshFilterTerms(postTypeField, 'category');
+	    refreshFilterTerms(postTypeField, 'tag');
+	  }
+
+	  function bindPostTypeField(field) {
+	    try {
+	      if (!isPostsGridPostTypeField(field)) return;
+	      if (field.__tectnPostsGridFilterBound) return;
+	      field.__tectnPostsGridFilterBound = true;
+
+	      var handler = function () { refreshAll(field); };
+	      if (typeof field.on === 'function') {
+	        field.on('change', handler);
+	      }
+	      if (field.$el && field.$el.length) {
+	        field.$el.find('select').off('change.tectnPostsGridFilter').on('change.tectnPostsGridFilter', handler);
+	      }
+
+	      setTimeout(handler, 50);
+	    } catch (e) {}
+	  }
+
+	  function refreshFromFilterField(filterField, kind) {
+	    var postTypeField = findPostTypeField(filterField);
+	    if (!postTypeField) return;
+	    refreshFilterTerms(postTypeField, kind);
+	  }
+
+	  acf.addAction('ready_field/key=field_699665aeec2b9', bindPostTypeField);
+	  acf.addAction('append_field/key=field_699665aeec2b9', bindPostTypeField);
+
+	  // When Filter by reveals Categories/Tags, reload terms for the current post type.
+	  acf.addAction('show_field/key=field_tectn_posts_grid_filter_categories', function (field) {
+	    refreshFromFilterField(field, 'category');
+	  });
+	  acf.addAction('append_field/key=field_tectn_posts_grid_filter_categories', function (field) {
+	    refreshFromFilterField(field, 'category');
+	  });
+	  acf.addAction('show_field/key=field_tectn_posts_grid_filter_tags', function (field) {
+	    refreshFromFilterField(field, 'tag');
+	  });
+	  acf.addAction('append_field/key=field_tectn_posts_grid_filter_tags', function (field) {
+	    refreshFromFilterField(field, 'tag');
+	  });
+	})(jQuery);
+	</script>
+	<?php
+}
+add_action( 'acf/input/admin_footer', 'tectn_acf_input_admin_footer_posts_grid_filter_taxonomies', 35 );
+
+/**
  * Sync Autoplay when Slider style changes: Slideshow → On, other styles → Off.
  * Only runs on style change (not on field ready) so manual Autoplay toggles stick until the next style switch.
  */

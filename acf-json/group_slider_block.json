@@ -22,7 +22,7 @@
             "label": "Slideshow aspect",
             "name": "slideshow_aspect",
             "type": "button_group",
-            "instructions": "Square crops photos to 1:1. Portrait uses a 4:5 frame and fits the full image (best for social/flyer graphics).",
+            "instructions": "Square crops photos to 1:1. Portrait sizes the frame to each image’s natural aspect so the full image shows (best for social/flyer graphics).",
             "choices": {
                 "square": "Square",
                 "portrait": "Portrait"

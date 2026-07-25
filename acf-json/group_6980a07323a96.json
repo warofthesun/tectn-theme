@@ -118,7 +118,7 @@
             "name": "slideshow_gallery",
             "aria-label": "",
             "type": "gallery",
-            "instructions": "Add images. Same behavior as the Slider block Slideshow: square crop, arrows, dots, optional captions.",
+            "instructions": "Add images. Same behavior as the Slider block Slideshow: aspect control, arrows, dots, optional captions.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -134,6 +134,54 @@
             "library": "all",
             "min": 1,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_6990ba_slideshow_aspect",
+            "label": "Slideshow aspect",
+            "name": "slideshow_aspect",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "Square crops photos to 1:1. Portrait sizes the frame to each image’s natural aspect so the full image shows (best for social/flyer graphics).",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6990ba_media_type",
+                        "operator": "==",
+                        "value": "slideshow"
+                    }
+                ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "square": "Square",
+                "portrait": "Portrait"
+            },
+            "default_value": "square",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_6990ba_slideshow_autoplay",
+            "label": "Autoplay",
+            "name": "autoplay",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Automatically advance slides. On by default for Slideshow; you can turn it off.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6990ba_media_type",
+                        "operator": "==",
+                        "value": "slideshow"
+                    }
+                ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": 1,
+            "ui": 1
         },
         {
             "key": "field_6990ba_show_captions",
@@ -241,5 +289,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771202256
+    "modified": 1784997600
 }

@@ -57,9 +57,16 @@ if ( ! empty( $term_ids ) ) {
   }
   $term_ids = array_values( array_filter( array_map( 'intval', $term_ids ) ) );
 
-  if ( ! empty( $term_ids ) ) {
+  $filter_taxonomy = '';
+  if ( function_exists( 'tectn_posts_grid_resolve_filter_taxonomy' ) ) {
+    $filter_taxonomy = tectn_posts_grid_resolve_filter_taxonomy( $post_type, ( $filter_by === 'tag' ) ? 'tag' : 'category' );
+  } else {
+    $filter_taxonomy = ( $filter_by === 'tag' ) ? 'post_tag' : 'category';
+  }
+
+  if ( ! empty( $term_ids ) && $filter_taxonomy !== '' ) {
     $tax_query[] = array(
-      'taxonomy' => ( $filter_by === 'tag' ) ? 'post_tag' : 'category',
+      'taxonomy' => $filter_taxonomy,
       'field'    => 'term_id',
       'terms'    => $term_ids,
     );
