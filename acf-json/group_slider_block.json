@@ -15,17 +15,34 @@
             },
             "default_value": "table_of_contents",
             "return_format": "value",
-            "wrapper": { "width": "50", "class": "", "id": "" }
+            "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_slider_slideshow_aspect",
+            "label": "Slideshow aspect",
+            "name": "slideshow_aspect",
+            "type": "button_group",
+            "instructions": "Square crops photos to 1:1. Portrait uses a 4:5 frame and fits the full image (best for social/flyer graphics).",
+            "choices": {
+                "square": "Square",
+                "portrait": "Portrait"
+            },
+            "default_value": "square",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal",
+            "conditional_logic": [[{ "field": "field_slider_type", "operator": "==", "value": "slideshow" }]],
+            "wrapper": { "width": "", "class": "", "id": "" }
         },
         {
             "key": "field_slider_autoplay",
             "label": "Autoplay",
             "name": "autoplay",
             "type": "true_false",
-            "instructions": "Automatically advance slides. Default: No for Table of contents and Horizontal; Yes for Slideshow.",
+            "instructions": "Automatically advance slides. Follows Slider style when you change it (On for Slideshow, Off otherwise). You can override afterward until the next style change.",
             "default_value": 0,
             "ui": 1,
-            "wrapper": { "width": "50", "class": "", "id": "" }
+            "wrapper": { "width": "", "class": "", "id": "" }
         },
         {
             "key": "field_slider_body",
@@ -91,5 +108,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 0
+    "show_in_rest": 0,
+    "modified": 1753399200
 }

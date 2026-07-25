@@ -28,9 +28,6 @@ if ( $is_inserter_preview ) {
 $classes = ['c-posts', 'c-sponsorships'];
 if (!empty($block['className'])) $classes[] = $block['className'];
 
-$theme_variant = get_field('color_palette') ?: 'green-gold';
-$classes[] = 'c-posts--' . sanitize_html_class($theme_variant);
-
 $bg_image      = get_field('background_image');
 $bg_max_height = (int) (get_field('max_bg_height') ?: 800);
 

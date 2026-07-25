@@ -153,6 +153,9 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
   $use_medium_text_classes = ! $is_small || $is_events_archive;
   $text_mode               = isset( $d['text_color'] ) ? (string) $d['text_color'] : '';
   $text_dark               = $text_mode === 'dark';
+  $headline_size_class     = function_exists( 'tectn_hero_headline_size_class' )
+    ? tectn_hero_headline_size_class( isset( $d['headline_size'] ) ? $d['headline_size'] : 'default' )
+    : '';
   ?>
   <div
     class="<?php echo $is_small ? 'hero__container hero__container--small' : 'hero__container hero__container--medium'; ?>">
@@ -168,7 +171,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
       <div class="hero__content hero__content--text<?php echo $is_small ? ' hero__content--small' : ' hero__content--medium'; ?> col-xs-12">
         <div class="hero__headline <?php echo $use_medium_text_classes ? 'hero__headline--medium' : 'hero__headline--small'; ?>">
           <?php if ( ! empty( $d['headline_text'] ) ) : ?>
-            <h1 class="hero__title <?php echo $use_medium_text_classes ? 'hero__title--medium' : 'hero__title--small'; ?><?php echo $text_dark ? ' dark' : ''; ?>"><?php echo wp_kses_post( $d['headline_text'] ); ?></h1>
+            <h1 class="hero__title <?php echo $use_medium_text_classes ? 'hero__title--medium' : 'hero__title--small'; ?><?php echo $text_dark ? ' dark' : ''; ?><?php echo $headline_size_class !== '' ? ' ' . esc_attr( $headline_size_class ) : ''; ?>"><?php echo wp_kses_post( $d['headline_text'] ); ?></h1>
           <?php endif; ?>
         </div>
       </div>
@@ -248,8 +251,11 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
                 array( 'class' => 'hero__logo-mark' )
               );
             endif;
+            $headline_size_class = function_exists( 'tectn_hero_headline_size_class' )
+              ? tectn_hero_headline_size_class( isset( $d['headline_size'] ) ? $d['headline_size'] : 'default' )
+              : '';
             ?>
-            <h1 class="hero__title hero__title--initiative"><?php echo wp_kses_post( $ht ); ?></h1>
+            <h1 class="hero__title hero__title--initiative<?php echo $headline_size_class !== '' ? ' ' . esc_attr( $headline_size_class ) : ''; ?>"><?php echo wp_kses_post( $ht ); ?></h1>
           <?php endif; ?>
         </div>
       </div>
@@ -310,11 +316,14 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
         if ( $landing_headline === '' ) {
           $landing_headline = get_the_title();
         }
+        $headline_size_class = function_exists( 'tectn_hero_headline_size_class' )
+          ? tectn_hero_headline_size_class( isset( $d['headline_size'] ) ? $d['headline_size'] : 'default' )
+          : '';
         ?>
         <div class="hero__text-block" style="margin-top:auto; margin-bottom:20vh;">
-          <h1 class="hero__title--landing"><?php echo wp_kses_post( $landing_headline ); ?></h1>
+          <h1 class="hero__title--landing<?php echo $headline_size_class !== '' ? ' ' . esc_attr( $headline_size_class ) : ''; ?>"><?php echo wp_kses_post( $landing_headline ); ?></h1>
           <?php if ( ! empty( $d['paragraph'] ) ) : ?>
-            <p class="hero__paragraph"><?php echo esc_html( $d['paragraph'] ); ?></p>
+            <div class="hero__paragraph"><?php echo wp_kses_post( $d['paragraph'] ); ?></div>
           <?php endif; ?>
           <?php if ( ! empty( $d['ctas'] ) ) : ?>
             <?php

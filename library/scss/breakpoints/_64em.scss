@@ -156,6 +156,17 @@
   			z-index: 8999;
 			border-radius: $radius-sm;
 
+			// While a deeper nested flyout is open, square the shared right edge
+			&:has(> li:hover > ul),
+			&:has(> li:focus-within > ul) {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+
+				> li:last-child > a {
+					border-bottom-right-radius: 0;
+				}
+			}
+
   			li {
   				// Containing block for nested flyouts (`ul { top: 0; left: 100% }`); otherwise `top: 0` aligns to the full submenu panel.
   				position: relative;
@@ -192,6 +203,17 @@
   					left: 100%;
   					background-color: $secondary-100;
   				}
+
+				// Nested flyout (3rd+ level): square the shared left edge while open
+				&:hover > ul,
+				&:focus-within > ul {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+
+					> li:last-child > a {
+						border-bottom-left-radius: 0;
+					}
+				}
   			}
 
   			/* highlight sub-menu current page */
@@ -455,7 +477,7 @@
   		&--landing {
   			// Match initiative / medium / small hero headline scale; rem avoids parent font-size shrinking em
   			h1.hero__title--landing {
-  			font-size: 4.5rem;
+  			font-size: calc(4.5rem + var(--hero-headline-size-adjust, 0rem));
   			margin-top: 0;
   			margin-bottom: 0;
 
@@ -556,15 +578,15 @@
   }
 
   .hero__title--initiative {
-	font-size: 6.5em;
+	font-size: calc(6.5em + var(--hero-headline-size-adjust, 0rem));
   }
 
   .hero__title--medium {
-  	font-size: 6.5em;
+  	font-size: calc(6.5em + var(--hero-headline-size-adjust, 0rem));
   }
 
   .hero__title--small {
-  	font-size: 6.5em;
+  	font-size: calc(6.5em + var(--hero-headline-size-adjust, 0rem));
   }
 
   /***************

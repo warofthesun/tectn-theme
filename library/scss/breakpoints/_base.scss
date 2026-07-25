@@ -1986,6 +1986,11 @@ border: $spacing-xs solid $white;
 	object-position: center center;
 }
 
+.c-slider__image--contain {
+	object-fit: contain;
+	object-position: center center;
+}
+
 /* Horizontal slider */
 .c-slider__content--centered {
 	text-align: center;
@@ -2188,6 +2193,21 @@ border: $spacing-xs solid $white;
 .c-slider--slideshow .c-slider__image-wrap--square {
 	aspect-ratio: 1 / 1;
 	transition: none;
+}
+
+.c-slider--slideshow .c-slider__image-wrap--portrait {
+	aspect-ratio: 4 / 5;
+	width: 100%;
+	max-width: 28rem;
+	margin-left: auto;
+	margin-right: auto;
+	transition: none;
+	background-color: $secondary-50;
+}
+
+.c-slider--slideshow.c-slider--aspect-portrait .c-slider__panel {
+	display: flex;
+	justify-content: center;
 }
 
 .c-slider--slideshow .c-slider__slide {
@@ -2616,7 +2636,6 @@ border: $spacing-xs solid $white;
 
 .c-sponsorships__title {
 	margin: 0;
-	color: $white;
 	text-transform: uppercase;
 	letter-spacing: 0.02em;
 }
@@ -3152,7 +3171,7 @@ POSTS & CONTENT STYLES
 		&--landing {
 			// rem (not em) so size is not shrunk by parent font-size; h1.hero__title--landing beats generic h1 rules
 			h1.hero__title--landing {
-				font-size: 2.5rem;
+				font-size: calc(2.5rem + var(--hero-headline-size-adjust, 0rem));
 				margin-top: 0;
 				margin-bottom: 0;
 				color: $primary-10;
@@ -3429,14 +3448,14 @@ POSTS & CONTENT STYLES
 	&__title--initiative {
 		color: $primary-10;
 		margin: 0;
-		font-size: 2.5rem;
+		font-size: calc(2.5rem + var(--hero-headline-size-adjust, 0rem));
 		text-shadow: 0 0 20px rgba($secondary-900, 0.7);
 	}
 
 	&__title--medium {
 		color: $primary-10;
 		margin: 0;
-		font-size: 2.5rem;
+		font-size: calc(2.5rem + var(--hero-headline-size-adjust, 0rem));
 		text-shadow: 0 0 20px rgba($secondary-900, 0.7);
 	}
 
@@ -3454,13 +3473,22 @@ POSTS & CONTENT STYLES
 	&__title--small {
 		color: $primary-10;
 		margin: 0;
-		font-size: 2.5rem;
+		font-size: calc(2.5rem + var(--hero-headline-size-adjust, 0rem));
 		text-shadow: 0 0 20px rgba($secondary-900, 0.7);
 	}
 
 	&__title--small.dark {
 		color: $secondary-900;
 		text-shadow: none;
+	}
+
+	/* Hero headline size (ACF Small / Default / Large) */
+	&__title--size-small {
+		--hero-headline-size-adjust: -0.75rem;
+	}
+
+	&__title--size-large {
+		--hero-headline-size-adjust: 0.75rem;
 	}
 
 	// All hero wave SVGs: use body background so wave meets content with no visible seam

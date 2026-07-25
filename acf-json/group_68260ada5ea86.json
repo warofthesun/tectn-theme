@@ -58,6 +58,7 @@
             },
             "clone": [
                 "field_68225159eee20",
+                "field_tectn_hero_headline_size",
                 "field_68225191eee21",
                 "field_682251bfeee22",
                 "field_683a10a1beb01",
@@ -97,7 +98,7 @@
                     "label": "Headline",
                     "name": "headline_type",
                     "aria-label": "",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -113,10 +114,8 @@
                     "default_value": "text",
                     "return_format": "value",
                     "allow_null": 0,
-                    "other_choice": 0,
                     "allow_in_bindings": 0,
-                    "layout": "vertical",
-                    "save_other_choice": 0
+                    "layout": "horizontal"
                 },
                 {
                     "key": "field_69b6d1d12a97c",
@@ -239,7 +238,8 @@
                         "id": ""
                     },
                     "clone": [
-                        "field_68225159eee20"
+                        "field_68225159eee20",
+                        "field_tectn_hero_headline_size"
                     ],
                     "display": "group",
                     "layout": "block",
@@ -353,7 +353,8 @@
             },
             "clone": [
                 "group_6826202d5b036",
-                "field_68225159eee20"
+                "field_68225159eee20",
+                "field_tectn_hero_headline_size"
             ],
             "display": "group",
             "layout": "block",
@@ -384,7 +385,8 @@
             },
             "clone": [
                 "group_682620428c475",
-                "field_68225159eee20"
+                "field_68225159eee20",
+                "field_tectn_hero_headline_size"
             ],
             "display": "group",
             "layout": "block",
@@ -421,5 +423,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1784688000
+    "modified": 1753392600
 }

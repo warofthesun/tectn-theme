@@ -31,16 +31,17 @@ if ( $is_inserter_preview ) {
 	return;
 }
 
-$slider_type    = get_field( 'slider_type' ) ?: 'table_of_contents';
+$slider_type = get_field( 'slider_type' );
+$slider_type = is_string( $slider_type ) && $slider_type !== '' ? $slider_type : 'table_of_contents';
 $headline       = get_field( 'headline' );
 $headline_size  = get_field( 'headline_size' ) ?: 'h2';
 $preheader      = get_field( 'preheader' ); // Same preheader pattern as headline-group: output as <h5 class="c-headline-group__preheader">
 $on_dark        = (bool) get_field( 'on_dark_background' );
 $body           = get_field( 'body' );
-$autoplay      = (bool) get_field( 'autoplay' );
-if ( $slider_type === 'slideshow' ) {
-	$autoplay = true;
-}
+$body           = is_string( $body ) ? $body : '';
+$autoplay         = (bool) get_field( 'autoplay' );
+$slideshow_aspect = get_field( 'slideshow_aspect' );
+$slideshow_aspect = ( is_string( $slideshow_aspect ) && $slideshow_aspect === 'portrait' ) ? 'portrait' : 'square';
 $show_captions = (bool) get_field( 'show_captions' );
 $list_item_icon = get_field( 'list_item_icon' );
 $gallery        = get_field( 'gallery' );
@@ -67,8 +68,12 @@ if ( is_array( $gallery ) && ! empty( $gallery ) ) {
 		if ( $id ) {
 			$caption = isset( $img['caption'] ) && (string) $img['caption'] !== '' ? $img['caption'] : wp_get_attachment_caption( $id );
 			$author  = get_field( 'caption_author', $id ) ?: '';
-			$size    = ( $slider_type === 'slideshow' ) ? 'tectn_slider_square' : 'large';
-			$src     = wp_get_attachment_image_url( $id, $size );
+			if ( $slider_type === 'slideshow' && $slideshow_aspect === 'square' ) {
+				$size = 'tectn_slider_square';
+			} else {
+				$size = 'large';
+			}
+			$src = wp_get_attachment_image_url( $id, $size );
 			if ( $src ) {
 				$url = $src;
 			}
@@ -98,7 +103,7 @@ $slider_empty_editor = array(
 	),
 	'slideshow'         => array(
 		'title' => __( 'Slideshow', 'tectn_theme' ),
-		'body'  => __( 'Add gallery images for a centered autoplay slideshow (square crop). Enable captions in the block settings when needed.', 'tectn_theme' ),
+		'body'  => __( 'Add gallery images for a centered slideshow. Autoplay defaults on for this style; turn it off in block settings if needed. Enable captions when images have captions or authors.', 'tectn_theme' ),
 	),
 );
 
@@ -137,9 +142,16 @@ if ( ! is_admin() ) {
 		true
 	);
 }
-$has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (string) $body !== '' );
+$has_header = ( ( is_string( $preheader ) && $preheader !== '' ) || ( is_string( $headline ) && $headline !== '' ) || $body !== '' );
+$slider_classes = array( 'c-slider', 'c-slider--' . sanitize_html_class( $slider_type ) );
+if ( ! empty( $block['align'] ) ) {
+	$slider_classes[] = 'align' . sanitize_html_class( $block['align'] );
+}
+if ( $slider_type === 'slideshow' ) {
+	$slider_classes[] = 'c-slider--aspect-' . sanitize_html_class( $slideshow_aspect );
+}
 ?>
-<div class="c-slider c-slider--<?php echo esc_attr( $slider_type ); ?><?php echo esc_attr( $align ); ?>"
+<div class="<?php echo esc_attr( implode( ' ', $slider_classes ) ); ?>"
 	 id="<?php echo esc_attr( $block_id ); ?>"
 	 data-slider-type="<?php echo esc_attr( $slider_type ); ?>"
 	 data-items="<?php echo esc_attr( wp_json_encode( $items ) ); ?>"
@@ -283,19 +295,21 @@ if ( $preheader ) {
 	<?php
 	$first = $items[0];
 	$first_has_caption = $show_captions && ( (string) $first['caption'] !== '' || (string) $first['author'] !== '' );
+	$slideshow_wrap_mod = ( $slideshow_aspect === 'portrait' ) ? 'c-slider__image-wrap--portrait' : 'c-slider__image-wrap--square';
+	$slideshow_img_mod  = ( $slideshow_aspect === 'portrait' ) ? 'c-slider__image--contain' : 'c-slider__image--cover';
 	?>
 	<div class="c-slider__panel">
-		<div class="c-slider__image-wrap c-slider__image-wrap--square">
+		<div class="c-slider__image-wrap <?php echo esc_attr( $slideshow_wrap_mod ); ?>">
 			<div class="c-slider__slide c-slider__slide--current" data-slider-slide>
 				<img src="<?php echo esc_url( $first['url'] ); ?>"
 					 alt="<?php echo esc_attr( $first['title'] ); ?>"
-					 class="c-slider__image c-slider__image--cover"
+					 class="c-slider__image <?php echo esc_attr( $slideshow_img_mod ); ?>"
 					 data-slider-image>
 			</div>
 			<div class="c-slider__slide c-slider__slide--next" data-slider-slide>
 				<img src="<?php echo esc_url( $first['url'] ); ?>"
 					 alt=""
-					 class="c-slider__image c-slider__image--cover"
+					 class="c-slider__image <?php echo esc_attr( $slideshow_img_mod ); ?>"
 					 data-slider-image>
 			</div>
 			<?php if ( $show_captions ) : ?>

@@ -23,9 +23,6 @@ $classes = ['c-posts'];
 if (!empty($block['className'])) $classes[] = $block['className'];
 if ($remove_bottom_margin) $classes[] = 'c-posts--no-mb';
 
-$theme_variant = get_field('color_palette') ?: 'green-gold';
-$classes[] = 'c-posts--' . sanitize_html_class($theme_variant);
-
 $post_type     = get_field('post_type') ?: 'post';
 $per_page      = (int) (get_field('posts_per_page') ?: 6);
 $bg_image      = get_field('background_image');
@@ -43,6 +40,45 @@ $requested = (int) get_field('posts_per_page');
 if ($requested <= 0) $requested = 6;
 $cap = min($requested, 6);
 
+// Optional category / tag filter
+$filter_by   = get_field( 'filter_by' ) ?: 'none';
+$tax_query   = array();
+$term_ids    = array();
+
+if ( $filter_by === 'category' ) {
+  $term_ids = get_field( 'filter_categories' );
+} elseif ( $filter_by === 'tag' ) {
+  $term_ids = get_field( 'filter_tags' );
+}
+
+if ( ! empty( $term_ids ) ) {
+  if ( ! is_array( $term_ids ) ) {
+    $term_ids = array( $term_ids );
+  }
+  $term_ids = array_values( array_filter( array_map( 'intval', $term_ids ) ) );
+
+  if ( ! empty( $term_ids ) ) {
+    $tax_query[] = array(
+      'taxonomy' => ( $filter_by === 'tag' ) ? 'post_tag' : 'category',
+      'field'    => 'term_id',
+      'terms'    => $term_ids,
+    );
+  }
+}
+
+/**
+ * Merge optional tax_query into WP_Query args.
+ *
+ * @param array<string, mixed> $args Query args.
+ * @return array<string, mixed>
+ */
+$with_tax = static function ( $args ) use ( $tax_query ) {
+  if ( ! empty( $tax_query ) ) {
+    $args['tax_query'] = $tax_query;
+  }
+  return $args;
+};
+
 // Sticky handling: only applies to the default "post" post type
 $sticky_ids = ($post_type === 'post') ? get_option('sticky_posts') : [];
 $sticky_ids = is_array($sticky_ids) ? array_values(array_filter(array_map('intval', $sticky_ids))) : [];
@@ -52,7 +88,7 @@ $posts_to_render = [];
 // Special handling for Events: only upcoming or ongoing events.
 if ($post_type === 'tribe_events') {
   $now = current_time('Y-m-d H:i:s');
-  $q = new WP_Query([
+  $q = new WP_Query( $with_tax( [
     'post_type'      => 'tribe_events',
     'post_status'    => 'publish',
     'posts_per_page' => $cap,
@@ -69,12 +105,12 @@ if ($post_type === 'tribe_events') {
       ],
     ],
     'no_found_rows'  => true,
-  ]);
+  ] ) );
 
   $posts_to_render = $q->posts;
 } elseif ($post_type === 'post' && !empty($sticky_ids)) {
   // 1) Pull sticky posts first (counting toward the cap)
-  $sticky_query = new WP_Query([
+  $sticky_query = new WP_Query( $with_tax( [
     'post_type'           => 'post',
     'post_status'         => 'publish',
     'posts_per_page'      => $cap,
@@ -82,7 +118,7 @@ if ($post_type === 'tribe_events') {
     'orderby'             => 'post__in',
     'ignore_sticky_posts' => true,
     'no_found_rows'       => true,
-  ]);
+  ] ) );
 
   $sticky_posts = $sticky_query->posts;
   $sticky_count = count($sticky_posts);
@@ -91,7 +127,7 @@ if ($post_type === 'tribe_events') {
   // 2) Fill the remaining slots with newest non-sticky posts
   $normal_posts = [];
   if ($remaining > 0) {
-    $normal_query = new WP_Query([
+    $normal_query = new WP_Query( $with_tax( [
       'post_type'           => 'post',
       'post_status'         => 'publish',
       'posts_per_page'      => $remaining,
@@ -100,7 +136,7 @@ if ($post_type === 'tribe_events') {
       'order'               => 'DESC',
       'ignore_sticky_posts' => true,
       'no_found_rows'       => true,
-    ]);
+    ] ) );
 
     $normal_posts = $normal_query->posts;
   }
@@ -108,14 +144,14 @@ if ($post_type === 'tribe_events') {
   $posts_to_render = array_merge($sticky_posts, $normal_posts);
 } else {
   // Non-default post types (or no sticky posts): simple capped query
-  $q = new WP_Query([
+  $q = new WP_Query( $with_tax( [
     'post_type'      => $post_type,
     'post_status'    => 'publish',
     'posts_per_page' => $cap,
     'orderby'        => 'date',
     'order'          => 'DESC',
     'no_found_rows'  => true,
-  ]);
+  ] ) );
 
   $posts_to_render = $q->posts;
 }
@@ -123,7 +159,7 @@ if ($post_type === 'tribe_events') {
 // Only show "view more" button if there are more items than we're displaying.
 if ( $post_type === 'tribe_events' ) {
   $now_for_count = current_time('Y-m-d H:i:s');
-  $count_query = new WP_Query([
+  $count_query = new WP_Query( $with_tax( [
     'post_type'      => 'tribe_events',
     'post_status'    => 'publish',
     'posts_per_page' => $cap + 1,
@@ -140,15 +176,15 @@ if ( $post_type === 'tribe_events' ) {
       ],
     ],
     'no_found_rows'  => true,
-  ]);
+  ] ) );
 } else {
-  $count_query = new WP_Query([
+  $count_query = new WP_Query( $with_tax( [
     'post_type'      => $post_type,
     'post_status'    => 'publish',
     'posts_per_page' => $cap + 1,
     'fields'         => 'ids',
     'no_found_rows'  => true,
-  ]);
+  ] ) );
 }
 $has_more_posts = count($count_query->posts) > $cap;
 

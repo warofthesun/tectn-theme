@@ -51,6 +51,104 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_tectn_posts_grid_filter_by",
+            "label": "Filter by",
+            "name": "filter_by",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Optionally limit displayed posts to selected categories or tags.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "none": "None",
+                "category": "Category",
+                "tag": "Tag"
+            },
+            "default_value": "none",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_tectn_posts_grid_filter_categories",
+            "label": "Categories",
+            "name": "filter_categories",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Show only posts in one or more of these categories.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_tectn_posts_grid_filter_by",
+                        "operator": "==",
+                        "value": "category"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "category",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "field_type": "multi_select",
+            "allow_null": 1,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_tectn_posts_grid_filter_tags",
+            "label": "Tags",
+            "name": "filter_tags",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Show only posts with one or more of these tags.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_tectn_posts_grid_filter_by",
+                        "operator": "==",
+                        "value": "tag"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "post_tag",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "field_type": "multi_select",
+            "allow_null": 1,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -72,5 +170,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1735689600
+    "modified": 1753386000
 }

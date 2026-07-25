@@ -187,6 +187,74 @@ function tectn_acf_input_admin_footer_color_picker_palettes() {
 add_action( 'acf/input/admin_footer', 'tectn_acf_input_admin_footer_color_picker_palettes', 20 );
 
 /**
+ * Sync Autoplay when Slider style changes: Slideshow → On, other styles → Off.
+ * Only runs on style change (not on field ready) so manual Autoplay toggles stick until the next style switch.
+ */
+function tectn_acf_input_admin_footer_slider_autoplay_slideshow() {
+	?>
+	<script>
+	(function () {
+	  if (!window.acf || !acf.addAction) return;
+
+	  function isOn(val) {
+	    return val === true || val === 1 || val === '1';
+	  }
+
+	  function findAutoplayField(typeField) {
+	    if (!typeField || !typeField.$el || !typeField.$el.length) return null;
+	    var $scope = typeField.$el.closest('.acf-block-fields, .acf-fields');
+	    if (!$scope.length) $scope = typeField.$el.parent();
+	    var $el = $scope.find('.acf-field[data-key="field_slider_autoplay"]').first();
+	    if (!$el.length) return null;
+	    return acf.getField($el);
+	  }
+
+	  function syncAutoplayForType(typeField) {
+	    try {
+	      if (!typeField || typeof typeField.get !== 'function') return;
+	      if (typeField.get('key') !== 'field_slider_type') return;
+
+	      var autoplayField = findAutoplayField(typeField);
+	      if (!autoplayField || typeof autoplayField.val !== 'function') return;
+
+	      var wantOn = typeField.val() === 'slideshow';
+	      var currentlyOn = isOn(autoplayField.val());
+	      if (wantOn === currentlyOn) return;
+	      autoplayField.val(wantOn ? 1 : 0);
+	    } catch (e) {}
+	  }
+
+	  function bindTypeField(field) {
+	    try {
+	      if (!field || typeof field.get !== 'function') return;
+	      if (field.get('key') !== 'field_slider_type') return;
+	      if (field.__tectnSlideshowAutoplayBound) return;
+	      field.__tectnSlideshowAutoplayBound = true;
+
+	      var onStyleChange = function () {
+	        syncAutoplayForType(field);
+	      };
+
+	      if (typeof field.on === 'function') {
+	        field.on('change', onStyleChange);
+	      }
+
+	      // Native select fallback — ACF field.on('change') is unreliable for some block sidebar selects.
+	      if (field.$el && field.$el.length && window.jQuery) {
+	        field.$el.find('select').off('change.tectnAutoplaySync').on('change.tectnAutoplaySync', onStyleChange);
+	      }
+	    } catch (e) {}
+	  }
+
+	  acf.addAction('ready_field/key=field_slider_type', bindTypeField);
+	  acf.addAction('append_field/key=field_slider_type', bindTypeField);
+	})();
+	</script>
+	<?php
+}
+add_action( 'acf/input/admin_footer', 'tectn_acf_input_admin_footer_slider_autoplay_slideshow', 30 );
+
+/**
  * Ensure ACF image Edit/Remove controls work after upload (side meta boxes / conditional fields).
  */
 function tectn_acf_input_admin_footer_image_actions_fix() {

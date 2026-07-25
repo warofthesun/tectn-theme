@@ -143,7 +143,7 @@
 
   		&--landing {
   			h1.hero__title--landing {
-  			font-size: 4.5rem;
+  			font-size: calc(4.5rem + var(--hero-headline-size-adjust, 0rem));
   			margin-top: 0;
   			margin-bottom: 0;
 

@@ -70,7 +70,8 @@
       "description": "Centered slideshow with square images.",
       "attributes": {
         "data": {
-          "slider_type": "slideshow"
+          "slider_type": "slideshow",
+          "autoplay": "1"
         }
       },
       "scope": ["inserter"],

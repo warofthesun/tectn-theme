@@ -29,35 +29,6 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_69966808df979",
-            "label": "Color Palette",
-            "name": "color_palette",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "green": "Green",
-                "blue": "Blue"
-            },
-            "default_value": "green",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 1,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
             "key": "field_699667e2_rmb",
             "label": "Remove bottom margin",
             "name": "remove_bottom_margin",
@@ -124,5 +95,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771540812
+    "modified": 1753386360
 }

@@ -9,6 +9,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Normalize hero headline size choice to small|default|large.
+ *
+ * @param mixed $size Raw ACF value.
+ * @return string
+ */
+function tectn_normalize_hero_headline_size( $size ) {
+	$size = is_string( $size ) ? sanitize_key( $size ) : 'default';
+	return in_array( $size, array( 'small', 'default', 'large' ), true ) ? $size : 'default';
+}
+
+/**
+ * CSS class for hero headline size (empty when default).
+ *
+ * @param mixed $size Raw or normalized size.
+ * @return string
+ */
+function tectn_hero_headline_size_class( $size ) {
+	$size = tectn_normalize_hero_headline_size( $size );
+	return $size === 'default' ? '' : 'hero__title--size-' . $size;
+}
+
+/**
  * Hero configuration for the current template context.
  * Use this to decide whether to show the hero and what data to pass to partials/hero/hero.php.
  *
@@ -184,6 +206,15 @@ function tectn_get_hero_config() {
         }
       }
       $headline_text = is_string( $headline_text ) ? $headline_text : '';
+      $headline_size = 'default';
+      if ( isset( $init['headline_text'] ) && is_array( $init['headline_text'] ) ) {
+        $headline_size = isset( $init['headline_text']['hero_headline_size'] )
+          ? $init['headline_text']['hero_headline_size']
+          : ( isset( $init['headline_text']['field_tectn_hero_headline_size'] ) ? $init['headline_text']['field_tectn_hero_headline_size'] : 'default' );
+      } elseif ( function_exists( 'get_field' ) ) {
+        $headline_size = get_field( 'hero_headline_size', $post->ID );
+      }
+      $headline_size = tectn_normalize_hero_headline_size( $headline_size );
       $logo_size     = isset( $init['logo_size'] ) ? sanitize_key( (string) $init['logo_size'] ) : 'medium';
       if ( ! in_array( $logo_size, array( 'small', 'medium', 'large' ), true ) ) {
         $logo_size = 'medium';
@@ -228,6 +259,7 @@ function tectn_get_hero_config() {
           'include_logo_mark'  => $include_logo_mark,
           'logo_mark_id'       => $logo_mark_id,
           'headline_text'      => $headline_text,
+          'headline_size'      => $headline_size,
           'gradient_overlay'   => isset( $init['gradient_overlay'] ) ? (bool) $init['gradient_overlay'] : true,
         ),
       );
@@ -245,6 +277,9 @@ function tectn_get_hero_config() {
       $headline_wys = function_exists( 'get_field' ) ? get_field( 'hero_headline', $post->ID ) : '';
       $headline_wys = is_string( $headline_wys ) ? trim( $headline_wys ) : '';
       $headline_text = $headline_wys !== '' ? $headline_wys : $page_title;
+      $headline_size = tectn_normalize_hero_headline_size(
+        function_exists( 'get_field' ) ? get_field( 'hero_headline_size', $post->ID ) : 'default'
+      );
 
       $use_solid_color   = ! empty( $medium['use_solid_color'] );
       $background_color  = isset( $medium['background_color'] ) && $medium['background_color']
@@ -265,6 +300,7 @@ function tectn_get_hero_config() {
           'background_image'  => $use_solid_color ? 0 : $page_image_id,
           'background_color'  => $background_color,
           'headline_text'     => $headline_text,
+          'headline_size'     => $headline_size,
         ),
       );
       return $config;
@@ -281,6 +317,9 @@ function tectn_get_hero_config() {
       $headline_wys = function_exists( 'get_field' ) ? get_field( 'hero_headline', $post->ID ) : '';
       $headline_wys = is_string( $headline_wys ) ? trim( $headline_wys ) : '';
       $headline_text = $headline_wys !== '' ? $headline_wys : $page_title;
+      $headline_size = tectn_normalize_hero_headline_size(
+        function_exists( 'get_field' ) ? get_field( 'hero_headline_size', $post->ID ) : 'default'
+      );
 
       $use_solid_color  = ! empty( $small['use_solid_color'] );
       $background_color = isset( $small['background_color'] ) && $small['background_color']
@@ -303,6 +342,7 @@ function tectn_get_hero_config() {
           'background_image' => 0,
           'background_color' => $background_color,
           'headline_text'    => $headline_text,
+          'headline_size'    => $headline_size,
           'size'              => 'small',
           'text_color'       => $text_color_mode,
         ),
@@ -338,11 +378,15 @@ function tectn_get_hero_config() {
       }
     }
     $hero_button_darkbg  = function_exists( 'get_field' ) ? (bool) get_field( 'hero_button_darkbg', $post->ID ) : false;
+    $headline_size       = tectn_normalize_hero_headline_size(
+      function_exists( 'get_field' ) ? get_field( 'hero_headline_size', $post->ID ) : 'default'
+    );
     $config              = array(
       'show' => true,
       'type' => 'landing',
       'data' => array(
         'headline'             => get_field( 'hero_headline', $post->ID ),
+        'headline_size'         => $headline_size,
         'paragraph'             => get_field( 'hero_paragraph', $post->ID ),
         'image_id'              => $image_id,
         'ctas'                  => $ctas,
