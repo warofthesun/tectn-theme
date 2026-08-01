@@ -151,8 +151,17 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
   $is_events_archive   = function_exists( 'tectn_is_events_listing_view' ) && tectn_is_events_listing_view();
   // Full-height medium uses --medium; Hero Small on pages uses --small only for headline/title.
   $use_medium_text_classes = ! $is_small || $is_events_archive;
-  $text_mode               = isset( $d['text_color'] ) ? (string) $d['text_color'] : '';
-  $text_dark               = $text_mode === 'dark';
+  $text_mode               = isset( $d['text_color'] ) ? (string) $d['text_color'] : 'default';
+  $text_color_mod          = '';
+  if ( $is_small ) {
+    if ( $text_mode === 'light' ) {
+      $text_color_mod = ' light';
+    } elseif ( $text_mode === 'dark' ) {
+      $text_color_mod = ' dark';
+    }
+  } elseif ( $text_mode === 'dark' ) {
+    $text_color_mod = ' dark';
+  }
   $headline_size_class     = function_exists( 'tectn_hero_headline_size_class' )
     ? tectn_hero_headline_size_class( isset( $d['headline_size'] ) ? $d['headline_size'] : 'default' )
     : '';
@@ -171,7 +180,7 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
       <div class="hero__content hero__content--text<?php echo $is_small ? ' hero__content--small' : ' hero__content--medium'; ?> col-xs-12">
         <div class="hero__headline <?php echo $use_medium_text_classes ? 'hero__headline--medium' : 'hero__headline--small'; ?>">
           <?php if ( ! empty( $d['headline_text'] ) ) : ?>
-            <h1 class="hero__title <?php echo $use_medium_text_classes ? 'hero__title--medium' : 'hero__title--small'; ?><?php echo $text_dark ? ' dark' : ''; ?><?php echo $headline_size_class !== '' ? ' ' . esc_attr( $headline_size_class ) : ''; ?>"><?php echo wp_kses_post( $d['headline_text'] ); ?></h1>
+            <h1 class="hero__title <?php echo $use_medium_text_classes ? 'hero__title--medium' : 'hero__title--small'; ?><?php echo esc_attr( $text_color_mod ); ?><?php echo $headline_size_class !== '' ? ' ' . esc_attr( $headline_size_class ) : ''; ?>"><?php echo wp_kses_post( $d['headline_text'] ); ?></h1>
           <?php endif; ?>
         </div>
       </div>

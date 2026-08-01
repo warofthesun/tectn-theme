@@ -329,9 +329,9 @@ function tectn_get_hero_config() {
         $background_color = '';
       }
 
-      $text_color_mode = isset( $small['text_color'] ) ? (string) $small['text_color'] : 'light';
-      if ( $text_color_mode !== 'dark' && $text_color_mode !== 'light' ) {
-        $text_color_mode = 'light';
+      $text_color_mode = isset( $small['text_color'] ) ? (string) $small['text_color'] : 'default';
+      if ( ! in_array( $text_color_mode, array( 'light', 'default', 'dark' ), true ) ) {
+        $text_color_mode = 'default';
       }
 
       $config = array(

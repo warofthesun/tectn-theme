@@ -983,10 +983,19 @@ Content Section block
 
 
   :root {
-  --wave-h: 130px;
+  /* Curve amplitude: flatter on small screens, full at 64em+ */
+  --curve-amp: 0.5;
+  /* Hero height: −20% at each mobile step (base → 48em → 64em full) */
+  --hero-h-scale: 0.64;
+  --wave-h-full: 130px;
+  --wave-h: calc(var(--wave-h-full) * var(--curve-amp));
+  --hero-wave-h-full: 120px;
+  --hero-wave-h: calc(var(--hero-wave-h-full) * var(--curve-amp));
+  --hero-wave-h-single-full: 140px;
+  --hero-wave-h-single: calc(var(--hero-wave-h-single-full) * var(--curve-amp));
   --bg-max-h: 300px;
-  --content-top: 140px;   /* how far down content sits from top wave */
-  --hang: 120px;          /* how far content hangs past bottom wave */
+  --content-top: calc(140px * var(--curve-amp));   /* how far down content sits from top wave */
+  --hang: calc(120px * var(--curve-amp));          /* how far content hangs past bottom wave */
 }
 
 .c-waveband {
@@ -2320,8 +2329,9 @@ border: $spacing-xs solid $white;
 	/* Page background color used for the masked waves */
 	--posts-bg: var(--c-page-bg, #F9FBF3);
   
-	/* Height of your curve.svg (match what you used before) */
-	--wave-h: 120px;
+	/* Height of curve.svg; amp inherits from :root for responsive flattening */
+	--wave-h-full: 120px;
+	--wave-h: calc(var(--wave-h-full) * var(--curve-amp));
   }
   
   .c-posts__bgImage {
@@ -2387,12 +2397,12 @@ border: $spacing-xs solid $white;
   }
   
   .c-posts__bg .c-posts__wave--top {
-	top: 120px;
+	top: var(--wave-h);
 	transform: translateX(-50%) translateY(-100%) scale(-1, -1);
   }
   
   .c-posts__bg .c-posts__wave--bottom {
-	bottom: 120px;
+	bottom: var(--wave-h);
 	transform: translateX(-50%) translateY(100%) scale(1, 1);
   }
 
@@ -3013,7 +3023,7 @@ and more scalable.
 }
 
 .header-widget-area {
-	display: flex;
+	display: none;
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 0.75em;
@@ -3025,15 +3035,14 @@ and more scalable.
 	}
 }
 
-#mobile-nav {
-	order: 2;
-	text-align: center;
+.mobile-nav-toggle {
+	@include color_text__nav-item_default;
+	font-weight: 700;
+	transition: all .5s;
+	cursor: pointer;
 	margin-bottom: 0;
 	margin-top: 0;
 	margin-left: 0;
-	color: $primary-50;
-	font-weight: 700;
-	transition: all .5s;
 
 	&.show {
 		margin-top: 0;
@@ -3047,18 +3056,27 @@ and more scalable.
 	}
 }
 
-// When mobile nav is open: put Menu button below the nav (logo | search on row 1, nav links row 2, Menu button row 3)
-#inner-header:has(#mobile-nav.show) {
-	.header-widget-area {
-		order: 2;
+#mobile-nav {
+	order: 2;
+	text-align: center;
+}
+
+.mobile-nav-toggle--footer {
+	display: none;
+	order: 4;
+	flex-basis: 100%;
+	justify-content: flex-end;
+	text-align: right;
+
+	&.show {
+		display: flex;
 	}
+}
+
+// When mobile nav is open: nav links between the top and bottom Menu buttons
+#inner-header:has(#mobile-nav.show) {
 	.header-nav {
 		order: 3;
-	}
-	#mobile-nav {
-		order: 4;
-		flex-basis: 100%;
-		justify-content: center;
 	}
 }
 
@@ -3082,7 +3100,7 @@ and more scalable.
 	}
 
 	li {
-	border-bottom: 1px solid white;
+	border-bottom: 0;
 	text-align: center;
 
 		a {
@@ -3121,7 +3139,8 @@ and more scalable.
 			li {
 
 				a {
-					padding-left: 30px;
+					padding-left: 10px;
+					padding-right: 10px;
 
 					&:hover,
 					&:focus {}
@@ -3136,6 +3155,7 @@ and more scalable.
 
 				ul.sub-menu,
 				ul.children {
+					margin-top: 0;
 					background-color: color.adjust($secondary-100, $lightness: -5%);
 				}
 
@@ -3230,7 +3250,7 @@ POSTS & CONTENT STYLES
 			}
 
 			.hero__content {
-				height: 50vh;
+				height: calc(90vh * var(--hero-h-scale));
 			}
 
 			// Stable root for em-based subtitle lines inside the headline; avoids shrink from inherited sizes
@@ -3271,6 +3291,11 @@ POSTS & CONTENT STYLES
 
 			
 		}
+
+	// Home / Landing: center the hero photo on mobile
+	&__container--landing &__content--image {
+		background-position: center center;
+	}
 
 	// Overlay sits between image and text; full viewport width via breakout
 	&__overlay--full-width {
@@ -3322,7 +3347,7 @@ POSTS & CONTENT STYLES
 		left: 50%;
 		width: 100vw;
 		transform: translateX(-50%);
-		height: 120px;
+		height: var(--hero-wave-h);
 		z-index: 2;
 		pointer-events: none;
 		line-height: 0;
@@ -3340,13 +3365,12 @@ POSTS & CONTENT STYLES
 		z-index: 2;
 	}
 
-	// Initiative hero variant (wave always shown; negative margin so wave meets content)
+	// Initiative hero variant (wave always shown)
 	&__container--initiative {
 		.hero__container--inner {
 			display: flex;
 			flex-direction: column;
-			min-height: 70vh;
-			margin-bottom: -120px; // pull content up so wave meets page with no gap
+			min-height: calc(70vh * var(--hero-h-scale));
 		}
 	}
 
@@ -3355,20 +3379,22 @@ POSTS & CONTENT STYLES
 		.hero__container--inner {
 			display: flex;
 			flex-direction: column;
-			min-height: 65vh;
-			margin-bottom: -120px; // keep consistent layout with initiative/medium hero
+			min-height: calc(65vh * var(--hero-h-scale));
 		}
 	}
 
 	// Small hero: half the vertical height of initiative/medium.
+	// Never tuck behind the header or pull following content up.
 	&__container--small {
+		top: 0;
+
 		.hero__container--inner {
-			min-height: 35vh;
-			margin-bottom: -60px;
+			min-height: calc(35vh * var(--hero-h-scale));
+			margin-bottom: 0;
 		}
 
 		.hero__content--bg {
-			min-height: 255px;
+			min-height: calc(255px * var(--hero-h-scale));
 		}
 	}
 
@@ -3415,8 +3441,8 @@ POSTS & CONTENT STYLES
 		text-align: center;
 		z-index: 2;
 		padding: 2rem 7%;
-		margin-bottom: 3vh;
-		min-height: 255px;
+		margin-bottom: 0;
+		min-height: calc(255px * var(--hero-h-scale));
 	}
 
 	&__headline--initiative {
@@ -3488,15 +3514,18 @@ POSTS & CONTENT STYLES
 	}
 
 	&__title--small {
-		color: $primary-10;
+		color: $primary-700;
 		margin: 0;
 		font-size: calc(2.5rem + var(--hero-headline-size-adjust, 0rem));
-		text-shadow: 0 0 20px rgba($secondary-900, 0.7);
+		text-shadow: none;
+	}
+
+	&__title--small.light {
+		color: $primary-500;
 	}
 
 	&__title--small.dark {
-		color: $secondary-900;
-		text-shadow: none;
+		color: $primary-900;
 	}
 
 	/* Hero headline size (ACF Small / Default / Large) */
@@ -3516,6 +3545,15 @@ POSTS & CONTENT STYLES
 	// Landing hero overlay curve: same
 	&__container--landing .hero__overlay-svg .hero__wave-fill {
 		fill: var(--body-bg, #{$secondary-50});
+	}
+
+	// Flatten landing overlay curves with --curve-amp (bottom-anchored)
+	&__container--landing .hero__overlay-svg .curve,
+	&__container--landing .hero__overlay-svg .hero__wave-fill,
+	&__container--landing .hero__overlay-svg path[stroke] {
+		transform-box: fill-box;
+		transform-origin: center bottom;
+		transform: scaleY(var(--curve-amp));
 	}
 
 	&__lower-content {
@@ -3584,7 +3622,7 @@ POSTS & CONTENT STYLES
 	width: 100vw;
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
-	min-height: 70vh;
+	min-height: calc(70vh * var(--hero-h-scale));
 	overflow: hidden;
 
 	.hero__container--single-inner {
@@ -3622,7 +3660,7 @@ POSTS & CONTENT STYLES
 		left: 0;
 		right: 0;
 		bottom: 0;
-		height: 140px;
+		height: var(--hero-wave-h-single);
 		pointer-events: none;
 		z-index: 2;
 	}
@@ -3643,7 +3681,7 @@ POSTS & CONTENT STYLES
 		z-index: 1;
 		display: flex;
 		align-items: flex-end;
-		min-height: 70vh;
+		min-height: calc(70vh * var(--hero-h-scale));
 		width: 96%;
 		max-width: 1240px;
 		margin-left: auto;
@@ -3725,10 +3763,10 @@ POSTS & CONTENT STYLES
 	}
 
 	&.hero__container--single-no-image {
-		min-height: 60vh;
+		min-height: calc(60vh * var(--hero-h-scale));
 
 		.hero__content--single {
-			min-height: 40vh;
+			min-height: calc(40vh * var(--hero-h-scale));
 		}
 	}
 }
@@ -4177,7 +4215,7 @@ body.tectn-stories-index .header {
 
 body.tectn-stories-index .hero__container--blog .hero__container--inner {
 	position: relative;
-	min-height: clamp(160px, 26vw, 300px);
+	min-height: calc(clamp(160px, 26vw, 300px) * var(--hero-h-scale));
 }
 
 .c-storiesPage {

@@ -228,18 +228,33 @@ document.addEventListener("DOMContentLoaded", () => {
 */
 jQuery(document).ready(function($) {
 
-	$("#mobile-nav").click(function(){
-        $(".nav").toggleClass("show");
-		$("#mobile-nav").toggleClass("show");
+	function toggleMobileNav() {
+		var isOpen = !$(".nav").first().hasClass("show");
+		$(".nav").toggleClass("show", isOpen);
+		$(".mobile-nav-toggle").toggleClass("show", isOpen);
+		$(".mobile-nav-toggle").attr("aria-expanded", isOpen ? "true" : "false");
+		$("#mobile-nav-footer").prop("hidden", !isOpen);
+	}
+
+	$(document).on("click", ".mobile-nav-toggle", function (e) {
+		e.preventDefault();
+		toggleMobileNav();
 	});
 
-	var $window = $(window),
-        $nav = $('.nav');
+	$(document).on("keydown", ".mobile-nav-toggle", function (e) {
+		if (e.key === "Enter" || e.key === " ") {
+			e.preventDefault();
+			toggleMobileNav();
+		}
+	});
+
+	var $window = $(window);
 
     function resize() {
         if ($window.width() > 1024) {
-            $("#mobile-nav").removeClass("show");
 			$(".nav").removeClass("show");
+			$(".mobile-nav-toggle").removeClass("show").attr("aria-expanded", "false");
+			$("#mobile-nav-footer").prop("hidden", true);
         }
     }
 

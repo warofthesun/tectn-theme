@@ -69,7 +69,7 @@
 							?>
 						</div>
 					</a>
-					<nav role="navigation" class="header-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
+					<nav id="header-nav" role="navigation" class="header-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
 						<div class="header-nav__wrapper">
 							<?php wp_nav_menu(array(
 								'container' => false,
@@ -105,8 +105,11 @@
 							<?php dynamic_sidebar( 'header-widget-area' ); ?>
 						</div>
 					<?php endif; ?>
-					<div id="mobile-nav">
-						Menu <i class="fas fa-chevron-down"></i>
+					<div id="mobile-nav" class="mobile-nav-toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="header-nav">
+						Menu <i class="fas fa-chevron-down" aria-hidden="true"></i>
+					</div>
+					<div id="mobile-nav-footer" class="mobile-nav-toggle mobile-nav-toggle--footer" role="button" tabindex="0" aria-expanded="false" aria-controls="header-nav" hidden>
+						Menu <i class="fas fa-chevron-down" aria-hidden="true"></i>
 					</div>
 				</div>
 

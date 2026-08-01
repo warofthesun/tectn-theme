@@ -134,7 +134,6 @@
 
   	&__container {
 		position: relative;
-		top: -76px;
 
   		h1 {
   			position: relative;
@@ -188,7 +187,6 @@
   			max-width: 1920px;
   			margin: auto;
 			position: relative;
-			margin-bottom: -120px;
   		}
 
 		// Internal pages: no overlap so green overlay doesn't cover content below
@@ -295,6 +293,12 @@
     width: 1000px;
     height: 480px;
   }
+
+  :root {
+    --curve-amp: 0.75;
+    --hero-h-scale: 0.8;
+  }
+
   /*********************
   FOOTER STYLES
   *********************/

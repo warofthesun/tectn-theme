@@ -59,8 +59,8 @@
             "label": "Text color",
             "name": "text_color",
             "aria-label": "",
-            "type": "select",
-            "instructions": "Choose whether the hero headline text is light or dark.",
+            "type": "button_group",
+            "instructions": "Choose the hero headline text color.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -70,17 +70,14 @@
             },
             "choices": {
                 "light": "Light",
+                "default": "Default",
                 "dark": "Dark"
             },
-            "default_value": "light",
+            "default_value": "default",
             "return_format": "value",
-            "multiple": 0,
             "allow_null": 0,
-            "ui": 1,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
+            "allow_in_bindings": 0,
+            "layout": "horizontal"
         }
     ],
     "location": [
@@ -107,5 +104,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1784671500
+    "modified": 1785591840
 }
