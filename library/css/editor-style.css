@@ -2004,8 +2004,8 @@ body {
 
 body {
   font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
-  font-size: 100%;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.4;
   color: #5c6b80;
   background-color: #F9FBF3;
   --body-bg: #F9FBF3;
@@ -5458,6 +5458,7 @@ and more scalable.
 .nav li ul.children li a {
   padding-left: 10px;
   padding-right: 10px;
+  line-height: 1.1;
 }
 .nav li ul.sub-menu li ul.sub-menu,
 .nav li ul.sub-menu li ul.children,

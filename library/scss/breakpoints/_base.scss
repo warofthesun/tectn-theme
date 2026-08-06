@@ -17,8 +17,8 @@ body {
 
 body {
 	font-family: $body-font;
-	font-size: 100%;
-	line-height: 1.5;
+	font-size: 18px;
+	line-height: 1.4;
 	color: $text-color;
 	 @include surface_primary__content;
   	-webkit-font-smoothing: antialiased;
@@ -3141,6 +3141,7 @@ and more scalable.
 				a {
 					padding-left: 10px;
 					padding-right: 10px;
+					line-height: 1.1;
 
 					&:hover,
 					&:focus {}
