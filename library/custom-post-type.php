@@ -97,6 +97,58 @@ function custom_post() {
 			'rewrite'           => array( 'slug' => 'person-tag' ),
 		)
 	);
+
+	// Page taxonomies: categories and tags for filtering pages in Resources (and elsewhere).
+	register_taxonomy(
+		'page_category',
+		array( 'page' ),
+		array(
+			'hierarchical'      => true,
+			'labels'            => array(
+				'name'              => __( 'Page Categories', 'tectn_theme' ),
+				'singular_name'     => __( 'Page Category', 'tectn_theme' ),
+				'search_items'      => __( 'Search Page Categories', 'tectn_theme' ),
+				'all_items'         => __( 'All Page Categories', 'tectn_theme' ),
+				'parent_item'       => __( 'Parent Page Category', 'tectn_theme' ),
+				'parent_item_colon' => __( 'Parent Page Category:', 'tectn_theme' ),
+				'edit_item'         => __( 'Edit Page Category', 'tectn_theme' ),
+				'update_item'       => __( 'Update Page Category', 'tectn_theme' ),
+				'add_new_item'      => __( 'Add New Page Category', 'tectn_theme' ),
+				'new_item_name'     => __( 'New Page Category Name', 'tectn_theme' ),
+			),
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_rest'      => true,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => 'page-category' ),
+		)
+	);
+
+	register_taxonomy(
+		'page_tag',
+		array( 'page' ),
+		array(
+			'hierarchical'               => false,
+			'labels'                     => array(
+				'name'                       => __( 'Page Tags', 'tectn_theme' ),
+				'singular_name'              => __( 'Page Tag', 'tectn_theme' ),
+				'search_items'               => __( 'Search Page Tags', 'tectn_theme' ),
+				'all_items'                  => __( 'All Page Tags', 'tectn_theme' ),
+				'edit_item'                  => __( 'Edit Page Tag', 'tectn_theme' ),
+				'update_item'                => __( 'Update Page Tag', 'tectn_theme' ),
+				'add_new_item'               => __( 'Add New Page Tag', 'tectn_theme' ),
+				'new_item_name'              => __( 'New Page Tag Name', 'tectn_theme' ),
+				'separate_items_with_commas' => __( 'Separate page tags with commas', 'tectn_theme' ),
+				'add_or_remove_items'        => __( 'Add or remove page tags', 'tectn_theme' ),
+				'choose_from_most_used'      => __( 'Choose from the most used page tags', 'tectn_theme' ),
+			),
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_rest'      => true,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => 'page-tag' ),
+		)
+	);
 }
 
 add_action( 'init', 'custom_post' );

@@ -7,10 +7,14 @@
             "label": "Sections",
             "name": "resource_sections",
             "type": "flexible_content",
-            "instructions": "Add sections from Site Settings or create page-only sections. Page-only items on a site section appear only on this page.",
+            "instructions": "Add sections from Site Settings, create page-only sections, or list site pages (chosen manually or by page category/tag).",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "layouts": {
                 "layout_tectn_resource_section": {
                     "key": "layout_tectn_resource_section",
@@ -23,13 +27,18 @@
                             "label": "Section source",
                             "name": "section_source",
                             "type": "select",
-                            "instructions": "",
+                            "instructions": "Resources section: reuse a Site Settings list. Page-only: custom links on this page. Site pages: link to WordPress pages (manual pick or by category/tag).",
                             "required": 0,
                             "conditional_logic": 0,
-                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
                             "choices": {
                                 "site": "Resources section",
-                                "local": "Page-only section"
+                                "local": "Page-only section",
+                                "pages": "Site pages section"
                             },
                             "default_value": "site",
                             "return_format": "value",
@@ -43,7 +52,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
-                            "wrapper": { "width": "50", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
                             "message": "",
                             "default_value": 0,
                             "ui": 1,
@@ -58,7 +71,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
-                            "wrapper": { "width": "50", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
                             "message": "",
                             "default_value": 0,
                             "ui": 1,
@@ -81,7 +98,11 @@
                                     }
                                 ]
                             ],
-                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
                             "default_value": ""
                         },
                         {
@@ -100,7 +121,11 @@
                                     }
                                 ]
                             ],
-                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
                             "default_value": ""
                         },
                         {
@@ -108,7 +133,7 @@
                             "label": "Site section",
                             "name": "selected_resource_section_key",
                             "type": "select",
-                            "instructions": "Choices use each section’s stable ID from Site Settings → Resources.",
+                            "instructions": "Choices use each section\u2019s stable ID from Site Settings \u2192 Resources.",
                             "required": 0,
                             "conditional_logic": [
                                 [
@@ -119,7 +144,11 @@
                                     }
                                 ]
                             ],
-                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
                             "choices": [],
                             "default_value": "",
                             "return_format": "value",
@@ -142,7 +171,11 @@
                                     }
                                 ]
                             ],
-                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
                             "layout": "block",
                             "min": 0,
                             "max": 0,
@@ -154,7 +187,11 @@
                                     "name": "item_link",
                                     "type": "link",
                                     "required": 0,
-                                    "wrapper": { "width": "50", "class": "", "id": "" },
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
                                     "return_format": "array",
                                     "parent_repeater": "field_tectn_resource_page_only_items"
                                 },
@@ -164,7 +201,11 @@
                                     "name": "item_body",
                                     "type": "textarea",
                                     "required": 0,
-                                    "wrapper": { "width": "50", "class": "", "id": "" },
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
                                     "rows": 3,
                                     "new_lines": "br",
                                     "parent_repeater": "field_tectn_resource_page_only_items"
@@ -189,9 +230,25 @@
                                         "operator": "!=",
                                         "value": "1"
                                     }
+                                ],
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "pages"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_section_edit_header",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
                                 ]
                             ],
-                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
                             "default_value": ""
                         },
                         {
@@ -212,9 +269,25 @@
                                         "operator": "!=",
                                         "value": "1"
                                     }
+                                ],
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "pages"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_section_edit_header",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
                                 ]
                             ],
-                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
                             "default_value": ""
                         },
                         {
@@ -235,9 +308,25 @@
                                         "operator": "!=",
                                         "value": "1"
                                     }
+                                ],
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "pages"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_section_edit_header",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
                                 ]
                             ],
-                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
                             "choices": {
                                 "hero": "Hero",
                                 "h1": "H1",
@@ -266,7 +355,11 @@
                                     }
                                 ]
                             ],
-                            "wrapper": { "width": "", "class": "", "id": "" },
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
                             "layout": "block",
                             "min": 0,
                             "max": 0,
@@ -278,7 +371,11 @@
                                     "name": "item_link",
                                     "type": "link",
                                     "required": 0,
-                                    "wrapper": { "width": "50", "class": "", "id": "" },
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
                                     "return_format": "array",
                                     "parent_repeater": "field_tectn_resource_local_items"
                                 },
@@ -288,12 +385,205 @@
                                     "name": "item_body",
                                     "type": "textarea",
                                     "required": 0,
-                                    "wrapper": { "width": "50", "class": "", "id": "" },
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
                                     "rows": 3,
                                     "new_lines": "br",
                                     "parent_repeater": "field_tectn_resource_local_items"
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_tectn_resource_pages_pick_mode",
+                            "label": "Pages source",
+                            "name": "pages_pick_mode",
+                            "type": "button_group",
+                            "instructions": "Choose pages manually, or auto-populate from page categories or tags.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "pages"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "manual": "Choose pages",
+                                "taxonomy": "By category or tag"
+                            },
+                            "default_value": "manual",
+                            "return_format": "value",
+                            "layout": "horizontal",
+                            "allow_null": 0,
+                            "allow_in_bindings": 0
+                        },
+                        {
+                            "key": "field_tectn_resource_pages_selected",
+                            "label": "Pages",
+                            "name": "selected_pages",
+                            "type": "relationship",
+                            "instructions": "Select one or more pages to list as resource links.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "pages"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_pages_pick_mode",
+                                        "operator": "==",
+                                        "value": "manual"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "page"
+                            ],
+                            "taxonomy": [],
+                            "filters": [
+                                "search",
+                                "taxonomy"
+                            ],
+                            "elements": [],
+                            "min": 0,
+                            "max": 0,
+                            "return_format": "id",
+                            "allow_in_bindings": 0
+                        },
+                        {
+                            "key": "field_tectn_resource_pages_filter_by",
+                            "label": "Filter by",
+                            "name": "pages_filter_by",
+                            "type": "button_group",
+                            "instructions": "Auto-include all published pages in the selected categories or tags.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "pages"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_pages_pick_mode",
+                                        "operator": "==",
+                                        "value": "taxonomy"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "category": "Category",
+                                "tag": "Tag"
+                            },
+                            "default_value": "category",
+                            "return_format": "value",
+                            "layout": "horizontal",
+                            "allow_null": 0,
+                            "allow_in_bindings": 0
+                        },
+                        {
+                            "key": "field_tectn_resource_pages_filter_categories",
+                            "label": "Page categories",
+                            "name": "pages_filter_categories",
+                            "type": "select",
+                            "instructions": "Pages in any of these categories are included (newest first).",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "pages"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_pages_pick_mode",
+                                        "operator": "==",
+                                        "value": "taxonomy"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_pages_filter_by",
+                                        "operator": "==",
+                                        "value": "category"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {},
+                            "default_value": [],
+                            "return_format": "value",
+                            "multiple": 1,
+                            "allow_null": 1,
+                            "ui": 1,
+                            "ajax": 0,
+                            "placeholder": "",
+                            "allow_in_bindings": 0
+                        },
+                        {
+                            "key": "field_tectn_resource_pages_filter_tags",
+                            "label": "Page tags",
+                            "name": "pages_filter_tags",
+                            "type": "select",
+                            "instructions": "Pages with any of these tags are included (newest first).",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_tectn_resource_section_source",
+                                        "operator": "==",
+                                        "value": "pages"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_pages_pick_mode",
+                                        "operator": "==",
+                                        "value": "taxonomy"
+                                    },
+                                    {
+                                        "field": "field_tectn_resource_pages_filter_by",
+                                        "operator": "==",
+                                        "value": "tag"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {},
+                            "default_value": [],
+                            "return_format": "value",
+                            "multiple": 1,
+                            "allow_null": 1,
+                            "ui": 1,
+                            "ajax": 0,
+                            "placeholder": "",
+                            "allow_in_bindings": 0
                         }
                     ],
                     "min": "",
@@ -312,7 +602,11 @@
             "instructions": "None = no background, no shadow. Color = background + drop shadow (same as Button Grid).",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "choices": {
                 "none": "None",
                 "color": "Color"
@@ -336,7 +630,11 @@
                     }
                 ]
             ],
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "#EFF5D1",
             "return_format": "string"
         },
@@ -348,7 +646,11 @@
             "instructions": "Number of columns on larger screens. On small screens the grid uses two columns (or one if you choose a single column here).",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "choices": {
                 "1": "1",
                 "2": "2",
@@ -367,7 +669,11 @@
             "instructions": "Left to right: fill each row before the next. Top to bottom: fill each column before the next.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "choices": {
                 "row": "Left to right (by row)",
                 "column": "Top to bottom (by column)"
@@ -384,7 +690,11 @@
             "instructions": "Small (600px), Medium (800px), or Large (1000px).",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "choices": {
                 "small": "Small (600px)",
                 "medium": "Medium (800px)",
@@ -414,5 +724,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1784655000
+    "modified": 1786020600
 }

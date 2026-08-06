@@ -61,6 +61,7 @@ $resolve_sections = static function () {
 		$headline       = '';
 		$headline_size  = 'h2';
 		$raw_item_rows  = array();
+		$entries        = array();
 
 		if ( $source === 'site' ) {
 			$selected = get_sub_field( 'selected_resource_section_key' );
@@ -82,6 +83,29 @@ $resolve_sections = static function () {
 			if ( is_array( $page_only ) && ! empty( $page_only ) ) {
 				$raw_item_rows = array_merge( $raw_item_rows, $page_only );
 			}
+			$entries = function_exists( 'tectn_resources_normalize_item_rows' )
+				? tectn_resources_normalize_item_rows( $raw_item_rows )
+				: array();
+		} elseif ( $source === 'pages' ) {
+			$preheader     = get_sub_field( 'preheader' );
+			$preheader     = is_string( $preheader ) ? trim( $preheader ) : '';
+			$headline      = get_sub_field( 'headline' );
+			$headline      = is_string( $headline ) ? trim( $headline ) : '';
+			$headline_size = get_sub_field( 'headline_size' );
+			$headline_size = is_string( $headline_size ) && $headline_size !== '' ? $headline_size : 'h2';
+
+			$pick_mode = get_sub_field( 'pages_pick_mode' );
+			$pick_mode = is_string( $pick_mode ) ? $pick_mode : 'manual';
+			$selected  = get_sub_field( 'selected_pages' );
+			$filter_by = get_sub_field( 'pages_filter_by' );
+			$filter_by = is_string( $filter_by ) ? $filter_by : 'category';
+			$term_ids  = ( $filter_by === 'tag' )
+				? get_sub_field( 'pages_filter_tags' )
+				: get_sub_field( 'pages_filter_categories' );
+
+			$entries = function_exists( 'tectn_resources_resolve_site_page_entries' )
+				? tectn_resources_resolve_site_page_entries( $pick_mode, $selected, $filter_by, $term_ids )
+				: array();
 		} else {
 			$preheader     = get_sub_field( 'preheader' );
 			$preheader     = is_string( $preheader ) ? trim( $preheader ) : '';
@@ -93,11 +117,10 @@ $resolve_sections = static function () {
 			if ( is_array( $local_items ) ) {
 				$raw_item_rows = $local_items;
 			}
+			$entries = function_exists( 'tectn_resources_normalize_item_rows' )
+				? tectn_resources_normalize_item_rows( $raw_item_rows )
+				: array();
 		}
-
-		$entries = function_exists( 'tectn_resources_normalize_item_rows' )
-			? tectn_resources_normalize_item_rows( $raw_item_rows )
-			: array();
 
 		if ( empty( $entries ) ) {
 			continue;
@@ -144,7 +167,7 @@ $render_placeholder = static function ( $message ) use ( $res_no_bg, $res_bg_col
 };
 
 if ( $is_editor_context && empty( $sections ) && empty( $block_data['inserter_preview'] ) ) {
-	$render_placeholder( __( 'Add sections in the block sidebar. Choose Resources sections or create page-only sections with links.', 'tectn_theme' ) );
+	$render_placeholder( __( 'Add sections in the block sidebar. Choose a Resources section, page-only links, or site pages (manual or by category/tag).', 'tectn_theme' ) );
 	return;
 }
 
