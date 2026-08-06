@@ -9,7 +9,7 @@
 - **Tracking Codes** (`tectn-tracking-codes`): submenu under **Sitewide** — repeater of pasted HTML snippets with head/footer placement — `group_tectn_site_tracking_codes.json`. Output via `inc/tracking-codes.php` on `wp_head` / `wp_footer`.
 - **Footer Information** (`footer-information`): **Contact Information** section (message + address, phone, email inside the `footer_information` group), then Social / CTA / Disclaimer tabs — `group_tectn_footer_information.json`. (Tab fields are not used for contact inside the group: ACF’s tab UI often fails when nested in a Group, which hid those fields.)
 - **Events Page Settings** (`theme-events-settings`): hero + intro fields — registered in `inc/acf-options.php` as `tectn_register_acf_events_settings()`.
-- **Post Settings** (`post-settings`): blog/events/pickup options — `group_tectn_post_settings.json`.
+- **Post Settings** (`post-settings`): blog/events options — `group_tectn_post_settings.json`.
 - **Forms** (`tectn-forms`): repeater of plain-text embed snippets — `group_tectn_site_forms.json`. Use `tectn_get_embedded_forms()` in PHP.
 - **Information tables** (`tectn-info-tables`): reusable four-column tables — `group_tectn_site_info_tables.json`. Use `tectn_get_embedded_info_tables()` in PHP.
 - **Information lists** (`tectn-information-lists`): repeater of lists (optional label, stable list ID, items with name + optional ACF link) — `group_tectn_site_information_lists.json`. Use `tectn_get_embedded_information_lists()` or `tectn_find_information_list_by_selector()` in PHP.
@@ -26,7 +26,7 @@
 
 There is **no** Theme Settings options page in this theme; options live under **Site Settings** and its sub-pages.
 
-New blog/events/pickup options added in code belong in **`group_tectn_post_settings.json`**, not in the Brand field group.
+New blog/events options added in code belong in **`group_tectn_post_settings.json`**, not in the Brand field group.
 
 ## If “Sync available” or sync feels stuck
 

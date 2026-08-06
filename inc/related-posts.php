@@ -118,7 +118,7 @@ function tectn_get_related_posts( $post_id, $post_type, $limit = 3 ) {
  * Get Related Posts section settings from Post Settings (Site Settings > Post Settings).
  * Returns heading and background image for the given post type. Reads from the Post Settings options page.
  *
- * @param string $post_type Post type (e.g. 'post', 'tribe_events', 'pickup_site').
+ * @param string $post_type Post type (e.g. 'post', 'tribe_events').
  * @return array{ heading: string, background_image_id: int, background_image_url: string }
  */
 function tectn_get_related_posts_settings( $post_type = 'post' ) {
@@ -127,7 +127,6 @@ function tectn_get_related_posts_settings( $post_type = 'post' ) {
   $defaults   = array(
     'post'          => __( 'Related Posts', 'tectn_theme' ),
     'tribe_events'  => __( 'Related Events', 'tectn_theme' ),
-    'pickup_site'   => __( 'Related Pick Up Locations', 'tectn_theme' ),
   );
   $heading = isset( $defaults[ $key ] ) ? $defaults[ $key ] : __( 'Related Posts', 'tectn_theme' );
   $bg_id   = 0;

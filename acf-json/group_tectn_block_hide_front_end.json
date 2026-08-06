@@ -40,7 +40,6 @@
         [{ "param": "block", "operator": "==", "value": "tectn/resources" }],
         [{ "param": "block", "operator": "==", "value": "tectn/posts-grid" }],
         [{ "param": "block", "operator": "==", "value": "tectn/people-list" }],
-        [{ "param": "block", "operator": "==", "value": "tectn/pickup-sites-map" }],
         [{ "param": "block", "operator": "==", "value": "tectn/iframe-embed" }]
     ],
     "menu_order": 100,
@@ -53,5 +52,5 @@
     "description": "Shared toggle for all TecTN ACF blocks. Render behavior is handled in inc/blocks.php.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1779727493
+    "modified": 1786019460
 }

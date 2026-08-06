@@ -626,7 +626,7 @@ ul.wp-block-list li {
 }
 
 h2.hero {
-  font-size: 4.5em;
+  font-size: 4.4em;
 }
 
 /******************************************************************
@@ -3379,7 +3379,6 @@ Content Section block
 .editor-styles-wrapper .c-sponsorships__placeholder,
 .editor-styles-wrapper .c-text-image__placeholder,
 .editor-styles-wrapper .c-peopleList__empty,
-.editor-styles-wrapper .c-pickup-sites-map__empty,
 .editor-styles-wrapper .c-iframe-embed__empty,
 .editor-styles-wrapper .c-slider--empty .c-slider__empty {
   font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
@@ -3699,123 +3698,7 @@ Content Section block
 }
 
 /* =========================
-   Pick-up Sites Map block — card-block-style wrapper, headline, body, search bar
-   ========================= */
-.c-pickup-sites-map {
-  padding: 0 1rem 2rem;
-  border-radius: 1rem;
-  margin-bottom: 1.5em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c-pickup-sites-map__headline {
-  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  color: #fff;
-  text-align: center;
-  margin: 0;
-  padding: 0.75rem 1.25rem;
-  padding-bottom: 0;
-  background-color: #A1B152;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-  display: block;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.c-pickup-sites-map__body {
-  position: relative;
-  background-color: #A1B152;
-  border-radius: 0.75em;
-  padding: 1em;
-  overflow: hidden;
-}
-
-.c-pickup-sites-map__body:first-child {
-  border-top-left-radius: 0.75em;
-  border-top-right-radius: 0.75em;
-}
-
-.c-pickup-sites-map__body:last-child {
-  border-bottom-left-radius: 0.75em;
-  border-bottom-right-radius: 0.75em;
-}
-
-.c-pickup-sites-map__body + .c-pickup-sites-map__search-bar {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.c-pickup-sites-map__canvas {
-  width: 100%;
-  min-height: 320px;
-  border-radius: 0.5em;
-}
-
-.c-pickup-sites-map__empty {
-  margin: 0;
-  padding: 1em;
-  background: rgba(255, 255, 255, 0.9);
-  text-align: center;
-  color: #5c6b80;
-  border-radius: 0.5em;
-}
-
-.c-pickup-sites-map__search-bar {
-  background-color: #A1B152;
-  border-bottom-left-radius: 0.5em;
-  border-bottom-right-radius: 0.5em;
-  padding-left: 1em;
-  padding-right: 1em;
-  margin-top: 0;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.c-pickup-sites-map__search-bar input[type=search] {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.c-pickup-sites-map__search-label {
-  display: block;
-  margin-bottom: 0.35em;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #fff;
-}
-
-.c-pickup-sites-map__search {
-  display: block;
-  width: 100%;
-  max-width: 20em;
-  padding: 0.5em 0.75em;
-  font-size: 1rem;
-  line-height: 1.4;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 2px;
-  background: #fff;
-}
-
-.c-pickup-sites-map__search:focus {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-}
-
-/* =========================
-   Iframe Embed block — same card/hierarchy as Pick-up Sites Map; no search bar
+   Iframe Embed block — card/hierarchy wrapper; no search bar
    ========================= */
 .c-iframe-embed {
   padding: 0 1rem 2rem;
@@ -5153,7 +5036,7 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
 }
 
 h1, .h1 {
-  font-size: 3.5em;
+  font-size: 3.4em;
   line-height: 0.9em;
   color: #C9DD67;
 }
@@ -5162,7 +5045,7 @@ h1.light, .h1.light {
 }
 
 h2, .h2 {
-  font-size: 2.48em;
+  font-size: 2.38em;
   line-height: 1em;
   margin-top: 0;
   margin-bottom: 0.375em;
@@ -5173,7 +5056,7 @@ h2.light, .h2.light {
 }
 
 h3, .h3 {
-  font-size: 2em;
+  font-size: 1.9em;
   line-height: 1.1;
   color: #79853E;
   margin-top: 0;
@@ -5184,7 +5067,7 @@ h3.light, .h3.light {
 }
 
 h4, .h4 {
-  font-size: 1.5em;
+  font-size: 1.4em;
   color: #79853E;
   margin-top: 0;
   margin-bottom: 0.375em;
@@ -5194,7 +5077,7 @@ h4.light, .h4.light {
 }
 
 h5, .h5 {
-  font-size: 1.2em;
+  font-size: 1.1em;
   line-height: 1.6em;
   text-transform: normal;
   color: #505829;
@@ -7245,23 +7128,23 @@ body#tinymce.wp-editor h1 a, body#tinymce.wp-editor .h1 a, body#tinymce.wp-edito
   text-decoration: none;
 }
 body#tinymce.wp-editor h1, body#tinymce.wp-editor .h1 {
-  font-size: 2.5em;
+  font-size: 2.4em;
   line-height: 1.333em;
 }
 body#tinymce.wp-editor h2, body#tinymce.wp-editor .h2 {
-  font-size: 1.75em;
+  font-size: 1.65em;
   line-height: 1.4em;
   margin-bottom: 0.375em;
 }
 body#tinymce.wp-editor h3, body#tinymce.wp-editor .h3 {
-  font-size: 1.125em;
+  font-size: 1.025em;
 }
 body#tinymce.wp-editor h4, body#tinymce.wp-editor .h4 {
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 400;
 }
 body#tinymce.wp-editor h5, body#tinymce.wp-editor .h5 {
-  font-size: 0.846em;
+  font-size: 0.746em;
   line-height: 2.09em;
   text-transform: uppercase;
   letter-spacing: 2px;

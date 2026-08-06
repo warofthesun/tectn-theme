@@ -273,71 +273,6 @@
             "ui_on_text": "Required",
             "ui_off_text": "Optional",
             "allow_in_bindings": 0
-        },
-        {
-            "key": "field_tectn_ps_tab_pickup",
-            "label": "Pick Up Locations",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_tectn_ps_heading_pickup",
-            "label": "Related section heading",
-            "name": "related_posts_heading_pickup_site",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "Heading above the related section on single pick-up locations. Default: Related Pick Up Locations",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "Related Pick Up Locations",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "allow_in_bindings": 0
-        },
-        {
-            "key": "field_tectn_ps_bg_pickup",
-            "label": "Related section background image",
-            "name": "background_image_pickup_site",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "Background for the Related section on single pick-up locations. Leave empty for the default solid color and gradient.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0,
-            "preview_size": "medium"
         }
     ],
     "location": [
@@ -359,5 +294,5 @@
     "description": "Per–post-type settings for related section heading and background. Sub-page of Site Settings.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1774400100
+    "modified": 1786019460
 }
