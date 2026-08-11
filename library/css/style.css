@@ -9664,6 +9664,9 @@ IMPORTING PARTIALS
     padding-right: 0em;
     padding-left: 6em;
   }
+  .c-content-group--reverse .c-image-grid--one {
+    padding-right: 0;
+  }
   /*********************
   SIDEBARS & ASIDES
   *********************/
