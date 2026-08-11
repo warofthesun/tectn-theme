@@ -1483,7 +1483,7 @@ textarea,
   padding: 0 12px;
   margin-bottom: 14px;
   font-size: 1em;
-  color: #5c6b80;
+  color: #0d0f02;
   border-radius: 3px;
   vertical-align: middle;
   -webkit-box-shadow: none;
@@ -3204,11 +3204,11 @@ PAGE NAVI STYLES
 }
 .pagination .current {
   cursor: default;
-  color: #5c6b80;
+  color: #0d0f02;
 }
 .pagination .current:hover, .pagination .current:focus {
   background-color: #fff;
-  color: #5c6b80;
+  color: #0d0f02;
 }
 
 /* end .bones_page_navi */
@@ -3357,7 +3357,7 @@ COMMENT FORM STYLES
   margin: 0;
 }
 .logged-in-as a {
-  color: #5c6b80;
+  color: #0d0f02;
 }
 
 .comment-form-comment {
@@ -3610,7 +3610,7 @@ body {
   font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
   font-size: 18px;
   line-height: 1.4;
-  color: #5c6b80;
+  color: #0d0f02;
   background-color: #F9FBF3;
   --body-bg: #F9FBF3;
   -webkit-font-smoothing: antialiased;
@@ -3798,7 +3798,7 @@ Buttons and such
 
 .c-information-lists__text {
   font-weight: 600;
-  color: #5c6b80;
+  color: #0d0f02;
 }
 
 @media (max-width: 47.99em) {
@@ -3890,14 +3890,14 @@ Buttons and such
 
 .c-resources__text {
   font-weight: 600;
-  color: #5c6b80;
+  color: #0d0f02;
 }
 
 .c-resources__body {
   margin: 0.5em 0 0;
   font-size: 0.95em;
   line-height: 1.5;
-  color: #5c6b80;
+  color: #0d0f02;
 }
 
 @media (max-width: 47.99em) {
@@ -4988,7 +4988,7 @@ Content Section block
   font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
   font-size: 1rem;
   line-height: 1.35;
-  color: #5c6b80;
+  color: #0d0f02;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -5371,7 +5371,7 @@ Content Section block
   padding: 1em;
   background: rgba(255, 255, 255, 0.9);
   text-align: center;
-  color: #5c6b80;
+  color: #0d0f02;
   border-radius: 0.5em;
 }
 
@@ -5430,7 +5430,7 @@ Content Section block
 }
 
 .c-slider__body {
-  color: #5c6b80;
+  color: #0d0f02;
   font-size: 0.95rem;
   line-height: 1.4;
   margin: 0;
@@ -5721,7 +5721,7 @@ Content Section block
   max-width: 35%;
   padding: 0.75rem 1rem;
   background: rgba(249, 251, 243, 0.92);
-  color: #5c6b80;
+  color: #0d0f02;
   z-index: 3;
   pointer-events: none;
   margin: 0;
@@ -5969,7 +5969,7 @@ Content Section block
   padding: 1em;
   background: rgba(255, 255, 255, 0.9);
   text-align: center;
-  color: #5c6b80;
+  color: #0d0f02;
   border-radius: 0.5em;
 }
 
