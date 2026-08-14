@@ -56,6 +56,8 @@
     $slideshow_gallery = get_field('slideshow_gallery');
     $slideshow_aspect  = get_field('slideshow_aspect');
     $slideshow_aspect  = ( is_string( $slideshow_aspect ) && $slideshow_aspect === 'portrait' ) ? 'portrait' : 'square';
+    $focal_css         = function_exists( 'tectn_slider_focal_css' ) ? tectn_slider_focal_css( get_field( 'focal_point' ) ) : 'center center';
+    $focal_style       = 'object-position: ' . $focal_css;
     $autoplay_raw     = get_field('autoplay');
     // Legacy slideshows had no Autoplay field and always played; default on when unset.
     $autoplay         = ( $media_type === 'slideshow' && $autoplay_raw === null ) ? true : (bool) $autoplay_raw;
@@ -130,8 +132,7 @@
             if ( $id ) {
                 $caption = isset( $img['caption'] ) && (string) $img['caption'] !== '' ? $img['caption'] : wp_get_attachment_caption( $id );
                 $author  = function_exists( 'get_field' ) ? ( get_field( 'caption_author', $id ) ?: '' ) : '';
-                $size    = ( $slideshow_aspect === 'square' ) ? 'tectn_slider_square' : 'large';
-                $src     = wp_get_attachment_image_url( $id, $size );
+                $src     = wp_get_attachment_image_url( $id, 'large' );
                 if ( $src ) {
                     $url = $src;
                 }
@@ -250,8 +251,10 @@
                     id="<?php echo esc_attr( $slideshow_id ); ?>"
                     data-slider-type="slideshow"
                     data-items="<?php echo esc_attr( wp_json_encode( $slideshow_items ) ); ?>"
+                    data-focal="<?php echo esc_attr( $focal_css ); ?>"
                     data-autoplay="<?php echo $autoplay ? '1' : '0'; ?>"
                     data-show-captions="<?php echo $show_captions ? '1' : '0'; ?>"
+                    style="<?php echo esc_attr( '--slider-focal: ' . $focal_css ); ?>"
                     role="region"
                     aria-label="<?php esc_attr_e( 'Image slideshow', 'tectn_theme' ); ?>">
                     <div class="c-slider__panel">
@@ -260,12 +263,14 @@
                                 <img src="<?php echo esc_url( $first['url'] ); ?>"
                                     alt="<?php echo esc_attr( $first['title'] ); ?>"
                                     class="c-slider__image <?php echo esc_attr( $img_mod ); ?>"
+                                    style="<?php echo esc_attr( $focal_style ); ?>"
                                     data-slider-image>
                             </div>
                             <div class="c-slider__slide c-slider__slide--next" data-slider-slide>
                                 <img src="<?php echo esc_url( $first['url'] ); ?>"
                                     alt=""
                                     class="c-slider__image <?php echo esc_attr( $img_mod ); ?>"
+                                    style="<?php echo esc_attr( $focal_style ); ?>"
                                     data-slider-image>
                             </div>
                             <?php if ( $show_captions ) : ?>

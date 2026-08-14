@@ -1893,16 +1893,17 @@ border: $spacing-xs solid $white;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	object-position: var(--slider-focal, center center);
 	border-radius: $radius-sm;
 }
 
 .c-slider__image--cover {
-	object-position: center center;
+	object-position: var(--slider-focal, center center);
 }
 
 .c-slider__image--contain {
 	object-fit: contain;
-	object-position: center center;
+	object-position: var(--slider-focal, center center);
 }
 
 /* Horizontal slider */
@@ -1921,19 +1922,11 @@ border: $spacing-xs solid $white;
 	transition: none;
 }
 
-.c-slider--horizontal .c-slider__slide {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 .c-slider--horizontal .c-slider__image--cover {
-	width: auto;
-	height: auto;
-	min-width: 100%;
-	min-height: 100%;
+	width: 100%;
+	height: 100%;
 	object-fit: cover;
-	object-position: center center;
+	object-position: var(--slider-focal, center center);
 }
 
 .c-slider--horizontal .c-slider__slide--next {

@@ -97,6 +97,33 @@
             "library": "all",
             "min": 1,
             "wrapper": { "width": "", "class": "", "id": "" }
+        },
+        {
+            "key": "field_slider_focal_point",
+            "label": "Focal point",
+            "name": "focal_point",
+            "type": "select",
+            "instructions": "Where images stay visible when cropped (cover). Applies to every slide in this block. Default is center.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "center": "Center",
+                "top": "Top",
+                "bottom": "Bottom",
+                "left": "Left",
+                "right": "Right",
+                "top_left": "Top left",
+                "top_right": "Top right",
+                "bottom_left": "Bottom left",
+                "bottom_right": "Bottom right"
+            },
+            "default_value": "center",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 1,
+            "ajax": 0
         }
     ],
     "location": [[{ "param": "block", "operator": "==", "value": "tectn\/slider" }]],
@@ -109,5 +136,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1753399200
+    "modified": 1786710000
 }

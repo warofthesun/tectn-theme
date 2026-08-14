@@ -108,3 +108,40 @@ function tectn_get_post_card_image_url( $post_id ) {
 	}
 	return (string) get_the_post_thumbnail_url( $post_id, 'post-card' );
 }
+
+/**
+ * Allowed slider/slideshow focal point keys → CSS object-position values.
+ *
+ * @return array<string, string>
+ */
+function tectn_slider_focal_point_map() {
+	return array(
+		'center'       => 'center center',
+		'top'          => 'center top',
+		'bottom'       => 'center bottom',
+		'left'         => 'left center',
+		'right'        => 'right center',
+		'top_left'     => 'left top',
+		'top_right'    => 'right top',
+		'bottom_left'  => 'left bottom',
+		'bottom_right' => 'right bottom',
+	);
+}
+
+/**
+ * Resolve a focal point field value to a CSS object-position string.
+ *
+ * @param mixed $focal_point Field value (key) or already a CSS string.
+ * @return string
+ */
+function tectn_slider_focal_css( $focal_point ) {
+	$map = tectn_slider_focal_point_map();
+	$key = is_string( $focal_point ) ? sanitize_key( $focal_point ) : 'center';
+	if ( isset( $map[ $key ] ) ) {
+		return $map[ $key ];
+	}
+	if ( is_string( $focal_point ) && preg_match( '/^(left|center|right)(\s+(top|center|bottom))?$/i', trim( $focal_point ) ) ) {
+		return strtolower( trim( $focal_point ) );
+	}
+	return 'center center';
+}

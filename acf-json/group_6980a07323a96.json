@@ -136,6 +136,42 @@
             "preview_size": "medium"
         },
         {
+            "key": "field_6990ba_slideshow_focal_point",
+            "label": "Focal point",
+            "name": "focal_point",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Where images stay visible when cropped (cover). Applies to every slide. Default is center.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6990ba_media_type",
+                        "operator": "==",
+                        "value": "slideshow"
+                    }
+                ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "center": "Center",
+                "top": "Top",
+                "bottom": "Bottom",
+                "left": "Left",
+                "right": "Right",
+                "top_left": "Top left",
+                "top_right": "Top right",
+                "bottom_left": "Bottom left",
+                "bottom_right": "Bottom right"
+            },
+            "default_value": "center",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 1,
+            "ajax": 0
+        },
+        {
             "key": "field_6990ba_slideshow_aspect",
             "label": "Slideshow aspect",
             "name": "slideshow_aspect",
@@ -289,5 +325,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1784997600
+    "modified": 1786710000
 }

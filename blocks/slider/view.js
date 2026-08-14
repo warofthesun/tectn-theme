@@ -8,10 +8,25 @@
     }
   }
 
+  function getFocal(el) {
+    return el.getAttribute('data-focal') || 'center center';
+  }
+
+  function applyFocal(img, focal) {
+    if (!img) return;
+    var value = focal || 'center center';
+    img.style.objectPosition = value;
+    var root = img.closest && img.closest('.c-slider');
+    if (root) {
+      root.style.setProperty('--slider-focal', value);
+    }
+  }
+
   // --- Table of contents slider ---
   document.querySelectorAll('.c-slider--table_of_contents').forEach(function (root) {
     var items = parseItems(root);
     if (!items.length) return;
+    var focal = getFocal(root);
 
     var wrap = root.querySelector('.c-slider__image-wrap');
     var currentSlide = root.querySelector('.c-slider__slide--current');
@@ -46,6 +61,7 @@
       var nextImg = nextSlide.querySelector('[data-slider-image]');
       nextImg.src = item.url;
       nextImg.alt = item.title || '';
+      applyFocal(nextImg, focal);
 
       nextSlide.classList.remove('c-slider__slide--up');
       nextSlide.classList.add('c-slider__slide--down');
@@ -70,6 +86,7 @@
         var curImg = currentSlide.querySelector('[data-slider-image]');
         curImg.src = item.url;
         curImg.alt = item.title || '';
+        applyFocal(curImg, focal);
         currentSlide.classList.remove('c-slider__slide--current');
         currentSlide.classList.add('c-slider__slide--next');
         nextSlide.classList.remove('c-slider__slide--next');
@@ -109,6 +126,7 @@
   document.querySelectorAll('.c-slider--horizontal').forEach(function (root) {
     var items = parseItems(root);
     if (!items.length) return;
+    var focal = getFocal(root);
 
     var wrap = root.querySelector('.c-slider__image-wrap');
     var currentSlide = root.querySelector('.c-slider__slide--current');
@@ -158,6 +176,7 @@
       var nextImg = nextSlide.querySelector('[data-slider-image]');
       nextImg.src = item.url;
       nextImg.alt = item.title || '';
+      applyFocal(nextImg, focal);
 
       currentSlide.classList.remove('c-slider__slide--out-left', 'c-slider__slide--out-right');
       nextSlide.classList.remove('c-slider__slide--in-from-left', 'c-slider__slide--in-from-right');
@@ -179,6 +198,7 @@
         var curImg = currentSlide.querySelector('[data-slider-image]');
         curImg.src = item.url;
         curImg.alt = item.title || '';
+        applyFocal(curImg, focal);
         currentSlide.classList.remove('c-slider__slide--current');
         currentSlide.classList.add('c-slider__slide--next');
         nextSlide.classList.remove('c-slider__slide--next');
@@ -267,6 +287,7 @@
   document.querySelectorAll('.c-slider--slideshow').forEach(function (root) {
     var items = parseItems(root);
     if (!items.length) return;
+    var focal = getFocal(root);
 
     var wrap = root.querySelector('.c-slider__image-wrap');
     var currentSlide = root.querySelector('.c-slider__slide--current');
@@ -331,6 +352,7 @@
       var nextImg = nextSlide.querySelector('[data-slider-image]');
       nextImg.src = item.url;
       nextImg.alt = item.title || '';
+      applyFocal(nextImg, focal);
       setWrapAspectFromImage(nextImg);
 
       currentSlide.classList.add('c-slider__slide--fade-out');
@@ -345,6 +367,7 @@
         var curImg = currentSlide.querySelector('[data-slider-image]');
         curImg.src = item.url;
         curImg.alt = item.title || '';
+        applyFocal(curImg, focal);
         currentSlide.classList.remove('c-slider__slide--current');
         currentSlide.classList.add('c-slider__slide--next');
         nextSlide.classList.remove('c-slider__slide--next');

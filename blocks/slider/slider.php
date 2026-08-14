@@ -45,6 +45,8 @@ $slideshow_aspect = ( is_string( $slideshow_aspect ) && $slideshow_aspect === 'p
 $show_captions = (bool) get_field( 'show_captions' );
 $list_item_icon = get_field( 'list_item_icon' );
 $gallery        = get_field( 'gallery' );
+$focal_css      = function_exists( 'tectn_slider_focal_css' ) ? tectn_slider_focal_css( get_field( 'focal_point' ) ) : 'center center';
+$focal_style    = 'object-position: ' . $focal_css;
 
 $list_icon_html = '';
 if ( is_array( $list_item_icon ) && ! empty( $list_item_icon['class'] ) ) {
@@ -68,12 +70,8 @@ if ( is_array( $gallery ) && ! empty( $gallery ) ) {
 		if ( $id ) {
 			$caption = isset( $img['caption'] ) && (string) $img['caption'] !== '' ? $img['caption'] : wp_get_attachment_caption( $id );
 			$author  = get_field( 'caption_author', $id ) ?: '';
-			if ( $slider_type === 'slideshow' && $slideshow_aspect === 'square' ) {
-				$size = 'tectn_slider_square';
-			} else {
-				$size = 'large';
-			}
-			$src = wp_get_attachment_image_url( $id, $size );
+			$size = 'large';
+			$src  = wp_get_attachment_image_url( $id, $size );
 			if ( $src ) {
 				$url = $src;
 			}
@@ -155,8 +153,10 @@ if ( $slider_type === 'slideshow' ) {
 	 id="<?php echo esc_attr( $block_id ); ?>"
 	 data-slider-type="<?php echo esc_attr( $slider_type ); ?>"
 	 data-items="<?php echo esc_attr( wp_json_encode( $items ) ); ?>"
+	 data-focal="<?php echo esc_attr( $focal_css ); ?>"
 	 data-autoplay="<?php echo $autoplay ? '1' : '0'; ?>"
 	 data-show-captions="<?php echo $show_captions ? '1' : '0'; ?>"
+	 style="<?php echo esc_attr( '--slider-focal: ' . $focal_css ); ?>"
 	 role="region"
 	 aria-label="<?php esc_attr_e( 'Image slider', 'tectn_theme' ); ?>">
 
@@ -206,12 +206,14 @@ if ( $slider_type === 'slideshow' ) {
 					<img src="<?php echo esc_url( $first['url'] ); ?>"
 						 alt="<?php echo esc_attr( $first['title'] ); ?>"
 						 class="c-slider__image"
+						 style="<?php echo esc_attr( $focal_style ); ?>"
 						 data-slider-image>
 				</div>
 				<div class="c-slider__slide c-slider__slide--next" data-slider-slide>
 					<img src="<?php echo esc_url( $first['url'] ); ?>"
 						 alt=""
 						 class="c-slider__image"
+						 style="<?php echo esc_attr( $focal_style ); ?>"
 						 data-slider-image>
 				</div>
 			</div>
@@ -243,12 +245,14 @@ if ( $preheader ) {
 				<img src="<?php echo esc_url( $first['url'] ); ?>"
 					 alt="<?php echo esc_attr( $first['title'] ); ?>"
 					 class="c-slider__image c-slider__image--cover"
+					 style="<?php echo esc_attr( $focal_style ); ?>"
 					 data-slider-image>
 			</div>
 			<div class="c-slider__slide c-slider__slide--next" data-slider-slide>
 				<img src="<?php echo esc_url( $first['url'] ); ?>"
 					 alt=""
 					 class="c-slider__image c-slider__image--cover"
+					 style="<?php echo esc_attr( $focal_style ); ?>"
 					 data-slider-image>
 			</div>
 			<?php if ( $show_captions ) : ?>
@@ -314,12 +318,14 @@ if ( $preheader ) {
 				<img src="<?php echo esc_url( $first['url'] ); ?>"
 					 alt="<?php echo esc_attr( $first['title'] ); ?>"
 					 class="c-slider__image <?php echo esc_attr( $slideshow_img_mod ); ?>"
+					 style="<?php echo esc_attr( $focal_style ); ?>"
 					 data-slider-image>
 			</div>
 			<div class="c-slider__slide c-slider__slide--next" data-slider-slide>
 				<img src="<?php echo esc_url( $first['url'] ); ?>"
 					 alt=""
 					 class="c-slider__image <?php echo esc_attr( $slideshow_img_mod ); ?>"
+					 style="<?php echo esc_attr( $focal_style ); ?>"
 					 data-slider-image>
 			</div>
 			<?php if ( $show_captions ) : ?>
