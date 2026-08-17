@@ -3880,8 +3880,7 @@ Buttons and such
 
 .c-resources__link {
   color: #698f3d;
-  text-decoration: underline;
-  text-underline-offset: 0.12em;
+  text-decoration: none;
   font-weight: 600;
 }
 .c-resources__link:hover, .c-resources__link:focus {
@@ -6895,6 +6894,63 @@ and more scalable.
   height: 100%;
   width: 100%;
 }
+.nav .nav-item__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+  text-align: left;
+}
+.nav .nav-item__row > a {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.nav .nav-submenu-toggle {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.75em;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #505829;
+}
+.nav .nav-submenu-toggle .fa-chevron-down {
+  -webkit-transition: -webkit-transform 0.25s ease;
+  transition: -webkit-transform 0.25s ease;
+  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+}
+.nav .nav-submenu-toggle:hover, .nav .nav-submenu-toggle:focus {
+  color: #A1B152;
+  -webkit-transition: 600ms;
+  transition: 600ms;
+}
+.nav .menu-item-has-children.is-open > .nav-item__row .nav-submenu-toggle .fa-chevron-down {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.nav .menu-item-has-children:not(.is-open) > ul.sub-menu,
+.nav .menu-item-has-children:not(.is-open) > ul.children {
+  display: none;
+}
 .nav li {
   border-bottom: 0;
   text-align: center;
@@ -9082,6 +9138,16 @@ IMPORTING PARTIALS
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     border: 0;
+  }
+  .nav .nav-item__row {
+    display: contents;
+  }
+  .nav .nav-submenu-toggle {
+    display: none;
+  }
+  .nav .menu-item-has-children:not(.is-open) > ul.sub-menu,
+  .nav .menu-item-has-children:not(.is-open) > ul.children {
+    display: block;
   }
   .nav ul {
     background: #F0F4EC;

@@ -71,33 +71,42 @@
 					</a>
 					<nav id="header-nav" role="navigation" class="header-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
 						<div class="header-nav__wrapper">
-							<?php wp_nav_menu(array(
-								'container' => false,
-								'container_class' => 'menu ',
-								'menu' => __( 'The Main Menu', 'tectn_theme' ),
-								'menu_class' => 'nav top-nav ',
-								'theme_location' => 'main-nav',
-								'before' => '',
-								'after' => '',
-								'link_before' => '',
-								'link_after' => '',
-								'depth' => 0,
-								'fallback_cb' => ''
-							)); ?>
+							<?php
+							$tectn_nav_walker = new Tectn_Nav_Walker();
+							wp_nav_menu(
+								array(
+									'container'      => false,
+									'container_class' => 'menu ',
+									'menu'           => __( 'The Main Menu', 'tectn_theme' ),
+									'menu_class'     => 'nav top-nav ',
+									'theme_location' => 'main-nav',
+									'before'         => '',
+									'after'          => '',
+									'link_before'    => '',
+									'link_after'     => '',
+									'depth'          => 0,
+									'fallback_cb'    => '',
+									'walker'         => $tectn_nav_walker,
+								)
+							);
 
-							<?php wp_nav_menu(array(
-								'container' => false,
-								'container_class' => 'login_forms ',
-								'menu' => __( 'Login and Forms', 'tectn_theme' ),
-								'menu_class' => 'nav top-nav ',
-								'theme_location' => 'login_forms',
-								'before' => '',
-								'after' => '',
-								'link_before' => '',
-								'link_after' => '',
-								'depth' => 0,
-								'fallback_cb' => ''
-							)); ?>
+							wp_nav_menu(
+								array(
+									'container'      => false,
+									'container_class' => 'login_forms ',
+									'menu'           => __( 'Login and Forms', 'tectn_theme' ),
+									'menu_class'     => 'nav top-nav ',
+									'theme_location' => 'login_forms',
+									'before'         => '',
+									'after'          => '',
+									'link_before'    => '',
+									'link_after'     => '',
+									'depth'          => 0,
+									'fallback_cb'    => '',
+									'walker'         => new Tectn_Nav_Walker(),
+								)
+							);
+							?>
 						</div>
 					</nav>
 					<?php if ( is_active_sidebar( 'header-widget-area' ) ) : ?>

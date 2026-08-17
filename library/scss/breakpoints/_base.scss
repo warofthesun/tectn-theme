@@ -376,8 +376,7 @@ Buttons and such
 
 .c-resources__link {
 	color: $link-color;
-	text-decoration: underline;
-	text-underline-offset: 0.12em;
+	text-decoration: none;
 	font-weight: 600;
 
 	&:hover,
@@ -2978,6 +2977,50 @@ and more scalable.
 		display: flex;
 		height: 100%;
 		width: 100%;
+	}
+
+	.nav-item__row {
+		display: flex;
+		align-items: stretch;
+		width: 100%;
+		text-align: left;
+
+		> a {
+			flex: 1 1 auto;
+			min-width: 0;
+		}
+	}
+
+	.nav-submenu-toggle {
+		flex: 0 0 auto;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 44px;
+		min-height: 44px;
+		padding: 0.75em;
+		border: 0;
+		background: transparent;
+		cursor: pointer;
+		@include color_text__nav-item_default;
+
+		.fa-chevron-down {
+			transition: transform 0.25s ease;
+		}
+
+		&:hover,
+		&:focus {
+			@include color_text__nav-item_hover;
+		}
+	}
+
+	.menu-item-has-children.is-open > .nav-item__row .nav-submenu-toggle .fa-chevron-down {
+		transform: rotate(180deg);
+	}
+
+	.menu-item-has-children:not(.is-open) > ul.sub-menu,
+	.menu-item-has-children:not(.is-open) > ul.children {
+		display: none;
 	}
 
 	li {

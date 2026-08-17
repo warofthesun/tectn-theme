@@ -137,6 +137,19 @@
   	flex-wrap: wrap;
   	border: 0;
 
+  	.nav-item__row {
+  		display: contents;
+  	}
+
+  	.nav-submenu-toggle {
+  		display: none;
+  	}
+
+  	.menu-item-has-children:not(.is-open) > ul.sub-menu,
+  	.menu-item-has-children:not(.is-open) > ul.children {
+  		display: block;
+  	}
+
   	ul {
   		background: $secondary-100;
   		margin-top: 0;

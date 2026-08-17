@@ -20,6 +20,7 @@ require_once $tectn_theme_dir . '/library/starter.php';
 require_once $tectn_theme_dir . '/inc/blocks.php';
 require_once $tectn_theme_dir . '/inc/iframe-embed.php';
 require_once $tectn_theme_dir . '/inc/helpers.php';
+require_once $tectn_theme_dir . '/inc/class-tectn-nav-walker.php';
 require_once $tectn_theme_dir . '/inc/blog.php';
 require_once $tectn_theme_dir . '/inc/hero.php';
 require_once $tectn_theme_dir . '/inc/related-posts.php';
