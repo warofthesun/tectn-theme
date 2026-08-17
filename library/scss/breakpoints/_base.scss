@@ -2870,7 +2870,7 @@ and more scalable.
 .header-nav__wrapper {
 	display: flex;
 	width: 100%;
-	align-items: center;
+	align-items: stretch;
 	flex-direction: column;
 }
 
@@ -2878,7 +2878,7 @@ and more scalable.
 	margin-top: $spacing-md;
 	margin-left: auto;
 	margin-bottom: auto;
-	align-items: center;
+	align-items: stretch;
 
 	&.show {
 		width: 100%;
@@ -3025,10 +3025,11 @@ and more scalable.
 
 	li {
 	border-bottom: 0;
-	text-align: center;
+	text-align: left;
 
 		a {
 			display: block;
+			text-align: left;
 			@include color_text__nav-item_default;
 			text-decoration: none;
 			padding: 0.75em;
