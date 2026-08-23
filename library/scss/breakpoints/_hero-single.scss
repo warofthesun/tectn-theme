@@ -9,10 +9,30 @@
 	background: transparent;
 	box-shadow: none;
 	color: $primary-10;
-	.nav a,
-	.header-nav a {
+
+	/* Top-level only (incl. parents with children wrapped in .nav-item__row) */
+	.nav > li > a,
+	.nav > li > .nav-item__row > a,
+	.nav > li > .nav-item__row > .nav-submenu-toggle,
+	.header-nav > .nav > li > a,
+	.header-nav > .nav > li > .nav-item__row > a,
+	.header-nav > .nav > li > .nav-item__row > .nav-submenu-toggle {
 		color: $primary-10;
 	}
+
+	/* Nested sub items keep normal site nav colors */
+	.nav ul.sub-menu a,
+	.nav ul.children a,
+	.nav ul.sub-menu .nav-submenu-toggle,
+	.nav ul.children .nav-submenu-toggle {
+		color: $primary-800;
+
+		&:hover,
+		&:focus {
+			color: $primary-600;
+		}
+	}
+
 	#mobile-nav,
 	.mobile-nav-toggle {
 		color: $primary-10;

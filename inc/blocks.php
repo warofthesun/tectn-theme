@@ -24,6 +24,20 @@ function tectn_register_acf_blocks() {
 add_action( 'init', 'tectn_register_acf_blocks' );
 
 /**
+ * Default ACF Blocks to v3 for WordPress 7+ iframe editor compatibility.
+ * Restores the toolbar pencil (opens Expanded Editor) and enables modern editing.
+ * Individual block.json `acf.blockVersion` values still win when set.
+ *
+ * @param int   $version Default ACF block version.
+ * @param array $block   Block settings.
+ * @return int
+ */
+function tectn_acf_default_block_version( $version, $block ) {
+	return 3;
+}
+add_filter( 'acf/blocks/default_block_version', 'tectn_acf_default_block_version', 10, 2 );
+
+/**
  * Whether the block is a TecTN theme block.
  *
  * @param array $block ACF block array.

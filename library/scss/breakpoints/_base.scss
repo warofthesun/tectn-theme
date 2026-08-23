@@ -2777,6 +2777,15 @@ h3, .h3 {
 	}
 }
 
+/* Block widget titles in the sidebar use h2; match site h3 */
+#sidebar1 h2.wp-block-heading {
+	font-size: 1.9em;
+	line-height: 1.1;
+	color: $primary-700;
+	margin-top: 0;
+	margin-bottom: 0.375em;
+}
+
 h4, .h4 {
 	font-size: 1.4em;
 	color: $primary-700;
@@ -2815,9 +2824,18 @@ HEADER STYLES
 		background-color: transparent;
 		box-shadow: none;
 
-		/* Logo uses secondary logo image as-is; only nav links forced light for contrast on hero */
-		.nav.top-nav a {
+		/* Logo uses secondary logo image as-is; only top-level nav forced light for contrast on hero */
+		.nav.top-nav > li > a,
+		.nav.top-nav > li > .nav-item__row > a,
+		.nav.top-nav > li > .nav-item__row > .nav-submenu-toggle {
 			filter: brightness(0) invert(1);
+		}
+
+		.nav.top-nav ul.sub-menu a,
+		.nav.top-nav ul.children a,
+		.nav.top-nav ul.sub-menu .nav-submenu-toggle,
+		.nav.top-nav ul.children .nav-submenu-toggle {
+			filter: none;
 		}
 	}
 }
@@ -3545,6 +3563,8 @@ POSTS & CONTENT STYLES
 /* Single post hero: all rules namespaced under .hero__container--single */
 .hero__container--single {
 	position: relative;
+	/* Tuck under transparent header (same pattern as landing; slightly more than 76px to close top gap) */
+	top: -80px;
 	width: 100vw;
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);

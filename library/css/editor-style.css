@@ -785,7 +785,7 @@ Here's a quick video to show how it works:
 http://www.youtube.com/watch?v=hwdVpKiJzac
 
 *********************/
-.c-button-group .c-button-group__button, #menu-login-and-forms.nav li a, .gallery-item .c-button-group__button, input[type=submit], input[type=file], #wp-submit {
+.c-button-group .c-button-group__button, #menu-login-and-forms.nav li a, .gallery-item .c-button-group__button, input[type=submit], input[type=file], #wp-submit, .wp-block-search__button.wp-element-button {
   display: inline-block;
   position: relative;
   font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
@@ -802,18 +802,18 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   -webkit-transition: background-color 0.14s ease-in-out;
   transition: background-color 0.14s ease-in-out;
 }
-.c-button-group .c-button-group__button .svg-inline--fa, #menu-login-and-forms.nav li a .svg-inline--fa, .gallery-item .c-button-group__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa {
+.c-button-group .c-button-group__button .svg-inline--fa, #menu-login-and-forms.nav li a .svg-inline--fa, .gallery-item .c-button-group__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa, .wp-block-search__button.wp-element-button .svg-inline--fa {
   font-size: 0.9em;
 }
-.c-button-group .c-button-group__button:hover, #menu-login-and-forms.nav li a:hover, .gallery-item .c-button-group__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-group .c-button-group__button:focus, #menu-login-and-forms.nav li a:focus, .gallery-item .c-button-group__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
+.c-button-group .c-button-group__button:hover, #menu-login-and-forms.nav li a:hover, .gallery-item .c-button-group__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .wp-block-search__button.wp-element-button:hover, .c-button-group .c-button-group__button:focus, #menu-login-and-forms.nav li a:focus, .gallery-item .c-button-group__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus, .wp-block-search__button.wp-element-button:focus {
   color: #fff;
   text-decoration: none;
   outline: none;
 }
-.c-button-group .c-button-group__button:active, #menu-login-and-forms.nav li a:active, .gallery-item .c-button-group__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active {
+.c-button-group .c-button-group__button:active, #menu-login-and-forms.nav li a:active, .gallery-item .c-button-group__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active, .wp-block-search__button.wp-element-button:active {
   top: 1px;
 }
-.c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--solid, .c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--solid.c-button-group__button--darkbg {
+.c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--solid, .wp-block-search__button.wp-element-button, .c-button-group.c-button-group--primary .c-button-group__button.c-button-group__button--solid.c-button-group__button--darkbg {
   background-color: #C9DD67;
   color: #505829;
   border-color: #A1B152;
@@ -840,12 +840,12 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   outline: none;
   background-color: rgba(244, 245, 237, 0.1);
 }
-.c-button-group.c-button-group--primary .c-button-group__button:hover, .c-button-group.c-button-group--primary .c-button-group__button:focus {
+.c-button-group.c-button-group--primary .c-button-group__button:hover, .wp-block-search__button.wp-element-button:hover, .c-button-group.c-button-group--primary .c-button-group__button:focus, .wp-block-search__button.wp-element-button:focus {
   background-color: #DFEBA4;
   text-decoration: none;
   outline: none;
 }
-.c-button-group.c-button-group--primary .c-button-group__button:active {
+.c-button-group.c-button-group--primary .c-button-group__button:active, .wp-block-search__button.wp-element-button:active {
   background-color: #A1B152;
 }
 .c-button-group.c-button-group--secondary .c-button-group__button.c-button-group__button--solid, #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
@@ -953,6 +953,24 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 }
 .c-button-group.c-button-group--accent .c-button-group__button:active {
   background-color: #BD951F;
+}
+
+/* Core Search block button → primary solid site button; height matches search input (40px) */
+.wp-block-search__button.wp-element-button {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 43px;
+  padding: 0 1em;
+  line-height: 1;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 /*
@@ -5053,6 +5071,15 @@ h3.light, .h3.light {
   color: #DFEBA4;
 }
 
+/* Block widget titles in the sidebar use h2; match site h3 */
+#sidebar1 h2.wp-block-heading {
+  font-size: 1.9em;
+  line-height: 1.1;
+  color: #79853E;
+  margin-top: 0;
+  margin-bottom: 0.375em;
+}
+
 h4, .h4 {
   font-size: 1.4em;
   color: #79853E;
@@ -5089,11 +5116,20 @@ HEADER STYLES
   background-color: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
-  /* Logo uses secondary logo image as-is; only nav links forced light for contrast on hero */
+  /* Logo uses secondary logo image as-is; only top-level nav forced light for contrast on hero */
 }
-.header.header--hero-transparent .nav.top-nav a {
+.header.header--hero-transparent .nav.top-nav > li > a,
+.header.header--hero-transparent .nav.top-nav > li > .nav-item__row > a,
+.header.header--hero-transparent .nav.top-nav > li > .nav-item__row > .nav-submenu-toggle {
   -webkit-filter: brightness(0) invert(1);
   filter: brightness(0) invert(1);
+}
+.header.header--hero-transparent .nav.top-nav ul.sub-menu a,
+.header.header--hero-transparent .nav.top-nav ul.children a,
+.header.header--hero-transparent .nav.top-nav ul.sub-menu .nav-submenu-toggle,
+.header.header--hero-transparent .nav.top-nav ul.children .nav-submenu-toggle {
+  -webkit-filter: none;
+  filter: none;
 }
 
 .header-logo {
@@ -5820,6 +5856,8 @@ POSTS & CONTENT STYLES
 /* Single post hero: all rules namespaced under .hero__container--single */
 .hero__container--single {
   position: relative;
+  /* Tuck under transparent header (same pattern as landing; slightly more than 76px to close top gap) */
+  top: -80px;
   width: 100vw;
   margin-left: -webkit-calc(50% - 50vw);
   margin-left: calc(50% - 50vw);

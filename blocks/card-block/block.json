@@ -2,23 +2,38 @@
   "name": "tectn/card-block",
   "title": "Card block",
   "description": "Section with short headline and repeater of cards (image, title, details, headline, body). Single card centers.",
-  "style": ["file:../../library/css/style.css"],
+  "style": [
+    "file:../../library/css/style.css"
+  ],
   "category": "tectn-blocks",
   "icon": "grid-view",
-  "keywords": ["card", "grid", "headline"],
+  "keywords": [
+    "card",
+    "grid",
+    "headline"
+  ],
   "acf": {
     "mode": "preview",
-    "renderTemplate": "card_block.php"
+    "renderTemplate": "card_block.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": false
   },
   "supports": {
     "jsx": true,
     "anchor": true,
-    "align": ["full", "wide"]
+    "align": [
+      "full",
+      "wide"
+    ]
   },
   "example": {
     "attributes": {
       "mode": "preview",
-      "data": { "inserter_preview": true }
+      "data": {
+        "inserter_preview": true
+      }
     }
-  }
+  },
+  "apiVersion": 3
 }

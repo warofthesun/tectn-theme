@@ -2,13 +2,23 @@
   "name": "tectn/content-container",
   "title": "Text + Image Combo",
   "description": "Container holding two stacked Text + Image blocks with optional background",
-  "style": ["file:../../library/css/style.css"],
+  "style": [
+    "file:../../library/css/style.css"
+  ],
   "category": "tectn-blocks",
   "icon": "admin-comments",
-  "keywords": ["card", "text", "steps", "container"],
+  "keywords": [
+    "card",
+    "text",
+    "steps",
+    "container"
+  ],
   "acf": {
     "mode": "preview",
-    "renderTemplate": "content_container.php"
+    "renderTemplate": "content_container.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": false
   },
   "attributes": {
     "tectnInsideContainer": {
@@ -26,7 +36,10 @@
   "example": {
     "attributes": {
       "mode": "preview",
-      "data": { "inserter_preview": true }
+      "data": {
+        "inserter_preview": true
+      }
     }
-  }
+  },
+  "apiVersion": 3
 }

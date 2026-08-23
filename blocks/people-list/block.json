@@ -2,16 +2,24 @@
   "name": "tectn/people-list",
   "title": "People list",
   "description": "Select and display People entries (Person post type) in a simple list.",
-  "style": ["file:../../library/css/style.css"],
+  "style": [
+    "file:../../library/css/style.css"
+  ],
   "category": "tectn-blocks",
   "icon": "groups",
   "supports": {
-    "align": ["wide", "full"],
+    "align": [
+      "wide",
+      "full"
+    ],
     "anchor": true
   },
   "acf": {
     "mode": "edit",
-    "renderTemplate": "people_list.php"
+    "renderTemplate": "people_list.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": false
   },
   "example": {
     "attributes": {
@@ -21,6 +29,6 @@
       }
     }
   },
-  "textdomain": "tectn_theme"
+  "textdomain": "tectn_theme",
+  "apiVersion": 3
 }
-

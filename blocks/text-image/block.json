@@ -2,18 +2,32 @@
   "name": "tectn/text-image",
   "title": "Text + Image",
   "description": "Header, body copy, CTAs, and image gallery, slideshow, or video",
-  "style": ["file:../../library/css/style.css"],
+  "style": [
+    "file:../../library/css/style.css"
+  ],
   "category": "tectn-blocks",
   "icon": "screenoptions",
-  "keywords": ["image", "content", "layout"],
+  "keywords": [
+    "image",
+    "content",
+    "layout"
+  ],
   "acf": {
     "mode": "preview",
-    "renderTemplate": "text_image.php"
+    "renderTemplate": "text_image.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": false
   },
-  "usesContext": ["tectn/insideContainer"],
+  "usesContext": [
+    "tectn/insideContainer"
+  ],
   "supports": {
     "anchor": true,
-    "align": ["full", "wide"]
+    "align": [
+      "full",
+      "wide"
+    ]
   },
   "example": {
     "attributes": {
@@ -22,5 +36,6 @@
         "inserter_preview": true
       }
     }
-  }
+  },
+  "apiVersion": 3
 }

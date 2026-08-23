@@ -2,13 +2,22 @@
   "name": "tectn/content-cards",
   "title": "Multi-card repeater",
   "description": "Informational cards with optional title and brief body copy",
-  "style": ["file:../../library/css/style.css"],
+  "style": [
+    "file:../../library/css/style.css"
+  ],
   "category": "tectn-blocks",
   "icon": "admin-comments",
-  "keywords": ["card", "text", "steps"],
+  "keywords": [
+    "card",
+    "text",
+    "steps"
+  ],
   "acf": {
     "mode": "preview",
-    "renderTemplate": "card_repeater.php"
+    "renderTemplate": "card_repeater.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": false
   },
   "supports": {
     "jsx": true,
@@ -17,7 +26,10 @@
   "example": {
     "attributes": {
       "mode": "preview",
-      "data": {"inserter_preview": true}
+      "data": {
+        "inserter_preview": true
+      }
     }
-  } 
+  },
+  "apiVersion": 3
 }

@@ -2,18 +2,32 @@
   "name": "tectn/iframe-embed",
   "title": "Iframe embed",
   "description": "Optional headline and a pasted iframe embed (maps, videos, etc.).",
-  "style": ["file:../../library/css/style.css", "file:./style.css"],
+  "style": [
+    "file:../../library/css/style.css",
+    "file:./style.css"
+  ],
   "category": "tectn-blocks",
   "icon": "embed-generic",
-  "keywords": ["iframe", "embed", "map", "video"],
+  "keywords": [
+    "iframe",
+    "embed",
+    "map",
+    "video"
+  ],
   "acf": {
     "mode": "preview",
-    "renderTemplate": "iframe_embed.php"
+    "renderTemplate": "iframe_embed.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": false
   },
   "supports": {
     "jsx": true,
     "anchor": true,
-    "align": ["full", "wide"]
+    "align": [
+      "full",
+      "wide"
+    ]
   },
   "example": {
     "attributes": {
@@ -22,5 +36,6 @@
         "inserter_preview": true
       }
     }
-  }
+  },
+  "apiVersion": 3
 }

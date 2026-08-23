@@ -1,14 +1,24 @@
 {
   "name": "tectn/information-lists",
   "title": "Information lists",
-  "description": "Display a link list from Site Settings → Information lists in a configurable grid.",
-  "style": ["file:../../library/css/style.css"],
+  "description": "Display a link list from Site Settings \u2192 Information lists in a configurable grid.",
+  "style": [
+    "file:../../library/css/style.css"
+  ],
   "category": "tectn-blocks",
   "icon": "list-view",
-  "keywords": ["list", "links", "grid", "columns"],
+  "keywords": [
+    "list",
+    "links",
+    "grid",
+    "columns"
+  ],
   "acf": {
     "mode": "preview",
-    "renderTemplate": "information_lists.php"
+    "renderTemplate": "information_lists.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": false
   },
   "supports": {
     "jsx": true,
@@ -17,7 +27,10 @@
   "example": {
     "attributes": {
       "mode": "preview",
-      "data": { "inserter_preview": true }
+      "data": {
+        "inserter_preview": true
+      }
     }
-  }
+  },
+  "apiVersion": 3
 }

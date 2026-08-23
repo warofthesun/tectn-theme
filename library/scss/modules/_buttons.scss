@@ -238,6 +238,20 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 
 } // end .button
 
+/* Core Search block button → primary solid site button; height matches search input (40px) */
+.wp-block-search__button.wp-element-button {
+  @extend %btn;
+  @extend %btn--primary;
+  @extend %btn--primary--solid;
+  box-sizing: border-box;
+  height: 43px;
+  padding: 0 $spacing-md;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /*
 An example button.
 You can use this example if you want. Just replace all the variables

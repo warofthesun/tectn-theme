@@ -1,14 +1,24 @@
 {
   "name": "tectn/info-table",
   "title": "Information table",
-  "description": "Display a four-column table from Site Settings → Information tables.",
-  "style": ["file:../../library/css/style.css"],
+  "description": "Display a four-column table from Site Settings \u2192 Information tables.",
+  "style": [
+    "file:../../library/css/style.css"
+  ],
   "category": "tectn-blocks",
   "icon": "editor-table",
-  "keywords": ["table", "grid", "information", "columns"],
+  "keywords": [
+    "table",
+    "grid",
+    "information",
+    "columns"
+  ],
   "acf": {
     "mode": "edit",
-    "renderTemplate": "info_table.php"
+    "renderTemplate": "info_table.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": false
   },
   "supports": {
     "jsx": true,
@@ -21,5 +31,6 @@
         "inserter_preview": true
       }
     }
-  }
+  },
+  "apiVersion": 3
 }

@@ -508,6 +508,11 @@
 			z-index: 2;
   		}
 
+		/* Single: keep base tuck under header (do not reset to 0) */
+		&--single {
+			top: -80px;
+		}
+
   		&--landing {
   			// Match initiative / medium / small hero headline scale; rem avoids parent font-size shrinking em
   			h1.hero__title--landing {

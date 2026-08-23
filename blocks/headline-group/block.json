@@ -1,26 +1,35 @@
 {
-    "name": "tectn/headline-group",
-    "title": "Headline group",
-    "description": "Headline, body copy, and 1 to 2 CTA buttons",
-    "style": [ "file:../../library/css/style.css" ],
-    "category": "tectn-blocks",
-    "icon": "screenoptions",
-    "keywords": ["headline", "content", "buttons"],
-    "acf": {
-        "mode": "preview",
-        "renderTemplate": "headline_group.php"
-    },
-    "supports": {
-        "jsx": true,
-        "anchor": true
-    },
-    "example": {
+  "name": "tectn/headline-group",
+  "title": "Headline group",
+  "description": "Headline, body copy, and 1 to 2 CTA buttons",
+  "style": [
+    "file:../../library/css/style.css"
+  ],
+  "category": "tectn-blocks",
+  "icon": "screenoptions",
+  "keywords": [
+    "headline",
+    "content",
+    "buttons"
+  ],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "headline_group.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": false
+  },
+  "supports": {
+    "jsx": true,
+    "anchor": true
+  },
+  "example": {
     "attributes": {
       "mode": "preview",
       "data": {
         "inserter_preview": true
       }
     }
-  }
+  },
+  "apiVersion": 3
 }
-
