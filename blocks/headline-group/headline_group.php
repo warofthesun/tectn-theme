@@ -26,7 +26,7 @@ if ( $is_inserter_preview ) {
 $preheader       = get_field( 'preheader' );
 $headline        = get_field( 'headline' );
 $headline_size   = get_field( 'headline_size' );
-$on_dark         = (bool) get_field( 'on_dark_background' );
+$on_dark         = tectn_acf_block_bool( 'on_dark_background', $block, '', false );
 $headline_parsed = function_exists( 'tectn_headline_tag_and_class' ) ? tectn_headline_tag_and_class( $headline_size, '' ) : array( 'tag' => 'h2', 'class' => '' );
 $body            = get_field( 'body_copy' );
 

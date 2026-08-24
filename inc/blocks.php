@@ -11,14 +11,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Register ACF blocks (single source of truth).
+ * Sorted by block.json title so the inserter lists them alphabetically
+ * (e.g. Text + Image before Text + Image Combo), not by folder name.
  */
 function tectn_register_acf_blocks() {
 	$block_dirs = glob( get_template_directory() . '/blocks/*', GLOB_ONLYDIR );
 	if ( ! $block_dirs ) {
 		return;
 	}
+
+	$blocks = array();
 	foreach ( $block_dirs as $dir ) {
-		register_block_type( $dir );
+		$json_path = $dir . '/block.json';
+		$title     = basename( $dir );
+		if ( is_readable( $json_path ) ) {
+			$meta = json_decode( (string) file_get_contents( $json_path ), true );
+			if ( is_array( $meta ) && ! empty( $meta['title'] ) && is_string( $meta['title'] ) ) {
+				$title = $meta['title'];
+			}
+		}
+		$blocks[] = array(
+			'dir'   => $dir,
+			'title' => $title,
+		);
+	}
+
+	usort(
+		$blocks,
+		static function ( $a, $b ) {
+			return strcasecmp( $a['title'], $b['title'] );
+		}
+	);
+
+	foreach ( $blocks as $block ) {
+		register_block_type( $block['dir'] );
 	}
 }
 add_action( 'init', 'tectn_register_acf_blocks' );

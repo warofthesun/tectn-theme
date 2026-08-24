@@ -145,3 +145,87 @@ function tectn_slider_focal_css( $focal_point ) {
 	}
 	return 'center center';
 }
+
+/**
+ * Whether a value is ACF Blocks auto-inline-editing placeholder (not a real field value).
+ *
+ * During some editor canvas renders with autoInlineEditing, get_field() returns
+ * strings like "acf_auto_inline_editing_field_name_{name}" instead of stored data.
+ * Those strings are truthy and break true/false and select checks.
+ *
+ * @param mixed $value Raw field value.
+ * @return bool
+ */
+function tectn_acf_is_inline_editing_placeholder( $value ) {
+	return is_string( $value ) && strpos( $value, 'acf_auto_inline_editing_field_name_' ) === 0;
+}
+
+/**
+ * Read an ACF block field: prefer $block['data'], skip inline-editing placeholders.
+ *
+ * @param string                    $name      Field name.
+ * @param array<string, mixed>|null $block     Block array from render template.
+ * @param string                    $field_key Optional field key (field_…).
+ * @return mixed|null Null when unset / only placeholder available.
+ */
+function tectn_acf_block_field( $name, $block = null, $field_key = '' ) {
+	if ( is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) {
+		$data = $block['data'];
+		if ( $field_key !== '' && array_key_exists( $field_key, $data ) && ! tectn_acf_is_inline_editing_placeholder( $data[ $field_key ] ) ) {
+			return $data[ $field_key ];
+		}
+		if ( array_key_exists( $name, $data ) && ! tectn_acf_is_inline_editing_placeholder( $data[ $name ] ) ) {
+			return $data[ $name ];
+		}
+	}
+
+	$value = function_exists( 'get_field' ) ? get_field( $name ) : null;
+	if ( tectn_acf_is_inline_editing_placeholder( $value ) ) {
+		return null;
+	}
+	return $value;
+}
+
+/**
+ * Coerce ACF true/false for blocks (handles "0"/"1" and inline-editing placeholders).
+ *
+ * @param string                    $name      Field name.
+ * @param array<string, mixed>|null $block     Block array.
+ * @param string                    $field_key Optional field key.
+ * @param bool                      $default   When unset.
+ * @return bool
+ */
+function tectn_acf_block_bool( $name, $block = null, $field_key = '', $default = false ) {
+	$value = tectn_acf_block_field( $name, $block, $field_key );
+	if ( $value === null || $value === '' ) {
+		return (bool) $default;
+	}
+	if ( is_bool( $value ) ) {
+		return $value;
+	}
+	if ( is_int( $value ) || is_float( $value ) ) {
+		return (int) $value === 1;
+	}
+	$str = strtolower( trim( (string) $value ) );
+	if ( in_array( $str, array( '0', 'false', 'off', 'no' ), true ) ) {
+		return false;
+	}
+	if ( in_array( $str, array( '1', 'true', 'on', 'yes' ), true ) ) {
+		return true;
+	}
+	return (bool) $default;
+}
+
+/**
+ * Read an ACF block array/repeater/gallery field; empty array when missing or placeholder.
+ *
+ * @param string                    $name      Field name.
+ * @param array<string, mixed>|null $block     Block array.
+ * @param string                    $field_key Optional field key.
+ * @return array<mixed>
+ */
+function tectn_acf_block_array( $name, $block = null, $field_key = '' ) {
+	$value = tectn_acf_block_field( $name, $block, $field_key );
+	return is_array( $value ) ? $value : array();
+}
+

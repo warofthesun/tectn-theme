@@ -76,19 +76,19 @@ $show_content_section_placeholder =
 $py            = get_field('padding_y') ?: 'xl';
 $content_align  = get_field('content_align') ?: 'middle';
 $min_height    = (int) (get_field('min_height') ?: 400);
-$bg_enable     = (bool) get_field('bg_enable');
-$bg_type    = get_field('bg_type') ?: 'image';
-$bg_image   = get_field('bg_image');
-$bg_overlay = get_field('bg_overlay') ?: 'warm'; // none | warm | medium | dark
-$bg_color   = get_field('bg_color');
+$bg_enable     = tectn_acf_block_bool( 'bg_enable', $block, '', false );
+$bg_type    = tectn_acf_block_field( 'bg_type', $block ) ?: 'image';
+$bg_image   = tectn_acf_block_field( 'bg_image', $block );
+$bg_overlay = tectn_acf_block_field( 'bg_overlay', $block ) ?: 'warm'; // none | warm | medium | dark
+$bg_color   = tectn_acf_block_field( 'bg_color', $block );
 if ( $bg_type === 'color' ) {
 	$bg_color = function_exists( 'tectn_color_or_default' ) ? tectn_color_or_default( $bg_color ) : ( $bg_color ?: '#EFF5D1' );
 }
 $bg_height  = (int) (get_field('bg_height') ?: 800);
 $bg_align_y = get_field('bg_align_y') ?: 'center';
 
-$bg_color_contains = (bool) get_field( 'bg_color_contains' );
-$remove_bottom_margin = (bool) get_field('remove_bottom_margin');
+$bg_color_contains = tectn_acf_block_bool( 'bg_color_contains', $block, '', false );
+$remove_bottom_margin = tectn_acf_block_bool( 'remove_bottom_margin', $block, '', false );
 $classes = ['c-content-section', "c-content-section--py-{$py}", "c-content-section--content-{$content_align}"];
 $classes[] = 'c-content-section--overlay-' . $bg_overlay;
 if ($remove_bottom_margin) $classes[] = 'c-content-section--no-mb';

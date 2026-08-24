@@ -39,10 +39,7 @@ $is_editor_context =
 	( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) ||
 	( defined( 'REST_REQUEST' ) && REST_REQUEST );
 
-$cards = get_field( 'cards' );
-if ( ! is_array( $cards ) ) {
-	$cards = array();
-}
+$cards = tectn_acf_block_array( 'cards', $block );
 
 if ( $is_editor_context && empty( $cards ) && empty( $block_data['inserter_preview'] ) ) {
 	echo '<section class="c-card-block alignfull">';

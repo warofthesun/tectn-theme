@@ -1,5 +1,58 @@
-/* Block-specific tweaks; layout tokens live in theme style.css (.c-iframe-embed). */
+/**
+ * Iframe Embed — editor + front-end block styles.
+ * Kept in sync with theme .c-iframe-embed rules so the canvas preview matches.
+ */
+
+.c-iframe-embed__frame {
+	position: relative;
+	width: 100%;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 0;
+	padding-bottom: 56.25%; /* 16:9 fallback */
+	border-radius: 0.5em;
+	overflow: hidden;
+}
+
 .c-iframe-embed__frame iframe {
-	display: block;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
 	max-width: 100%;
+	display: block;
+	border: 0;
+	min-height: 320px;
+}
+
+.c-iframe-embed--ratio-4-3 .c-iframe-embed__frame {
+	padding-bottom: 75%; /* 4:3 fallback */
+}
+
+@supports (aspect-ratio: 1 / 1) {
+	.c-iframe-embed__frame {
+		height: auto;
+		padding-bottom: 0;
+		aspect-ratio: 16 / 9;
+	}
+
+	.c-iframe-embed--ratio-4-3 .c-iframe-embed__frame {
+		aspect-ratio: 4 / 3;
+	}
+}
+
+.c-iframe-embed--no-min-height .c-iframe-embed__frame iframe {
+	min-height: 0;
+}
+
+.c-iframe-embed--no-bg .c-iframe-embed__headline,
+.c-iframe-embed--no-bg .c-iframe-embed__body {
+	background-color: transparent !important;
+	background-image: none !important;
+}
+
+/* Visible on light editor canvas when background is off */
+.c-iframe-embed--no-bg .c-iframe-embed__headline {
+	color: #505829;
 }

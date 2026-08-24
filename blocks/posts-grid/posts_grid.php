@@ -18,7 +18,7 @@ if ( $is_inserter_preview ) {
 
 $block_id = !empty($block['anchor']) ? $block['anchor'] : 'posts-grid-' . $block['id'];
 
-$remove_bottom_margin = (bool) get_field('remove_bottom_margin');
+$remove_bottom_margin = tectn_acf_block_bool( 'remove_bottom_margin', $block, '', false );
 $classes = ['c-posts'];
 if (!empty($block['className'])) $classes[] = $block['className'];
 if ($remove_bottom_margin) $classes[] = 'c-posts--no-mb';

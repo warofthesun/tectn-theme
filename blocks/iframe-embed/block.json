@@ -6,6 +6,9 @@
     "file:../../library/css/style.css",
     "file:./style.css"
   ],
+  "editorStyle": [
+    "file:./style.css"
+  ],
   "category": "tectn-blocks",
   "icon": "embed-generic",
   "keywords": [

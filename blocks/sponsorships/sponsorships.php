@@ -34,7 +34,7 @@ $bg_max_height = (int) (get_field('max_bg_height') ?: 800);
 $preheader        = get_field('preheader');
 $headline         = get_field('headline');
 $headline_size    = get_field('headline_size') ?: 'h2';
-$on_dark          = (bool) get_field('on_dark_background');
+$on_dark          = tectn_acf_block_bool( 'on_dark_background', $block, '', false );
 $headline_parsed  = function_exists( 'tectn_headline_tag_and_class' ) ? tectn_headline_tag_and_class( $headline_size, 'c-sponsorships__title' ) : array( 'tag' => 'h2', 'class' => 'c-sponsorships__title' );
 
 $bg_url = '';
@@ -48,8 +48,7 @@ if ( ! empty( $bg_image ) ) {
 	}
 }
 
-$tiers = get_field('tiers');
-if (!is_array($tiers)) $tiers = [];
+$tiers = tectn_acf_block_array( 'tiers', $block );
 
 if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && empty( $tiers ) ) {
   echo '<div class="c-sponsorships__placeholder alignfull">';

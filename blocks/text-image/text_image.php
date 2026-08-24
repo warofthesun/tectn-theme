@@ -25,10 +25,13 @@
 
     // When nested inside Content Section or Text + Image Combo, always defer background to the parent.
     $is_inside_container = ! empty( $block['context']['tectn/insideContainer'] );
-    $enable_bg         = $is_inside_container ? false : get_field('use_colored_background');
-    $content_full_width = (bool) get_field('content_full_width');
+    $enable_bg           = $is_inside_container
+        ? false
+        : tectn_acf_block_bool( 'use_colored_background', $block, 'field_6991ee833dec1', false );
+    $content_full_width  = tectn_acf_block_bool( 'content_full_width', $block, 'field_6991ee_content_full', false );
+
     // Resolve background: hex from color picker, or legacy named values (pre-picker).
-    $bg_raw = get_field( 'background_color' );
+    $bg_raw = tectn_acf_block_field( 'background_color', $block );
     $bg_legacy = array(
         'sage'     => '#EFF5D1',
         'cream'    => '#F0F4EC',
@@ -43,30 +46,34 @@
         $bg_value = $bg_raw;
     }
 
-    $preheader        = get_field('preheader');
-    $headline         = get_field('headline');
-    $headline_size    = get_field('headline_size');
-    $on_dark          = (bool) get_field('on_dark_background');
+    $preheader        = tectn_acf_block_field( 'preheader', $block );
+    $headline         = tectn_acf_block_field( 'headline', $block );
+    $headline_size    = tectn_acf_block_field( 'headline_size', $block );
+    $on_dark          = tectn_acf_block_bool( 'on_dark_background', $block, '', false );
     $headline_parsed  = function_exists( 'tectn_headline_tag_and_class' ) ? tectn_headline_tag_and_class( $headline_size, '' ) : array( 'tag' => 'h2', 'class' => '' );
-    $body             = get_field('body_copy');
-    $content_position = get_field('content_vertical');
-    $image_position  = get_field('image_horizontal');
-    $media_type       = get_field('media_type') ?: 'gallery';
-    $images           = get_field('images');
-    $slideshow_gallery = get_field('slideshow_gallery');
-    $slideshow_aspect  = get_field('slideshow_aspect');
+    $body             = tectn_acf_block_field( 'body_copy', $block );
+    $content_position = tectn_acf_block_field( 'content_vertical', $block );
+    $image_position  = tectn_acf_block_field( 'image_horizontal', $block );
+    $media_type_raw   = tectn_acf_block_field( 'media_type', $block );
+    $media_type       = ( is_string( $media_type_raw ) && $media_type_raw !== '' ) ? $media_type_raw : 'gallery';
+    $images           = tectn_acf_block_array( 'images', $block );
+    $slideshow_gallery = tectn_acf_block_array( 'slideshow_gallery', $block );
+    $slideshow_aspect  = tectn_acf_block_field( 'slideshow_aspect', $block );
     $slideshow_aspect  = ( is_string( $slideshow_aspect ) && $slideshow_aspect === 'portrait' ) ? 'portrait' : 'square';
-    $focal_css         = function_exists( 'tectn_slider_focal_css' ) ? tectn_slider_focal_css( get_field( 'focal_point' ) ) : 'center center';
+    $focal_css         = function_exists( 'tectn_slider_focal_css' ) ? tectn_slider_focal_css( tectn_acf_block_field( 'focal_point', $block ) ) : 'center center';
     $focal_style       = 'object-position: ' . $focal_css;
-    $autoplay_raw     = get_field('autoplay');
+    $autoplay_raw     = tectn_acf_block_field( 'autoplay', $block );
     // Legacy slideshows had no Autoplay field and always played; default on when unset.
-    $autoplay         = ( $media_type === 'slideshow' && $autoplay_raw === null ) ? true : (bool) $autoplay_raw;
-    $show_captions    = (bool) get_field('show_captions');
-    $video_url        = get_field('video_url', false, false); // raw URL for wp_oembed_get()
-    $count            = is_array($images) ? count($images) : 0;
-    $slideshow_count  = is_array($slideshow_gallery) ? count($slideshow_gallery) : 0;
+    $autoplay         = ( $media_type === 'slideshow' && $autoplay_raw === null ) ? true : tectn_acf_block_bool( 'autoplay', $block, '', false );
+    $show_captions    = tectn_acf_block_bool( 'show_captions', $block, '', false );
+    $video_url        = tectn_acf_block_field( 'video_url', $block ); // raw URL for wp_oembed_get()
+    if ( ! is_string( $video_url ) ) {
+        $video_url = '';
+    }
+    $count            = count( $images );
+    $slideshow_count  = count( $slideshow_gallery );
 
-    $has_video = ($media_type === 'video' && ! empty($video_url) && is_string($video_url));
+    $has_video = ($media_type === 'video' && $video_url !== '');
     $has_gallery = ($media_type === 'gallery' && $count > 0);
     $has_slideshow = ($media_type === 'slideshow' && $slideshow_count > 0);
     $has_media = $has_video || $has_gallery || $has_slideshow;
@@ -303,7 +310,7 @@
                         <?php esc_html_e( 'Add images to the slideshow gallery in the block settings.', 'tectn_theme' ); ?>
                     </div>
                 </div>
-            <?php elseif ( $images ) : ?>
+            <?php elseif ( $has_gallery ) : ?>
                 <ul class="<?= esc_attr($grid_class); ?>">
                     <?php if ($count === 3): ?>
 

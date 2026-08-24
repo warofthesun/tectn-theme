@@ -36,16 +36,16 @@ $slider_type = is_string( $slider_type ) && $slider_type !== '' ? $slider_type :
 $headline       = get_field( 'headline' );
 $headline_size  = get_field( 'headline_size' ) ?: 'h2';
 $preheader      = get_field( 'preheader' ); // Same preheader pattern as headline-group: output as <h5 class="c-headline-group__preheader">
-$on_dark        = (bool) get_field( 'on_dark_background' );
+$on_dark        = tectn_acf_block_bool( 'on_dark_background', $block, '', false );
 $body           = get_field( 'body' );
 $body           = is_string( $body ) ? $body : '';
-$autoplay         = (bool) get_field( 'autoplay' );
+$autoplay         = tectn_acf_block_bool( 'autoplay', $block, '', false );
 $slideshow_aspect = get_field( 'slideshow_aspect' );
 $slideshow_aspect = ( is_string( $slideshow_aspect ) && $slideshow_aspect === 'portrait' ) ? 'portrait' : 'square';
-$show_captions = (bool) get_field( 'show_captions' );
+$show_captions = tectn_acf_block_bool( 'show_captions', $block, '', false );
 $list_item_icon = get_field( 'list_item_icon' );
-$gallery        = get_field( 'gallery' );
-$focal_css      = function_exists( 'tectn_slider_focal_css' ) ? tectn_slider_focal_css( get_field( 'focal_point' ) ) : 'center center';
+$gallery        = tectn_acf_block_array( 'gallery', $block );
+$focal_css      = function_exists( 'tectn_slider_focal_css' ) ? tectn_slider_focal_css( tectn_acf_block_field( 'focal_point', $block ) ) : 'center center';
 $focal_style    = 'object-position: ' . $focal_css;
 
 $list_icon_html = '';

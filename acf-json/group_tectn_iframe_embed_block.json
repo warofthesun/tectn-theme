@@ -35,6 +35,60 @@
             "rows": 6,
             "placeholder": "Paste iframe code here",
             "new_lines": ""
+        },
+        {
+            "key": "field_ieb_show_background",
+            "label": "Show background",
+            "name": "show_background",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Dark card behind the embed. Independent of height and ratio.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "50", "class": "", "id": "" },
+            "message": "",
+            "default_value": 1,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_ieb_use_min_height",
+            "label": "Use minimum height",
+            "name": "use_min_height",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "320px minimum on the iframe. Turn off so height follows the aspect ratio only. Independent of background.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "50", "class": "", "id": "" },
+            "message": "",
+            "default_value": 1,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_ieb_aspect_ratio",
+            "label": "Aspect ratio",
+            "name": "aspect_ratio",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "Responsive frame ratio (max width 800px).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "16_9": "16 / 9",
+                "4_3": "4 / 3"
+            },
+            "default_value": "16_9",
+            "return_format": "value",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "layout": "horizontal"
         }
     ],
     "location": [
@@ -56,5 +110,5 @@
     "description": "Matches Paste embed pattern from group_69cdc5bfb43fe for block context.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1775093666
+    "modified": 1787531768
 }

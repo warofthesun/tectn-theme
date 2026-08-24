@@ -40,10 +40,7 @@ $is_editor_context =
 	( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) ||
 	( defined( 'REST_REQUEST' ) && REST_REQUEST );
 
-$buttons = get_field( 'buttons' );
-if ( ! is_array( $buttons ) ) {
-	$buttons = array();
-}
+$buttons = tectn_acf_block_array( 'buttons', $block );
 
 // Editor empty state — do not gate by $block['mode']; new blocks load in preview mode.
 if ( $is_editor_context && empty( $buttons ) && empty( $block_data['inserter_preview'] ) ) {
@@ -58,9 +55,9 @@ if ( $is_editor_context && empty( $buttons ) && empty( $block_data['inserter_pre
 
 $block_id = ! empty( $block['anchor'] ) ? $block['anchor'] : 'button-grid-' . $block['id'];
 
-$bg_style  = get_field( 'background_style' ) ?: 'color';
+$bg_style  = tectn_acf_block_field( 'background_style', $block ) ?: 'color';
 $no_bg     = ( $bg_style === 'none' );
-$bg_color  = ! $no_bg && get_field( 'background_color' ) ? esc_attr( get_field( 'background_color' ) ) : '#EFF5D1';
+$bg_color  = ! $no_bg && tectn_acf_block_field( 'background_color', $block ) ? esc_attr( tectn_acf_block_field( 'background_color', $block ) ) : '#EFF5D1';
 $per_row   = (int) ( get_field( 'buttons_per_row' ) ?: 3 );
 $per_row   = max( 1, min( 4, $per_row ) );
 $width     = get_field( 'block_width' ) ?: 'medium';

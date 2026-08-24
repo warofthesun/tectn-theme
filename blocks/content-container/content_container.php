@@ -37,26 +37,26 @@ if ( $is_inserter_preview ) {
 // Fields (add these in ACF)
 $py = get_field('padding_y') ?: 'xl';
 
-$bg_enable = (bool) get_field('bg_enable');
-$bg_type   = get_field('bg_type') ?: 'image'; // image | color
+$bg_enable = tectn_acf_block_bool( 'bg_enable', $block, '', false );
+$bg_type   = tectn_acf_block_field( 'bg_type', $block ) ?: 'image'; // image | color
 
 // Image background fields
-$bg_image  = get_field('bg_image');
-$bg_height = (int) (get_field('bg_height') ?: 800);
+$bg_image  = tectn_acf_block_field( 'bg_image', $block );
+$bg_height = (int) ( tectn_acf_block_field( 'bg_height', $block ) ?: 800 );
 
 // Solid color background fields
-$bg_color = get_field( 'bg_color' ); // hex from ACF color picker
+$bg_color = tectn_acf_block_field( 'bg_color', $block ); // hex from ACF color picker
 if ( $bg_type === 'color' ) {
 	$bg_color = function_exists( 'tectn_color_or_default' ) ? tectn_color_or_default( $bg_color ) : ( $bg_color ?: '#EFF5D1' );
 }
 
-$remove_bottom_margin = (bool) get_field('remove_bottom_margin');
+$remove_bottom_margin = tectn_acf_block_bool( 'remove_bottom_margin', $block, '', false );
 $classes = ['c-band', "c-band--py-{$py}"];
 if ($remove_bottom_margin) $classes[] = 'c-band--no-mb';
 if ( $bg_enable && $bg_type !== 'color' ) {
   $classes[] = 'c-band--grad-strong';
 }
-if ( $bg_type === 'color' && (bool) get_field( 'bg_color_contains' ) ) {
+if ( $bg_type === 'color' && tectn_acf_block_bool( 'bg_color_contains', $block, '', false ) ) {
   $classes[] = 'c-band--bg-contains';
 }
 

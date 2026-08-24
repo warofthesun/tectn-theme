@@ -13,10 +13,10 @@ $block_id = ! empty( $block['anchor'] ) ? $block['anchor'] : 'tectn-information-
 
 $block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
 
-$il_bg_style = function_exists( 'get_field' ) ? get_field( 'background_style' ) : null;
+$il_bg_style = function_exists( 'tectn_acf_block_field' ) ? tectn_acf_block_field( 'background_style', $block ) : ( function_exists( 'get_field' ) ? get_field( 'background_style' ) : null );
 $il_bg_style = ( $il_bg_style !== null && $il_bg_style !== '' ) ? (string) $il_bg_style : 'color';
 $il_no_bg    = ( $il_bg_style === 'none' );
-$il_bg_raw   = function_exists( 'get_field' ) ? get_field( 'background_color' ) : null;
+$il_bg_raw   = function_exists( 'tectn_acf_block_field' ) ? tectn_acf_block_field( 'background_color', $block ) : ( function_exists( 'get_field' ) ? get_field( 'background_color' ) : null );
 $il_bg_color = ( $il_bg_raw !== null && $il_bg_raw !== '' ) ? esc_attr( (string) $il_bg_raw ) : '#EFF5D1';
 
 $is_inserter_preview =

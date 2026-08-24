@@ -33,10 +33,16 @@ $section_headline = get_field( 'section_headline' );
 $raw_embed        = get_field( 'iframe_embed' );
 $raw_embed        = is_string( $raw_embed ) ? trim( $raw_embed ) : '';
 
-if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && $raw_embed === '' ) {
+/**
+ * Build root classes including independent layout modifiers.
+ *
+ * @param array<string, mixed> $block Block array.
+ * @return array{0: string, 1: string} Block id and class string (with align).
+ */
+$tectn_iframe_embed_root = static function ( $block ) {
 	$block_id = isset( $block['id'] ) ? $block['id'] : 'iframe-embed-' . wp_rand( 1000, 9999 );
 	$align    = ! empty( $block['align'] ) ? ' align' . $block['align'] : '';
-	$classes  = array( 'c-iframe-embed' );
+	$classes  = array_merge( array( 'c-iframe-embed' ), tectn_iframe_embed_modifier_classes( $block ) );
 	if ( ! empty( $block['className'] ) ) {
 		foreach ( preg_split( '/\s+/', trim( $block['className'] ) ) as $c ) {
 			if ( $c !== '' ) {
@@ -44,9 +50,14 @@ if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && $raw_embe
 			}
 		}
 	}
+	return array( (string) $block_id, implode( ' ', $classes ) . $align );
+};
+
+if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && $raw_embed === '' ) {
+	list( $block_id, $class_attr ) = $tectn_iframe_embed_root( $block );
 	?>
-<div id="<?php echo esc_attr( (string) $block_id ); ?>"
-	class="<?php echo esc_attr( implode( ' ', $classes ) . $align ); ?>"
+<div id="<?php echo esc_attr( $block_id ); ?>"
+	class="<?php echo esc_attr( $class_attr ); ?>"
 	aria-label="<?php esc_attr_e( 'Embedded content', 'tectn_theme' ); ?>">
 	<div class="c-iframe-embed__body">
 		<div class="c-iframe-embed__placeholder">
@@ -59,20 +70,10 @@ if ( $is_editor_context && empty( $block_data['inserter_preview'] ) && $raw_embe
 	return;
 }
 
-$block_id = isset( $block['id'] ) ? $block['id'] : 'iframe-embed-' . wp_rand( 1000, 9999 );
-$align    = ! empty( $block['align'] ) ? ' align' . $block['align'] : '';
-
-$classes = array( 'c-iframe-embed' );
-if ( ! empty( $block['className'] ) ) {
-	foreach ( preg_split( '/\s+/', trim( $block['className'] ) ) as $c ) {
-		if ( $c !== '' ) {
-			$classes[] = sanitize_html_class( $c );
-		}
-	}
-}
+list( $block_id, $class_attr ) = $tectn_iframe_embed_root( $block );
 ?>
-<div id="<?php echo esc_attr( (string) $block_id ); ?>"
-	class="<?php echo esc_attr( implode( ' ', $classes ) . $align ); ?>"
+<div id="<?php echo esc_attr( $block_id ); ?>"
+	class="<?php echo esc_attr( $class_attr ); ?>"
 	aria-label="<?php esc_attr_e( 'Embedded content', 'tectn_theme' ); ?>">
 	<?php if ( $section_headline !== '' && $section_headline !== null ) : ?>
 		<h2 class="c-iframe-embed__headline"><?php echo esc_html( (string) $section_headline ); ?></h2>
