@@ -9,6 +9,48 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Debug NDJSON logger (session 7ac3e3). Writes under the theme so Docker mounts see it.
+ *
+ * @param string               $hypothesis_id Hypothesis id.
+ * @param string               $location      Code location.
+ * @param string               $message       Short message.
+ * @param array<string, mixed> $data          Payload.
+ * @param string               $run_id        Run id.
+ */
+function tectn_debug_log_7ac3e3( $hypothesis_id, $location, $message, $data = array(), $run_id = 'pre-fix' ) {
+	// #region agent log
+	$payload = array(
+		'sessionId'    => '7ac3e3',
+		'runId'        => $run_id,
+		'hypothesisId' => $hypothesis_id,
+		'location'     => $location,
+		'message'      => $message,
+		'data'         => $data,
+		'timestamp'    => (int) round( microtime( true ) * 1000 ),
+	);
+	$line = wp_json_encode( $payload ) . "\n";
+	$dir  = get_template_directory() . '/.cursor';
+	if ( ! is_dir( $dir ) ) {
+		wp_mkdir_p( $dir );
+	}
+	@file_put_contents( $dir . '/debug-7ac3e3.log', $line, FILE_APPEND );
+	foreach ( array( 'http://host.docker.internal:7272/ingest/081cba34-db3c-4310-ace5-70e9f0d86181', 'http://127.0.0.1:7272/ingest/081cba34-db3c-4310-ace5-70e9f0d86181' ) as $url ) {
+		$ctx = stream_context_create(
+			array(
+				'http' => array(
+					'method'  => 'POST',
+					'header'  => "Content-Type: application/json\r\nX-Debug-Session-Id: 7ac3e3\r\n",
+					'content' => wp_json_encode( $payload ),
+					'timeout' => 1,
+				),
+			)
+		);
+		@file_get_contents( $url, false, $ctx );
+	}
+	// #endregion
+}
+
+/**
  * Parse headline_size (from ACF field_6992657b77c7f) into tag and class for output.
  * When "Hero" is selected (value contains "hero"), returns h2 with class "hero" plus any block class.
  *
@@ -161,7 +203,31 @@ function tectn_acf_is_inline_editing_placeholder( $value ) {
 }
 
 /**
+ * Whether a value looks like unformatted ACF image/gallery storage (IDs only).
+ * Block meta stores attachment IDs; get_field() expands them to arrays with url/ID keys.
+ *
+ * @param mixed $value Raw value from $block['data'].
+ * @return bool
+ */
+function tectn_acf_is_raw_media_value( $value ) {
+	if ( is_int( $value ) || ( is_string( $value ) && $value !== '' && is_numeric( $value ) ) ) {
+		return true;
+	}
+	if ( ! is_array( $value ) || $value === array() ) {
+		return false;
+	}
+	foreach ( $value as $item ) {
+		if ( ! is_int( $item ) && ! ( is_string( $item ) && $item !== '' && is_numeric( $item ) ) ) {
+			return false;
+		}
+	}
+	return true;
+}
+
+/**
  * Read an ACF block field: prefer $block['data'], skip inline-editing placeholders.
+ * For image/gallery fields, $block['data'] often holds raw attachment IDs — use get_field()
+ * when available so return_format (array/url) is applied.
  *
  * @param string                    $name      Field name.
  * @param array<string, mixed>|null $block     Block array from render template.
@@ -169,20 +235,35 @@ function tectn_acf_is_inline_editing_placeholder( $value ) {
  * @return mixed|null Null when unset / only placeholder available.
  */
 function tectn_acf_block_field( $name, $block = null, $field_key = '' ) {
+	$from_block_data = false;
+	$value           = null;
+
 	if ( is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) {
 		$data = $block['data'];
 		if ( $field_key !== '' && array_key_exists( $field_key, $data ) && ! tectn_acf_is_inline_editing_placeholder( $data[ $field_key ] ) ) {
-			return $data[ $field_key ];
-		}
-		if ( array_key_exists( $name, $data ) && ! tectn_acf_is_inline_editing_placeholder( $data[ $name ] ) ) {
-			return $data[ $name ];
+			$from_block_data = true;
+			$value           = $data[ $field_key ];
+		} elseif ( array_key_exists( $name, $data ) && ! tectn_acf_is_inline_editing_placeholder( $data[ $name ] ) ) {
+			$from_block_data = true;
+			$value           = $data[ $name ];
 		}
 	}
 
-	$value = function_exists( 'get_field' ) ? get_field( $name ) : null;
-	if ( tectn_acf_is_inline_editing_placeholder( $value ) ) {
-		return null;
+	// Raw attachment IDs in block meta are not usable as image arrays — prefer formatted get_field().
+	if ( $value !== null && tectn_acf_is_raw_media_value( $value ) && function_exists( 'get_field' ) ) {
+		$formatted = get_field( $name );
+		if ( ! tectn_acf_is_inline_editing_placeholder( $formatted ) && $formatted !== null && $formatted !== false && $formatted !== '' ) {
+			return $formatted;
+		}
 	}
+
+	if ( $value === null && ! $from_block_data ) {
+		$value = function_exists( 'get_field' ) ? get_field( $name ) : null;
+		if ( tectn_acf_is_inline_editing_placeholder( $value ) ) {
+			return null;
+		}
+	}
+
 	return $value;
 }
 
