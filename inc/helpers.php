@@ -9,48 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Debug NDJSON logger (session 7ac3e3). Writes under the theme so Docker mounts see it.
- *
- * @param string               $hypothesis_id Hypothesis id.
- * @param string               $location      Code location.
- * @param string               $message       Short message.
- * @param array<string, mixed> $data          Payload.
- * @param string               $run_id        Run id.
- */
-function tectn_debug_log_7ac3e3( $hypothesis_id, $location, $message, $data = array(), $run_id = 'pre-fix' ) {
-	// #region agent log
-	$payload = array(
-		'sessionId'    => '7ac3e3',
-		'runId'        => $run_id,
-		'hypothesisId' => $hypothesis_id,
-		'location'     => $location,
-		'message'      => $message,
-		'data'         => $data,
-		'timestamp'    => (int) round( microtime( true ) * 1000 ),
-	);
-	$line = wp_json_encode( $payload ) . "\n";
-	$dir  = get_template_directory() . '/.cursor';
-	if ( ! is_dir( $dir ) ) {
-		wp_mkdir_p( $dir );
-	}
-	@file_put_contents( $dir . '/debug-7ac3e3.log', $line, FILE_APPEND );
-	foreach ( array( 'http://host.docker.internal:7272/ingest/081cba34-db3c-4310-ace5-70e9f0d86181', 'http://127.0.0.1:7272/ingest/081cba34-db3c-4310-ace5-70e9f0d86181' ) as $url ) {
-		$ctx = stream_context_create(
-			array(
-				'http' => array(
-					'method'  => 'POST',
-					'header'  => "Content-Type: application/json\r\nX-Debug-Session-Id: 7ac3e3\r\n",
-					'content' => wp_json_encode( $payload ),
-					'timeout' => 1,
-				),
-			)
-		);
-		@file_get_contents( $url, false, $ctx );
-	}
-	// #endregion
-}
-
-/**
  * Parse headline_size (from ACF field_6992657b77c7f) into tag and class for output.
  * When "Hero" is selected (value contains "hero"), returns h2 with class "hero" plus any block class.
  *

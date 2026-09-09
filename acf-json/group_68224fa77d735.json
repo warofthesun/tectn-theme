@@ -18,10 +18,10 @@
             },
             "default_value": "",
             "allow_in_bindings": 0,
-            "tabs": "visual",
+            "tabs": "all",
             "media_upload": 0,
             "toolbar": "bold_italic",
-            "delay": 0
+            "delay": 1
         },
         {
             "key": "field_tectn_hero_headline_size",
@@ -64,10 +64,10 @@
             },
             "default_value": "",
             "allow_in_bindings": 1,
-            "tabs": "visual",
+            "tabs": "all",
             "media_upload": 0,
             "toolbar": "bold_italic",
-            "delay": 0
+            "delay": 1
         },
         {
             "key": "field_682251bfeee22",
@@ -242,5 +242,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1753394400
+    "modified": 1777935600
 }

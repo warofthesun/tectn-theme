@@ -61,26 +61,6 @@ function tectn_setup() {
 // let's get this party started
 add_action( 'after_setup_theme', 'tectn_setup' );
 
-/**
- * Temporary debug: Text + Image editor positioning (session 7ac3e3).
- */
-function tectn_enqueue_text_image_editor_debug() {
-	// #region agent log
-	$path = get_template_directory() . '/blocks/text-image/editor-debug.js';
-	if ( ! is_readable( $path ) ) {
-		return;
-	}
-	wp_enqueue_script(
-		'tectn-text-image-editor-debug',
-		get_template_directory_uri() . '/blocks/text-image/editor-debug.js',
-		array( 'wp-dom-ready' ),
-		(string) filemtime( $path ),
-		true
-	);
-	// #endregion
-}
-add_action( 'enqueue_block_editor_assets', 'tectn_enqueue_text_image_editor_debug' );
-
 
 /************* OEMBED SIZE OPTIONS *************/
 

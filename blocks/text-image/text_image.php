@@ -117,48 +117,6 @@
         $classes_cg[] = 'c-content-group--reverse';
     }
 
-    // #region agent log
-    if ( function_exists( 'tectn_debug_log_7ac3e3' ) ) {
-        $gf_cv = function_exists( 'get_field' ) ? get_field( 'content_vertical' ) : null;
-        $gf_ih = function_exists( 'get_field' ) ? get_field( 'image_horizontal' ) : null;
-        $gf_images = function_exists( 'get_field' ) ? get_field( 'images' ) : null;
-        tectn_debug_log_7ac3e3(
-            'A-D-E',
-            'blocks/text-image/text_image.php:classes',
-            'text-image positioning resolve',
-            array(
-                'is_admin'           => is_admin(),
-                'is_editor_context'  => $is_editor_context,
-                'rest'               => defined( 'REST_REQUEST' ) && REST_REQUEST,
-                'content_position'   => $content_position,
-                'image_position'     => $image_position,
-                'classes_cg'         => $classes_cg,
-                'has_middle'         => in_array( 'c-content-group--middle', $classes_cg, true ),
-                'has_bottom'         => in_array( 'c-content-group--bottom', $classes_cg, true ),
-                'has_reverse'        => in_array( 'c-content-group--reverse', $classes_cg, true ),
-                'images_count'       => $count,
-                'text_col'           => $text_col,
-                'image_col'          => $image_col,
-                'images_data_type'   => isset( $block_data['images'] ) ? gettype( $block_data['images'] ) : 'unset',
-                'get_field_cv'       => $gf_cv,
-                'get_field_ih'       => $gf_ih,
-                'get_field_img_count'=> is_array( $gf_images ) ? count( $gf_images ) : 0,
-                'style_theme_enqueued' => wp_style_is( 'tectn_theme-style', 'enqueued' ) || wp_style_is( 'tectn_theme-style', 'done' ),
-                'block_style_handles'=> array_values(
-                    array_filter(
-                        array(
-                            wp_style_is( 'tectn-text-image-style', 'registered' ) ? 'tectn-text-image-style:reg' : null,
-                            wp_style_is( 'tectn-text-image-style', 'enqueued' ) ? 'tectn-text-image-style:enq' : null,
-                            wp_style_is( 'wp-block-tectn-text-image', 'registered' ) ? 'wp-block-tectn-text-image:reg' : null,
-                            wp_style_is( 'wp-block-tectn-text-image', 'enqueued' ) ? 'wp-block-tectn-text-image:enq' : null,
-                        )
-                    )
-                ),
-            )
-        );
-    }
-    // #endregion
-
     $classes_band = [
         'c-waveband',
         $enable_bg ? 'is-bg' : '',

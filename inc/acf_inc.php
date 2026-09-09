@@ -306,8 +306,10 @@ function tectn_acf_wysiwyg_toolbars_bold_italic( $toolbars ) {
 add_filter( 'acf/fields/wysiwyg/toolbars', 'tectn_acf_wysiwyg_toolbars_bold_italic' );
 
 /**
- * Force Hero Headline / Paragraph to the Bold/Italic toolbar (and Visual mode)
- * even if the DB field group still has older settings before ACF JSON sync.
+ * Force Hero Headline / Paragraph toolbar + delayed TinyMCE init.
+ * Delay is required for sidebar WYSIWYGs in the block editor (Gutenberg moves
+ * DOM nodes and breaks Visual mode otherwise). Works even if DB field groups
+ * have not been synced from ACF JSON yet.
  *
  * @param array<string, mixed> $field Field array.
  * @return array<string, mixed>
@@ -325,8 +327,9 @@ function tectn_acf_force_hero_bold_italic_toolbar( $field ) {
 		return $field;
 	}
 	$field['toolbar']      = 'bold_italic';
-	$field['tabs']         = 'visual';
+	$field['tabs']         = 'all';
 	$field['media_upload'] = 0;
+	$field['delay']        = 1;
 	return $field;
 }
 add_filter( 'acf/load_field/key=field_68225159eee20', 'tectn_acf_force_hero_bold_italic_toolbar' );

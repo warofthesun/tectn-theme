@@ -436,6 +436,54 @@ function tectn_acf_input_admin_footer_image_actions_fix() {
 add_action( 'acf/input/admin_footer', 'tectn_acf_input_admin_footer_image_actions_fix', 25 );
 
 /**
+ * Re-enable sidebar Hero WYSIWYGs after Gutenberg remounts the Page sidebar.
+ * TinyMCE cannot safely move in the DOM; delay + remount on show fixes dead Visual tabs.
+ */
+function tectn_acf_input_admin_footer_hero_wysiwyg_sidebar_fix() {
+	?>
+	<script>
+	(function ($) {
+	  if (!window.acf || !acf.addAction) return;
+
+	  function isSidebarField(field) {
+	    return !!(field && field.$el && field.$el.closest('#side-sortables, .edit-post-meta-boxes-area, .editor-sidebar').length);
+	  }
+
+	  function remountWysiwyg(field) {
+	    try {
+	      if (!field || field.get('type') !== 'wysiwyg' || !isSidebarField(field)) return;
+	      if (typeof field.disable === 'function') field.disable();
+	      if (typeof field.enable === 'function') field.enable();
+	    } catch (e) {}
+	  }
+
+	  acf.addAction('show_field/type=wysiwyg', remountWysiwyg);
+	  acf.addAction('append_field/type=wysiwyg', remountWysiwyg);
+
+	  if (window.wp && wp.data && wp.data.subscribe) {
+	    var last = '';
+	    wp.data.subscribe(function () {
+	      try {
+	        var sel = wp.data.select('core/edit-post');
+	        if (!sel || typeof sel.getActiveGeneralSidebarName !== 'function') return;
+	        var name = sel.getActiveGeneralSidebarName();
+	        if (name === last) return;
+	        var prev = last;
+	        last = name;
+	        if (name !== 'edit-post/document' || !prev) return;
+	        $('.acf-field-wysiwyg').each(function () {
+	          remountWysiwyg(acf.getField($(this)));
+	        });
+	      } catch (e) {}
+	    });
+	  }
+	})(jQuery);
+	</script>
+	<?php
+}
+add_action( 'acf/input/admin_footer', 'tectn_acf_input_admin_footer_hero_wysiwyg_sidebar_fix', 28 );
+
+/**
  * Map legacy named background colors (pre color-picker) to hex.
  *
  * @param mixed $value Color value.
