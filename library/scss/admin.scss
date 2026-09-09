@@ -66,3 +66,16 @@ start customizing. All admin functions are located in lib/admin/
 	pointer-events: auto !important;
 	cursor: pointer;
 }
+
+/*
+ * Hide meta box Move up / Move down only (keep .handlediv collapse).
+ * Move down can yank side ACF boxes (e.g. Hero Options) into a lost region.
+ */
+#side-sortables .postbox .handle-order-higher,
+#side-sortables .postbox .handle-order-lower,
+.edit-post-meta-boxes-area .postbox .handle-order-higher,
+.edit-post-meta-boxes-area .postbox .handle-order-lower,
+.editor-sidebar .postbox .handle-order-higher,
+.editor-sidebar .postbox .handle-order-lower {
+	display: none !important;
+}

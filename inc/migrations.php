@@ -209,3 +209,92 @@ function tectn_migrate_footer_contact_into_footer_group() {
 	update_option( 'tectn_footer_contact_into_group_v1', '1' );
 }
 add_action( 'acf/init', 'tectn_migrate_footer_contact_into_footer_group', 103 );
+
+/**
+ * Restore Hero Options (and other ACF side boxes) yanked out of the Document sidebar
+ * via WordPress "Move down" meta box reorder. Runs once per site.
+ *
+ * Meta box id for field group group_68260ada5ea86 is acf-group_68260ada5ea86.
+ */
+function tectn_migrate_restore_hero_options_metabox_order() {
+	if ( get_option( 'tectn_hero_options_metabox_order_reset_v1', '' ) === '1' ) {
+		return;
+	}
+
+	$hero_box_id = 'acf-group_68260ada5ea86';
+	$user_ids    = get_users(
+		array(
+			'fields' => 'ID',
+			'number' => -1,
+		)
+	);
+
+	foreach ( $user_ids as $user_id ) {
+		$user_id = (int) $user_id;
+		if ( $user_id <= 0 ) {
+			continue;
+		}
+
+		// Un-hide if Screen Options / preferences hid the box.
+		$hidden = get_user_meta( $user_id, 'metaboxhidden_page', true );
+		if ( is_array( $hidden ) && in_array( $hero_box_id, $hidden, true ) ) {
+			$hidden = array_values( array_diff( $hidden, array( $hero_box_id ) ) );
+			update_user_meta( $user_id, 'metaboxhidden_page', $hidden );
+		}
+
+		$order = get_user_meta( $user_id, 'meta-box-order_page', true );
+		if ( ! is_array( $order ) || $order === array() ) {
+			continue;
+		}
+
+		$contexts = array( 'side', 'normal', 'advanced' );
+		$found_in = '';
+		$boxes    = array();
+
+		foreach ( $contexts as $context ) {
+			if ( empty( $order[ $context ] ) || ! is_string( $order[ $context ] ) ) {
+				$boxes[ $context ] = array();
+				continue;
+			}
+			$ids = array_values(
+				array_filter(
+					array_map( 'trim', explode( ',', $order[ $context ] ) )
+				)
+			);
+			if ( in_array( $hero_box_id, $ids, true ) ) {
+				$found_in = $context;
+				$ids      = array_values( array_diff( $ids, array( $hero_box_id ) ) );
+			}
+			$boxes[ $context ] = $ids;
+		}
+
+		// Already on side, or not in a custom order list: leave alone.
+		if ( $found_in === '' || $found_in === 'side' ) {
+			continue;
+		}
+
+		// Stuck in normal/advanced after "Move down": put back on side.
+		array_unshift( $boxes['side'], $hero_box_id );
+		$boxes['side'] = array_values( array_unique( $boxes['side'] ) );
+
+		$new_order = array();
+		foreach ( $contexts as $context ) {
+			if ( ! empty( $boxes[ $context ] ) ) {
+				$new_order[ $context ] = implode( ',', $boxes[ $context ] );
+			} elseif ( isset( $order[ $context ] ) ) {
+				$new_order[ $context ] = '';
+			}
+		}
+		// Preserve any unexpected keys from the original option.
+		foreach ( $order as $key => $value ) {
+			if ( ! isset( $new_order[ $key ] ) ) {
+				$new_order[ $key ] = $value;
+			}
+		}
+
+		update_user_meta( $user_id, 'meta-box-order_page', $new_order );
+	}
+
+	update_option( 'tectn_hero_options_metabox_order_reset_v1', '1' );
+}
+add_action( 'admin_init', 'tectn_migrate_restore_hero_options_metabox_order', 20 );
