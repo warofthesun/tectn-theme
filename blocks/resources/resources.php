@@ -87,12 +87,12 @@ $resolve_sections = static function () {
 				? tectn_resources_normalize_item_rows( $raw_item_rows )
 				: array();
 		} elseif ( $source === 'pages' ) {
-			$preheader     = get_sub_field( 'preheader' );
-			$preheader     = is_string( $preheader ) ? trim( $preheader ) : '';
-			$headline      = get_sub_field( 'headline' );
-			$headline      = is_string( $headline ) ? trim( $headline ) : '';
-			$headline_size = get_sub_field( 'headline_size' );
-			$headline_size = is_string( $headline_size ) && $headline_size !== '' ? $headline_size : 'h2';
+			$preheader     = tectn_acf_value_text( get_sub_field( 'preheader' ) );
+			$headline      = tectn_acf_value_text( get_sub_field( 'headline' ) );
+			$headline_size = tectn_acf_value_text( get_sub_field( 'headline_size' ), 'h2' );
+			if ( $headline_size === '' ) {
+				$headline_size = 'h2';
+			}
 
 			$pick_mode = get_sub_field( 'pages_pick_mode' );
 			$pick_mode = is_string( $pick_mode ) ? $pick_mode : 'manual';
@@ -107,13 +107,13 @@ $resolve_sections = static function () {
 				? tectn_resources_resolve_site_page_entries( $pick_mode, $selected, $filter_by, $term_ids )
 				: array();
 		} else {
-			$preheader     = get_sub_field( 'preheader' );
-			$preheader     = is_string( $preheader ) ? trim( $preheader ) : '';
-			$headline      = get_sub_field( 'headline' );
-			$headline      = is_string( $headline ) ? trim( $headline ) : '';
-			$headline_size = get_sub_field( 'headline_size' );
-			$headline_size = is_string( $headline_size ) && $headline_size !== '' ? $headline_size : 'h2';
-			$local_items   = get_sub_field( 'resource_items' );
+			$preheader     = tectn_acf_value_text( get_sub_field( 'preheader' ) );
+			$headline      = tectn_acf_value_text( get_sub_field( 'headline' ) );
+			$headline_size = tectn_acf_value_text( get_sub_field( 'headline_size' ), 'h2' );
+			if ( $headline_size === '' ) {
+				$headline_size = 'h2';
+			}
+			$local_items = get_sub_field( 'resource_items' );
 			if ( is_array( $local_items ) ) {
 				$raw_item_rows = $local_items;
 			}
@@ -126,14 +126,12 @@ $resolve_sections = static function () {
 			continue;
 		}
 
-		$hide_header = (bool) get_sub_field( 'hide_header' );
-		$edit_header = (bool) get_sub_field( 'edit_header' );
+		$hide_header = tectn_acf_value_is_true( get_sub_field( 'hide_header' ) );
+		$edit_header = tectn_acf_value_is_true( get_sub_field( 'edit_header' ) );
 
 		if ( $edit_header ) {
-			$override_pre = get_sub_field( 'header_preheader_override' );
-			$override_head = get_sub_field( 'header_headline_override' );
-			$preheader     = is_string( $override_pre ) ? trim( $override_pre ) : '';
-			$headline      = is_string( $override_head ) ? trim( $override_head ) : '';
+			$preheader = tectn_acf_value_text( get_sub_field( 'header_preheader_override' ) );
+			$headline  = tectn_acf_value_text( get_sub_field( 'header_headline_override' ) );
 		}
 
 		$sections[] = array(

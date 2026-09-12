@@ -20,6 +20,23 @@
             "ui": 1
         },
         {
+            "key": "field_699ba_show_sponsor_scroll",
+            "label": "Sponsor Scroll",
+            "name": "show_sponsor_scroll",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Show a Sponsor Scroll block between the two Text + Image sections. Edit its label and sponsors on that middle block.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "On",
+            "ui_off_text": "Off",
+            "ui": 1
+        },
+        {
             "key": "field_699ba4690a534",
             "label": "Padding - Vertical",
             "name": "padding_y",
@@ -318,5 +335,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1784655000
+    "modified": 1786019900
 }

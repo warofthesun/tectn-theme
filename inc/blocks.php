@@ -50,6 +50,52 @@ function tectn_register_acf_blocks() {
 add_action( 'init', 'tectn_register_acf_blocks' );
 
 /**
+ * Sync Combo ACF "Sponsor Scroll" toggle onto the block attribute that provides context.
+ *
+ * @param array $parsed_block Block being rendered.
+ * @return array
+ */
+function tectn_content_container_sync_sponsor_scroll_context( $parsed_block ) {
+	if ( empty( $parsed_block['blockName'] ) || $parsed_block['blockName'] !== 'tectn/content-container' ) {
+		return $parsed_block;
+	}
+
+	$data = array();
+	if ( ! empty( $parsed_block['attrs']['data'] ) && is_array( $parsed_block['attrs']['data'] ) ) {
+		$data = $parsed_block['attrs']['data'];
+	}
+
+	$raw = $data['show_sponsor_scroll'] ?? 0;
+	$on  = ! empty( $raw ) && $raw !== '0' && $raw !== 0 && $raw !== false;
+
+	if ( ! isset( $parsed_block['attrs'] ) || ! is_array( $parsed_block['attrs'] ) ) {
+		$parsed_block['attrs'] = array();
+	}
+	$parsed_block['attrs']['showSponsorScroll'] = (bool) $on;
+
+	return $parsed_block;
+}
+add_filter( 'render_block_data', 'tectn_content_container_sync_sponsor_scroll_context', 10, 1 );
+
+/**
+ * Editor: keep Combo inner Sponsor Scroll in sync with the On/Off switch.
+ */
+function tectn_content_container_editor_assets() {
+	$path = get_template_directory() . '/blocks/content-container/editor.js';
+	if ( ! is_readable( $path ) ) {
+		return;
+	}
+	wp_enqueue_script(
+		'tectn-content-container-editor',
+		get_template_directory_uri() . '/blocks/content-container/editor.js',
+		array( 'wp-blocks', 'wp-data', 'wp-dom-ready', 'wp-element' ),
+		(string) filemtime( $path ),
+		true
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'tectn_content_container_editor_assets' );
+
+/**
  * Default ACF Blocks to v3 for WordPress 7+ iframe editor compatibility.
  * Restores the toolbar pencil (opens Expanded Editor) and enables modern editing.
  * Individual block.json `acf.blockVersion` values still win when set.

@@ -51,8 +51,12 @@ if ( $bg_type === 'color' ) {
 }
 
 $remove_bottom_margin = tectn_acf_block_bool( 'remove_bottom_margin', $block, '', false );
+$show_sponsor_scroll  = tectn_acf_block_bool( 'show_sponsor_scroll', $block, 'field_699ba_show_sponsor_scroll', false );
 $classes = ['c-band', "c-band--py-{$py}"];
 if ($remove_bottom_margin) $classes[] = 'c-band--no-mb';
+if ( $show_sponsor_scroll ) {
+  $classes[] = 'c-band--sponsor-scroll';
+}
 if ( $bg_enable && $bg_type !== 'color' ) {
   $classes[] = 'c-band--grad-strong';
 }
@@ -158,6 +162,7 @@ if ( $has_waves && $should_render_bg && $bg_type === 'color' && !empty($bg_color
         <?php
           $band_inner_template = [
             ['tectn/text-image', []],
+            ['tectn/sponsor-scroll', []],
             ['tectn/text-image', []],
           ];
         ?>
@@ -190,6 +195,7 @@ if ( $has_waves && $should_render_bg && $bg_type === 'color' && !empty($bg_color
         <?php
           $band_inner_template = [
             ['tectn/text-image', []],
+            ['tectn/sponsor-scroll', []],
             ['tectn/text-image', []],
           ];
         ?>

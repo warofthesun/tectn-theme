@@ -702,6 +702,160 @@ BAND / SECTION WRAPPER
   display: block;
 }
 
+.c-band__inner .c-sponsor-scroll {
+  margin-block: $spacing-md;
+}
+
+/* Combo: Sponsor Scroll only visible when the On/Off switch is on */
+.c-band:not(.c-band--sponsor-scroll) {
+  .c-sponsor-scroll,
+  .c-sponsor-scroll__placeholder,
+  .wp-block-tectn-sponsor-scroll,
+  .block-editor-block-list__block[data-type="tectn/sponsor-scroll"] {
+    display: none !important;
+  }
+}
+
+/***************
+SPONSOR SCROLL
+*********************/
+
+.c-sponsor-scroll {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 42px;
+  height: 42px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.c-sponsor-scroll__label {
+  flex: 0 0 auto;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 8.75rem;
+  height: 100%;
+  padding: 0 $spacing-sm;
+  background: $secondary-500;
+  color: $primary-100;
+  font-family: $header-font;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border-radius: $radius-xs 0 0 $radius-xs;
+  box-sizing: border-box;
+  // Bebas Neue sits optically high; nudge for true vertical center in the pill
+  padding-top: 0.12em;
+}
+
+.c-sponsor-scroll__track {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-inline: $spacing-sm;
+  background: $secondary-100;
+  border: 1px solid $primary-600;
+  border-left: 0;
+  border-radius: 0 $radius-xs $radius-xs 0;
+  box-sizing: border-box;
+}
+
+.c-sponsor-scroll__rail {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex: 0 0 auto;
+  width: max-content;
+}
+
+.c-sponsor-scroll__items {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex: 0 0 auto;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-family: $body-font;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  color: $primary-800;
+}
+
+.c-sponsor-scroll__item {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.c-sponsor-scroll__amount {
+  color: $primary-900;
+}
+
+.c-sponsor-scroll__sep {
+  flex: 0 0 auto;
+  margin: 0 $spacing-sm;
+  color: $secondary-500;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.c-sponsor-scroll--animate .c-sponsor-scroll__rail {
+  animation: tectn-sponsor-scroll var(--sponsor-scroll-duration, 20s) linear infinite;
+  will-change: transform;
+}
+
+@keyframes tectn-sponsor-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-1 * var(--sponsor-scroll-distance, 100%)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-sponsor-scroll--animate .c-sponsor-scroll__rail {
+    animation: none;
+  }
+}
+
+.c-sponsor-scroll__placeholder {
+  box-sizing: border-box;
+  max-width: 650px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  border: 1px dashed rgba(0, 0, 0, 0.28);
+  border-radius: $radius-sm;
+  background: rgba(0, 0, 0, 0.03);
+  line-height: 1.35;
+  font-family: $body-font;
+  font-size: 1rem;
+  color: $text-color;
+
+  strong {
+    display: inline-block;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
 /* Band with top/bottom waves — DOM order Wave / Section / Wave */
 .c-band__wrap {
   display: flex;
@@ -1308,24 +1462,25 @@ border: $spacing-xs solid $white;
 	.c-headline-group__placeholder,
 	.c-iframe-embed__placeholder,
 	.c-slider__placeholder,
-	.c-sponsorships__placeholder,
-	.c-text-image__placeholder {
-		box-sizing: border-box;
-		max-width: 650px;
-		width: 100%;
-		margin-left: auto;
-		margin-right: auto;
-		padding: 1rem;
-		border: 1px dashed rgba(0, 0, 0, 0.28);
-		border-radius: 8px;
-		background: rgba(0, 0, 0, 0.03);
-		line-height: 1.35;
+		.c-sponsorships__placeholder,
+		.c-text-image__placeholder,
+		.c-sponsor-scroll__placeholder {
+			box-sizing: border-box;
+			max-width: 650px;
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 1rem;
+			border: 1px dashed rgba(0, 0, 0, 0.28);
+			border-radius: 8px;
+			background: rgba(0, 0, 0, 0.03);
+			line-height: 1.35;
 
-		strong {
-			display: inline-block;
-			margin-bottom: 0.25rem;
+			strong {
+				display: inline-block;
+				margin-bottom: 0.25rem;
+			}
 		}
-	}
 
 	/*
 	 * Block editor canvas (iframe): core UI sets fonts on wrappers so empty-state copy
@@ -1358,7 +1513,8 @@ border: $spacing-xs solid $white;
 		.c-text-image__placeholder,
 		.c-peopleList__empty,
 		.c-iframe-embed__empty,
-		.c-slider--empty .c-slider__empty {
+		.c-slider--empty .c-slider__empty,
+		.c-sponsor-scroll__placeholder {
 			font-family: $body-font;
 			font-size: 1rem;
 			line-height: 1.35;
@@ -1377,7 +1533,8 @@ border: $spacing-xs solid $white;
 		.c-iframe-embed__placeholder strong,
 		.c-slider__placeholder strong,
 		.c-sponsorships__placeholder strong,
-		.c-text-image__placeholder strong {
+		.c-text-image__placeholder strong,
+		.c-sponsor-scroll__placeholder strong {
 			font-weight: 700;
 		}
 

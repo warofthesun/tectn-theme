@@ -1,0 +1,46 @@
+{
+  "name": "tectn/sponsor-scroll",
+  "title": "Sponsor Scroll",
+  "description": "Horizontal sponsored-by label with a scrolling list of names and amounts.",
+  "style": [
+    "file:../../library/css/style.css"
+  ],
+  "viewScript": [
+    "file:./view.js"
+  ],
+  "category": "tectn-blocks",
+  "icon": "money-alt",
+  "keywords": [
+    "sponsor",
+    "scroll",
+    "marquee",
+    "donation"
+  ],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "sponsor_scroll.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": false
+  },
+  "usesContext": [
+    "tectn/showSponsorScroll"
+  ],
+  "supports": {
+    "jsx": true,
+    "anchor": true,
+    "align": [
+      "full",
+      "wide"
+    ]
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {
+        "inserter_preview": true
+      }
+    }
+  },
+  "apiVersion": 3
+}

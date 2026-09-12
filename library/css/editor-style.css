@@ -2589,6 +2589,210 @@ BAND / SECTION WRAPPER
   display: block;
 }
 
+.c-band__inner .c-sponsor-scroll {
+  margin-block: 1em;
+}
+
+/* Combo: Sponsor Scroll only visible when the On/Off switch is on */
+.c-band:not(.c-band--sponsor-scroll) .c-sponsor-scroll,
+.c-band:not(.c-band--sponsor-scroll) .c-sponsor-scroll__placeholder,
+.c-band:not(.c-band--sponsor-scroll) .wp-block-tectn-sponsor-scroll,
+.c-band:not(.c-band--sponsor-scroll) .block-editor-block-list__block[data-type="tectn/sponsor-scroll"] {
+  display: none !important;
+}
+
+/***************
+SPONSOR SCROLL
+*********************/
+.c-sponsor-scroll {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 42px;
+  height: 42px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.c-sponsor-scroll__label {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-width: 8.75rem;
+  height: 100%;
+  padding: 0 0.75em;
+  background: #698f3d;
+  color: #EFF5D1;
+  font-family: "Bebas Neue", "Helvetica Neue", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border-radius: 0.25em 0 0 0.25em;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-top: 0.12em;
+}
+
+.c-sponsor-scroll__track {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  overflow: hidden;
+  padding-inline: 0.75em;
+  background: #F0F4EC;
+  border: 1px solid #A1B152;
+  border-left: 0;
+  border-radius: 0 0.25em 0.25em 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.c-sponsor-scroll__rail {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c-sponsor-scroll__items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  color: #505829;
+}
+
+.c-sponsor-scroll__item {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.c-sponsor-scroll__amount {
+  color: #282C15;
+}
+
+.c-sponsor-scroll__sep {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  margin: 0 0.75em;
+  color: #698f3d;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.c-sponsor-scroll--animate .c-sponsor-scroll__rail {
+  -webkit-animation: tectn-sponsor-scroll var(--sponsor-scroll-duration, 20s) linear infinite;
+  animation: tectn-sponsor-scroll var(--sponsor-scroll-duration, 20s) linear infinite;
+  will-change: transform;
+}
+
+@-webkit-keyframes tectn-sponsor-scroll {
+  from {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(-webkit-calc(-1 * var(--sponsor-scroll-distance, 100%)));
+    transform: translateX(calc(-1 * var(--sponsor-scroll-distance, 100%)));
+  }
+}
+
+@keyframes tectn-sponsor-scroll {
+  from {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(-webkit-calc(-1 * var(--sponsor-scroll-distance, 100%)));
+    transform: translateX(calc(-1 * var(--sponsor-scroll-distance, 100%)));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .c-sponsor-scroll--animate .c-sponsor-scroll__rail {
+    -webkit-animation: none;
+    animation: none;
+  }
+}
+.c-sponsor-scroll__placeholder {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  max-width: 650px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  border: 1px dashed rgba(0, 0, 0, 0.28);
+  border-radius: 0.5em;
+  background: rgba(0, 0, 0, 0.03);
+  line-height: 1.35;
+  font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  color: #0d0f02;
+}
+.c-sponsor-scroll__placeholder strong {
+  display: inline-block;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+.c-sponsor-scroll__placeholder p {
+  margin: 0;
+}
+
 /* Band with top/bottom waves — DOM order Wave / Section / Wave */
 .c-band__wrap {
   display: -webkit-box;
@@ -3340,7 +3544,8 @@ Content Section block
 .c-iframe-embed__placeholder,
 .c-slider__placeholder,
 .c-sponsorships__placeholder,
-.c-text-image__placeholder {
+.c-text-image__placeholder,
+.c-sponsor-scroll__placeholder {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 650px;
@@ -3364,7 +3569,8 @@ Content Section block
 .c-iframe-embed__placeholder strong,
 .c-slider__placeholder strong,
 .c-sponsorships__placeholder strong,
-.c-text-image__placeholder strong {
+.c-text-image__placeholder strong,
+.c-sponsor-scroll__placeholder strong {
   display: inline-block;
   margin-bottom: 0.25rem;
 }
@@ -3397,7 +3603,8 @@ Content Section block
 .editor-styles-wrapper .c-text-image__placeholder,
 .editor-styles-wrapper .c-peopleList__empty,
 .editor-styles-wrapper .c-iframe-embed__empty,
-.editor-styles-wrapper .c-slider--empty .c-slider__empty {
+.editor-styles-wrapper .c-slider--empty .c-slider__empty,
+.editor-styles-wrapper .c-sponsor-scroll__placeholder {
   font-family: "Glacial Indifference", "Helvetica Neue", sans-serif;
   font-size: 1rem;
   line-height: 1.35;
@@ -3415,7 +3622,8 @@ Content Section block
 .editor-styles-wrapper .c-iframe-embed__placeholder strong,
 .editor-styles-wrapper .c-slider__placeholder strong,
 .editor-styles-wrapper .c-sponsorships__placeholder strong,
-.editor-styles-wrapper .c-text-image__placeholder strong {
+.editor-styles-wrapper .c-text-image__placeholder strong,
+.editor-styles-wrapper .c-sponsor-scroll__placeholder strong {
   font-weight: 700;
 }
 .editor-styles-wrapper {

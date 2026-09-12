@@ -161,6 +161,50 @@ function tectn_acf_is_inline_editing_placeholder( $value ) {
 }
 
 /**
+ * Coerce an ACF value to bool, ignoring auto-inline-editing placeholders.
+ *
+ * @param mixed $value   Raw field value (e.g. from get_sub_field).
+ * @param bool  $default Fallback when empty or placeholder.
+ * @return bool
+ */
+function tectn_acf_value_is_true( $value, $default = false ) {
+	if ( tectn_acf_is_inline_editing_placeholder( $value ) ) {
+		return (bool) $default;
+	}
+	if ( $value === null || $value === '' ) {
+		return (bool) $default;
+	}
+	if ( is_bool( $value ) ) {
+		return $value;
+	}
+	if ( is_int( $value ) || is_float( $value ) ) {
+		return (int) $value === 1;
+	}
+	$str = strtolower( trim( (string) $value ) );
+	if ( in_array( $str, array( '0', 'false', 'off', 'no' ), true ) ) {
+		return false;
+	}
+	if ( in_array( $str, array( '1', 'true', 'on', 'yes' ), true ) ) {
+		return true;
+	}
+	return (bool) $default;
+}
+
+/**
+ * Coerce an ACF value to trimmed text, ignoring auto-inline-editing placeholders.
+ *
+ * @param mixed  $value   Raw field value.
+ * @param string $default Fallback when empty or placeholder.
+ * @return string
+ */
+function tectn_acf_value_text( $value, $default = '' ) {
+	if ( ! is_string( $value ) || tectn_acf_is_inline_editing_placeholder( $value ) ) {
+		return $default;
+	}
+	return trim( $value );
+}
+
+/**
  * Whether a value looks like unformatted ACF image/gallery storage (IDs only).
  * Block meta stores attachment IDs; get_field() expands them to arrays with url/ID keys.
  *

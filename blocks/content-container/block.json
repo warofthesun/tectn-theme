@@ -24,10 +24,15 @@
     "tectnInsideContainer": {
       "type": "boolean",
       "default": true
+    },
+    "showSponsorScroll": {
+      "type": "boolean",
+      "default": false
     }
   },
   "providesContext": {
-    "tectn/insideContainer": "tectnInsideContainer"
+    "tectn/insideContainer": "tectnInsideContainer",
+    "tectn/showSponsorScroll": "showSponsorScroll"
   },
   "supports": {
     "jsx": true,
