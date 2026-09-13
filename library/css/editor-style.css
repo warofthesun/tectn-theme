@@ -5093,6 +5093,9 @@ Card
   color: inherit;
   text-decoration: none;
 }
+.c-postCard__titleLink:visited {
+  color: inherit;
+}
 .c-postCard__titleLink:hover, .c-postCard__titleLink:focus-visible {
   opacity: 0.92;
 }
@@ -5100,6 +5103,9 @@ Card
 .c-postCard__authorLink {
   color: inherit;
   text-decoration: none;
+}
+.c-postCard__authorLink:visited {
+  color: inherit;
 }
 .c-postCard__authorLink:hover, .c-postCard__authorLink:focus-visible {
   text-decoration: underline;
@@ -7181,12 +7187,18 @@ body.tectn-stories-index .hero__container--blog .hero__container--inner {
   color: inherit;
   text-decoration: none;
 }
+.c-storiesIndex .c-postCard__titleLink:visited {
+  color: inherit;
+}
 .c-storiesIndex .c-postCard__titleLink:hover, .c-storiesIndex .c-postCard__titleLink:focus-visible {
   opacity: 0.88;
 }
 .c-storiesIndex .c-postCard__authorLink {
   color: inherit;
   text-decoration: none;
+}
+.c-storiesIndex .c-postCard__authorLink:visited {
+  color: inherit;
 }
 .c-storiesIndex .c-postCard__authorLink:hover, .c-storiesIndex .c-postCard__authorLink:focus-visible {
   text-decoration: underline;

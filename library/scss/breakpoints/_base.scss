@@ -2808,6 +2808,10 @@ border: $spacing-xs solid $white;
 	color: inherit;
 	text-decoration: none;
 
+	&:visited {
+		color: inherit;
+	}
+
 	&:hover,
 	&:focus-visible {
 		opacity: 0.92;
@@ -2817,6 +2821,10 @@ border: $spacing-xs solid $white;
   .c-postCard__authorLink {
 	color: inherit;
 	text-decoration: none;
+
+	&:visited {
+		color: inherit;
+	}
 
 	&:hover,
 	&:focus-visible {
@@ -4778,6 +4786,10 @@ body.tectn-stories-index .hero__container--blog .hero__container--inner {
 		color: inherit;
 		text-decoration: none;
 
+		&:visited {
+			color: inherit;
+		}
+
 		&:hover,
 		&:focus-visible {
 			opacity: 0.88;
@@ -4787,6 +4799,10 @@ body.tectn-stories-index .hero__container--blog .hero__container--inner {
 	.c-postCard__authorLink {
 		color: inherit;
 		text-decoration: none;
+
+		&:visited {
+			color: inherit;
+		}
 
 		&:hover,
 		&:focus-visible {
